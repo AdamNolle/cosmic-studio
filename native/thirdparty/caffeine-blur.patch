@@ -1,0 +1,602 @@
+diff --git a/runtime/src/platform_specific/wayland/mod.rs b/runtime/src/platform_specific/wayland/mod.rs
+index 752ca49..8a84a75 100644
+--- a/runtime/src/platform_specific/wayland/mod.rs
++++ b/runtime/src/platform_specific/wayland/mod.rs
+@@ -35,6 +35,8 @@ pub enum Action {
+     InhibitShortcuts(bool),
+     /// Rounded corners in logical space
+     RoundedCorners(iced_core::window::Id, Option<CornerRadius>),
++    /// Native blur region for a managed XDG popup in logical coordinates.
++    BlurSurface(Id, Option<Vec<iced_core::Rectangle>>),
+ }
+ 
+ #[derive(Debug, Clone, Copy, PartialEq, Default)]
+@@ -67,6 +69,9 @@ impl Debug for Action {
+             Action::InhibitShortcuts(v) => {
+                 f.debug_tuple("InhibitShortcuts").field(v).finish()
+             }
++            Action::BlurSurface(id, region) => {
++                f.debug_tuple("BlurSurface").field(id).field(region).finish()
++            }
+             Action::RoundedCorners(id, v) => {
+                 f.debug_tuple("RoundedCorners").field(id).field(v).finish()
+             }
+diff --git a/winit/src/platform_specific/wayland/commands/blur.rs b/winit/src/platform_specific/wayland/commands/blur.rs
+new file mode 100644
+index 0000000..81e7e6b
+--- /dev/null
++++ b/winit/src/platform_specific/wayland/commands/blur.rs
+@@ -0,0 +1,23 @@
++//! Request native background blur for an XDG popup's surface-local region.
++
++use iced_runtime::{
++    core::{window, Rectangle},
++    platform_specific::{self, wayland},
++    task, Action, Task,
++};
++
++/// Whether this connection's compositor has advertised native blur support.
++/// Material must remain opaque until this becomes true.
++pub fn available() -> bool {
++    crate::platform_specific::wayland::handlers::ext_background_effect::available()
++}
++
++/// Record the desired region even when popup creation/capabilities are pending.
++/// `None` disables the effect; requests for non-popup IDs never affect windows.
++pub fn blur(id: window::Id, region: Option<Vec<Rectangle>>) -> Task<()> {
++    task::effect(Action::PlatformSpecific(
++        platform_specific::Action::Wayland(wayland::Action::BlurSurface(
++            id, region,
++        )),
++    ))
++}
+diff --git a/winit/src/platform_specific/wayland/commands/mod.rs b/winit/src/platform_specific/wayland/commands/mod.rs
+index 191dc3a..cd6832c 100644
+--- a/winit/src/platform_specific/wayland/commands/mod.rs
++++ b/winit/src/platform_specific/wayland/commands/mod.rs
+@@ -1,6 +1,7 @@
+ //! Interact with the wayland objects of your application.
+ 
+ pub mod activation;
++pub mod blur;
+ pub mod corner_radius;
+ pub mod keyboard_shortcuts_inhibit;
+ pub mod layer_surface;
+diff --git a/winit/src/platform_specific/wayland/event_loop/mod.rs b/winit/src/platform_specific/wayland/event_loop/mod.rs
+index 319a75e..22e9585 100644
+--- a/winit/src/platform_specific/wayland/event_loop/mod.rs
++++ b/winit/src/platform_specific/wayland/event_loop/mod.rs
+@@ -330,6 +330,10 @@ impl SctkEventLoop {
+                         (),
+                     ).ok(),
+ 
++                    ext_background_effect_manager: crate::handlers::ext_background_effect::ExtBackgroundEffectManager::new(&globals, &qh).ok(),
++                    popup_blur: Default::default(),
++                    popup_blur_objects: HashMap::new(),
++
+                     registry_state,
+ 
+                     queue_handle: qh,
+diff --git a/winit/src/platform_specific/wayland/event_loop/state.rs b/winit/src/platform_specific/wayland/event_loop/state.rs
+index e61a0e6..ef52e1c 100644
+--- a/winit/src/platform_specific/wayland/event_loop/state.rs
++++ b/winit/src/platform_specific/wayland/event_loop/state.rs
+@@ -486,7 +486,10 @@ pub struct SctkState {
+     pub(crate) inhibitor_manager: Option<zwp_keyboard_shortcuts_inhibit_manager_v1::ZwpKeyboardShortcutsInhibitManagerV1>,
+ 
+     pub(crate) corner_radius_manager: Option<CosmicCornerRadiusManagerV1>,
+-    pub(crate) pending_corner_radius: HashMap<core::window::Id, CornerRadius>
++    pub(crate) pending_corner_radius: HashMap<core::window::Id, CornerRadius>,
++    pub(crate) ext_background_effect_manager: Option<crate::handlers::ext_background_effect::ExtBackgroundEffectManager>,
++    pub(crate) popup_blur: crate::handlers::blur_lifecycle::BlurLifecycle<core::window::Id>,
++    pub(crate) popup_blur_objects: HashMap<core::window::Id, wayland_protocols::ext::background_effect::v1::client::ext_background_effect_surface_v1::ExtBackgroundEffectSurfaceV1>
+ }
+ 
+ /// An error that occurred while running an application.
+@@ -552,6 +555,51 @@ pub(crate) fn receive_frame(
+ }
+ 
+ impl SctkState {
++    /// Reconcile only XDG popup roots; no layer, lock, input-method or window fallback.
++    pub(crate) fn reconcile_popup_blur(&mut self, id: core::window::Id) {
++        use crate::handlers::blur_lifecycle::Change;
++        let surface = self.popups.iter().find(|popup| popup.data.id == id)
++            .map(|popup| popup.popup.wl_surface().clone());
++        let supported = self.ext_background_effect_manager.as_ref()
++            .is_some_and(|manager| manager.supported);
++        let change = self.popup_blur.reconcile(id, supported, surface.is_some());
++        let Some(surface) = surface else { return; };
++        match change {
++            Change::Quiet => return,
++            Change::Remove => {
++                if let Some(effect) = self.popup_blur_objects.remove(&id) {
++                    effect.destroy();
++                }
++            }
++            Change::Create(rectangles) | Change::Update(rectangles) => {
++                let effect = self.popup_blur_objects.entry(id).or_insert_with(|| {
++                    self.ext_background_effect_manager.as_ref().unwrap()
++                        .effect(&surface, &self.queue_handle)
++                });
++                let region = self.compositor_state.wl_compositor()
++                    .create_region(&self.queue_handle, ());
++                for r in rectangles {
++                    region.add(r.x, r.y, r.width, r.height);
++                }
++                effect.set_blur_region(Some(&region));
++                // Protocol copies pending region state; do not leak wl_region objects.
++                region.destroy();
++            }
++        }
++        // This pinned backend never drains its older to_commit queue. Commit
++        // changed double-buffered effect state directly, without a timer/loop.
++        surface.commit();
++        self.request_redraw(&surface);
++    }
++
++    /// Called for app destruction and compositor popup_done, including descendants.
++    pub(crate) fn remove_popup_blur(&mut self, id: core::window::Id) {
++        self.popup_blur.remove(id);
++        if let Some(effect) = self.popup_blur_objects.remove(&id) {
++            effect.destroy();
++        }
++    }
++
+     pub fn request_redraw(&mut self, surface: &WlSurface) {
+         let e = self
+             .frame_status
+@@ -874,6 +922,8 @@ impl SctkState {
+             close_with_children: settings.close_with_children,
+         });
+ 
++        self.reconcile_popup_blur(settings.id);
++
+         Ok((
+             settings.id,
+             parent.wl_surface().clone(),
+@@ -1301,6 +1351,11 @@ impl SctkState {
+                 // XXX popup destruction must be done carefully
+                 // first destroy the uppermost popup, then work down to the requested popup
+                 platform_specific::wayland::popup::Action::Destroy { id } => {
++                    // Also discard requests for popups closed before native creation.
++                    self.remove_popup_blur(id);
++                    if self.pending_popup.as_ref().is_some_and(|(settings, _)| settings.id == id) {
++                        self.pending_popup = None;
++                    }
+                     let sctk_popup = match self
+                         .popups
+                         .iter()
+@@ -1331,6 +1386,7 @@ impl SctkState {
+                         to_destroy.push(popup_to_destroy_first);
+                     }
+                     for popup in to_destroy.into_iter().rev() {
++                        self.remove_popup_blur(popup.data.id);
+                         if let Some(id) = self.id_map.remove(&popup.popup.wl_surface().id()) {
+                             _ = self.destroyed.insert(id);
+                         }
+@@ -1561,6 +1617,13 @@ impl SctkState {
+                     }
+                 }
+             }
++            Action::BlurSurface(id, rectangles) => {
++                let region = rectangles.map(|rects| rects.into_iter().filter_map(|r| {
++                    crate::handlers::blur_lifecycle::rectangle(r.x, r.y, r.width, r.height)
++                }).collect());
++                self.popup_blur.request(id, region);
++                self.reconcile_popup_blur(id);
++            }
+             Action::RoundedCorners(id, v) => {
+                 if let Some(manager) = self.corner_radius_manager.as_ref() {
+                     if let Some(w) = self.windows.iter_mut().find(|w| w.id == id) {
+diff --git a/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs b/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs
+new file mode 100644
+index 0000000..3a3a510
+--- /dev/null
++++ b/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs
+@@ -0,0 +1,248 @@
++//! Popup-only background-effect lifecycle, independent of protocol objects.
++//! Desired state survives creation/capability ordering; applied state prevents
++//! duplicate objects and redundant requests. Coordinates stay surface-local.
++
++use std::collections::HashMap;
++use std::hash::Hash;
++
++// The installed COSMIC compositor uses the corrected v1 Blur bit. The pinned
++// client enum decodes it as Unknown(1); zero means no advertised capability.
++pub(crate) fn supports_blur(bits: u32) -> bool {
++    bits & 1 != 0
++}
++
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub(crate) struct RegionRect {
++    pub x: i32,
++    pub y: i32,
++    pub width: i32,
++    pub height: i32,
++}
++
++pub(crate) fn rectangle(
++    x: f32,
++    y: f32,
++    width: f32,
++    height: f32,
++) -> Option<RegionRect> {
++    if !x.is_finite()
++        || !y.is_finite()
++        || width.is_nan()
++        || height.is_nan()
++        || width <= 0.0
++        || height <= 0.0
++    {
++        return None;
++    }
++    // The native toolkit uses positive-infinite extents as a full-surface
++    // sentinel. Bound them safely; the compositor clips to actual surface size.
++    // Do not convert surface-local logical coordinates to buffer pixels.
++    const LIMIT: f64 = 1_048_576.0;
++    let left = f64::from(x).floor().clamp(-LIMIT, LIMIT) as i32;
++    let top = f64::from(y).floor().clamp(-LIMIT, LIMIT) as i32;
++    let right = (f64::from(x) + f64::from(width))
++        .ceil()
++        .clamp(-LIMIT, LIMIT) as i32;
++    let bottom = (f64::from(y) + f64::from(height))
++        .ceil()
++        .clamp(-LIMIT, LIMIT) as i32;
++    (right > left && bottom > top).then_some(RegionRect {
++        x: left,
++        y: top,
++        width: right - left,
++        height: bottom - top,
++    })
++}
++
++#[derive(Debug, PartialEq, Eq)]
++pub(crate) enum Change {
++    Quiet,
++    Create(Vec<RegionRect>),
++    Update(Vec<RegionRect>),
++    Remove,
++}
++
++pub(crate) struct BlurLifecycle<I> {
++    desired: HashMap<I, Vec<RegionRect>>,
++    applied: HashMap<I, Vec<RegionRect>>,
++}
++
++impl<I: Copy + Eq + Hash> Default for BlurLifecycle<I> {
++    fn default() -> Self {
++        Self {
++            desired: HashMap::new(),
++            applied: HashMap::new(),
++        }
++    }
++}
++
++impl<I: Copy + Eq + Hash> BlurLifecycle<I> {
++    pub fn request(&mut self, id: I, region: Option<Vec<RegionRect>>) {
++        match region {
++            Some(region) => {
++                self.desired.insert(id, region);
++            }
++            None => {
++                self.desired.remove(&id);
++            }
++        }
++    }
++
++    pub fn reconcile(
++        &mut self,
++        id: I,
++        available: bool,
++        exists: bool,
++    ) -> Change {
++        if !exists {
++            return Change::Quiet;
++        }
++        if !available || !self.desired.contains_key(&id) {
++            return if self.applied.remove(&id).is_some() {
++                Change::Remove
++            } else {
++                Change::Quiet
++            };
++        }
++        let desired = &self.desired[&id];
++        if self.applied.get(&id) == Some(desired) {
++            return Change::Quiet;
++        }
++        let prior = self.applied.insert(id, desired.clone());
++        if prior.is_some() {
++            Change::Update(desired.clone())
++        } else {
++            Change::Create(desired.clone())
++        }
++    }
++
++    pub fn remove(&mut self, id: I) {
++        self.desired.remove(&id);
++        self.applied.remove(&id);
++    }
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    fn region(width: f32) -> Vec<RegionRect> {
++        vec![rectangle(0.0, 0.0, width, 60.0).unwrap()]
++    }
++
++    #[test]
++    fn zero_or_unknown_non_blur_capabilities_keep_material_opaque() {
++        assert!(!supports_blur(0));
++        assert!(!supports_blur(2));
++        assert!(supports_blur(1));
++        assert!(supports_blur(3));
++    }
++
++    #[test]
++    fn first_request_survives_both_creation_capability_orders() {
++        for capability_first in [true, false] {
++            let mut state = BlurLifecycle::default();
++            state.request(1, Some(region(80.0)));
++            assert_eq!(
++                state.reconcile(1, capability_first, !capability_first),
++                Change::Quiet
++            );
++            assert_eq!(
++                state.reconcile(1, true, true),
++                Change::Create(region(80.0))
++            );
++            assert_eq!(state.reconcile(1, true, true), Change::Quiet);
++        }
++    }
++
++    #[test]
++    fn resize_updates_existing_object_and_only_correct_popup() {
++        let mut state = BlurLifecycle::default();
++        state.request(1, Some(region(80.0)));
++        state.request(2, Some(region(90.0)));
++        assert_eq!(
++            state.reconcile(1, true, true),
++            Change::Create(region(80.0))
++        );
++        assert_eq!(
++            state.reconcile(2, true, true),
++            Change::Create(region(90.0))
++        );
++        state.request(1, Some(region(100.0)));
++        assert_eq!(
++            state.reconcile(1, true, true),
++            Change::Update(region(100.0))
++        );
++        assert_eq!(state.reconcile(2, true, true), Change::Quiet);
++    }
++
++    #[test]
++    fn unsupported_is_quiet_and_capability_loss_preserves_desired_request() {
++        let mut state = BlurLifecycle::default();
++        state.request(1, Some(region(80.0)));
++        assert_eq!(state.reconcile(1, false, true), Change::Quiet);
++        assert_eq!(
++            state.reconcile(1, true, true),
++            Change::Create(region(80.0))
++        );
++        assert_eq!(state.reconcile(1, false, true), Change::Remove);
++        assert_eq!(state.reconcile(1, false, true), Change::Quiet);
++        assert_eq!(
++            state.reconcile(1, true, true),
++            Change::Create(region(80.0))
++        );
++    }
++
++    #[test]
++    fn unset_and_native_destroy_prevent_stale_replay() {
++        let mut state = BlurLifecycle::default();
++        state.request(1, Some(region(80.0)));
++        state.request(1, None);
++        assert_eq!(state.reconcile(1, true, true), Change::Quiet);
++        state.request(1, Some(region(80.0)));
++        state.reconcile(1, true, true);
++        state.request(1, None);
++        assert_eq!(state.reconcile(1, true, true), Change::Remove);
++        state.request(1, Some(region(80.0)));
++        state.remove(1);
++        assert_eq!(state.reconcile(1, true, true), Change::Quiet);
++    }
++
++    #[test]
++    fn regions_cover_fractional_logical_bounds_without_nan_or_overflow() {
++        assert_eq!(
++            rectangle(1.25, -0.25, 2.5, 4.5),
++            Some(RegionRect {
++                x: 1,
++                y: -1,
++                width: 3,
++                height: 6
++            })
++        );
++        assert_eq!(rectangle(f32::NAN, 0.0, 2.0, 2.0), None);
++        assert_eq!(rectangle(0.0, 0.0, -1.0, 2.0), None);
++        assert_eq!(rectangle(f32::INFINITY, 0.0, 2.0, 2.0), None);
++        assert_eq!(
++            rectangle(0.0, 0.0, f32::MAX, f32::MAX).unwrap().width,
++            1_048_576
++        );
++    }
++
++    #[test]
++    fn managed_popup_infinite_mask_requests_the_full_native_surface() {
++        let full = rectangle(0.0, 0.0, f32::INFINITY, f32::INFINITY).unwrap();
++        assert_eq!(
++            full,
++            RegionRect {
++                x: 0,
++                y: 0,
++                width: 1_048_576,
++                height: 1_048_576
++            }
++        );
++        let mut state = BlurLifecycle::default();
++        state.request(1, Some(vec![full]));
++        assert_eq!(state.reconcile(1, true, true), Change::Create(vec![full]));
++        assert_eq!(rectangle(0.0, 0.0, f32::NEG_INFINITY, 2.0), None);
++    }
++}
+diff --git a/winit/src/platform_specific/wayland/handlers/ext_background_effect.rs b/winit/src/platform_specific/wayland/handlers/ext_background_effect.rs
+new file mode 100644
+index 0000000..5b81b5f
+--- /dev/null
++++ b/winit/src/platform_specific/wayland/handlers/ext_background_effect.rs
+@@ -0,0 +1,102 @@
++//! Narrow ext-background-effect v1 backport for managed XDG popup roots.
++
++use crate::platform_specific::wayland::{
++    event_loop::state::SctkState, sctk_event::SctkEvent,
++};
++use cctk::sctk::{
++    globals::GlobalData,
++    reexports::client::{
++        delegate_dispatch,
++        globals::{BindError, GlobalList},
++        protocol::wl_surface::WlSurface,
++        Connection, Dispatch, Proxy, QueueHandle,
++    },
++};
++use std::sync::atomic::{AtomicBool, Ordering};
++use wayland_protocols::ext::background_effect::v1::client::{
++    ext_background_effect_manager_v1::{Event, ExtBackgroundEffectManagerV1},
++    ext_background_effect_surface_v1::ExtBackgroundEffectSurfaceV1,
++};
++
++static AVAILABLE: AtomicBool = AtomicBool::new(false);
++pub fn available() -> bool {
++    AVAILABLE.load(Ordering::Acquire)
++}
++
++pub(crate) struct ExtBackgroundEffectManager {
++    manager: ExtBackgroundEffectManagerV1,
++    pub supported: bool,
++}
++
++impl ExtBackgroundEffectManager {
++    pub fn new(
++        globals: &GlobalList,
++        qh: &QueueHandle<SctkState>,
++    ) -> Result<Self, BindError> {
++        AVAILABLE.store(false, Ordering::Release);
++        Ok(Self {
++            manager: globals.bind(qh, 1..=1, GlobalData)?,
++            supported: false,
++        })
++    }
++
++    pub fn effect(
++        &self,
++        surface: &WlSurface,
++        qh: &QueueHandle<SctkState>,
++    ) -> ExtBackgroundEffectSurfaceV1 {
++        self.manager.get_background_effect(surface, qh, ())
++    }
++}
++
++impl Dispatch<ExtBackgroundEffectManagerV1, GlobalData, SctkState>
++    for ExtBackgroundEffectManager
++{
++    fn event(
++        state: &mut SctkState,
++        _: &ExtBackgroundEffectManagerV1,
++        event: Event,
++        _: &GlobalData,
++        _: &Connection,
++        _: &QueueHandle<SctkState>,
++    ) {
++        if let Event::Capabilities { flags } = event {
++            let bits = match flags {
++                wayland_client::WEnum::Value(value) => value.bits(),
++                wayland_client::WEnum::Unknown(value) => value,
++            };
++            let supported = super::blur_lifecycle::supports_blur(bits);
++            if let Some(manager) = state.ext_background_effect_manager.as_mut()
++            {
++                let changed = manager.supported != supported;
++                manager.supported = supported;
++                AVAILABLE.store(supported, Ordering::Release);
++                let ids: Vec<_> =
++                    state.popups.iter().map(|popup| popup.data.id).collect();
++                for id in ids {
++                    state.reconcile_popup_blur(id);
++                }
++                if changed {
++                    state.sctk_events.push(SctkEvent::BlurCapabilitiesChanged);
++                }
++            }
++        }
++    }
++}
++
++impl Dispatch<ExtBackgroundEffectSurfaceV1, (), SctkState>
++    for ExtBackgroundEffectManager
++{
++    fn event(
++        _: &mut SctkState,
++        _: &ExtBackgroundEffectSurfaceV1,
++        _: <ExtBackgroundEffectSurfaceV1 as Proxy>::Event,
++        _: &(),
++        _: &Connection,
++        _: &QueueHandle<SctkState>,
++    ) {
++    }
++}
++
++delegate_dispatch!(SctkState: [ExtBackgroundEffectManagerV1: GlobalData] => ExtBackgroundEffectManager);
++delegate_dispatch!(SctkState: [ExtBackgroundEffectSurfaceV1: ()] => ExtBackgroundEffectManager);
+diff --git a/winit/src/platform_specific/wayland/handlers/mod.rs b/winit/src/platform_specific/wayland/handlers/mod.rs
+index 856c5c3..cd60235 100644
+--- a/winit/src/platform_specific/wayland/handlers/mod.rs
++++ b/winit/src/platform_specific/wayland/handlers/mod.rs
+@@ -1,5 +1,7 @@
+ // handlers
+ pub mod activation;
++pub(crate) mod blur_lifecycle;
++pub mod ext_background_effect;
+ pub mod compositor;
+ pub mod output;
+ pub mod overlap;
+diff --git a/winit/src/platform_specific/wayland/handlers/shell/xdg_popup.rs b/winit/src/platform_specific/wayland/handlers/shell/xdg_popup.rs
+index 3b8a0dd..1b0fd8f 100644
+--- a/winit/src/platform_specific/wayland/handlers/shell/xdg_popup.rs
++++ b/winit/src/platform_specific/wayland/handlers/shell/xdg_popup.rs
+@@ -80,6 +80,7 @@ impl PopupHandler for SctkState {
+             }
+         }
+         for popup in to_destroy.into_iter().rev() {
++            self.remove_popup_blur(popup.data.id);
+             if let Some(id) = self.id_map.remove(&popup.popup.wl_surface().id())
+             {
+                 _ = self.destroyed.insert(id);
+diff --git a/winit/src/platform_specific/wayland/sctk_event.rs b/winit/src/platform_specific/wayland/sctk_event.rs
+index 53caa7d..bcd624e 100755
+--- a/winit/src/platform_specific/wayland/sctk_event.rs
++++ b/winit/src/platform_specific/wayland/sctk_event.rs
+@@ -98,6 +98,8 @@ use super::{
+ 
+ #[derive(Debug, Clone)]
+ pub enum SctkEvent {
++    /// Native blur availability changed; refresh cached popup material once.
++    BlurCapabilitiesChanged,
+     //
+     // Input events
+     //
+@@ -366,6 +368,12 @@ impl SctkEvent {
+         C: Compositor<Renderer = P::Renderer>,
+     {
+         match self {
++            SctkEvent::BlurCapabilitiesChanged => {
++                for (id, window) in window_manager.iter_mut() {
++                    window.state.synchronize(program, id, window.raw.as_ref());
++                    window.request_redraw();
++                }
++            }
+             // TODO Ashley: Platform specific multi-seat events?
+             SctkEvent::SeatEvent { .. } => Default::default(),
+             SctkEvent::PointerEvent { variant, .. } => match variant.kind {

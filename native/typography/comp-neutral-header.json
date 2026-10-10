@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "library_revision": "d922ac380134c00208d2acf93947d44fb217eec5",
+  "path": "src/theme/style/iced.rs",
+  "input_sha256": "c49b6d1d97c7823ff82d794b4b72c0b1cfc98ecdfee8ad95f2ed10ede6cedee7",
+  "output_sha256": "6e356383dc320aedc63a5b3dda794626c276583db6301fe315d0c2da8383ad63",
+  "scope": "Only focused HeaderBar icon foreground; content focus/semantic accent and inactive blend preserved"
+}

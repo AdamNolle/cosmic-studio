@@ -1,0 +1,1654 @@
+diff --git a/src/backend/render/mod.rs b/src/backend/render/mod.rs
+index 9ad6158..3d15c2d 100644
+--- a/src/backend/render/mod.rs
++++ b/src/backend/render/mod.rs
+@@ -19,7 +19,7 @@ use crate::{
+             shadow::{SHADOW_SHADER, ShadowShader},
+             wayland::{
+                 SurfaceRenderElement,
+-                blur_effect::BlurShaders,
++                blur_effect::{BlurShaders, LiquidGlassKind, LiquidGlassTarget},
+                 clipped_surface::{CLIPPING_SHADER, ClippingShader},
+                 push_render_elements_from_surface_tree,
+             },
+@@ -75,7 +75,7 @@ use smithay::{
+             sync::SyncPoint,
+         },
+     },
+-    desktop::utils::bbox_from_surface_tree,
++    desktop::{PopupKind, utils::bbox_from_surface_tree},
+     input::Seat,
+     output::{Output, OutputModeSource, OutputNoMode},
+     utils::{
+@@ -430,6 +430,8 @@ pub fn init_shaders(renderer: &mut GlesRenderer) -> Result<(), GlesError> {
+             UniformName::new("corner_radius", UniformType::_4f),
+             UniformName::new("input_to_geo", UniformType::Matrix3x3),
+             UniformName::new("noise", UniformType::_1f),
++            UniformName::new("defocus_step", UniformType::_2f),
++            UniformName::new("clip_enabled", UniformType::_1f),
+         ],
+     )?;
+     let shadow_shader = renderer.compile_custom_pixel_shader(
+@@ -851,6 +853,18 @@ where
+                 workspace_idx,
+                 ..
+             } => {
++                // The popup is a separate surface. Only its requested backdrop
++                // receives optics; its foreground and grab/input stay native.
++                with_states(popup.wl_surface(), |states| {
++                    let target = states
++                        .data_map
++                        .get_or_insert_threadsafe::<LiquidGlassTarget, _>(Default::default);
++                    *target.0.lock().unwrap() = if matches!(popup, PopupKind::Xdg(_)) {
++                        LiquidGlassKind::for_popup()
++                    } else {
++                        None
++                    };
++                });
+                 let mut geometry = popup.geometry().as_global();
+                 geometry.loc += location;
+ 
+@@ -894,6 +908,19 @@ where
+                 location,
+                 workspace_idx,
+             } => {
++                // Apply optics to named shell roots. Popup roots are marked
++                // separately; children and application contents stay native.
++                with_states(layer.wl_surface(), |states| {
++                    let target = states
++                        .data_map
++                        .get_or_insert_threadsafe::<LiquidGlassTarget, _>(Default::default);
++                    *target.0.lock().unwrap() = match layer.namespace() {
++                        "launcher" | "app-library" | "dialog" | "osd" => {
++                            LiquidGlassKind::for_popup()
++                        }
++                        namespace => LiquidGlassKind::for_namespace(namespace),
++                    };
++                });
+                 let mut geometry = layer.geometry().as_global();
+                 geometry.loc += location;
+                 let geometry = geometry.to_local(output).as_logical();
+diff --git a/src/backend/render/shaders/clipped_surface.frag b/src/backend/render/shaders/clipped_surface.frag
+index d99d1a5..09fc0fa 100644
+--- a/src/backend/render/shaders/clipped_surface.frag
++++ b/src/backend/render/shaders/clipped_surface.frag
+@@ -26,6 +26,8 @@ uniform vec2 geo_size;
+ uniform vec4 corner_radius;
+ uniform mat3 input_to_geo;
+ uniform float noise;
++uniform vec2 defocus_step;
++uniform float clip_enabled;
+ 
+ float rounding_alpha(vec2 coords, vec2 size) {
+     vec2 center;
+@@ -64,6 +66,16 @@ void main() {
+     }
+ 
+     vec4 color = texture2D(tex, v_coords);
++    if (defocus_step.x > 0.0) {
++        // Separable 1-2-1 kernel: subtle content blur in logical pixels.
++        // Filter premultiplied colors to keep transparent edges free of halos.
++        vec2 d=defocus_step;
++        color=color*0.25
++            +(texture2D(tex,v_coords+vec2(d.x,0.0))+texture2D(tex,v_coords-vec2(d.x,0.0))
++             +texture2D(tex,v_coords+vec2(0.0,d.y))+texture2D(tex,v_coords-vec2(0.0,d.y)))*0.125
++            +(texture2D(tex,v_coords+d)+texture2D(tex,v_coords-d)
++             +texture2D(tex,v_coords+vec2(d.x,-d.y))+texture2D(tex,v_coords+vec2(-d.x,d.y)))*0.0625;
++    }
+     #if defined(NO_ALPHA)
+     color = vec4(color.rgb, 1.0);
+     #endif
+@@ -72,7 +84,9 @@ void main() {
+     }
+ 
+     vec3 coords_geo = input_to_geo * vec3(v_coords, 1.0);
+-    if (coords_geo.x < 0.0 || 1.0 < coords_geo.x || coords_geo.y < 0.0 || 1.0 < coords_geo.y) {
++    if (clip_enabled <= 0.0) {
++        // Defocus alone must preserve client shadows and outlying subsurfaces.
++    } else if (coords_geo.x < 0.0 || 1.0 < coords_geo.x || coords_geo.y < 0.0 || 1.0 < coords_geo.y) {
+         // Clip outside geometry.
+         color = vec4(0.0);
+     } else {
+diff --git a/src/backend/render/shaders/liquid_glass.frag b/src/backend/render/shaders/liquid_glass.frag
+new file mode 100644
+index 0000000..bf0199e
+--- /dev/null
++++ b/src/backend/render/shaders/liquid_glass.frag
+@@ -0,0 +1,157 @@
++// SPDX-License-Identifier: GPL-3.0-only
++// Original COSMIC backdrop optics inspired by ryohsuke1231/liquid-glass.
++// Analytic GPU lens rays through two optical interfaces and a backdrop plane.
++// The cached native backdrop supplies the scene; foreground text stays separate.
++#version 100
++//_DEFINES_
++#if defined(EXTERNAL)
++#extension GL_OES_EGL_image_external : require
++#endif
++precision highp float;
++#if defined(EXTERNAL)
++uniform samplerExternalOES tex;
++#else
++uniform sampler2D tex;
++#endif
++uniform float alpha;
++varying vec2 v_coords;
++#if defined(DEBUG_FLAGS)
++uniform float tint;
++#endif
++uniform vec2 geo_size;
++uniform vec4 corner_radius;
++uniform mat3 input_to_geo;
++uniform mat3 geo_to_input;
++uniform float pool_inset;
++uniform float pool_radius;
++uniform float material_type;
++uniform float noise;
++
++float rounded_distance(vec2 p, vec2 size, float radius) {
++    vec2 q = abs(p - size * 0.5) - (size * 0.5 - radius);
++    return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
++}
++
++vec2 rounded_normal(vec2 p, vec2 size, float radius) {
++    vec2 centered = p - size * 0.5;
++    vec2 q = abs(centered) - (size * 0.5 - radius);
++    vec2 direction = mix(vec2(-1.0), vec2(1.0), step(vec2(0.0), centered));
++    vec2 outside = max(q, 0.0);
++    if (dot(outside, outside) > 0.00001)
++        return normalize(outside) * direction;
++    return q.x > q.y ? vec2(direction.x, 0.0) : vec2(0.0, direction.y);
++}
++
++float outer_alpha(vec2 p) {
++    float r = p.x < geo_size.x * 0.5
++        ? (p.y < geo_size.y * 0.5 ? corner_radius.x : corner_radius.w)
++        : (p.y < geo_size.y * 0.5 ? corner_radius.y : corner_radius.z);
++    r = min(r, min(geo_size.x, geo_size.y) * 0.5);
++    return 1.0 - smoothstep(-0.5, 0.5, rounded_distance(p, geo_size, r));
++}
++
++float hash(vec2 p) {
++    vec3 p3 = fract(vec3(p.xyx) * 0.1031);
++    p3 += dot(p3, p3.yzx + 33.33);
++    return fract((p3.x + p3.y) * p3.z);
++}
++
++vec2 limited_offset(vec2 offset, float limit) {
++    return offset * min(1.0, limit / max(length(offset), 0.0001));
++}
++
++// Snell refraction through a curved entrance and a flat rear face. There is
++// no scene depth buffer in a desktop: the native backdrop is the image plane.
++vec2 trace_lens(vec3 normal, float height, float depth, float ior,
++                float limit, out float internal_reflection) {
++    vec3 inside = refract(vec3(0.0, 0.0, -1.0), normal, 1.0 / ior);
++    vec3 outgoing = refract(inside, vec3(0.0, 0.0, 1.0), ior);
++    internal_reflection = 1.0 - step(0.00001, dot(outgoing, outgoing));
++    vec2 rear_hit = inside.xy * height / max(-inside.z, 0.08);
++    vec2 plane_hit = outgoing.xy * depth / max(-outgoing.z, 0.12);
++    return limited_offset(rear_hit + plane_hit, limit);
++}
++
++vec4 backdrop(vec2 p) {
++    vec2 uv = (geo_to_input * vec3(p / geo_size, 1.0)).xy;
++    return texture2D(tex, clamp(uv, vec2(0.0), vec2(1.0)));
++}
++
++void main() {
++    if (alpha <= 0.0) discard;
++    vec2 p = (input_to_geo * vec3(v_coords, 1.0)).xy * geo_size;
++    if (any(lessThan(p, vec2(0.0))) || any(greaterThan(p, geo_size))) discard;
++    float mask = outer_alpha(p);
++    if (mask <= 0.0) discard;
++    vec2 inner_size = max(geo_size - pool_inset * 2.0, vec2(1.0));
++    vec2 inner_p = p - pool_inset;
++    float native_radius = p.x < geo_size.x * 0.5
++        ? (p.y < geo_size.y * 0.5 ? corner_radius.x : corner_radius.w)
++        : (p.y < geo_size.y * 0.5 ? corner_radius.y : corner_radius.z);
++    float radius = min(material_type > 1.5 || material_type < 0.5 ? native_radius : pool_radius,
++                       min(inner_size.x, inner_size.y) * 0.5);
++    float distance_to_rim = rounded_distance(inner_p, inner_size, radius);
++    vec2 normal = rounded_normal(inner_p, inner_size, radius);
++    float inward = max(-distance_to_rim, 0.0);
++    bool dock = material_type > 0.5 && material_type < 1.5;
++    bool floating = material_type > 1.5;
++    bool window = material_type > 2.5;
++    float max_shift = window ? 3.0 : (dock ? 18.0 : (floating ? 8.0 : 5.0));
++    float thickness = window ? 2.5 : (dock ? 8.5 : (floating ? 6.0 : 3.5));
++    float scene_depth = window ? 7.0 : (dock ? 27.0 : (floating ? 16.0 : 11.0));
++    float band = min(window ? 12.0 : (dock ? 24.0 : (floating ? 17.0 : 10.0)),
++                     min(inner_size.x, inner_size.y) * 0.5);
++    float edge = 1.0 - clamp(inward / max(band, 1.0), 0.0, 1.0);
++    float sag = sqrt(max(1.0 - edge * edge, 0.012));
++    float slope = min(thickness * edge / max(band * sag, 0.01), 2.2);
++    vec3 bevel_normal = normalize(vec3(normal * slope, 1.0));
++    float surface_height = thickness * sag;
++    float coverage = 1.0 - smoothstep(-0.25, 0.5, distance_to_rim);
++    float total_reflection;
++    vec2 ray = trace_lens(bevel_normal, surface_height, scene_depth,
++                          1.46, max_shift, total_reflection) * coverage;
++    // Mild wavelength dispersion, strongest at grazing edges. Three bounded
++    // transmission samples plus one reflection sample, with no ray-march loop.
++    float ignored;
++    vec2 red_ray = trace_lens(bevel_normal, surface_height, scene_depth,
++                              1.452, max_shift, ignored) * coverage;
++    vec2 blue_ray = trace_lens(bevel_normal, surface_height, scene_depth,
++                               1.468, max_shift, ignored) * coverage;
++    vec4 green = backdrop(p + ray);
++    vec4 red = backdrop(p + red_ray);
++    vec4 blue = backdrop(p + blue_ray);
++    vec4 color = vec4(red.r, green.g, blue.b, green.a);
++#if defined(NO_ALPHA)
++    color.a = 1.0;
++#endif
++    if (color.a <= 0.0) discard;
++    vec2 light_direction = normalize(vec2(-0.65, -0.76));
++    float directional_light = max(dot(normal, light_direction), 0.0);
++    float rim = exp(-abs(distance_to_rim + 0.7) * 1.15);
++    vec3 half_vector = normalize(vec3(-0.40, -0.58, 0.72) + vec3(0.0, 0.0, 1.0));
++    float specular = pow(max(dot(bevel_normal, half_vector), 0.0), 42.0) * edge;
++    float f0 = pow((1.46 - 1.0) / (1.46 + 1.0), 2.0);
++    float fresnel = f0 + (1.0 - f0) * pow(1.0 - bevel_normal.z, 5.0);
++    fresnel = mix(fresnel, 1.0, total_reflection);
++    vec3 reflected_ray = reflect(vec3(0.0, 0.0, -1.0), bevel_normal);
++    vec2 reflection_offset = limited_offset(reflected_ray.xy * scene_depth,
++                                             max_shift);
++    vec4 reflected = backdrop(p + reflection_offset);
++    color.rgb = mix(color.rgb, reflected.rgb, fresnel * coverage);
++    float material_strength = window ? 0.45 : (dock ? 1.0 : (floating ? 0.78 : 0.65));
++    float highlight = material_strength * (
++        rim * (0.055 + 0.20 * pow(directional_light, 3.0))
++        + specular * 0.30 + fresnel * 0.10);
++    float inner_shade = exp(-inward / 6.0)
++        * (1.0 - directional_light) * edge * 0.045;
++    color.rgb *= 1.0 - inner_shade;
++    color.rgb += vec3(0.98) * highlight * color.a;
++    // Stable grain; no clock, animation, CPU reads or per-frame random seed.
++    color.rgb += (hash(floor(p * 2.0)) - 0.5) * noise * color.a;
++    color.rgb = clamp(color.rgb, vec3(0.0), vec3(color.a));
++    color *= mask * alpha;
++#if defined(DEBUG_FLAGS)
++    if (tint == 1.0) color = vec4(0.0, 0.2, 0.0, 0.2) + color * 0.8;
++#endif
++    gl_FragColor = color;
++}
+diff --git a/src/backend/render/wayland/blur_effect.rs b/src/backend/render/wayland/blur_effect.rs
+index b8a7935..4eecb0a 100644
+--- a/src/backend/render/wayland/blur_effect.rs
++++ b/src/backend/render/wayland/blur_effect.rs
+@@ -24,7 +24,7 @@ use smithay::{
+     },
+     wayland::compositor::SurfaceData,
+ };
+-use tracing::trace;
++use tracing::{trace, warn};
+ 
+ use crate::{
+     backend::render::{element::AsGlowRenderer, wayland::clipped_surface::ClippingShader},
+@@ -33,10 +33,118 @@ use crate::{
+ 
+ pub static BLUR_DOWNSAMPLE_SHADER: &str = include_str!("../shaders/blur_downsample.frag");
+ pub static BLUR_UPSAMPLE_SHADER: &str = include_str!("../shaders/blur_upsample.frag");
++pub static LIQUID_GLASS_SHADER: &str = include_str!("../shaders/liquid_glass.frag");
++
++// Opt in once per process. Never change client contents or lock-screen surfaces.
++static LIQUID_GLASS_ENABLED: LazyLock<bool> =
++    LazyLock::new(|| std::env::var("COSMIC_STUDIO_LIQUID_GLASS").as_deref() == Ok("1"));
++
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum LiquidGlassKind {
++    Panel,
++    Dock,
++    Surface,
++    Window,
++}
++
++impl LiquidGlassKind {
++    pub fn for_namespace(namespace: &str) -> Option<Self> {
++        if !*LIQUID_GLASS_ENABLED {
++            return None;
++        }
++        Self::from_namespace(namespace)
++    }
++
++    pub fn for_popup() -> Option<Self> {
++        LIQUID_GLASS_ENABLED.then_some(Self::Surface)
++    }
++
++    pub fn for_window(app_id: &str) -> Option<Self> {
++        if *LIQUID_GLASS_ENABLED {
++            Self::from_application(app_id)
++        } else {
++            None
++        }
++    }
++
++    fn from_application(app_id: &str) -> Option<Self> {
++        match app_id {
++            "com.system76.CosmicFiles"
++            | "com.system76.CosmicSettings"
++            | "com.system76.CosmicStore"
++            | "com.system76.CosmicMonitor"
++            | "com.system76.CosmicPlayer"
++            | "com.system76.CosmicViewer" => Some(Self::Window),
++            _ => None,
++        }
++    }
++
++    fn from_namespace(namespace: &str) -> Option<Self> {
++        match namespace {
++            "Panel" => Some(Self::Panel),
++            "Dock" => Some(Self::Dock),
++            _ => None,
++        }
++    }
++
++    fn optical_geometry(self) -> (f32, f32) {
++        match self {
++            Self::Panel => (0.0, 0.0),
++            Self::Dock => (3.0, 3.0),
++            Self::Surface => (0.0, 0.0),
++            Self::Window => (0.0, 0.0),
++        }
++    }
++}
++
++#[derive(Debug, Default)]
++pub struct LiquidGlassTarget(pub Mutex<Option<LiquidGlassKind>>);
+ 
+ const NOISE: f32 = 0.03;
+ const MAX_STEPS: usize = 15;
+ 
++fn capture_padding(strength: usize, output_scale: f64, glass: Option<LiquidGlassKind>) -> f64 {
++    let native = BLUR_PARAMS[(strength + 2).min(MAX_STEPS - 1)].extended_radius as f64;
++    // Preserve the native filter's complete footprint around refracted samples,
++    // even at fractional or unusually high display scales.
++    let displacement = match glass {
++        Some(LiquidGlassKind::Dock) => 18.0,
++        Some(LiquidGlassKind::Panel) => 5.0,
++        Some(LiquidGlassKind::Surface) => 8.0,
++        Some(LiquidGlassKind::Window) => 3.0,
++        None => 0.0,
++    };
++    native + (displacement * output_scale).ceil()
++}
++
++fn glass_optical_hull(
++    geometry: Rectangle<f64, Logical>,
++    region: &[Rectangle<i32, Logical>],
++) -> Option<Rectangle<f64, Logical>> {
++    // Blur rectangles are local to the padded backdrop. A dock's layer canvas
++    // can include its anchor gap, which must not become a second optical rim.
++    // Retain the individual rectangles for drawing, including any mask holes.
++    let bounds = Rectangle::from_size(geometry.size);
++    let mut clipped = region
++        .iter()
++        .filter_map(|r| r.to_f64().intersection(bounds));
++    let first = clipped.next()?;
++    let mut left = first.loc.x;
++    let mut top = first.loc.y;
++    let mut right = left + first.size.w;
++    let mut bottom = top + first.size.h;
++    for rect in clipped {
++        left = left.min(rect.loc.x);
++        top = top.min(rect.loc.y);
++        right = right.max(rect.loc.x + rect.size.w);
++        bottom = bottom.max(rect.loc.y + rect.size.h);
++    }
++    Some(Rectangle::new(
++        geometry.loc + Point::new(left, top),
++        Size::new(right - left, bottom - top),
++    ))
++}
++
+ #[derive(Debug, Clone, Copy, PartialEq)]
+ struct BlurParameters {
+     passes: usize,
+@@ -83,6 +191,7 @@ static BLUR_PARAMS: LazyLock<Vec<BlurParameters>> = LazyLock::new(|| {
+ pub struct BlurShaders {
+     down: GlesTexProgram,
+     up: GlesTexProgram,
++    glass: Option<GlesTexProgram>,
+ }
+ 
+ impl BlurShaders {
+@@ -102,7 +211,34 @@ impl BlurShaders {
+             ],
+         )?;
+ 
+-        Ok(BlurShaders { up, down })
++        let glass = if *LIQUID_GLASS_ENABLED {
++            match renderer.compile_custom_texture_shader(
++                LIQUID_GLASS_SHADER,
++                &[
++                    UniformName::new("geo_size", UniformType::_2f),
++                    UniformName::new("corner_radius", UniformType::_4f),
++                    UniformName::new("input_to_geo", UniformType::Matrix3x3),
++                    UniformName::new("geo_to_input", UniformType::Matrix3x3),
++                    UniformName::new("pool_inset", UniformType::_1f),
++                    UniformName::new("pool_radius", UniformType::_1f),
++                    UniformName::new("material_type", UniformType::_1f),
++                    UniformName::new("noise", UniformType::_1f),
++                ],
++            ) {
++                Ok(shader) => {
++                    tracing::info!("COSMIC Studio liquid glass GLES shader compiled");
++                    Some(shader)
++                }
++                Err(err) => {
++                    warn!("COSMIC Studio liquid glass unavailable; using native frosting: {err}");
++                    None
++                }
++            }
++        } else {
++            None
++        };
++
++        Ok(BlurShaders { up, down, glass })
+     }
+ 
+     pub fn get<R: AsGlowRenderer>(renderer: &R) -> Self {
+@@ -115,7 +251,14 @@ impl BlurShaders {
+     }
+ }
+ 
+-type BlurTexture<T> = Mutex<Option<T>>;
++// Keep both ping-pong targets in the renderer-owned element cache. The original
++// implementation allocated the second target on every damaged frame.
++#[derive(Debug)]
++struct BlurTargets<T> {
++    texture: T,
++    scratch: T,
++}
++type BlurTexture<T> = Mutex<Option<BlurTargets<T>>>;
+ 
+ #[derive(Debug)]
+ pub struct BlurState {
+@@ -126,6 +269,8 @@ pub struct BlurState {
+     pub passes: usize,
+     pub region: Vec<Rectangle<i32, Logical>>,
+     pub commit: CommitCounter,
++    glass: Option<LiquidGlassKind>,
++    radii: [u8; 4],
+ }
+ 
+ unsafe impl Send for BlurState {}
+@@ -141,6 +286,8 @@ impl Default for BlurState {
+             passes: 0,
+             region: Vec::new(),
+             commit: CommitCounter::default(),
++            glass: None,
++            radii: [0; 4],
+         }
+     }
+ }
+@@ -178,6 +325,7 @@ impl BlurElement {
+             output_scale,
+             radii,
+             strength,
++            None,
+         )
+     }
+ 
+@@ -194,6 +342,10 @@ impl BlurElement {
+             return Ok(None);
+         };
+ 
++        let glass = states
++            .data_map
++            .get::<LiquidGlassTarget>()
++            .and_then(|target| *target.0.lock().unwrap());
+         let state = states
+             .data_map
+             .get_or_insert_threadsafe::<Mutex<BlurState>, _>(Default::default);
+@@ -206,6 +358,7 @@ impl BlurElement {
+             output_scale,
+             radii,
+             strength,
++            glass,
+         )
+     }
+ 
+@@ -217,24 +370,36 @@ impl BlurElement {
+         output_scale: f64,
+         radii: [u8; 4],
+         strength: usize,
++        glass: Option<LiquidGlassKind>,
+     ) -> Result<Option<Self>, R::Error> {
+         if strength == 0 || geometry.size.w == 0. || geometry.size.h == 0. {
+             return Ok(None);
+         }
+ 
++        let scaling_shaders = BlurShaders::get(renderer);
++        let glass = glass.filter(|_| scaling_shaders.glass.is_some());
++        let optical_geometry = if glass.is_some() {
++            let Some(hull) = glass_optical_hull(geometry, region) else {
++                return Ok(None);
++            };
++            hull
++        } else {
++            geometry
++        };
+         let geo = geometry.to_physical_precise_round(output_scale);
++        let optical_geo = optical_geometry.to_physical_precise_round(output_scale);
+         let mut extended_geo = geo;
+-        let radius = BLUR_PARAMS[(strength + 2).min(MAX_STEPS - 1)].extended_radius as f64;
++        let radius = capture_padding(strength, output_scale, glass);
+         extended_geo.loc -= Point::<f64, Physical>::new(radius, radius);
+         extended_geo.size += Size::<f64, Physical>::new(radius, radius).upscale(2.);
+ 
+         // compute input_to_geo so that it crops the extended capture radius
+         let geo_scale = {
+-            let Scale { x, y } = geo.size / extended_geo.size;
++            let Scale { x, y } = optical_geo.size / extended_geo.size;
+             Affine2::from_scale(Vec2::new(x as f32, y as f32)).inverse()
+         };
+         let geo_translation = {
+-            let offset = geo.loc - extended_geo.loc;
++            let offset = optical_geo.loc - extended_geo.loc;
+             Affine2::from_translation(-Vec2::new(
+                 (offset.x / extended_geo.size.w) as f32,
+                 (offset.y / extended_geo.size.h) as f32,
+@@ -242,8 +407,14 @@ impl BlurElement {
+         };
+         let input_to_geo = Mat3::from(geo_scale * geo_translation);
+ 
+-        let uniforms = vec![
+-            Uniform::new("geo_size", (geometry.size.w as f32, geometry.size.h as f32)),
++        let mut uniforms = vec![
++            Uniform::new(
++                "geo_size",
++                (
++                    optical_geometry.size.w as f32,
++                    optical_geometry.size.h as f32,
++                ),
++            ),
+             Uniform::new(
+                 "corner_radius",
+                 [
+@@ -260,9 +431,45 @@ impl BlurElement {
+                     transpose: false,
+                 },
+             ),
+-            Uniform::new("noise", UniformValue::_1f(NOISE)),
++            Uniform::new(
++                "noise",
++                UniformValue::_1f(if glass.is_some() { 0.006 } else { NOISE }),
++            ),
+         ];
+ 
++        let render_shader = if let Some(kind) = glass {
++            let (inset, radius) = kind.optical_geometry();
++            uniforms.extend([
++                Uniform::new(
++                    "geo_to_input",
++                    UniformValue::Matrix3x3 {
++                        matrices: vec![*AsRef::<[f32; 9]>::as_ref(&input_to_geo.inverse())],
++                        transpose: false,
++                    },
++                ),
++                Uniform::new("pool_inset", inset),
++                Uniform::new("pool_radius", radius),
++                Uniform::new(
++                    "material_type",
++                    match kind {
++                        LiquidGlassKind::Panel => 0.0_f32,
++                        LiquidGlassKind::Dock => 1.0_f32,
++                        LiquidGlassKind::Surface => 2.0_f32,
++                        LiquidGlassKind::Window => 3.0_f32,
++                    },
++                ),
++            ]);
++            scaling_shaders.glass.as_ref().unwrap().clone()
++        } else {
++            // The clipping program is shared with the audited inactive-window
++            // filter. Explicit values prevent uniforms leaking between draws.
++            uniforms.extend([
++                Uniform::new("defocus_step", (0.0_f32, 0.0_f32)),
++                Uniform::new("clip_enabled", 1.0_f32),
++            ]);
++            ClippingShader::get(renderer)
++        };
++
+         let geometry = extended_geo.to_logical(output_scale);
+         let extended_offset = Point::<f64, Physical>::new(radius, radius).to_logical(output_scale);
+ 
+@@ -277,13 +484,17 @@ impl BlurElement {
+             && state.offset == params.offset
+             && state.passes == params.passes
+             && &state.region == region
+-            && state.src == src);
++            && state.src == src
++            && state.glass == glass
++            && state.radii == radii);
+ 
+         state.renderer_id = Some(renderer_id);
+         state.offset = params.offset;
+         state.passes = params.passes;
+         state.region = region.clone();
+         state.src = src;
++        state.glass = glass;
++        state.radii = radii;
+         if dirty {
+             state.commit.increment();
+         }
+@@ -294,8 +505,8 @@ impl BlurElement {
+             src,
+             geometry,
+             extended_offset,
+-            scaling_shaders: BlurShaders::get(renderer),
+-            render_shader: ClippingShader::get(renderer),
++            scaling_shaders,
++            render_shader,
+             offset: state.offset,
+             passes: state.passes,
+             region: region
+@@ -384,33 +595,32 @@ where
+ 
+         let texture_ref = cache.get_or_insert_threadsafe(BlurTexture::<R::TextureId>::default);
+         let mut texture_entry = texture_ref.lock().unwrap();
+-        if texture_entry.as_ref().is_some_and(|tex| {
+-            tex.size() != tex_size
+-                || R::tex_to_gl(
+-                    &renderer.as_ref().context_id(),
+-                    texture_entry.as_ref().unwrap(),
+-                )
+-                .is_none()
++        if texture_entry.as_ref().is_some_and(|targets| {
++            targets.texture.size() != tex_size
++                || R::tex_to_gl(&renderer.as_ref().context_id(), &targets.texture).is_none()
++                || R::tex_to_gl(&renderer.as_ref().context_id(), &targets.scratch).is_none()
+         }) {
+             texture_entry.take();
+         }
+         if texture_entry.is_none() {
+-            let gl_texture = renderer
++            let texture = renderer
++                .as_mut()
++                .create_buffer(Fourcc::Abgr8888, tex_size)
++                .map_err(R::from_gles_error)?;
++            let scratch = renderer
+                 .as_mut()
+                 .create_buffer(Fourcc::Abgr8888, tex_size)
+                 .map_err(R::from_gles_error)?;
+-            *texture_entry = Some(R::tex_from_gl(&renderer.as_ref().context_id(), gl_texture));
++            *texture_entry = Some(BlurTargets {
++                texture: R::tex_from_gl(&renderer.as_ref().context_id(), texture),
++                scratch: R::tex_from_gl(&renderer.as_ref().context_id(), scratch),
++            });
+         }
+ 
+-        let mut texture = R::tex_to_gl(
+-            &renderer.as_ref().context_id(),
+-            texture_entry.as_ref().unwrap(),
+-        )
+-        .unwrap();
+-        let mut off_texture = renderer
+-            .as_mut()
+-            .create_buffer(Fourcc::Abgr8888, tex_size)
+-            .map_err(R::from_gles_error)?;
++        let targets = texture_entry.as_ref().unwrap();
++        let mut texture = R::tex_to_gl(&renderer.as_ref().context_id(), &targets.texture).unwrap();
++        let mut off_texture =
++            R::tex_to_gl(&renderer.as_ref().context_id(), &targets.scratch).unwrap();
+         std::mem::drop(renderer);
+ 
+         let sync = blit_from_active_fb(gles_frame, src, dst, transform, &mut texture)
+@@ -461,11 +671,11 @@ where
+         };
+         let texture_ref = texture.lock().unwrap();
+ 
+-        if let Some(tex) = texture_ref.as_ref() {
++        if let Some(targets) = texture_ref.as_ref() {
+             BorrowMut::<GlesFrame>::borrow_mut(<R as AsGlowRenderer>::glow_frame_mut(frame))
+                 .override_default_tex_program(self.render_shader.clone(), self.uniforms.clone());
+             frame.render_texture_from_to(
+-                tex,
++                &targets.texture,
+                 src,
+                 dst,
+                 &damage,
+@@ -703,3 +913,93 @@ fn render_blur(
+     // since we render PASSES * 2 (downscale and upscale), so the number of swaps is always even.
+     Ok(())
+ }
++
++#[cfg(test)]
++mod studio_glass_tests {
++    use super::*;
++
++    #[test]
++    fn only_named_shell_layers_are_eligible() {
++        assert_eq!(
++            LiquidGlassKind::from_namespace("Panel"),
++            Some(LiquidGlassKind::Panel)
++        );
++        assert_eq!(
++            LiquidGlassKind::from_namespace("Dock"),
++            Some(LiquidGlassKind::Dock)
++        );
++        for excluded in [
++            "cosmic-greeter",
++            "cosmic-workspaces",
++            "Panel-popup",
++            "Dock-popup",
++            "",
++            "panel",
++            "cosmic-launcher",
++        ] {
++            assert_eq!(LiquidGlassKind::from_namespace(excluded), None);
++        }
++    }
++
++    #[test]
++    fn optical_dimensions_are_logical_and_pool_is_inset() {
++        assert_eq!(LiquidGlassKind::Dock.optical_geometry(), (3.0, 3.0));
++        assert_eq!(LiquidGlassKind::Panel.optical_geometry(), (0.0, 0.0));
++        let native = capture_padding(2, 1.0, None);
++        for (kind, displacement) in [(LiquidGlassKind::Dock, 18.0),
++                                      (LiquidGlassKind::Panel, 5.0),
++                                      (LiquidGlassKind::Surface, 8.0),
++                                      (LiquidGlassKind::Window, 3.0)] {
++            for scale in [1.0, 1.25, 1.5, 2.0, 4.0, 8.0] {
++                let expansion = capture_padding(2, scale, Some(kind));
++                assert!(expansion - displacement * scale >= native);
++            }
++        }
++    }
++
++    #[test]
++    fn window_material_is_limited_to_reviewed_system_apps() {
++        for app_id in ["com.system76.CosmicFiles", "com.system76.CosmicSettings",
++                       "com.system76.CosmicStore", "com.system76.CosmicMonitor",
++                       "com.system76.CosmicPlayer", "com.system76.CosmicViewer"] {
++            assert_eq!(LiquidGlassKind::from_application(app_id), Some(LiquidGlassKind::Window));
++        }
++        for app_id in ["", "com.system76.CosmicEdit", "com.system76.CosmicTerm",
++                       "com.system76.CosmicGreeter", "brave", "com.system76.CosmicFiles-other"] {
++            assert_eq!(LiquidGlassKind::from_application(app_id), None);
++        }
++    }
++
++    #[test]
++    fn optical_hull_excludes_anchor_margin_and_retains_region_holes() {
++        let canvas = Rectangle::new(Point::new(500.0, 924.0), Size::new(600.0, 76.0));
++        let requested = vec![Rectangle::new(Point::new(0, -26), Size::new(600, 76))];
++        assert_eq!(
++            glass_optical_hull(canvas, &requested),
++            Some(Rectangle::new(
++                Point::new(500.0, 924.0),
++                Size::new(600.0, 50.0),
++            ))
++        );
++        let with_hole = vec![
++            Rectangle::new(Point::new(10, 4), Size::new(20, 20)),
++            Rectangle::new(Point::new(50, 4), Size::new(20, 20)),
++        ];
++        assert_eq!(
++            glass_optical_hull(canvas, &with_hole),
++            Some(Rectangle::new(
++                Point::new(510.0, 928.0),
++                Size::new(60.0, 20.0),
++            ))
++        );
++        assert_eq!(with_hole.len(), 2);
++        assert_eq!(glass_optical_hull(canvas, &[]), None);
++        assert_eq!(
++            glass_optical_hull(
++                canvas,
++                &[Rectangle::new(Point::new(0, 100), Size::new(600, 10)),]
++            ),
++            None
++        );
++    }
++}
+diff --git a/src/backend/render/wayland/clipped_surface.rs b/src/backend/render/wayland/clipped_surface.rs
+index 5253526..dc968e0 100644
+--- a/src/backend/render/wayland/clipped_surface.rs
++++ b/src/backend/render/wayland/clipped_surface.rs
+@@ -20,6 +20,67 @@ use smithay::{
+ use crate::backend::render::element::AsGlowRenderer;
+ 
+ pub static CLIPPING_SHADER: &str = include_str!("../shaders/clipped_surface.frag");
++// v_coords are normalized texture coordinates, while strength is measured in
++// surface logical pixels. Output scale must not affect the sampling distance.
++fn defocus_step(
++    strength: f32,
++    buffer: Size<i32, Logical>,
++    source: Size<f64, Logical>,
++    destination: Size<i32, Logical>,
++    transform: Transform,
++) -> (f32, f32) {
++    let step: Size<f64, Logical> = Size::from((
++        strength as f64 * source.w / destination.w.max(1) as f64 / buffer.w.max(1) as f64,
++        strength as f64 * source.h / destination.h.max(1) as f64 / buffer.h.max(1) as f64,
++    ));
++    let step = transform.invert().transform_size(step);
++    (step.w as f32, step.h as f32)
++}
++
++#[cfg(test)]
++mod defocus_tests {
++    use super::*;
++
++    #[test]
++    fn logical_strength_handles_viewport_scaling_and_rotation() {
++        let normal = defocus_step(
++            0.8,
++            (1000, 500).into(),
++            (1000.0, 500.0).into(),
++            (1000, 500).into(),
++            Transform::Normal,
++        );
++        assert!((normal.0 - 0.0008).abs() < 0.000001);
++        assert!((normal.1 - 0.0016).abs() < 0.000001);
++        // Half of the buffer stretched over the same destination halves the UV step.
++        let cropped = defocus_step(
++            0.8,
++            (1000, 500).into(),
++            (500.0, 250.0).into(),
++            (1000, 500).into(),
++            Transform::Normal,
++        );
++        assert_eq!(cropped, (normal.0 / 2.0, normal.1 / 2.0));
++        for transform in [
++            Transform::_90,
++            Transform::_270,
++            Transform::Flipped90,
++            Transform::Flipped270,
++        ] {
++            assert_eq!(
++                defocus_step(
++                    0.8,
++                    (1000, 500).into(),
++                    (1000.0, 500.0).into(),
++                    (1000, 500).into(),
++                    transform
++                ),
++                (normal.1, normal.0)
++            );
++        }
++    }
++}
++
+ pub struct ClippingShader(pub GlesTexProgram);
+ 
+ impl ClippingShader {
+@@ -37,6 +98,9 @@ impl ClippingShader {
+ #[derive(Debug)]
+ pub struct ClippedSurfaceRenderElement<R: Renderer> {
+     inner: WaylandSurfaceRenderElement<R>,
++    defocus_id: Option<Id>,
++    defocus: f32,
++    clip: bool,
+     program: GlesTexProgram,
+     radius: [u8; 4],
+     geometry: Rectangle<f64, Logical>,
+@@ -113,10 +177,15 @@ where
+                 },
+             ),
+             Uniform::new("noise", UniformValue::_1f(0.0)),
++            Uniform::new("defocus_step", (0.0f32, 0.0f32)),
++            Uniform::new("clip_enabled", UniformValue::_1f(1.0)),
+         ];
+ 
+         Self {
+             inner: elem,
++            defocus_id: None,
++            defocus: 0.0,
++            clip: true,
+             program: ClippingShader::get(renderer),
+             radius,
+             geometry,
+@@ -124,6 +193,29 @@ where
+         }
+     }
+ 
++    pub fn with_defocus(mut self, id: Id, strength: f32, clip: bool) -> Self {
++        let size = self.inner.buffer_size();
++        let view = self.inner.view();
++        let step = defocus_step(
++            strength,
++            size,
++            view.src.size,
++            view.dst,
++            self.inner.transform(),
++        );
++        self.uniforms
++            .retain(|u| u.name != "defocus_step" && u.name != "clip_enabled");
++        self.uniforms.push(Uniform::new("defocus_step", step));
++        self.uniforms.push(Uniform::new(
++            "clip_enabled",
++            UniformValue::_1f(if clip { 1.0 } else { 0.0 }),
++        ));
++        self.defocus_id = Some(id);
++        self.defocus = strength;
++        self.clip = clip;
++        self
++    }
++
+     pub fn will_clip(
+         elem: &WaylandSurfaceRenderElement<R>,
+         scale: Scale<f64>,
+@@ -177,7 +269,7 @@ where
+     R::TextureId: 'static,
+ {
+     fn id(&self) -> &Id {
+-        self.inner.id()
++        self.defocus_id.as_ref().unwrap_or_else(|| self.inner.id())
+     }
+ 
+     fn current_commit(&self) -> CommitCounter {
+@@ -204,6 +296,25 @@ where
+         // FIXME: radius changes need to cause damage.
+         let damage = self.inner.damage_since(scale, commit);
+ 
++        // Every filtered pixel also depends on neighboring source pixels. Include
++        // that footprint when a client submits partial damage (e.g. a cursor).
++        let extent = Point::from((
++            (self.defocus as f64 * scale.x).ceil() as i32,
++            (self.defocus as f64 * scale.y).ceil() as i32,
++        ));
++        let bounds = Rectangle::from_size(self.geometry(scale).size);
++        let damage: DamageSet<i32, Physical> = damage
++            .into_iter()
++            .filter_map(|mut rect| {
++                rect.loc -= extent;
++                rect.size += Size::from((extent.x * 2, extent.y * 2));
++                rect.intersection(bounds)
++            })
++            .collect();
++        if !self.clip {
++            return damage;
++        }
++
+         // Intersect with geometry, since we're clipping by it.
+         let mut geo = self.geometry.to_physical_precise_round(scale);
+         geo.loc -= self.geometry(scale).loc;
+@@ -214,6 +325,11 @@ where
+     }
+ 
+     fn opaque_regions(&self, scale: Scale<f64>) -> OpaqueRegions<i32, Physical> {
++        // Filtering can mix opaque pixels with adjacent translucent pixels.
++        // A conservative empty region prevents incorrect occlusion at edges.
++        if self.defocus > 0.0 {
++            return OpaqueRegions::default();
++        }
+         let regions = self.inner.opaque_regions(scale);
+ 
+         // Intersect with geometry, since we're clipping by it.
+diff --git a/src/backend/render/wayland/mod.rs b/src/backend/render/wayland/mod.rs
+index c2b7d4e..7b1b956 100644
+--- a/src/backend/render/wayland/mod.rs
++++ b/src/backend/render/wayland/mod.rs
+@@ -39,6 +39,45 @@ pub fn push_render_elements_from_surface_tree<R>(
+     blur_strength: usize,
+     kind: impl Into<KindEvaluation>,
+     push_above: &mut dyn FnMut(SurfaceRenderElement<R>),
++    push_below: Option<&mut dyn FnMut(SurfaceRenderElement<R>)>,
++) where
++    R: Renderer + ImportAll + AsGlowRenderer,
++    R::TextureId: Clone + 'static,
++{
++    push_render_elements_from_surface_tree_defocus(
++        renderer,
++        main_surface,
++        location,
++        geometry,
++        scale,
++        alpha,
++        should_clip,
++        radii,
++        blur_geometry,
++        blur_strength,
++        0.0,
++        kind,
++        push_above,
++        push_below,
++    )
++}
++
++struct DefocusId(smithay::backend::renderer::element::Id);
++
++pub fn push_render_elements_from_surface_tree_defocus<R>(
++    renderer: &mut R,
++    main_surface: &wl_surface::WlSurface,
++    location: impl Into<Point<i32, Physical>>,
++    geometry: impl Into<Rectangle<f64, Logical>>,
++    scale: impl Into<Scale<f64>>,
++    alpha: f32,
++    should_clip: bool,
++    radii: [u8; 4],
++    blur_geometry: impl Into<Option<Rectangle<f64, Logical>>>,
++    blur_strength: usize,
++    defocus: f32,
++    kind: impl Into<KindEvaluation>,
++    push_above: &mut dyn FnMut(SurfaceRenderElement<R>),
+     mut push_below: Option<&mut dyn FnMut(SurfaceRenderElement<R>)>,
+ ) where
+     R: Renderer + ImportAll + AsGlowRenderer,
+@@ -98,15 +137,29 @@ pub fn push_render_elements_from_surface_tree<R>(
+                                 radii,
+                                 blur_strength,
+                             );
+-                            let elem: SurfaceRenderElement<R> = if radii.iter().any(|r| *r != 0)
+-                                && should_clip
+-                                && ClippedSurfaceRenderElement::will_clip(
+-                                    &surface, scale, geometry, radii,
+-                                ) {
+-                                ClippedSurfaceRenderElement::new(
+-                                    renderer, surface, scale, geometry, radii,
+-                                )
+-                                .into()
++                            let elem: SurfaceRenderElement<R> = if defocus > 0.0
++                                || (radii.iter().any(|r| *r != 0)
++                                    && should_clip
++                                    && ClippedSurfaceRenderElement::will_clip(
++                                        &surface, scale, geometry, radii,
++                                    )) {
++                                let mut clipped = ClippedSurfaceRenderElement::new(
++                                    renderer,
++                                    surface,
++                                    scale,
++                                    geometry,
++                                    if should_clip { radii } else { [0; 4] },
++                                );
++                                if defocus > 0.0 {
++                                    // Separate stable identity damages both focus states without animating.
++                                    // Lifetime follows this wl_surface; closed windows leave no renderer cache.
++                                    states.data_map.insert_if_missing(|| {
++                                        DefocusId(smithay::backend::renderer::element::Id::new())
++                                    });
++                                    let id = states.data_map.get::<DefocusId>().unwrap().0.clone();
++                                    clipped = clipped.with_defocus(id, defocus, should_clip);
++                                }
++                                clipped.into()
+                             } else {
+                                 surface.into()
+                             };
+diff --git a/src/shell/element/chrome_policy.rs b/src/shell/element/chrome_policy.rs
+new file mode 100644
+index 0000000..e11756a
+--- /dev/null
++++ b/src/shell/element/chrome_policy.rs
+@@ -0,0 +1,108 @@
++// SPDX-License-Identifier: GPL-3.0-only
++//! Event-driven, bounded server-decoration policy for clients without theme hints.
++//! XDG toplevel/decoration does not expose a light/dark preference in this SDK.
++//! Exact Spotify IDs therefore use one cached native dark palette. Client-owned
++//! decorations and all other applications retain their own/system theme.
++
++use cosmic::cosmic_theme::{ThemeBuilder, palette::Srgba};
++use cosmic::{Theme, theme::ThemeType};
++use std::sync::{Arc, LazyLock};
++
++static SPOTIFY_CHROME: LazyLock<Arc<cosmic::cosmic_theme::Theme>> = LazyLock::new(|| {
++    let mut theme = ThemeBuilder::dark()
++        .bg_color(Srgba::new(18.0 / 255.0, 18.0 / 255.0, 18.0 / 255.0, 1.0))
++        .primary_container_bg(Srgba::new(24.0 / 255.0, 24.0 / 255.0, 24.0 / 255.0, 1.0))
++        .build();
++    // A black client should keep a solid matching frame even over bright content.
++    theme.frosted_windows = false;
++    // Match the reviewed system radii. Native SSD maps radius_s4 to outer8.
++    // Maximized/tiled geometry still follows the existing compositor policy.
++    theme.corner_radii = cosmic::cosmic_theme::CornerRadii {
++        radius_0: [0.0; 4],
++        radius_xs: [2.0; 4],
++        radius_s: [4.0; 4],
++        radius_m: [6.0; 4],
++        radius_l: [8.0; 4],
++        radius_xl: [10.0; 4],
++    };
++    Arc::new(theme)
++});
++
++fn prefers_black_chrome(app_id: &str) -> bool {
++    app_id.eq_ignore_ascii_case("spotify") || app_id.eq_ignore_ascii_case("com.spotify.Client")
++}
++
++pub(super) fn for_app(base: &Theme, app_id: &str) -> Theme {
++    if !prefers_black_chrome(app_id) || base.cosmic().is_high_contrast {
++        return base.clone();
++    }
++    let mut selected = base.clone();
++    selected.theme_type = ThemeType::Custom(SPOTIFY_CHROME.clone());
++    selected.transparent = false;
++    selected
++}
++
++pub(super) fn is_black_chrome(theme: &Theme) -> bool {
++    matches!(&theme.theme_type, ThemeType::Custom(palette) if Arc::ptr_eq(palette, &SPOTIFY_CHROME))
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn exact_identity_only() {
++        assert!(prefers_black_chrome("spotify"));
++        assert!(prefers_black_chrome("Spotify"));
++        assert!(prefers_black_chrome("com.spotify.Client"));
++        for other in [
++            "",
++            "spotify-preview",
++            "myspotify",
++            "com.spotify.Client.test",
++            "com.system76.CosmicFiles",
++        ] {
++            assert!(!prefers_black_chrome(other));
++        }
++    }
++
++    #[test]
++    fn light_apps_keep_their_original_palette() {
++        let light = Theme::light();
++        let selected = for_app(&light, "com.system76.CosmicFiles");
++        assert_eq!(selected, light);
++        assert!(!is_black_chrome(&selected));
++    }
++
++    #[test]
++    fn spotify_uses_one_opaque_native_dark_palette() {
++        let first = for_app(&Theme::light(), "spotify");
++        let second = for_app(&Theme::dark(), "com.spotify.Client");
++        assert!(is_black_chrome(&first) && is_black_chrome(&second));
++        assert!(first.cosmic().is_dark);
++        assert!(!first.transparent && !first.cosmic().frosted_windows);
++        let background = first.cosmic().background(false).base;
++        for channel in [background.red, background.green, background.blue] {
++            assert!((channel - 18.0 / 255.0).abs() < 0.0001);
++        }
++        assert_eq!(background.alpha, 1.0);
++    }
++
++    #[test]
++    fn dark_chrome_matches_subtle_system_corners() {
++        let theme = for_app(&Theme::light(), "spotify");
++        let radii = &theme.cosmic().corner_radii;
++        assert_eq!(radii.radius_0, [0.0; 4]);
++        assert_eq!(radii.radius_xs, [2.0; 4]);
++        assert_eq!(radii.radius_s, [4.0; 4]);
++        assert_eq!(radii.radius_m, [6.0; 4]);
++        assert_eq!(radii.radius_l, [8.0; 4]);
++        assert_eq!(radii.radius_xl, [10.0; 4]);
++    }
++
++    #[test]
++    fn high_contrast_preference_remains_authoritative() {
++        let accessible = Theme::light_hc();
++        assert_eq!(for_app(&accessible, "spotify"), accessible);
++    }
++}
+diff --git a/src/shell/element/mod.rs b/src/shell/element/mod.rs
+index d4743b7..4f437f4 100644
+--- a/src/shell/element/mod.rs
++++ b/src/shell/element/mod.rs
+@@ -48,6 +48,8 @@ use std::{
+     sync::{Arc, Mutex, Weak, atomic::AtomicBool},
+ };
+ 
++mod chrome_policy;
++
+ pub mod surface;
+ use self::stack::MoveResult;
+ pub use self::surface::CosmicSurface;
+@@ -890,6 +892,15 @@ impl CosmicMapped {
+         }
+     }
+ 
++    /// Refresh only on identity/selection events, never from a rendering path.
++    pub(crate) fn refresh_chrome_identity(&self) {
++        match &self.element {
++            CosmicMappedInternal::Window(w) => w.refresh_chrome_identity(),
++            CosmicMappedInternal::Stack(s) => s.refresh_chrome_identity(),
++            CosmicMappedInternal::_GenericCatcher(_) => {}
++        }
++    }
++
+     pub(crate) fn update_theme(&self, theme: cosmic::Theme) {
+         match &self.element {
+             CosmicMappedInternal::Window(w) => w.set_theme(theme),
+diff --git a/src/shell/element/stack.rs b/src/shell/element/stack.rs
+index f4a37bf..860ef41 100644
+--- a/src/shell/element/stack.rs
++++ b/src/shell/element/stack.rs
+@@ -129,6 +129,7 @@ pub struct CosmicStackInternal {
+     mask: Mutex<Option<tiny_skia::Mask>>,
+     tiled: AtomicBool,
+     theme: Mutex<cosmic::Theme>,
++    base_theme: Mutex<cosmic::Theme>,
+     appearance_conf: Mutex<AppearanceConfig>,
+ }
+ 
+@@ -162,6 +163,8 @@ impl CosmicStack {
+         theme.transparent = theme.cosmic().frosted_windows;
+         let windows = windows.map(Into::into).collect::<Vec<_>>();
+         assert!(!windows.is_empty());
++        let base_theme = theme.clone();
++        theme = super::chrome_policy::for_app(&base_theme, &windows[0].app_id());
+ 
+         for window in &windows {
+             window.try_force_undecorated(true);
+@@ -189,6 +192,7 @@ impl CosmicStack {
+                 mask: Mutex::new(None),
+                 tiled: AtomicBool::new(false),
+                 theme: Mutex::new(theme.clone()),
++                base_theme: Mutex::new(base_theme),
+                 appearance_conf: Mutex::new(appearance),
+             },
+             (width, TAB_HEIGHT),
+@@ -233,6 +237,7 @@ impl CosmicStack {
+             }
+             p.scroll_to_focus.store(true, Ordering::SeqCst);
+         });
++        self.refresh_chrome_identity();
+         self.0
+             .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+         self.0.force_redraw()
+@@ -265,6 +270,7 @@ impl CosmicStack {
+                 .unwrap()
+                 .take_if(|(_, idx)| *idx >= windows.len());
+         });
++        self.refresh_chrome_identity();
+         self.0
+             .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+         self.0.force_redraw()
+@@ -298,6 +304,7 @@ impl CosmicStack {
+ 
+             Some(window)
+         });
++        self.refresh_chrome_identity();
+         self.0
+             .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+         self.0.force_redraw();
+@@ -421,6 +428,7 @@ impl CosmicStack {
+         });
+ 
+         if update {
++            self.refresh_chrome_identity();
+             self.0
+                 .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+         }
+@@ -475,6 +483,7 @@ impl CosmicStack {
+         });
+ 
+         if !matches!(result, MoveResult::Default) {
++            self.refresh_chrome_identity();
+             self.0
+                 .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+         }
+@@ -509,6 +518,7 @@ impl CosmicStack {
+                 }
+             }
+         });
++        self.refresh_chrome_identity();
+         self.0
+             .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+         self.0.force_redraw()
+@@ -871,10 +881,29 @@ impl CosmicStack {
+ 
+     pub(crate) fn set_theme(&self, mut theme: cosmic::Theme) {
+         theme.transparent = theme.cosmic().frosted_windows;
+-        self.0.with_program(|p| {
+-            *p.theme.lock().unwrap() = theme.clone();
++        let (selected, changed) = self.0.with_program(|p| {
++            *p.base_theme.lock().unwrap() = theme.clone();
++            let selected = super::chrome_policy::for_app(
++                &theme,
++                &p.windows.lock().unwrap()[p.active.load(Ordering::SeqCst)].app_id(),
++            );
++            let mut current = p.theme.lock().unwrap();
++            let changed = *current != selected;
++            *current = selected.clone();
++            (selected, changed)
+         });
+-        self.0.set_theme(theme);
++        if changed {
++            self.0.set_theme(selected);
++            self.0.force_update();
++            self.0.force_redraw();
++        }
++    }
++
++    pub(crate) fn refresh_chrome_identity(&self) {
++        let base = self
++            .0
++            .with_program(|p| p.base_theme.lock().unwrap().clone());
++        self.set_theme(base);
+     }
+ 
+     pub fn update_appearance_conf(&self, appearance: &AppearanceConfig) {
+@@ -1393,7 +1422,9 @@ impl Decorations<CosmicStackInternal, Message> for DefaultDecorations {
+             .class(theme::Container::custom(move |theme| {
+                 let cosmic_theme = theme.cosmic();
+ 
+-                let mut background = if group_focused {
++                let mut background = if super::chrome_policy::is_black_chrome(theme) {
++                    cosmic_theme.background(false).base
++                } else if group_focused {
+                     cosmic_theme.accent_color()
+                 } else {
+                     cosmic_theme.primary_container_color()
+@@ -1507,10 +1538,11 @@ impl SpaceElement for CosmicStack {
+         })
+     }
+     fn refresh(&self) {
+-        self.0.with_program(|p| {
++        let (chrome_changed, resize_width) = self.0.with_program(|p| {
+             let mut windows = p.windows.lock().unwrap();
+ 
+             // don't let the stack become empty
++            let old_len = windows.len();
+             let old_active = p.active.load(Ordering::SeqCst);
+             let active = windows[old_active].clone();
+             windows.retain(IsAlive::alive);
+@@ -1526,11 +1558,7 @@ impl SpaceElement for CosmicStack {
+                 });
+             let active = p.active.load(Ordering::SeqCst);
+ 
+-            if old_active != active {
+-                self.0
+-                    .resize(Size::from((self.active().geometry().size.w, TAB_HEIGHT)));
+-                self.0.force_redraw();
+-            }
++            let resize_width = (old_active != active).then(|| windows[active].geometry().size.w);
+ 
+             windows.iter().enumerate().for_each(|(i, w)| {
+                 if i == active {
+@@ -1542,7 +1570,15 @@ impl SpaceElement for CosmicStack {
+ 
+                 SpaceElement::refresh(w)
+             });
++            (old_active != active || old_len != len, resize_width)
+         });
++        if let Some(width) = resize_width {
++            self.0.resize(Size::from((width, TAB_HEIGHT)));
++            self.0.force_redraw();
++        }
++        if chrome_changed {
++            self.refresh_chrome_identity();
++        }
+         SpaceElement::refresh(&self.0);
+     }
+ }
+diff --git a/src/shell/element/stack/tab.rs b/src/shell/element/stack/tab.rs
+index 4b2a329..739ad49 100644
+--- a/src/shell/element/stack/tab.rs
++++ b/src/shell/element/stack/tab.rs
+@@ -146,7 +146,7 @@ impl<Message: TabMessage + 'static> Tab<Message> {
+             id,
+             app_icon: from_name(app_id.into()).size(16).icon(),
+             title: title.into(),
+-            font: cosmic::font::default(),
++            font: cosmic::font::display(),
+             close_message: None,
+             press_message: None,
+             right_click_message: None,
+diff --git a/src/shell/element/surface.rs b/src/shell/element/surface.rs
+index a7fd922..8277473 100644
+--- a/src/shell/element/surface.rs
++++ b/src/shell/element/surface.rs
+@@ -1,7 +1,11 @@
+ use crate::{
+     backend::render::{
+         element::AsGlowRenderer,
+-        wayland::{SurfaceRenderElement, push_render_elements_from_surface_tree},
++        wayland::{
++            SurfaceRenderElement,
++            blur_effect::{LiquidGlassKind, LiquidGlassTarget},
++            push_render_elements_from_surface_tree, push_render_elements_from_surface_tree_defocus,
++        },
+     },
+     shell::focus::target::PointerFocusTarget,
+     wayland::handlers::{
+@@ -29,8 +33,8 @@ use smithay::{
+         },
+     },
+     desktop::{
+-        PopupManager, WeakWindow, Window, WindowSurface, WindowSurfaceType, space::SpaceElement,
+-        utils::OutputPresentationFeedback,
++        PopupKind, PopupManager, WeakWindow, Window, WindowSurface, WindowSurfaceType,
++        space::SpaceElement, utils::OutputPresentationFeedback,
+     },
+     input::{
+         Seat,
+@@ -895,6 +899,16 @@ impl CosmicSurface {
+             WindowSurface::Wayland(toplevel) => {
+                 let surface = toplevel.wl_surface();
+                 for (popup, popup_offset) in PopupManager::popups_for_surface(surface) {
++                    with_states(popup.wl_surface(), |states| {
++                        let target = states
++                            .data_map
++                            .get_or_insert_threadsafe::<LiquidGlassTarget, _>(Default::default);
++                        *target.0.lock().unwrap() = if matches!(popup, PopupKind::Xdg(_)) {
++                            LiquidGlassKind::for_popup()
++                        } else {
++                            None
++                        };
++                    });
+                     let offset = (self.0.geometry().loc + popup_offset - popup.geometry().loc)
+                         .to_physical_precise_round(scale);
+                     let mut geometry = popup.geometry().to_f64();
+@@ -949,7 +963,27 @@ impl CosmicSurface {
+             WindowSurface::Wayland(toplevel) => {
+                 let surface = toplevel.wl_surface();
+ 
+-                push_render_elements_from_surface_tree(
++                // Only opted-in native applications receive window optics.
++                // The client's committed blur region remains authoritative.
++                with_states(surface, |states| {
++                    let kind =
++                        states
++                            .data_map
++                            .get::<XdgToplevelSurfaceData>()
++                            .and_then(|metadata| {
++                                let metadata = metadata.lock().unwrap();
++                                metadata
++                                    .app_id
++                                    .as_deref()
++                                    .and_then(LiquidGlassKind::for_window)
++                            });
++                    let target = states
++                        .data_map
++                        .get_or_insert_threadsafe::<LiquidGlassTarget, _>(Default::default);
++                    *target.0.lock().unwrap() = kind;
++                });
++
++                push_render_elements_from_surface_tree_defocus(
+                     renderer,
+                     surface,
+                     location,
+@@ -960,6 +994,7 @@ impl CosmicSurface {
+                     radii,
+                     None,
+                     blur_strength,
++                    if self.is_activated(false) { 0.0 } else { 0.8 },
+                     scanout_kind_eval(scanout_override, scanout_node, alpha),
+                     push_above,
+                     push_below,
+@@ -970,7 +1005,7 @@ impl CosmicSurface {
+                     return;
+                 };
+ 
+-                push_render_elements_from_surface_tree(
++                push_render_elements_from_surface_tree_defocus(
+                     renderer,
+                     &surface,
+                     location,
+@@ -981,6 +1016,7 @@ impl CosmicSurface {
+                     radii,
+                     None,
+                     blur_strength,
++                    if self.is_activated(false) { 0.0 } else { 0.8 },
+                     scanout_kind_eval(scanout_override, scanout_node, alpha),
+                     push_above,
+                     push_below,
+diff --git a/src/shell/element/window.rs b/src/shell/element/window.rs
+index fa4a187..5473c10 100644
+--- a/src/shell/element/window.rs
++++ b/src/shell/element/window.rs
+@@ -76,7 +76,7 @@ use wayland_backend::server::ObjectId;
+ use super::CosmicSurface;
+ 
+ pub const SSD_HEIGHT: i32 = 36;
+-pub const RESIZE_BORDER: i32 = 10;
++pub const RESIZE_BORDER: i32 = 12;
+ 
+ #[derive(Clone, PartialEq, Eq, Hash)]
+ pub struct CosmicWindow(pub(super) IcedElement<CosmicWindowInternal>);
+@@ -98,6 +98,7 @@ pub struct CosmicWindowInternal {
+     last_title: Mutex<String>,
+     tiled: AtomicBool,
+     theme: Mutex<cosmic::Theme>,
++    base_theme: Mutex<cosmic::Theme>,
+     appearance_conf: Mutex<AppearanceConfig>,
+ }
+ 
+@@ -206,6 +207,8 @@ impl CosmicWindow {
+         let width = window.geometry().size.w;
+         let last_title = window.title();
+         theme.transparent = theme.cosmic().frosted_windows;
++        let base_theme = theme.clone();
++        theme = super::chrome_policy::for_app(&base_theme, &window.app_id());
+ 
+         if appearance.clip_floating_windows {
+             window.set_tiled(true);
+@@ -219,6 +222,7 @@ impl CosmicWindow {
+                 last_title: Mutex::new(last_title),
+                 tiled: AtomicBool::new(false),
+                 theme: Mutex::new(theme.clone()),
++                base_theme: Mutex::new(base_theme),
+                 appearance_conf: Mutex::new(appearance),
+             },
+             (width, SSD_HEIGHT),
+@@ -605,10 +609,26 @@ impl CosmicWindow {
+ 
+     pub(crate) fn set_theme(&self, mut theme: cosmic::Theme) {
+         theme.transparent = theme.cosmic().frosted_windows;
+-        self.0.with_program(|p| {
+-            *p.theme.lock().unwrap() = theme.clone();
++        let (selected, changed) = self.0.with_program(|p| {
++            *p.base_theme.lock().unwrap() = theme.clone();
++            let selected = super::chrome_policy::for_app(&theme, &p.window.app_id());
++            let mut current = p.theme.lock().unwrap();
++            let changed = *current != selected;
++            *current = selected.clone();
++            (selected, changed)
+         });
+-        self.0.set_theme(theme);
++        if changed {
++            self.0.set_theme(selected);
++            self.0.force_update();
++            self.0.force_redraw();
++        }
++    }
++
++    pub(crate) fn refresh_chrome_identity(&self) {
++        let base = self
++            .0
++            .with_program(|p| p.base_theme.lock().unwrap().clone());
++        self.set_theme(base);
+     }
+ 
+     pub fn update_appearance_conf(&self, appearance: &AppearanceConfig) {
+diff --git a/src/utils/iced/mod.rs b/src/utils/iced/mod.rs
+index 4522644..ed7e232 100644
+--- a/src/utils/iced/mod.rs
++++ b/src/utils/iced/mod.rs
+@@ -226,6 +226,7 @@ impl<P: Program + Send + Clone + 'static> Clone for IcedElementInternal<P> {
+         if !self.state.is_queue_empty() {
+             tracing::warn!("Missing force_update call");
+         }
++        cosmic::font::preload();
+         let mut renderer = cosmic::Renderer::new(cosmic::font::default(), Pixels(16.0));
+         let state = State::new(
+             ID.clone(),
+@@ -305,6 +306,7 @@ impl<P: Program + Send + 'static> IcedElement<P> {
+     ) -> IcedElement<P> {
+         let size = size.into();
+         let last_seat = Arc::new(Mutex::new(None));
++        cosmic::font::preload();
+         let mut renderer = cosmic::Renderer::new(cosmic::font::default(), Pixels(16.0));
+ 
+         let state = State::new(
+@@ -1260,3 +1262,32 @@ render_elements! {
+     UI=MemoryRenderBufferRenderElement<R>,
+     Blur=BlurElement,
+ }
++
++#[cfg(test)]
++mod studio_native_font_tests {
++    use cosmic::iced::advanced::graphics::text::{cosmic_text::fontdb, font_system};
++
++    #[test]
++    fn custom_renderer_fonts_are_authentic_and_loaded_once() {
++        cosmic::font::preload();
++        let fonts = font_system();
++        let count_before = fonts.read().unwrap().db().faces().count();
++        cosmic::font::preload();
++        let fonts = fonts.read().unwrap();
++        assert_eq!(count_before, fonts.db().faces().count());
++        for (family, weight, italic) in [
++            ("Archivo", 400, false), ("Archivo", 400, true),
++            ("Archivo", 500, false), ("Archivo", 500, true),
++            ("Archivo", 600, false), ("Archivo", 600, true),
++            ("Archivo", 700, false), ("Archivo", 700, true),
++            ("Instrument Serif", 400, false), ("Instrument Serif", 400, true),
++        ] {
++            assert!(fonts.db().faces().any(|face| {
++                face.families.iter().any(|(name, _)| name == family)
++                    && face.weight.0 == weight
++                    && (face.style == fontdb::Style::Italic) == italic
++                    && matches!(face.source, fontdb::Source::Binary(_))
++            }), "Missing native custom-renderer face: {family} {weight} italic={italic}");
++        }
++    }
++}
+diff --git a/src/wayland/handlers/xdg_shell/mod.rs b/src/wayland/handlers/xdg_shell/mod.rs
+index be7084d..f5b5406 100644
+--- a/src/wayland/handlers/xdg_shell/mod.rs
++++ b/src/wayland/handlers/xdg_shell/mod.rs
+@@ -45,6 +45,13 @@ impl XdgShellHandler for State {
+         &mut self.common.xdg_shell_state
+     }
+ 
++    fn app_id_changed(&mut self, surface: ToplevelSurface) {
++        let shell = self.common.shell.read();
++        if let Some(element) = shell.element_for_surface(&surface) {
++            element.refresh_chrome_identity();
++        }
++    }
++
+     fn new_toplevel(&mut self, surface: ToplevelSurface) {
+         let mut shell = self.common.shell.write();
+         let seat = shell.seats.last_active().clone();
+diff --git a/src/xwayland.rs b/src/xwayland.rs
+index cc6be3b..5b44b45 100644
+--- a/src/xwayland.rs
++++ b/src/xwayland.rs
+@@ -55,7 +55,7 @@ use smithay::{
+     },
+     xwayland::{
+         X11Surface, X11Wm, XWayland, XWaylandClientData, XWaylandEvent, XwmHandler,
+-        xwm::{Reorder, XwmId},
++        xwm::{Reorder, WmWindowProperty, XwmId},
+     },
+ };
+ use tracing::{error, trace, warn};
+@@ -779,6 +779,15 @@ impl XwmHandler for State {
+             .unwrap()
+     }
+ 
++    fn property_notify(&mut self, _xwm: XwmId, window: X11Surface, property: WmWindowProperty) {
++        if matches!(property, WmWindowProperty::Class) {
++            let shell = self.common.shell.read();
++            if let Some(element) = shell.element_for_surface(&window) {
++                element.refresh_chrome_identity();
++            }
++        }
++    }
++
+     fn new_window(&mut self, _xwm: XwmId, _window: X11Surface) {}
+     fn new_override_redirect_window(&mut self, _xwm: XwmId, _window: X11Surface) {}
+     fn destroyed_window(&mut self, _xwm: XwmId, _window: X11Surface) {}

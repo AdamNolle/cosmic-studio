@@ -1,0 +1,316 @@
+{
+  "schema": 1,
+  "profiles": {
+    "native-08a09e3d": {
+      "kind": "native-library",
+      "revision": "08a09e3dfa1f729d52585fcedd6e731130235363",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/libcosmic-core-08a",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "7419067fc61664988a5add66b7278e6cfba82812bd1bbe2c9051e3afe1ce24fc"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-d77e99fb": {
+      "kind": "native-library",
+      "revision": "d77e99fb1555e2728297677de61e23ada4d9d09b",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/libcosmic-core-d77",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-d922ac38": {
+      "kind": "native-library",
+      "revision": "d922ac380134c00208d2acf93947d44fb217eec5",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/libcosmic-comp-native",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "175429fae64aa3aef0a1e3fb23c7b50b4f06e6b002819f1c89ee95e1ee66e709"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-87ab8179": {
+      "kind": "native-library",
+      "revision": "87ab8179e1bd9880239c340855ae8862034bd0e8",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/libcosmic-greeter-native",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-8cb10bf6": {
+      "kind": "native-library",
+      "revision": "8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/libcosmic-8cb10bf",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "175429fae64aa3aef0a1e3fb23c7b50b4f06e6b002819f1c89ee95e1ee66e709"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-8cb86195": {
+      "kind": "native-library",
+      "revision": "8cb86195ec576064ac8e59e9200315714d17dc55",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/libcosmic-8cb8619",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-9cc82abd": {
+      "kind": "native-library",
+      "revision": "9cc82abd9ca5601bb0341edd12a9acbc97e77801",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-player",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "175429fae64aa3aef0a1e3fb23c7b50b4f06e6b002819f1c89ee95e1ee66e709"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-eaa7a5a2": {
+      "kind": "native-library",
+      "revision": "eaa7a5a24c4359ebeaab507855388942e8984d5d",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-viewer",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-03c8f93b": {
+      "kind": "native-library",
+      "revision": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-applets",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "70b7f5e919a57af3ecb7955996cdb34e21f21275638969fec9f8b49dac9d1f6e"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-d921602c": {
+      "kind": "native-library",
+      "revision": "d921602cde8248c070b493ce43b0edd388e19b9a",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-notifications-osd",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-23f5d63f": {
+      "kind": "native-library",
+      "revision": "23f5d63fed2a370f3c2f54b90ec8f0896fe82105",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-store",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "cosmic-launcher": {
+      "kind": "client",
+      "revision": "cc3d42bcc8fbcb67e6312f2766394e18b4d937d5",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-launcher",
+      "files": {
+        "src/app.rs": "b7fe94e65908fbb4ab5ac3b6f0ea4332f44efde04afd50855bfba6863b7e491a"
+      },
+      "roles": [
+        {
+          "file": "src/app.rs",
+          "before": "                    let name = Column::with_children(name.lines().map(|line| {\n                        text::body(line.to_string())\n                            .ellipsize",
+          "after": "                    let name = Column::with_children(name.lines().map(|line| {\n                        text::body(line.to_string())\n                            .font(cosmic::font::display())\n                            .ellipsize",
+          "role": "primary launcher result title; description/input retained"
+        }
+      ]
+    },
+    "cosmic-app-library": {
+      "kind": "client",
+      "revision": "0a3996de82c264095ade047661f7a3088f99013e",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-app-library",
+      "files": {
+        "src/app.rs": "b1b8aecb8d3a85ed1a8ae18539d0f7b84c084c7ec58a6195408e159d423596b9",
+        "src/widgets/application.rs": "48fa90be8e44989873b8fa7b4a6858c346107e883fd31917dceba2658665ee9a"
+      },
+      "roles": [
+        {
+          "file": "src/app.rs",
+          "before": "container(text(cur_group.name()).size(24))",
+          "after": "container(text(cur_group.name()).size(24).font(cosmic::font::display()))",
+          "role": "24px application group title"
+        },
+        {
+          "file": "src/widgets/application.rs",
+          "before": "                        text(name)\n                            .size(14.0)",
+          "after": "                        text(name)\n                            .font(cosmic::font::display())\n                            .size(14.0)",
+          "role": "application card name; existing14px and geometry retained"
+        }
+      ]
+    },
+    "cosmic-workspaces": {
+      "kind": "client",
+      "revision": "28e257daa86643aee4166f192fb3e000ac3f7605",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-workspaces",
+      "files": {
+        "src/view/mod.rs": "eb2c03fe69e9b3130ff1244b02cda40949f895039cd7ed9a1788fa1f26bc3a21"
+      },
+      "roles": [
+        {
+          "file": "src/view/mod.rs",
+          "before": "    let label = widget::text::body(toplevel.info.title.clone())\n        .ellipsize",
+          "after": "    let label = widget::text::body(toplevel.info.title.clone())\n        .font(cosmic::font::display())\n        .ellipsize",
+          "role": "overview window title; document content untouched"
+        }
+      ]
+    },
+    "cosmic-applets-calendar": {
+      "kind": "client",
+      "revision": "82e7cd814addb0641959b634227fe550374e195b",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/cosmic-applets",
+      "files": {
+        "cosmic-applet-time/src/window.rs": "b09c3f3eae34184681753d7ef2924ad95830bcb82755b1aac02a6051167cb530"
+      },
+      "roles": [
+        {
+          "file": "cosmic-applet-time/src/window.rs",
+          "before": "        let date = text(\n            DateTimeFormatter::try_new(prefs, fieldsets::YMD::long())\n                .unwrap()\n                .format(&datetime)\n                .to_string(),\n        )\n        .size(18);",
+          "after": "        let date = text(\n            DateTimeFormatter::try_new(prefs, fieldsets::YMD::long())\n                .unwrap()\n                .format(&datetime)\n                .to_string(),\n        )\n        .font(cosmic::font::display())\n        .size(18);",
+          "role": "18px calendar selected-date heading; month/day controls and tooltip body retained"
+        }
+      ]
+    },
+    "native-dc1cf9f0": {
+      "kind": "native-library",
+      "revision": "dc1cf9f00cbe2902a52166492654bb9fee8a73d1",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/thirdparty-font-build-inputs/library-brightness-native",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "175429fae64aa3aef0a1e3fb23c7b50b4f06e6b002819f1c89ee95e1ee66e709"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-1f8d8786": {
+      "kind": "native-library",
+      "revision": "1f8d8786940cc6db59d412153c5a03f69a20375c",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/thirdparty-font-build-inputs/library-sysinfo-native",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "175429fae64aa3aef0a1e3fb23c7b50b4f06e6b002819f1c89ee95e1ee66e709"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-a401af8b": {
+      "kind": "native-library",
+      "revision": "a401af8b1c54a8abd393b8c5b7c8809402f83850",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/thirdparty-font-build-inputs/library-status-hub-native",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "8f44774efd04481387fd3cb3d909d93b20c5f19719742e007527913b02acf9cf"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    },
+    "native-76c1897d": {
+      "kind": "native-library",
+      "revision": "76c1897d4d9a637c8aa4016483bf05fec5f10ebd",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/thirdparty-font-build-inputs/library-caffeine-native",
+      "files": {
+        "src/widget/menu/menu_tree.rs": "41a15a6d6d37577c14984376140ee360fc56377a09b1658589a9024a3abaf81a"
+      },
+      "roles": [
+        {
+          "file": "src/widget/menu/menu_tree.rs",
+          "before": "widget::button::custom(widget::text(label))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "after": "widget::button::custom(widget::text(label).font(crate::font::display()))\n        .padding([4, 12])\n        .class(theme::Button::MenuRoot)",
+          "role": "top-level application menu heading; command entries and keyboard shortcuts unchanged"
+        }
+      ]
+    }
+  }
+}

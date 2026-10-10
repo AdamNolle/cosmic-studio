@@ -1,0 +1,60 @@
+--- a/src/font.rs
++++ b/src/font.rs
+@@ -39,3 +39,10 @@
+ pub fn mono() -> Font {
+     Font::from(crate::config::monospace_font())
+ }
++
++/// COSMIC Studio display face. A static font key uses the renderer's existing
++/// shaped-text cache; ordinary UI, captions, code and symbols keep their roles.
++#[inline]
++pub fn display() -> Font {
++    Font::with_name("Instrument Serif")
++}
+--- a/src/widget/text.rs
++++ b/src/widget/text.rs
+@@ -31,7 +31,7 @@
+         Text::new(text)
+             .size(35.0)
+             .line_height(LineHeight::Absolute(52.0.into()))
+-            .font(crate::font::semibold())
++            .font(crate::font::display())
+     }
+ 
+     inner(text.into())
+@@ -44,7 +44,7 @@
+         Text::new(text)
+             .size(29.0)
+             .line_height(LineHeight::Absolute(43.0.into()))
+-            .font(crate::font::semibold())
++            .font(crate::font::display())
+     }
+ 
+     inner(text.into())
+@@ -57,7 +57,7 @@
+         Text::new(text)
+             .size(24.0)
+             .line_height(LineHeight::Absolute(36.0.into()))
+-            .font(crate::font::bold())
++            .font(crate::font::display())
+     }
+ 
+     inner(text.into())
+@@ -70,7 +70,7 @@
+         Text::new(text)
+             .size(20.0)
+             .line_height(LineHeight::Absolute(30.0.into()))
+-            .font(crate::font::bold())
++            .font(crate::font::display())
+     }
+ 
+     inner(text.into())
+@@ -83,7 +83,7 @@
+         Text::new(text)
+             .size(14.0)
+             .line_height(LineHeight::Absolute(iced::Pixels(21.0)))
+-            .font(crate::font::bold())
++            .font(crate::font::display())
+     }
+ 
+     inner(text.into())

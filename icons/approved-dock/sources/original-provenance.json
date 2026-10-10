@@ -1,0 +1,11 @@
+{
+  "brave": "https://github.com/brave/brave-core/blob/master/app/theme/brave/mac/app.icns",
+  "ghostty": "https://github.com/ghostty-org/ghostty/blob/main/macos/Assets.xcassets/AppIconImage.imageset/macOS-AppIcon-1024px.png",
+  "spotify": "https://download.scdn.co/Spotify.dmg (AppIcon.icns, downloaded 2026-10-10)",
+  "obsidian": "https://github.com/obsidianmd/obsidian-releases/releases/tag/v1.14.4 (icon.icns from official Mac disk image)",
+  "zed": "https://github.com/zed-industries/zed/blob/main/crates/zed/resources/app-icon@2x.png",
+  "darktable": "https://github.com/darktable-org/darktable/blob/master/data/pixmaps/scalable/darktable_macos_icon.svg",
+  "files": "Adaptation of installed COSMIC Files vector. No official macOS version exists.",
+  "chatgpt": "Adaptation using the installed Conflux ChatGPT knot; official Mac download was unavailable. Not presented as an extracted native icon.",
+  "trash": "Adaptation of installed Conflux wastebasket, retained on a matching squircle."
+}

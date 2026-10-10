@@ -1,0 +1,11 @@
+# Approved opaque dark terminal appearance; UI controls use the separate dark CSS.
+theme = Studio Dark
+background-opacity = 1
+window-theme = dark
+font-family = iA Writer Mono S
+faint-opacity = 0.8
+window-padding-x = 12
+window-padding-y = 12
+window-titlebar-background = #030405
+window-titlebar-foreground = #F0F1F2
+gtk-custom-css = @STUDIO_GTK_CSS@

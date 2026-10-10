@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "applets_revision": "82e7cd814addb0641959b634227fe550374e195b",
+  "library_revision": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+  "preimages": {
+    "cosmic-applets/cosmic-applet-time/src/window.rs": "b09c3f3eae34184681753d7ef2924ad95830bcb82755b1aac02a6051167cb530",
+    "libcosmic-applets/src/widget/wayland/tooltip/widget.rs": "c7410b923ae8056fce40f6347d88c00556ad359df03b2fbcd057ae224c7bb0ad"
+  }
+}

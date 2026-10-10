@@ -1,0 +1,677 @@
+[
+  {
+    "id": "org.gimp.GIMP.desktop",
+    "name": "GNU Image Manipulation Program",
+    "icon": "org.gimp.GIMP",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/flatpak/exports/share/applications/org.gimp.GIMP.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/512x512/apps/org.gimp.GIMP.png",
+    "theme_icon": "org.gimp.GIMP"
+  },
+  {
+    "id": "io.github.kai_j_g.HardwareMonitor.desktop",
+    "name": "Hardware Monitor for COSMIC\u2122",
+    "icon": "io.github.kai_j_g.HardwareMonitor",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/flatpak/exports/share/applications/io.github.kai_j_g.HardwareMonitor.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/io.github.kai_j_g.HardwareMonitor.svg",
+    "theme_icon": "io.github.kai_j_g.HardwareMonitor"
+  },
+  {
+    "id": "org.kde.kdenlive.desktop",
+    "name": "Kdenlive",
+    "icon": "org.kde.kdenlive",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/flatpak/exports/share/applications/org.kde.kdenlive.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/512x512/apps/org.kde.kdenlive.png",
+    "theme_icon": "org.kde.kdenlive"
+  },
+  {
+    "id": "repoman.desktop",
+    "name": "Repoman",
+    "icon": "repoman",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/repoman.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/repoman.svg",
+    "theme_icon": "repoman"
+  },
+  {
+    "id": "qt5ct.desktop",
+    "name": "Qt5 Settings",
+    "icon": "preferences-desktop-theme",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/qt5ct.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/preferences/scalable/preferences-desktop-theme.svg",
+    "theme_icon": "preferences-desktop-theme"
+  },
+  {
+    "id": "solaar.desktop",
+    "name": "Solaar",
+    "icon": "solaar",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/solaar.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/solaar.svg",
+    "theme_icon": "solaar"
+  },
+  {
+    "id": "firefox.desktop",
+    "name": "Firefox Web Browser",
+    "icon": "firefox",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/firefox.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/firefox.svg",
+    "theme_icon": "firefox"
+  },
+  {
+    "id": "PrusaSlicer.desktop",
+    "name": "PrusaSlicer",
+    "icon": "PrusaSlicer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/PrusaSlicer.desktop",
+    "source": "/usr/share/icons/hicolor/192x192/apps/PrusaSlicer.png",
+    "theme_icon": "PrusaSlicer"
+  },
+  {
+    "id": "libreoffice-calc.desktop",
+    "name": "LibreOffice Calc",
+    "icon": "libreoffice-calc",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/libreoffice-calc.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-calc.png",
+    "theme_icon": "libreoffice-calc"
+  },
+  {
+    "id": "com.system76.CosmicViewer.desktop",
+    "name": "COSMIC Viewer",
+    "icon": "com.system76.CosmicViewer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicViewer.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicViewer.svg",
+    "theme_icon": "com.system76.CosmicViewer"
+  },
+  {
+    "id": "local-flameshot-capture.desktop",
+    "name": "Take Screenshot (Flameshot)",
+    "icon": "org.flameshot.Flameshot",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/local-flameshot-capture.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg",
+    "theme_icon": "org.flameshot.Flameshot"
+  },
+  {
+    "id": "antigravity.desktop",
+    "name": "Antigravity",
+    "icon": "antigravity",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/antigravity.desktop",
+    "source": "/home/adamnolle/Documents/Codex/2026-10-10/us/work/system-icons/antigravity-original.png",
+    "theme_icon": "antigravity"
+  },
+  {
+    "id": "nsight-compute-2025.3.1.desktop",
+    "name": "NVIDIA Nsight Compute 2025.3.1",
+    "icon": "/opt/nvidia/nsight-compute/2025.3.1/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/nsight-compute-2025.3.1.desktop",
+    "source": "/opt/nvidia/nsight-compute/2025.3.1/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png",
+    "theme_icon": "studio-app-nsight-compute-2025.3.1"
+  },
+  {
+    "id": "qt6ct.desktop",
+    "name": "Qt6 Settings",
+    "icon": "preferences-desktop-theme",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/qt6ct.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/preferences/scalable/preferences-desktop-theme.svg",
+    "theme_icon": "preferences-desktop-theme"
+  },
+  {
+    "id": "nvidia-settings.desktop",
+    "name": "NVIDIA X Server Settings",
+    "icon": "nvidia-settings",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/nvidia-settings.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/nvidia-settings.svg",
+    "theme_icon": "nvidia-settings"
+  },
+  {
+    "id": "thunderbird.desktop",
+    "name": "Thunderbird",
+    "icon": "thunderbird",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/thunderbird.desktop",
+    "source": "/usr/share/icons/hicolor/128x128/apps/thunderbird.png",
+    "theme_icon": "thunderbird"
+  },
+  {
+    "id": "com.system76.FirmwareManager.desktop",
+    "name": "Firmware Manager",
+    "icon": "firmware-manager",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.FirmwareManager.desktop",
+    "source": "/usr/share/icons/Cosmic/scalable/apps/firmware-manager.svg",
+    "theme_icon": "firmware-manager"
+  },
+  {
+    "id": "org.gnome.eog.desktop",
+    "name": "Image Viewer",
+    "icon": "org.gnome.eog",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.eog.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.eog.svg",
+    "theme_icon": "org.gnome.eog"
+  },
+  {
+    "id": "libreoffice-writer.desktop",
+    "name": "LibreOffice Writer",
+    "icon": "libreoffice-writer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/libreoffice-writer.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-writer.png",
+    "theme_icon": "libreoffice-writer"
+  },
+  {
+    "id": "chatgpt.desktop",
+    "name": "ChatGPT",
+    "icon": "chatgpt",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/chatgpt.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/chatgpt.svg",
+    "theme_icon": "chatgpt"
+  },
+  {
+    "id": "libreoffice-math.desktop",
+    "name": "LibreOffice Math",
+    "icon": "libreoffice-math",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/libreoffice-math.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-math.png",
+    "theme_icon": "libreoffice-math"
+  },
+  {
+    "id": "display-im6.q16.desktop",
+    "name": "ImageMagick (color depth=q16)",
+    "icon": "display-im6.q16",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/display-im6.q16.desktop",
+    "source": "/home/adamnolle/Documents/Codex/2026-10-10/us/work/system-icons/imagemagick-wizard.png",
+    "theme_icon": "display-im6.q16"
+  },
+  {
+    "id": "brave-browser.desktop",
+    "name": "Brave Web Browser",
+    "icon": "brave-browser",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/brave-browser.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/brave-browser.png",
+    "theme_icon": "brave-browser"
+  },
+  {
+    "id": "org.gnome.Evince.desktop",
+    "name": "Document Viewer",
+    "icon": "org.gnome.Evince",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.Evince.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.Evince.svg",
+    "theme_icon": "org.gnome.Evince"
+  },
+  {
+    "id": "com.system76.Popsicle.desktop",
+    "name": "Popsicle USB Flasher",
+    "icon": "com.system76.Popsicle",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.Popsicle.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/com.system76.Popsicle.png",
+    "theme_icon": "com.system76.Popsicle"
+  },
+  {
+    "id": "vlc.desktop",
+    "name": "VLC media player",
+    "icon": "vlc",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/vlc.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/vlc.svg",
+    "theme_icon": "vlc"
+  },
+  {
+    "id": "pavucontrol.desktop",
+    "name": "PulseAudio Volume Control",
+    "icon": "multimedia-volume-control",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/pavucontrol.desktop",
+    "source": "/usr/share/icons/Cosmic/scalable/apps/multimedia-volume-control.svg",
+    "theme_icon": "multimedia-volume-control"
+  },
+  {
+    "id": "steam.desktop",
+    "name": "Steam",
+    "icon": "steam",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/steam.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/steam.png",
+    "theme_icon": "steam"
+  },
+  {
+    "id": "org.gnome.DiskUtility.desktop",
+    "name": "Disks",
+    "icon": "org.gnome.DiskUtility",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.DiskUtility.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.DiskUtility.svg",
+    "theme_icon": "org.gnome.DiskUtility"
+  },
+  {
+    "id": "blender.desktop",
+    "name": "Blender",
+    "icon": "/home/adamnolle/.local/opt/blender-5.2.2-linux-x64/blender.svg",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/blender.desktop",
+    "source": "/home/adamnolle/.local/opt/blender-5.2.2-linux-x64/blender.svg",
+    "theme_icon": "studio-app-blender"
+  },
+  {
+    "id": "org.freedesktop.IBus.Setup.desktop",
+    "name": "IBus Preferences",
+    "icon": "ibus-setup",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.freedesktop.IBus.Setup.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/ibus-setup.svg",
+    "theme_icon": "ibus-setup"
+  },
+  {
+    "id": "com.system76.CosmicPlayer.desktop",
+    "name": "COSMIC Media Player",
+    "icon": "com.system76.CosmicPlayer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicPlayer.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicPlayer.svg",
+    "theme_icon": "com.system76.CosmicPlayer"
+  },
+  {
+    "id": "md.obsidian.Obsidian.desktop",
+    "name": "Obsidian",
+    "icon": "obsidian",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/md.obsidian.Obsidian.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/obsidian.svg",
+    "theme_icon": "obsidian"
+  },
+  {
+    "id": "fr.handbrake.ghb.desktop",
+    "name": "HandBrake",
+    "icon": "fr.handbrake.ghb",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/flatpak/exports/share/applications/fr.handbrake.ghb.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/fr.handbrake.ghb.svg",
+    "theme_icon": "fr.handbrake.ghb"
+  },
+  {
+    "id": "org.darktable.Darktable.desktop",
+    "name": "Darktable Photo Workflow Software",
+    "icon": "org.darktable.Darktable",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/flatpak/exports/share/applications/org.darktable.Darktable.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/256x256/apps/org.darktable.Darktable.png",
+    "theme_icon": "org.darktable.Darktable"
+  },
+  {
+    "id": "syncthing-ui.desktop",
+    "name": "Syncthing Web UI",
+    "icon": "syncthing",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/syncthing-ui.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/syncthing.png",
+    "theme_icon": "syncthing"
+  },
+  {
+    "id": "spotify.desktop",
+    "name": "Spotify",
+    "icon": "spotify-client",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/spotify.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/spotify-client.svg",
+    "theme_icon": "spotify-client"
+  },
+  {
+    "id": "org.gnome.font-viewer.desktop",
+    "name": "Fonts",
+    "icon": "org.gnome.font-viewer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.font-viewer.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.font-viewer.svg",
+    "theme_icon": "org.gnome.font-viewer"
+  },
+  {
+    "id": "PrusaGcodeviewer.desktop",
+    "name": "Prusa GCode viewer",
+    "icon": "PrusaSlicer-gcodeviewer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/PrusaGcodeviewer.desktop",
+    "source": "/usr/share/icons/hicolor/192x192/apps/PrusaSlicer-gcodeviewer.png",
+    "theme_icon": "PrusaSlicer-gcodeviewer"
+  },
+  {
+    "id": "com.mitchellh.ghostty.desktop",
+    "name": "Ghostty",
+    "icon": "com.mitchellh.ghostty",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.mitchellh.ghostty.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/com.mitchellh.ghostty.png",
+    "theme_icon": "com.mitchellh.ghostty"
+  },
+  {
+    "id": "libreoffice-startcenter.desktop",
+    "name": "LibreOffice",
+    "icon": "libreoffice-startcenter",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/libreoffice-startcenter.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-startcenter.png",
+    "theme_icon": "libreoffice-startcenter"
+  },
+  {
+    "id": "nsight-compute-2026.1.1.desktop",
+    "name": "NVIDIA Nsight Compute 2026.1.1",
+    "icon": "/opt/nvidia/nsight-compute/2026.1.1/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/nsight-compute-2026.1.1.desktop",
+    "source": "/opt/nvidia/nsight-compute/2026.1.1/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png",
+    "theme_icon": "studio-app-nsight-compute-2026.1.1"
+  },
+  {
+    "id": "com.system76.CosmicFiles.desktop",
+    "name": "COSMIC Files",
+    "icon": "com.system76.CosmicFiles",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicFiles.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicFiles.svg",
+    "theme_icon": "com.system76.CosmicFiles"
+  },
+  {
+    "id": "simple-scan.desktop",
+    "name": "Document Scanner",
+    "icon": "org.gnome.SimpleScan",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/simple-scan.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/devices/org.gnome.SimpleScan.svg",
+    "theme_icon": "org.gnome.SimpleScan"
+  },
+  {
+    "id": "com.system76.CosmicStore.desktop",
+    "name": "COSMIC Store",
+    "icon": "com.system76.CosmicStore",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicStore.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicStore.svg",
+    "theme_icon": "com.system76.CosmicStore"
+  },
+  {
+    "id": "looking-glass-client.desktop",
+    "name": "Looking Glass Client",
+    "icon": "looking-glass",
+    "visible": true,
+    "desktop_file": "/usr/local/share/applications/looking-glass-client.desktop",
+    "source": "/usr/local/share/icons/hicolor/scalable/apps/looking-glass.svg",
+    "theme_icon": "looking-glass"
+  },
+  {
+    "id": "org.gnome.baobab.desktop",
+    "name": "Disk Usage Analyzer",
+    "icon": "org.gnome.baobab",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.baobab.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.baobab.svg",
+    "theme_icon": "org.gnome.baobab"
+  },
+  {
+    "id": "local-trash.desktop",
+    "name": "Trash",
+    "icon": "user-trash",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/local-trash.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/places/scalable/user-trash.svg",
+    "theme_icon": "user-trash"
+  },
+  {
+    "id": "discord.desktop",
+    "name": "Discord",
+    "icon": "discord",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/discord.desktop",
+    "source": "/usr/share/pixmaps/discord.png",
+    "theme_icon": "discord"
+  },
+  {
+    "id": "nm-connection-editor.desktop",
+    "name": "Advanced Network Configuration",
+    "icon": "preferences-system-network",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/nm-connection-editor.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/categories/preferences-system-network.svg",
+    "theme_icon": "preferences-system-network"
+  },
+  {
+    "id": "nsys-ui-2025.6.3.desktop",
+    "name": "NVIDIA Nsight Systems 2025.6.3",
+    "icon": "/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/nsys-ui.png",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/nsys-ui-2025.6.3.desktop",
+    "source": "/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/nsys-ui.png",
+    "theme_icon": "studio-app-nsys-ui-2025.6.3"
+  },
+  {
+    "id": "nsys-ui-2025.3.2.desktop",
+    "name": "NVIDIA Nsight Systems 2025.3.2",
+    "icon": "/opt/nvidia/nsight-systems/2025.3.2/host-linux-x64/nsys-ui.png",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/nsys-ui-2025.3.2.desktop",
+    "source": "/opt/nvidia/nsight-systems/2025.3.2/host-linux-x64/nsys-ui.png",
+    "theme_icon": "studio-app-nsys-ui-2025.3.2"
+  },
+  {
+    "id": "info.desktop",
+    "name": "TeXInfo",
+    "icon": "dialog-information",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/info.desktop",
+    "source": "/usr/share/icons/Cosmic/scalable/status/dialog-information.svg",
+    "theme_icon": "dialog-information"
+  },
+  {
+    "id": "org.gnome.seahorse.Application.desktop",
+    "name": "Passwords and Keys",
+    "icon": "org.gnome.seahorse.Application",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.seahorse.Application.desktop",
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.seahorse.Application.svg",
+    "theme_icon": "org.gnome.seahorse.Application"
+  },
+  {
+    "id": "libreoffice-impress.desktop",
+    "name": "LibreOffice Impress",
+    "icon": "libreoffice-impress",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/libreoffice-impress.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-impress.png",
+    "theme_icon": "libreoffice-impress"
+  },
+  {
+    "id": "syncthing-start.desktop",
+    "name": "Start Syncthing",
+    "icon": "syncthing",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/syncthing-start.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/syncthing.png",
+    "theme_icon": "syncthing"
+  },
+  {
+    "id": "dev.zed.Zed.desktop",
+    "name": "Zed",
+    "icon": "dev.zed.Zed",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/dev.zed.Zed.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/dev.zed.Zed.png",
+    "theme_icon": "dev.zed.Zed"
+  },
+  {
+    "id": "com.system76.CosmicMonitor.desktop",
+    "name": "COSMIC System Monitor",
+    "icon": "com.system76.CosmicMonitor",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicMonitor.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicMonitor.svg",
+    "theme_icon": "com.system76.CosmicMonitor"
+  },
+  {
+    "id": "org.darktable.darktable.desktop",
+    "name": "Darktable Photo Workflow Software",
+    "icon": "darktable",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.darktable.darktable.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/darktable.png",
+    "theme_icon": "darktable"
+  },
+  {
+    "id": "libreoffice-draw.desktop",
+    "name": "LibreOffice Draw",
+    "icon": "libreoffice-draw",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/libreoffice-draw.desktop",
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-draw.png",
+    "theme_icon": "libreoffice-draw"
+  },
+  {
+    "id": "gimp.desktop",
+    "name": "GNU Image Manipulation Program",
+    "icon": "gimp",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/gimp.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/gimp.png",
+    "theme_icon": "gimp"
+  },
+  {
+    "id": "debian-xterm.desktop",
+    "name": "XTerm",
+    "icon": "mini.xterm",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/debian-xterm.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/mini.xterm.svg",
+    "theme_icon": "mini.xterm"
+  },
+  {
+    "id": "gnome-language-selector.desktop",
+    "name": "Language Support",
+    "icon": "preferences-desktop-locale",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/gnome-language-selector.desktop",
+    "source": "/usr/share/icons/Cosmic/scalable/apps/preferences-desktop-locale.svg",
+    "theme_icon": "preferences-desktop-locale"
+  },
+  {
+    "id": "gucharmap.desktop",
+    "name": "Character Map",
+    "icon": "accessories-character-map",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/gucharmap.desktop",
+    "source": "/usr/share/icons/Cosmic/scalable/apps/accessories-character-map.svg",
+    "theme_icon": "accessories-character-map"
+  },
+  {
+    "id": "net.blip.Blip.desktop",
+    "name": "Blip",
+    "icon": "net.blip.Blip",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/applications/net.blip.Blip.desktop",
+    "source": "/home/adamnolle/.local/share/icons/hicolor/512x512/apps/net.blip.Blip.png",
+    "theme_icon": "net.blip.Blip"
+  },
+  {
+    "id": "debian-uxterm.desktop",
+    "name": "UXTerm",
+    "icon": "mini.xterm",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/debian-uxterm.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/mini.xterm.svg",
+    "theme_icon": "mini.xterm"
+  },
+  {
+    "id": "com.system76.CosmicScreenshot.desktop",
+    "name": "COSMIC Screenshot",
+    "icon": "com.system76.CosmicScreenshot",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicScreenshot.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicScreenshot.svg",
+    "theme_icon": "com.system76.CosmicScreenshot"
+  },
+  {
+    "id": "org.gnome.FileRoller.desktop",
+    "name": "File Roller",
+    "icon": "org.gnome.FileRoller",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.gnome.FileRoller.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/org.gnome.FileRoller.svg",
+    "theme_icon": "org.gnome.FileRoller"
+  },
+  {
+    "id": "system76-driver.desktop",
+    "name": "System76 Driver",
+    "icon": "system76-driver",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/system76-driver.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/system76-driver.svg",
+    "theme_icon": "system76-driver"
+  },
+  {
+    "id": "system-config-printer.desktop",
+    "name": "Printers",
+    "icon": "printer",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/system-config-printer.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/devices/scalable/printer.svg",
+    "theme_icon": "printer"
+  },
+  {
+    "id": "org.flameshot.Flameshot.desktop",
+    "name": "Flameshot",
+    "icon": "org.flameshot.Flameshot",
+    "visible": true,
+    "desktop_file": "/home/adamnolle/.local/share/flatpak/exports/share/applications/org.flameshot.Flameshot.desktop",
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg",
+    "theme_icon": "org.flameshot.Flameshot"
+  },
+  {
+    "id": "com.system76.CosmicSettings.desktop",
+    "name": "COSMIC Settings",
+    "icon": "com.system76.CosmicSettings",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicSettings.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicSettings.svg",
+    "theme_icon": "com.system76.CosmicSettings"
+  },
+  {
+    "id": "com.system76.CosmicTerm.desktop",
+    "name": "COSMIC Terminal",
+    "icon": "com.system76.CosmicTerm",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicTerm.desktop",
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicTerm.svg",
+    "theme_icon": "com.system76.CosmicTerm"
+  },
+  {
+    "id": "com.system76.CosmicEdit.desktop",
+    "name": "COSMIC Text Editor",
+    "icon": "com.system76.CosmicEdit",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/com.system76.CosmicEdit.desktop",
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicEdit.svg",
+    "theme_icon": "com.system76.CosmicEdit"
+  },
+  {
+    "id": "org.inkscape.Inkscape.desktop",
+    "name": "Inkscape Vector Graphics Editor",
+    "icon": "org.inkscape.Inkscape",
+    "visible": true,
+    "desktop_file": "/usr/share/applications/org.inkscape.Inkscape.desktop",
+    "source": "/usr/share/icons/hicolor/scalable/apps/org.inkscape.Inkscape.svg",
+    "theme_icon": "org.inkscape.Inkscape"
+  }
+]

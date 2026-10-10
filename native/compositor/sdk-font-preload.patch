@@ -1,0 +1,80 @@
+--- a/src/app/mod.rs
++++ b/src/app/mod.rs
+@@ -896,35 +896,9 @@
+     }
+ }
+ 
+-const EMBEDDED_FONTS: &[&[u8]] = &[
+-    include_bytes!("../../res/open-sans/OpenSans-Light.ttf"),
+-    include_bytes!("../../res/open-sans/OpenSans-Regular.ttf"),
+-    include_bytes!("../../res/open-sans/OpenSans-Semibold.ttf"),
+-    include_bytes!("../../res/open-sans/OpenSans-Bold.ttf"),
+-    include_bytes!("../../res/open-sans/OpenSans-ExtraBold.ttf"),
+-    include_bytes!("../../res/noto/NotoSansMono-Regular.ttf"),
+-    include_bytes!("../../res/noto/NotoSansMono-Bold.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-Regular.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-Italic.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-Medium.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-MediumItalic.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-SemiBold.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-SemiBoldItalic.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-Bold.ttf"),
+-    include_bytes!("../../res/studio-fonts/archivo/Archivo-BoldItalic.ttf"),
+-    include_bytes!("../../res/studio-fonts/instrumentserif/InstrumentSerif-Regular.ttf"),
+-    include_bytes!("../../res/studio-fonts/instrumentserif/InstrumentSerif-Italic.ttf"),
+-];
+-
+ #[cold]
+ fn preload_fonts() {
+-    let mut font_system = iced::advanced::graphics::text::font_system()
+-        .write()
+-        .unwrap();
+-
+-    EMBEDDED_FONTS
+-        .iter()
+-        .for_each(move |font| font_system.load_font(Cow::Borrowed(font)));
++    crate::font::preload();
+ }
+ 
+ #[cfg(test)]
+--- a/src/font.rs
++++ b/src/font.rs
+@@ -43,3 +43,38 @@
+ /// COSMIC Studio display face; body and code keep their own font roles.
+ #[inline]
+ pub fn display() -> Font { Font::with_name("Instrument Serif") }
++
++const EMBEDDED_FONTS: &[&[u8]] = &[
++    include_bytes!("../res/open-sans/OpenSans-Light.ttf"),
++    include_bytes!("../res/open-sans/OpenSans-Regular.ttf"),
++    include_bytes!("../res/open-sans/OpenSans-Semibold.ttf"),
++    include_bytes!("../res/open-sans/OpenSans-Bold.ttf"),
++    include_bytes!("../res/open-sans/OpenSans-ExtraBold.ttf"),
++    include_bytes!("../res/noto/NotoSansMono-Regular.ttf"),
++    include_bytes!("../res/noto/NotoSansMono-Bold.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-Regular.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-Italic.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-Medium.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-MediumItalic.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-SemiBold.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-SemiBoldItalic.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-Bold.ttf"),
++    include_bytes!("../res/studio-fonts/archivo/Archivo-BoldItalic.ttf"),
++    include_bytes!("../res/studio-fonts/instrumentserif/InstrumentSerif-Regular.ttf"),
++    include_bytes!("../res/studio-fonts/instrumentserif/InstrumentSerif-Italic.ttf"),
++];
++
++/// Load the canonical native faces before creating a custom text renderer.
++/// Repeated renderer/app construction does no further loading or font scan.
++#[cold]
++pub fn preload() {
++    static PRELOAD: std::sync::Once = std::sync::Once::new();
++    PRELOAD.call_once(|| {
++        let mut font_system = iced::advanced::graphics::text::font_system()
++            .write()
++            .unwrap();
++        EMBEDDED_FONTS.iter().for_each(|font| {
++            font_system.load_font(std::borrow::Cow::Borrowed(font));
++        });
++    });
++}

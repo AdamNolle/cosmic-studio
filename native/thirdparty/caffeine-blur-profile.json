@@ -1,0 +1,24 @@
+{
+  "iced": "7bb364e01d6cd6c07703416828006ab497a082e6",
+  "library": "76c1897d4d9a637c8aa4016483bf05fec5f10ebd",
+  "new_files": [
+    "winit/src/platform_specific/wayland/commands/blur.rs",
+    "winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs",
+    "winit/src/platform_specific/wayland/handlers/ext_background_effect.rs"
+  ],
+  "patch_sha256": "adc35c4f016592fb4e4caabff77455adb8ee8d3bbfeb015db8f92e7c1e34d420",
+  "protocol": {
+    "checksum": "efa790ed75fbfd71283bd2521a1cfdc022aabcc28bdcff00851f9e4ae88d9901",
+    "target_corrected_blur_bit": 1,
+    "version": "0.32.9"
+  },
+  "sha256": {
+    "runtime/src/platform_specific/wayland/mod.rs": "cd1c3511bf6c55979ae2788d0820468b1c74bdf31e38d8a982f561010be61620",
+    "winit/src/platform_specific/wayland/commands/mod.rs": "2fd852f2db95214454d2b36c40abfa5be5a125dceaf999be510f09f4317f78ae",
+    "winit/src/platform_specific/wayland/event_loop/mod.rs": "34388ce39e9dec90d7fb0af4ae325328feff9382611343744569b600fdec436b",
+    "winit/src/platform_specific/wayland/event_loop/state.rs": "7b1cd04b4b54ec7197b18646429b53be449ff748f60fca695ae87f81d7968436",
+    "winit/src/platform_specific/wayland/handlers/mod.rs": "f843be40c5abcfdb97c245f49c3e9203a6428993e36a1929589c4849a5d3133d",
+    "winit/src/platform_specific/wayland/handlers/shell/xdg_popup.rs": "baa8a8aebe0476efb7f08a8aa44e2d8df9723640224f32963f0aad7d350c9f4e",
+    "winit/src/platform_specific/wayland/sctk_event.rs": "a8267059de313abc1c08cadc09e084a60ed8919ba9a5402b7c9ebc91a136a227"
+  }
+}

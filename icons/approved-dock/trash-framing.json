@@ -1,0 +1,22 @@
+{
+  "revision": "Larger Trash framing with approved glass and paper styling",
+  "created_at_utc": "20261010T191313Z",
+  "archive": "/home/adamnolle/Desktop/Code/cosmic-studio/icons/approved-dock/revisions/trash-before-larger-framing-20261010T191313Z",
+  "source_camera_scale": 3.55,
+  "camera_scale": 3.08,
+  "vessel_radial_scale": 1.1,
+  "changes": "Approximately 15% taller and 27% wider in the same transparent canvas. Original materials and paper retained.",
+  "sizes": [
+    32,
+    48,
+    64,
+    96,
+    128,
+    256,
+    512,
+    1024,
+    4096
+  ],
+  "repository": "/home/adamnolle/Desktop/Code/cosmic-studio/icons/approved-dock",
+  "dock_icon_pixels": 60
+}

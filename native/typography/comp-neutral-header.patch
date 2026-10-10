@@ -1,0 +1,11 @@
+--- a/src/theme/style/iced.rs
++++ b/src/theme/style/iced.rs
+@@ -545,7 +545,7 @@
+             } => {
+                 let (icon_color, text_color) = if *focused {
+                     (
+-                        Color::from(cosmic.accent_text_color()),
++                        Color::from(cosmic.background(self.transparent).on),
+                         Color::from(cosmic.background(self.transparent).on),
+                     )
+                 } else {

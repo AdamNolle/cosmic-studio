@@ -1,0 +1,28 @@
+diff --git a/src/app.rs b/src/app.rs
+index 11de300..702c31c 100644
+--- a/src/app.rs
++++ b/src/app.rs
+@@ -175,6 +175,7 @@ impl FromStr for ApplicationsTasks {
+ pub fn run() -> cosmic::iced::Result {
+     let args = Args::parse();
+     let settings = Settings::default()
++        .theme(cosmic::theme::Theme::custom(std::sync::Arc::new(cosmic::theme::system_dark().cosmic().clone())))
+         .antialiasing(true)
+         .client_decorations(true)
+         .debug(false)
+@@ -1896,6 +1897,14 @@ impl cosmic::Application for CosmicAppLibrary {
+             Task::none()
+         };
+         let dummy_task = self_.create_dummy_layer_surface();
+-        (self_, Task::batch([dummy_task, task]))
++        (self_, Task::batch([dummy_task, task, studio_dark_shell()]))
+     }
+ }
++
++// Native process-local shell material; applications continue using light defaults.
++fn studio_dark_shell() -> cosmic::app::Task<Message> {
++    let dark = cosmic::theme::system_dark().cosmic().clone();
++    cosmic::app::Task::done(cosmic::action::cosmic(cosmic::app::Action::AppThemeChange(
++        cosmic::theme::Theme::custom(std::sync::Arc::new(dark)),
++    )))
++}

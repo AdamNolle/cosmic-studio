@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "compiler": "rustc1.99.0 (b940084d7 2026-09-28)",
+  "native_font_database_test": {
+    "result": "1 passed/0 failed",
+    "ten_binary_faces": true,
+    "second_preload_faces_unchanged": true,
+    "library": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+    "log": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/native-font-tests.log"
+  },
+  "python_tests": {
+    "passed": 24,
+    "failed": 0
+  },
+  "frozen_popup_material": {
+    "surround_alpha": 0.86,
+    "control_alpha": 0.94,
+    "native_palette_dark_min_contrast": 4.7457,
+    "native_palette_light_min_contrast": 9.544,
+    "source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-material-palette-check.log"
+  },
+  "artifacts": [
+    {
+      "binary": "cosmic-applets",
+      "path": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/artifacts/final/cosmic-applets",
+      "sha256": "6eedfb4960c2bb67fd45ab41ff9f343b04811485bc4d42c2cbbac7b0f6ecb124",
+      "bytes": 107450968,
+      "ldd_missing": 0,
+      "source_commit": "82e7cd814addb0641959b634227fe550374e195b",
+      "library_commit": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+      "fonts": "10 authentic faces embedded + semantic display helpers",
+      "popup_alpha": [
+        0.86,
+        0.94
+      ],
+      "build": "release locked offline",
+      "compiler": "rustc1.99.0 (b940084d7 2026-09-28)"
+    },
+    {
+      "binary": "cosmic-panel-button",
+      "path": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/artifacts/final/cosmic-panel-button",
+      "sha256": "fcce0c797091d82f71d497e4b0e94b81822a82045c2ef9de823ad98767730a7d",
+      "bytes": 27589328,
+      "ldd_missing": 0,
+      "source_commit": "82e7cd814addb0641959b634227fe550374e195b",
+      "library_commit": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+      "fonts": "10 authentic faces embedded + semantic display helpers",
+      "popup_alpha": [
+        0.86,
+        0.94
+      ],
+      "build": "release locked offline",
+      "compiler": "rustc1.99.0 (b940084d7 2026-09-28)"
+    },
+    {
+      "binary": "cosmic-notifications",
+      "path": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/artifacts/final/cosmic-notifications",
+      "sha256": "fa1af29f8d9c2dea92fa464d2616a6d8ac3e27fe148891387f83fbe3f0efafa2",
+      "bytes": 36470400,
+      "ldd_missing": 0,
+      "source_commit": "aa4dac2702506395ab76da1f6755e03b2ccb0db8",
+      "library_commit": "d921602cde8248c070b493ce43b0edd388e19b9a",
+      "fonts": "10 authentic faces embedded + semantic display helpers + notification summary",
+      "popup_alpha": [
+        0.86,
+        0.94
+      ],
+      "build": "release locked offline after pinned fetch",
+      "registry_packages_changed": 0,
+      "compiler": "rustc1.99.0 (b940084d7 2026-09-28)"
+    },
+    {
+      "binary": "cosmic-osd",
+      "path": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/artifacts/final/cosmic-osd",
+      "sha256": "0f7122d95f405dcbfaac183291e856954c59dc1d814e8b68b7e1ac0b306bb04d",
+      "bytes": 34783296,
+      "ldd_missing": 0,
+      "source_commit": "3faadf56bdaea4b088ea8dc5e808b167cec86de3",
+      "library_commit": "d921602cde8248c070b493ce43b0edd388e19b9a",
+      "fonts": "10 authentic faces embedded + semantic display helpers",
+      "popup_alpha": [
+        0.86,
+        0.94
+      ],
+      "build": "release locked offline",
+      "registry_packages_changed": 0,
+      "compiler": "rustc1.99.0 (b940084d7 2026-09-28)"
+    }
+  ],
+  "deployment": "Candidates only; root owns reversible staging and approved panel refresh. No client restart from typography work.",
+  "role_audit": {
+    "body_and_controls": "font::default reads configured Archivo; applet Context::text, dropdowns and inputs use default UI family",
+    "native_title_bar": "HeaderBar title calls widget::text::heading, patched to Instrument Serif",
+    "viewer": "Image/file heading and wallpaper-dialog title use patched helpers",
+    "store": "Product/section/navigation titles use patched title2/title4/heading",
+    "monitor": "Semantic section/title helpers patched; explicit chart/code roles preserved",
+    "player": "Media title uses title4; audio/subtitle sections use heading; fixed-width timers retain font::mono",
+    "menu_bar": "Applet normal/bold families use configured Archivo; no forced serif for small menu labels",
+    "notification": "Summary explicitly Instrument Serif18; content/captions Archivo"
+  },
+  "dependency_invariants": {
+    "cosmic-applets": {
+      "removed_registry_packages": 0,
+      "added_registry_packages": 0
+    },
+    "cosmic-notifications": {
+      "removed_registry_packages": 0,
+      "added_registry_packages": 0
+    },
+    "cosmic-osd": {
+      "removed_registry_packages": 0,
+      "added_registry_packages": 0
+    }
+  },
+  "os_release_queue": "4 binaries passed final release and copied; target handed to root",
+  "startup_performance": {
+    "additional_font_faces": 10,
+    "authentic_ttf_bytes": 1695412,
+    "loads": "existing native process startup preload",
+    "dedup": "Existing modern static-byte pointer dedup retained; reviewed older Caffeine uses Once",
+    "per_frame_font_work_added": false,
+    "font_polling_or_network_added": false,
+    "native_database_test_elapsed_seconds": 0.01,
+    "test_limit": "Font preload/database test; no claim of whole application startup benchmark"
+  }
+}

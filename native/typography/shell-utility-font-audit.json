@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "audited_at": "2026-10-10",
+  "components": [
+    {
+      "component": "cosmic-launcher",
+      "installed_package": "1.9.0~1789681974~24.04~cc3d42b",
+      "source_commit": "cc3d42bcc8fbcb67e6312f2766394e18b4d937d5",
+      "repository": "https://github.com/pop-os/cosmic-launcher.git",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-launcher",
+      "staged_binary": "/home/adamnolle/.local/share/cosmic-studio/bin/cosmic-launcher",
+      "staged_sha256": "9a4bbbc4d288baf4b7f8c422210e46a52f52ace3f1fadc52e9848c07096bd6d3",
+      "wrapper": "/home/adamnolle/.local/bin/cosmic-launcher",
+      "live_processes": [
+        {
+          "pid": 97285,
+          "binary": "/home/adamnolle/.local/share/cosmic-studio/bin/cosmic-launcher (deleted)"
+        }
+      ],
+      "authentic_fonts_in_current_staged_binary": 0,
+      "new_source_scope": "10 native authentic faces + Archivo absent-config fallback + Instrument Serif semantic title/heading helpers + reviewed popup material",
+      "new_source_status": "prepared; no build or launch",
+      "initial_setup_launched": false
+    },
+    {
+      "component": "cosmic-app-library",
+      "installed_package": "1.9.0~1789577459~24.04~0a3996d",
+      "source_commit": "0a3996de82c264095ade047661f7a3088f99013e",
+      "repository": "https://github.com/pop-os/cosmic-app-library.git",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-app-library",
+      "staged_binary": "/home/adamnolle/.local/share/cosmic-studio/bin/cosmic-app-library",
+      "staged_sha256": "0c390728fac2e5788e129aaa5a11bb697326445813aefbcd989680d8cb6e7706",
+      "wrapper": "/home/adamnolle/.local/bin/cosmic-app-library",
+      "live_processes": [
+        {
+          "pid": 97205,
+          "binary": "/home/adamnolle/.local/share/cosmic-studio/bin/cosmic-app-library (deleted)"
+        }
+      ],
+      "authentic_fonts_in_current_staged_binary": 0,
+      "new_source_scope": "10 native authentic faces + Archivo absent-config fallback + Instrument Serif semantic title/heading helpers + reviewed popup material",
+      "new_source_status": "prepared; no build or launch",
+      "initial_setup_launched": false
+    },
+    {
+      "component": "cosmic-workspaces",
+      "installed_package": "1.0.12~1789501875~24.04~28e257d",
+      "source_commit": "28e257daa86643aee4166f192fb3e000ac3f7605",
+      "repository": "https://github.com/pop-os/cosmic-workspaces-epoch.git",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-workspaces",
+      "staged_binary": "/home/adamnolle/.local/share/cosmic-studio/bin/cosmic-workspaces",
+      "staged_sha256": "88e94e8df02279e4b40c06e7671f5d6436946627d1c864595e54ee28c94d0ccf",
+      "wrapper": "/home/adamnolle/.local/bin/cosmic-workspaces",
+      "live_processes": [
+        {
+          "pid": 97372,
+          "binary": "/home/adamnolle/.local/share/cosmic-studio/bin/cosmic-workspaces (deleted)"
+        }
+      ],
+      "authentic_fonts_in_current_staged_binary": 0,
+      "new_source_scope": "10 native authentic faces + Archivo absent-config fallback + Instrument Serif semantic title/heading helpers + reviewed popup material",
+      "new_source_status": "prepared; no build or launch",
+      "initial_setup_launched": false
+    },
+    {
+      "component": "cosmic-osk",
+      "installed_package": "0.1.0~1790118689~24.04~38e9625",
+      "source_commit": "38e962576f1893e6452d4c273c41149c432191b2",
+      "repository": "https://github.com/pop-os/cosmic-osk.git",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-osk",
+      "staged_binary": null,
+      "staged_sha256": null,
+      "wrapper": null,
+      "live_processes": [
+        {
+          "pid": 3143,
+          "binary": "/usr/bin/cosmic-osk"
+        }
+      ],
+      "authentic_fonts_in_current_staged_binary": null,
+      "new_source_scope": "10 native authentic faces + Archivo absent-config fallback + Instrument Serif semantic title/heading helpers + reviewed popup material",
+      "new_source_status": "prepared; no build or launch",
+      "initial_setup_launched": false
+    },
+    {
+      "component": "cosmic-initial-setup",
+      "installed_package": "1.0.0~1789502018~24.04~9b5a949",
+      "source_commit": "9b5a9490e60966ebf0565267ce0e9fca368dfbd1",
+      "repository": "https://github.com/pop-os/cosmic-initial-setup.git",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-initial-setup",
+      "staged_binary": null,
+      "staged_sha256": null,
+      "wrapper": null,
+      "live_processes": [],
+      "authentic_fonts_in_current_staged_binary": null,
+      "new_source_scope": "10 native authentic faces + Archivo absent-config fallback + Instrument Serif semantic title/heading helpers + reviewed popup material",
+      "new_source_status": "prepared; no build or launch",
+      "initial_setup_launched": false
+    },
+    {
+      "component": "cosmic-screenshot",
+      "installed_package": "0.1.0~1787597529~24.04~5ddcf18",
+      "source_commit": "5ddcf1804192ff98823bd37a778286db5a00f3dd",
+      "repository": "https://github.com/pop-os/cosmic-screenshot.git",
+      "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/shell-fonts-next/cosmic-screenshot",
+      "staged_binary": null,
+      "staged_sha256": null,
+      "wrapper": null,
+      "live_processes": [],
+      "authentic_fonts_in_current_staged_binary": null,
+      "new_source_scope": "Screenshot is a CLI portal client; no own text renderer/font library",
+      "new_source_status": "audited; no font rebuild required",
+      "initial_setup_launched": false
+    }
+  ],
+  "screenshot_gui_owner": "ashpd screenshot request delegates selection/capture to portal/compositor; notification text belongs to cosmic-notifications",
+  "current_live_icon_theme": "Studio Dock",
+  "typography_verify": "19PASS/0FAIL/1PREPARED native-heading rollout",
+  "python_tests": "24PASS",
+  "comp_font_gap_fixed_source": "Canonical native SDK preload now supports custom comp renderers; root owns rebuild/7tests",
+  "comp_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/cosmic-comp-native",
+  "native_sdk_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/libcosmic-comp-native",
+  "preserved_roles": [
+    "document text",
+    "terminal/code monospace",
+    "glyph/emoji fonts",
+    "keyboard input behavior",
+    "active sessions"
+  ]
+}

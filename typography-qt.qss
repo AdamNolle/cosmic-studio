@@ -1,0 +1,6 @@
+/* Qt's font settings select Archivo for controls. These supported title
+   subcontrols affect their title text rather than a group's content widgets. */
+QGroupBox::title, QDockWidget::title {
+  font-family: "Instrument Serif";
+  font-weight: normal;
+}

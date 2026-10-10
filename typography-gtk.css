@@ -1,0 +1,18 @@
+/* Semantic title roles only. GTK settings own ordinary UI typography, and
+   code widgets, icon fonts, emoji and content keep their own font selection. */
+headerbar .title,
+.titlebar .title,
+.title-1,
+.title-2,
+.title-3,
+.title-4,
+.large-title {
+  font-family: "Instrument Serif";
+  font-weight: normal;
+  font-style: normal;
+}
+headerbar .title,
+.titlebar .title {
+  font-size: 1.15em;
+}
+/* Instrument Serif has a real regular and italic, no invented bold face. */

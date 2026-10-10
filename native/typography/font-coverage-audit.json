@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "audited_at": "2026-10-10T18:27:57.505163+00:00",
+  "native_evidence": {
+    "interface_font": "(family: \"Archivo\", weight: Normal, stretch: Normal, style: Normal)",
+    "menu_bar_library_revision": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+    "body_paths": [
+      "font::default uses configured interface_font",
+      "app::Settings default_font = font::default",
+      "applet::Context::text explicitly selects font::default",
+      "dropdown defaults select font::default"
+    ],
+    "heading_gap": "Stock native helpers select bold/semibold interface face. Separate heading font is not a native Tk schema key. Rebuild required.",
+    "cache_gap": "Native font database is initialized at process startup; live toolkit config updates do not rescan it. Existing stock processes may retain fallback until natural relaunch."
+  },
+  "toolkits": {
+    "GTK3/GTK4": "Archivo settings plus semantic Instrument Serif imports in both native palettes",
+    "Qt5/Qt6": "Archivo general font; semantic group/dock title QSS",
+    "Electron/Chromium": "Native toolkit metrics and CSS system-ui inherit supported system settings; existing chrome may cache. Custom embedded content fonts stay content-owned."
+  },
+  "preserved_roles": [
+    "Ghostty iA Writer Mono S",
+    "code/terminal text",
+    "glyph/symbol/emoji fallback",
+    "fractional font sizes and text scaling",
+    "custom app themes",
+    "embedded website/document font choices"
+  ],
+  "fc_match": {
+    "Archivo": "Archivo|Regular|/home/adamnolle/.local/share/fonts/cosmic-studio/archivo/Archivo-Regular.ttf",
+    "Instrument Serif": "Instrument Serif|Regular|/home/adamnolle/.local/share/fonts/cosmic-studio/instrumentserif/InstrumentSerif-Regular.ttf",
+    "iA Writer Mono S": "iA Writer Mono S|Regular|/home/adamnolle/.local/share/fonts/cosmic-studio/iAWriterMonoS-Regular.ttf",
+    "monospace": "DejaVu Sans Mono|Book|/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
+  },
+  "fixes": [
+    {
+      "profile": "typography",
+      "backup": "/home/adamnolle/Desktop/Code/cosmic-studio/backups/20261010-131622-fonts-d74c84",
+      "changed": "Two native GTK palette files; inactive palette heading import gap fixed",
+      "verification": "17PASS/0FAIL"
+    },
+    {
+      "profile": "shell",
+      "backup": "/home/adamnolle/Desktop/Code/cosmic-studio/backups/20261010-131959-shell-7bf4d3",
+      "changed": "Six actual files; dock padding8/spacing8/border0 and font/frame imports retained",
+      "verification": "30PASS/0FAIL; real rendering remains separately reviewed"
+    }
+  ],
+  "runtime_native_candidates": "Build records distinguish prepared candidates from running stock processes; no open application restart performed.",
+  "font_backup": "/home/adamnolle/Desktop/Code/cosmic-studio/backups/20261010-134416-fonts-297297",
+  "font_verify": "18 PASS, 1 PREPARED native heading build, 0 FAIL",
+  "private_flatpak_config": {
+    "component": "com.github.codevardhan.caffeine-applet",
+    "reason": "Private XDG_CONFIG_HOME without a host CosmicTk mount",
+    "interface_font": "Archivo",
+    "original_interface_font": "absent",
+    "font_mounts": "Host font files available",
+    "permissions_changed": false,
+    "restarted": false
+  },
+  "native_validation": {
+    "test": "studio_embedded_font_tests::authentic_faces_load_once_with_native_font_system",
+    "library_revision": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+    "result": "1 passed, 0 failed",
+    "evidence": "Actual Binary-backed fontdb entries for all ten faces; second preload adds no faces",
+    "compiler": "rustc 1.99.0 (b940084d7 2026-09-28)",
+    "candidate_scope": "first font applets build passed; final popup palette rebuild queued",
+    "app_restarts": false
+  }
+}

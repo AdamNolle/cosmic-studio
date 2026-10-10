@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "compositor_revision": "0fbd4574ef4caf74769a617d205fd1fc909ac9b1",
+  "smithay_revision": "e3d461a057ba244d213a8498ec372b0799cca103",
+  "native_library_revision": "d922ac380134c00208d2acf93947d44fb217eec5",
+  "confirmed_live_spotify_app_id": "spotify",
+  "identity_probe": "metadata-only ext_foreign_toplevel_list_v1; titles ignored; no control protocol bound",
+  "matches": [
+    "spotify",
+    "com.spotify.Client"
+  ],
+  "matching": "exact ASCII case-insensitive; no prefix or title matches",
+  "native_palette": {
+    "background": "#121212",
+    "primary_container": "#181818",
+    "opaque": true,
+    "native_builder": "ThemeBuilder::dark; LazyLock<Arc<Theme>>; one process-wide palette",
+    "corner_radii": {
+      "0": 0,
+      "xs": 2,
+      "s": 4,
+      "m": 6,
+      "l": 8,
+      "xl": 10
+    },
+    "actual_native_ssd_radius": 8
+  },
+  "updates": [
+    "creation",
+    "Wayland app_id_changed",
+    "XWayland Class property event",
+    "global theme event",
+    "stack selection/add/remove/focus/move",
+    "retained stack window change"
+  ],
+  "excluded": [
+    "client-owned decorations",
+    "unknown application identities",
+    "document body",
+    "terminal/code fonts",
+    "glyph fonts",
+    "pixel sampling",
+    "filesystem polling",
+    "per-frame identity reads"
+  ],
+  "high_contrast": "original native high-contrast theme is authoritative",
+  "source_sha256": {
+    "src/shell/element/chrome_policy.rs": "724f7c7ef50faa3d9614798be1a755d44fe7c0129badf9956ef4b9781dd0155a",
+    "src/shell/element/window.rs": "67b5d56fe4e346c9a92925b15e66922b81a16b0398f0bd9716e0acb3e094f6a6",
+    "src/shell/element/stack.rs": "c57d06dd488c1586d08363690a6d85226f3b135833cb0135fac82a257c70b61f",
+    "src/shell/element/mod.rs": "f50e4899fe7a63caa06179bb132c5c10d04c6bbe7bc5804d4e050bbde48246f4",
+    "src/wayland/handlers/xdg_shell/mod.rs": "d9d6538644c314490d3501bce0074501afd7731de61f963e11e521cc9ab52b41",
+    "src/xwayland.rs": "954bb41823230c068bc1eed29d7f6c82da355e5794cf98cfdbfcbe61fe321d0f"
+  },
+  "native_tests": 5,
+  "typed_test_status": "queued; no Cargo invoked by fonts agent",
+  "live_rollout": "not restarted or installed by this preparation",
+  "maximized_geometry": "Existing native maximized policy unchanged; square top corners remain authoritative"
+}

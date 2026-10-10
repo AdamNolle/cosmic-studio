@@ -1,0 +1,85 @@
+{
+  "date": "2026-10-10",
+  "status": "checkpoint; native rollout incomplete",
+  "native_candidates_installed": false,
+  "builds": [
+    {
+      "component": "cosmic-files",
+      "exit_code": 0,
+      "seconds": 26.6
+    },
+    {
+      "component": "cosmic-settings",
+      "exit_code": 0,
+      "seconds": 84.0
+    },
+    {
+      "component": "cosmic-edit",
+      "exit_code": 0,
+      "seconds": 30.5
+    },
+    {
+      "component": "cosmic-term",
+      "exit_code": 0,
+      "seconds": 30.5
+    },
+    {
+      "component": "cosmic-store",
+      "exit_code": 0,
+      "seconds": 49.3
+    },
+    {
+      "component": "cosmic-monitor",
+      "exit_code": 0,
+      "seconds": 14.3
+    },
+    {
+      "component": "cosmic-player",
+      "exit_code": 101,
+      "seconds": 1.1
+    },
+    {
+      "component": "cosmic-viewer",
+      "exit_code": null,
+      "status": "interrupted at user-requested stopping point; final link not verified"
+    },
+    {
+      "component": "cosmic-comp",
+      "exit_code": 0,
+      "status": "release build and isolated normal/maximized rendering passed; not installed"
+    }
+  ],
+  "installed": [
+    "GTK 3/4 titlebutton assets and palette imports",
+    "GTK three-button layout",
+    "Zed server decoration preference",
+    "Obsidian titlebar-only snippet"
+  ],
+  "validation": [
+    "Python syntax checks passed",
+    "git diff --check passed",
+    "Unsupported-source preparation failure preserves both original files",
+    "Toolkit installer idempotence and installed hashes verified",
+    "GTK symlinks preserved",
+    "GTK 3/4 CSS parsing passed",
+    "Isolated Files, Settings, GTK, Brave and SSD rendering checked",
+    "SSD focus now renders saturated active colors; maximized state renders restore symbol"
+  ],
+  "limitations": [
+    "Player build blocked by libunwind/libdw development pkg-config dependencies",
+    "Viewer build interrupted at the final application stage",
+    "No new native control binaries installed; existing app windows and compositor were left running",
+    "No live pointer-click test: nested COSMIC does not expose the virtual pointer protocol",
+    "Proprietary custom titlebars may require app-specific support"
+  ],
+  "binary_sha256": {
+    "cosmic-comp": "97d3ea096b9dedef84f20a78a0fa13ae92f78c58b8a21930fb2e46d34410e1c3",
+    "cosmic-files": "a891b4e1d047a5f1d840061d4f949238dc61da8bcfdb6c71c243ba68cc594fa6",
+    "cosmic-settings": "41ac10949bb10da48e4741f47a9c2b2d5f00e3e0f80ceb3b2f2eb634bbdd7d59",
+    "cosmic-edit": "350394a40dfbfbe7fb9e7fe01958b999f6de9eca4aa22943d29463e3f2df705f",
+    "cosmic-term": "63126c03094b71be9737f5c48dffb6fed73065929bbe55074360ccf565ccc70b",
+    "cosmic-store": "b01a74127514a1321127e271259a11bd0eb068d864edab53c3a0b05c1c9c1d4b",
+    "cosmic-monitor": "0541be2adde34914a9dce522cf9d3f1d511599c6fc170eabda31810f68346bc5"
+  },
+  "private_builds_running": false
+}

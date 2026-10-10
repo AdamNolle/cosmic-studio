@@ -1,0 +1,280 @@
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -3,6 +3,8 @@
+ 
+ pub mod greeter;
+ pub mod locker;
++pub mod studio;
++pub mod studio_preview;
+ 
+ mod wayland;
+ 
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -16,6 +16,10 @@
+                 print_help(env!("CARGO_PKG_VERSION"), env!("VERGEN_GIT_SHA"));
+                 return Ok(());
+             }
++            Some("--studio-preview") => {
++                cosmic_greeter::studio_preview::run()?;
++                return Ok(());
++            }
+             Some("--version") | Some("-v") => {
+                 println!(
+                     "cosmic-greeter {} (git commit {})",
+@@ -27,6 +31,9 @@
+             _ => {}
+         }
+     }
++
++    // Load display/UI faces before any surface or authentication flow starts.
++    cosmic_greeter::studio::load_fonts();
+ 
+     // Enable jpeg-xl support for image-rs.
+     let _ = jxl_oxide::integration::register_image_decoding_hook();
+--- a/src/time.rs
++++ b/src/time.rs
+@@ -102,6 +102,7 @@
+                 .push(text::title2(self.format_date()).class(style::Text::Accent))
+                 .push(
+                     text(self.format_time(military_time))
++                        .font(cosmic::font::display())
+                         .size(if military_time { 112. } else { 75. })
+                         .class(style::Text::Accent),
+                 ),
+--- a/src/greeter.rs
++++ b/src/greeter.rs
+@@ -312,7 +312,10 @@
+         logind_available: false,
+     };
+ 
+-    let settings = Settings::default().no_main_window(true);
++    let settings = Settings::default()
++        .default_font(cosmic::iced::Font::with_name("Archivo"))
++        .theme(crate::studio::dark_theme())
++        .no_main_window(true);
+ 
+     cosmic::app::run::<App>(settings, flags)?;
+ 
+@@ -1106,9 +1109,7 @@
+         }));
+         if let Some(theme) = &user_data.theme_opt {
+             self.accessibility.high_contrast = theme.is_high_contrast;
+-            tasks.push(cosmic::command::set_theme(cosmic::Theme::custom(Arc::new(
+-                theme.clone(),
+-            ))));
++            tasks.push(cosmic::command::set_theme(crate::studio::theme_for(Some(theme))));
+         }
+ 
+         Task::batch(tasks)
+@@ -1146,6 +1147,7 @@
+             Message::OutputEvent(output_event, output)
+         }));
+         tasks.push(common_task);
++        tasks.push(cosmic::command::set_theme(crate::studio::dark_theme()));
+ 
+         //TODO: use full_name?
+         let mut usernames: Vec<_> = flags
+@@ -1398,7 +1400,7 @@
+                 }
+             }
+             Message::Reload(new) => {
+-                return cosmic::command::set_theme(new.clone());
++                return cosmic::command::set_theme(crate::studio::select_theme(&new));
+             }
+             Message::Session(selected_session) => {
+                 self.selected_session = selected_session;
+@@ -1960,6 +1962,9 @@
+     builder: cosmic_theme::ThemeBuilder,
+     enabled: bool,
+ ) -> Result<cosmic_theme::Theme, cosmic_config::Error> {
++    if !enabled {
++        return Ok(crate::studio::dark_theme().cosmic().clone());
++    }
+     let is_dark = builder.palette.is_dark();
+     let mut builder = builder.clone();
+ 
+--- a/src/locker.rs
++++ b/src/locker.rs
+@@ -94,7 +94,10 @@
+         logind_available: false,
+     };
+ 
+-    let settings = Settings::default().no_main_window(true);
++    let settings = Settings::default()
++        .default_font(cosmic::iced::Font::with_name("Archivo"))
++        .theme(crate::studio::theme_for(flags.user_data.theme_opt.as_ref()))
++        .no_main_window(true);
+ 
+     cosmic::app::run::<App>(settings, flags)?;
+ 
+@@ -699,6 +702,8 @@
+             None => false,
+         };
+ 
++        let appearance = crate::studio::theme_for(flags.user_data.theme_opt.as_ref());
++
+         let mut app = App {
+             common,
+             flags,
+@@ -726,7 +731,7 @@
+             lock()
+         };
+ 
+-        (app, Task::batch([task, common_task]))
++        (app, Task::batch([task, common_task, cosmic::command::set_theme(appearance)]))
+     }
+ 
+     /// Handle application events here.
+--- /dev/null
++++ b/src/studio.rs
+@@ -0,0 +1,85 @@
++// COSMIC Studio lock/login appearance. Authentication and session state stay
++// in upstream greeter/locker code; this module selects only fonts and theme.
++use std::borrow::Cow;
++use std::sync::{Arc, Once};
++
++pub fn load_fonts() {
++    static LOAD: Once = Once::new();
++    LOAD.call_once(|| {
++        // Parse authentic licensed faces once through COSMIC's own text engine.
++        let faces: &[&'static [u8]] = &[
++            include_bytes!("../fonts/archivo/Archivo-Regular.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-Italic.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-Medium.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-MediumItalic.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-SemiBold.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-SemiBoldItalic.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-Bold.ttf"),
++            include_bytes!("../fonts/archivo/Archivo-BoldItalic.ttf"),
++            include_bytes!("../fonts/instrumentserif/InstrumentSerif-Regular.ttf"),
++            include_bytes!("../fonts/instrumentserif/InstrumentSerif-Italic.ttf"),
++        ];
++        let mut fonts = cosmic::iced::advanced::graphics::text::font_system()
++            .write()
++            .expect("native font system poisoned");
++        for face in faces {
++            fonts.load_font(Cow::Borrowed(*face));
++        }
++    });
++}
++
++pub fn dark_theme() -> cosmic::Theme {
++    cosmic::Theme::custom(Arc::new(cosmic::theme::system_dark().cosmic().clone()))
++}
++
++pub fn select_theme(theme: &cosmic::Theme) -> cosmic::Theme {
++    if theme.cosmic().is_high_contrast {
++        theme.clone()
++    } else {
++        dark_theme()
++    }
++}
++
++pub fn theme_for(theme: Option<&cosmic::cosmic_theme::Theme>) -> cosmic::Theme {
++    match theme {
++        Some(theme) if theme.is_high_contrast => cosmic::Theme::custom(Arc::new(theme.clone())),
++        _ => dark_theme(),
++    }
++}
++
++#[cfg(test)]
++mod studio_tests {
++    use super::*;
++
++    #[test]
++    fn embedded_faces_are_available_once_without_fontconfig_or_a_display() {
++        load_fonts();
++        let fonts = cosmic::iced::advanced::graphics::text::font_system().read().unwrap();
++        let before = fonts.db().faces().count();
++        for family in ["Archivo", "Instrument Serif"] {
++            assert!(fonts.db().faces().any(|face| face.families.iter().any(|(name, _)| name == family)));
++        }
++        drop(fonts);
++        load_fonts();
++        let fonts = cosmic::iced::advanced::graphics::text::font_system().read().unwrap();
++        assert_eq!(before, fonts.db().faces().count());
++    }
++
++    #[test]
++    fn dark_shell_appearance_does_not_change_global_user_preferences() {
++        let before = cosmic::theme::active_type();
++        assert!(dark_theme().cosmic().is_dark);
++        assert_eq!(before, cosmic::theme::active_type());
++        assert!(select_theme(&cosmic::theme::system_light()).cosmic().is_dark);
++    }
++
++    #[test]
++    fn explicit_high_contrast_theme_survives_the_dark_default() {
++        let mut theme = cosmic::theme::system_light().cosmic().clone();
++        theme.is_high_contrast = true;
++        let selected = theme_for(Some(&theme));
++        assert!(selected.cosmic().is_high_contrast);
++        assert!(!selected.cosmic().is_dark);
++        assert!(select_theme(&selected).cosmic().is_high_contrast);
++    }
++}
+--- /dev/null
++++ b/src/studio_preview.rs
+@@ -0,0 +1,61 @@
++// An ordinary Wayland window for appearance review. This path has no PAM,
++// greetd IPC, logind lock signal, session-lock request or authentication state.
++use cosmic::app::{Core, Settings, Task};
++use cosmic::iced::{Alignment, Length, Size};
++use cosmic::{Element, executor, widget};
++
++pub fn run() -> cosmic::iced::Result {
++    crate::studio::load_fonts();
++    cosmic::app::run::<Preview>(
++        Settings::default()
++            .theme(crate::studio::dark_theme())
++            .default_font(cosmic::iced::Font::with_name("Archivo"))
++            .size(Size::new(960.0, 440.0))
++            .exit_on_close(true),
++        (),
++    )
++}
++
++struct Preview {
++    core: Core,
++    time: crate::time::Time,
++}
++
++#[derive(Debug, Clone)]
++pub enum Message {
++    None,
++}
++
++impl cosmic::Application for Preview {
++    type Executor = executor::Default;
++    type Flags = ();
++    type Message = Message;
++    const APP_ID: &'static str = "com.adamnolle.CosmicStudio.LockAppearancePreview";
++
++    fn core(&self) -> &Core { &self.core }
++    fn core_mut(&mut self) -> &mut Core { &mut self.core }
++    fn init(mut core: Core, _: ()) -> (Self, Task<Message>) {
++        core.set_header_title("COSMIC Studio · lock appearance preview".into());
++        (
++            Self { core, time: crate::time::Time::new() },
++            cosmic::command::set_theme(crate::studio::dark_theme()),
++        )
++    }
++    fn update(&mut self, _: Message) -> Task<Message> { Task::none() }
++    fn view(&self) -> Element<'_, Message> {
++        let identity = widget::column::with_capacity(5)
++            .spacing(16)
++            .align_x(Alignment::Center)
++            .push(widget::icon::from_name("system-lock-screen-symbolic").size(48))
++            .push(widget::text::title4("COSMIC Studio"))
++            .push(widget::secure_input("Password", "", None, true))
++            .push(widget::text::caption("Appearance preview · authentication is disabled"))
++            .width(Length::FillPortion(2));
++        let content = widget::row::with_capacity(2)
++            .spacing(32)
++            .align_y(Alignment::Center)
++            .push(widget::container(self.time.date_time_widget(false)).width(Length::FillPortion(3)))
++            .push(identity);
++        widget::container(content).padding(32).center(Length::Fill).into()
++    }
++}

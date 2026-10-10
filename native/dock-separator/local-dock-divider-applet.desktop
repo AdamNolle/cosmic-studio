@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Dock Separator
+Exec=cosmic-studio-dock-separator
+NoDisplay=true
+Terminal=false
+Categories=Utility;
+X-CosmicApplet=true

@@ -1,0 +1,16 @@
+[package]
+name = "cosmic-studio-dock-separator"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+
+[dependencies]
+libcosmic = { git = "https://github.com/pop-os/libcosmic", rev = "03c8f93b294ad239ea935f6dd3c14a15acde8d0d", default-features = false, features = [
+    "applet", "applet-token", "dbus-config", "multi-window", "tokio",
+    "wayland", "desktop-systemd-scope", "winit",
+] }
+
+[profile.release]
+opt-level = 3
+panic = "abort"
+lto = "thin"

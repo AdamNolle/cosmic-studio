@@ -1,0 +1,20 @@
+{
+  "candidate": "/home/adamnolle/Documents/Codex/2026-10-04/cou/work/cosmic-comp-src/target/release/cosmic-studio-dock-separator",
+  "sha256": "49e6f75198b406be6a0e3cb46cc78a11ebcac73a397de471018c50559e3020dc",
+  "library_commit": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+  "tests_passed": true,
+  "runtime_libraries_resolved": true,
+  "installed": false,
+  "launched": false,
+  "upstream_applets_commit": "82e7cd814addb0641959b634227fe550374e195b",
+  "library_patch_sha256": "336b4a0dc669911234b0df219315eb6a128471a85fc139b07109318d587db166",
+  "library_source_sha256": "1410774ecbd94a930f4acf8e5ee756066b16b17d21cf65ba69f8305e2c66c273",
+  "native_tests": 2,
+  "layout_renderer": "Iced core null renderer; actual Container layout",
+  "major_axis_width_at_M": 20,
+  "cross_axis_height_at_M": 56,
+  "rule_size_at_M": [
+    1,
+    28
+  ]
+}

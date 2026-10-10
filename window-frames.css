@@ -1,0 +1,57 @@
+/* Application outer frames only. Keep controls, header separators and menus native.
+ * GTK3 draws the frame on `decoration`; GTK4 draws it on `window` itself.
+ * Chromium uses these same CSD/solid-CSD nodes for its GTK window frame provider.
+ * Remove the theme's zero-blur 1px shadow stroke, retaining a soft drop shadow.
+ * Do not change border radii, input/resize regions, padding, backgrounds or fonts.
+ */
+window.csd,
+window.solid-csd,
+window.csd decoration,
+window.solid-csd decoration {
+    border-width: 0;
+    border-style: none;
+    outline-width: 0;
+    outline-style: none;
+    box-shadow: 0 3px 12px 1px rgba(0, 0, 0, 0.18);
+}
+
+window.csd:backdrop,
+window.solid-csd:backdrop,
+window.csd decoration:backdrop,
+window.solid-csd decoration:backdrop {
+    box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* Maximized/fullscreen/tiled windows retain their ordinary shadow-free edges. */
+window.csd.maximized,
+window.csd.fullscreen,
+window.csd.tiled,
+window.csd.tiled-top,
+window.csd.tiled-bottom,
+window.csd.tiled-left,
+window.csd.tiled-right,
+window.solid-csd.maximized,
+window.solid-csd.fullscreen,
+window.solid-csd.tiled,
+window.solid-csd.tiled-top,
+window.solid-csd.tiled-bottom,
+window.solid-csd.tiled-left,
+window.solid-csd.tiled-right,
+window.csd.maximized decoration,
+window.csd.fullscreen decoration,
+window.csd.tiled decoration,
+window.csd.tiled-top decoration,
+window.csd.tiled-bottom decoration,
+window.csd.tiled-left decoration,
+window.csd.tiled-right decoration,
+window.solid-csd.maximized decoration,
+window.solid-csd.fullscreen decoration,
+window.solid-csd.tiled decoration,
+window.solid-csd.tiled-top decoration,
+window.solid-csd.tiled-bottom decoration,
+window.solid-csd.tiled-left decoration,
+window.solid-csd.tiled-right decoration,
+window.csd > decoration-overlay,
+window.solid-csd > decoration-overlay {
+    box-shadow: none;
+}

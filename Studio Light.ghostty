@@ -1,0 +1,23 @@
+# Studio Light — opaque, light-mode terminal
+background = #F5F5F7
+foreground = #202024
+cursor-color = #1D5AB0
+cursor-text = #FFFFFF
+selection-background = #2868C7
+selection-foreground = #FFFFFF
+palette = 0=#202024
+palette = 1=#B72F28
+palette = 2=#247747
+palette = 3=#805A00
+palette = 4=#205E9D
+palette = 5=#863D8B
+palette = 6=#176F78
+palette = 7=#5F6069
+palette = 8=#62626B
+palette = 9=#B72F28
+palette = 10=#247747
+palette = 11=#805A00
+palette = 12=#205E9D
+palette = 13=#863D8B
+palette = 14=#176F78
+palette = 15=#202024

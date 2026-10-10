@@ -1,0 +1,11 @@
+--- a/src/font.rs
++++ b/src/font.rs
+@@ -8,7 +8,7 @@
+ 
+ #[inline]
+ pub fn default() -> Font {
+-    Font::from(crate::config::interface_font())
++    Font::with_name("Archivo")
+ }
+ 
+ #[inline]

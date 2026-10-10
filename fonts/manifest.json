@@ -1,0 +1,95 @@
+{
+  "license": "SIL Open Font License 1.1",
+  "families": {
+    "Archivo": [
+      {
+        "file": "archivo/Archivo-Regular.ttf",
+        "sha256": "59fbfd8a9bb41301bfe950e7b097fd42d52af224a07761e2c1b2c959a4c9cf9a",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-Regular.ttf",
+        "bytes": 183540
+      },
+      {
+        "file": "archivo/Archivo-Italic.ttf",
+        "sha256": "344ac62b73990a6e7f18d28af41c9e952098faf58dbe46048b02aca7128c0974",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-Italic.ttf",
+        "bytes": 194676
+      },
+      {
+        "file": "archivo/Archivo-Medium.ttf",
+        "sha256": "6d42123d7954e72600b2e29284a9c8c95cddb4372b21cd3d2a5e8cd4f231f36b",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-Medium.ttf",
+        "bytes": 184324
+      },
+      {
+        "file": "archivo/Archivo-MediumItalic.ttf",
+        "sha256": "75a787e434bdcb2121a3ffea4dd876bccb18035c36dadfc0d42c639171677375",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-MediumItalic.ttf",
+        "bytes": 200560
+      },
+      {
+        "file": "archivo/Archivo-SemiBold.ttf",
+        "sha256": "6598b6ed816158767a7633bdfb01d78daf54cab4cd4d9d3cc0cfd995f4723083",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-SemiBold.ttf",
+        "bytes": 186700
+      },
+      {
+        "file": "archivo/Archivo-SemiBoldItalic.ttf",
+        "sha256": "77eee24151e8e6f6f4d8b91a1219efb8cf6f46f4a8f591afbdc6a50becd16ef5",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-SemiBoldItalic.ttf",
+        "bytes": 206492
+      },
+      {
+        "file": "archivo/Archivo-Bold.ttf",
+        "sha256": "951a0ebab63b1bb0d90a26c27625bda803d570dace3851fa2f1eea65852d8983",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-Bold.ttf",
+        "bytes": 192180
+      },
+      {
+        "file": "archivo/Archivo-BoldItalic.ttf",
+        "sha256": "2a6a93a878804257237ce188ab31245fa4b8a0fb1c29a4b34588e8e1ed642b1d",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/fonts/ttf/Archivo-BoldItalic.ttf",
+        "bytes": 205336
+      },
+      {
+        "file": "archivo/OFL.txt",
+        "sha256": "108b4e57c9c796d3d38d0428ca7ee39de47ad93187302718d9b2d8864b9b716b",
+        "source": "https://raw.githubusercontent.com/Omnibus-Type/Archivo/211127690e8ff106c36c935f7e5e697114cff103/OFL.txt",
+        "bytes": 4388
+      }
+    ],
+    "Instrument Serif": [
+      {
+        "file": "instrumentserif/InstrumentSerif-Regular.ttf",
+        "sha256": "498efd461f6ddfcb7a111bf9a565709d2085d48201d501ead960d93e84ffbb88",
+        "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/instrumentserif/InstrumentSerif-Regular.ttf",
+        "bytes": 70012
+      },
+      {
+        "file": "instrumentserif/InstrumentSerif-Italic.ttf",
+        "sha256": "08939b8bdf534afec24ae0ef5e03f948940cd9a8fe08e7fecbad040e62327385",
+        "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/instrumentserif/InstrumentSerif-Italic.ttf",
+        "bytes": 71592
+      },
+      {
+        "file": "instrumentserif/OFL.txt",
+        "sha256": "129ed7618959716959f2941fdd5b49e0ad6e6c1d78726761786a00253d865521",
+        "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/instrumentserif/OFL.txt",
+        "bytes": 4405
+      },
+      {
+        "file": "instrumentserif/METADATA.pb",
+        "sha256": "9a650bee57af3478f9294c8765292dcea36322082b987b857e29a2ea64861f6a",
+        "source": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/instrumentserif/METADATA.pb",
+        "bytes": 1287
+      }
+    ]
+  },
+  "revisions": {
+    "Archivo": "211127690e8ff106c36c935f7e5e697114cff103",
+    "Instrument Serif": "bd8f81ddb5c74d5c8897b36ad88b440266245103"
+  },
+  "sources": {
+    "Archivo": "https://github.com/Omnibus-Type/Archivo",
+    "Instrument Serif": "https://github.com/google/fonts"
+  }
+}

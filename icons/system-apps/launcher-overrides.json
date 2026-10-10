@@ -1,0 +1,27 @@
+[
+  {
+    "desktop_id": "nsight-compute-2025.3.1.desktop",
+    "source": "/usr/share/applications/nsight-compute-2025.3.1.desktop",
+    "icon": "studio-app-nsight-compute-2025.3.1"
+  },
+  {
+    "desktop_id": "blender.desktop",
+    "source": "/home/adamnolle/.local/share/applications/blender.desktop",
+    "icon": "studio-app-blender"
+  },
+  {
+    "desktop_id": "nsight-compute-2026.1.1.desktop",
+    "source": "/usr/share/applications/nsight-compute-2026.1.1.desktop",
+    "icon": "studio-app-nsight-compute-2026.1.1"
+  },
+  {
+    "desktop_id": "nsys-ui-2025.6.3.desktop",
+    "source": "/usr/share/applications/nsys-ui-2025.6.3.desktop",
+    "icon": "studio-app-nsys-ui-2025.6.3"
+  },
+  {
+    "desktop_id": "nsys-ui-2025.3.2.desktop",
+    "source": "/usr/share/applications/nsys-ui-2025.3.2.desktop",
+    "icon": "studio-app-nsys-ui-2025.3.2"
+  }
+]

@@ -1,0 +1,86 @@
+/* Studio titlebar controls. Artwork includes the black glyph; preserve native actions. */
+
+button.titlebutton,
+windowcontrols button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+  margin: 0 3px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  background-color: transparent;
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: none;
+  color: #000000;
+}
+
+button.titlebutton image,
+windowcontrols button image { opacity: 0; color: transparent; -gtk-icon-shadow: none; }
+
+button.titlebutton.minimize,
+windowcontrols button.minimize { background-image: url("assets/normal/minimize.svg"); }
+
+button.titlebutton.minimize:backdrop,
+windowcontrols button.minimize:backdrop { background-image: url("assets/inactive/minimize.svg"); }
+
+button.titlebutton.minimize:hover,
+windowcontrols button.minimize:hover { background-image: url("assets/hover/minimize.svg"); }
+
+button.titlebutton.minimize:active,
+windowcontrols button.minimize:active { background-image: url("assets/pressed/minimize.svg"); }
+
+button.titlebutton.minimize:disabled,
+windowcontrols button.minimize:disabled { background-image: url("assets/inactive/minimize.svg"); }
+
+button.titlebutton.maximize,
+windowcontrols button.maximize { background-image: url("assets/normal/maximize.svg"); }
+
+button.titlebutton.maximize:backdrop,
+windowcontrols button.maximize:backdrop { background-image: url("assets/inactive/maximize.svg"); }
+
+button.titlebutton.maximize:hover,
+windowcontrols button.maximize:hover { background-image: url("assets/hover/maximize.svg"); }
+
+button.titlebutton.maximize:active,
+windowcontrols button.maximize:active { background-image: url("assets/pressed/maximize.svg"); }
+
+button.titlebutton.maximize:disabled,
+windowcontrols button.maximize:disabled { background-image: url("assets/inactive/maximize.svg"); }
+
+button.titlebutton.close,
+windowcontrols button.close { background-image: url("assets/normal/close.svg"); }
+
+button.titlebutton.close:backdrop,
+windowcontrols button.close:backdrop { background-image: url("assets/inactive/close.svg"); }
+
+button.titlebutton.close:hover,
+windowcontrols button.close:hover { background-image: url("assets/hover/close.svg"); }
+
+button.titlebutton.close:active,
+windowcontrols button.close:active { background-image: url("assets/pressed/close.svg"); }
+
+button.titlebutton.close:disabled,
+windowcontrols button.close:disabled { background-image: url("assets/inactive/close.svg"); }
+
+window.maximized button.titlebutton.maximize,
+window.maximized windowcontrols button.maximize { background-image: url("assets/normal/restore.svg"); }
+
+window.maximized button.titlebutton.maximize:backdrop,
+window.maximized windowcontrols button.maximize:backdrop { background-image: url("assets/inactive/restore.svg"); }
+
+window.maximized button.titlebutton.maximize:hover,
+window.maximized windowcontrols button.maximize:hover { background-image: url("assets/hover/restore.svg"); }
+
+window.maximized button.titlebutton.maximize:active,
+window.maximized windowcontrols button.maximize:active { background-image: url("assets/pressed/restore.svg"); }
+
+window.maximized button.titlebutton.maximize:disabled,
+window.maximized windowcontrols button.maximize:disabled { background-image: url("assets/inactive/restore.svg"); }
+
+button.titlebutton { margin: 0; }
+
+button.titlebutton:focus,
+windowcontrols button:focus { outline: 1px solid @theme_selected_bg_color; outline-offset: -1px; }

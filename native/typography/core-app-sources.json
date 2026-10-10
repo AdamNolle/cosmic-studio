@@ -1,0 +1,22 @@
+[
+  {
+    "component": "cosmic-files",
+    "source_commit": "d1f0af78e64f9e8ddb52c486913d53a234ce3cf2",
+    "native_library_source": "git+https://github.com/pop-os/libcosmic.git#08a09e3dfa1f729d52585fcedd6e731130235363"
+  },
+  {
+    "component": "cosmic-edit",
+    "source_commit": "bfc98bf21930fe5d9c32b7c238442499191b6319",
+    "native_library_source": "git+https://github.com/pop-os/libcosmic.git#08a09e3dfa1f729d52585fcedd6e731130235363"
+  },
+  {
+    "component": "cosmic-term",
+    "source_commit": "9129277bed1e810418a3138d683c1bc15656234f",
+    "native_library_source": "git+https://github.com/pop-os/libcosmic.git#08a09e3dfa1f729d52585fcedd6e731130235363"
+  },
+  {
+    "component": "cosmic-settings",
+    "source_commit": "7421ff0ab482c942eef23fbe9280edacfbeb35cc",
+    "native_library_source": "git+https://github.com/pop-os/libcosmic#d77e99fb1555e2728297677de61e23ada4d9d09b"
+  }
+]

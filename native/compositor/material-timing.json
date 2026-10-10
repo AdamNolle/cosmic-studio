@@ -1,0 +1,47 @@
+{
+  "renderer": "NVIDIA GeForce RTX 5080/PCIe/SSE2",
+  "version": "OpenGL ES 3.2 NVIDIA 595.84",
+  "samples": [
+    {
+      "surface": "Panel",
+      "width": 2560,
+      "height": 32,
+      "gpu_timer": true,
+      "mean_ms": 0.001544,
+      "min_ms": 0.001525,
+      "max_ms": 0.001559,
+      "wall_per_draw_ms": 0.002035
+    },
+    {
+      "surface": "Dock",
+      "width": 600,
+      "height": 84,
+      "gpu_timer": true,
+      "mean_ms": 0.000957,
+      "min_ms": 0.000946,
+      "max_ms": 0.000961,
+      "wall_per_draw_ms": 0.001852
+    },
+    {
+      "surface": "Popup",
+      "width": 420,
+      "height": 320,
+      "gpu_timer": true,
+      "mean_ms": 0.002451,
+      "min_ms": 0.002442,
+      "max_ms": 0.002458,
+      "wall_per_draw_ms": 0.002726
+    },
+    {
+      "surface": "Window",
+      "width": 900,
+      "height": 620,
+      "gpu_timer": true,
+      "mean_ms": 0.009435,
+      "min_ms": 0.009427,
+      "max_ms": 0.00944,
+      "wall_per_draw_ms": 0.010268
+    }
+  ],
+  "scope": "Final material shader only; native blur/capture and total desktop frame times excluded. 3000 draws per surface, ten query batches. Rounded-source probe; not a main-session performance result."
+}

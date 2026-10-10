@@ -1,0 +1,31 @@
+diff --git a/src/main.rs b/src/main.rs
+index 4ba8e05..6801f64 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -530,7 +530,7 @@ impl Application for App {
+                 scroll: DiscreteScrollState::default().rate_limit(Some(SCROLL_RATE_LIMIT)),
+                 ..Default::default()
+             },
+-            Task::none(),
++            studio_dark_shell(),
+         )
+     }
+     // TODO: show panel and dock? Drag?
+@@ -1212,8 +1212,17 @@ pub fn main() -> iced::Result {
+ 
+     cosmic::app::run_single_instance::<App>(
+         cosmic::app::Settings::default()
++            .theme(cosmic::theme::Theme::custom(std::sync::Arc::new(cosmic::theme::system_dark().cosmic().clone())))
+             .no_main_window(true)
+             .exit_on_close(false),
+         Args::parse(),
+     )
+ }
++
++// Process-local native shell palette; work applications retain their light preference.
++fn studio_dark_shell() -> cosmic::app::Task<Msg> {
++    let dark = cosmic::theme::system_dark().cosmic().clone();
++    cosmic::app::Task::done(cosmic::action::cosmic(cosmic::app::Action::AppThemeChange(
++        cosmic::theme::Theme::custom(std::sync::Arc::new(dark)),
++    )))
++}

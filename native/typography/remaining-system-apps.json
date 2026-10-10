@@ -1,0 +1,78 @@
+[
+  {
+    "component": "cosmic-store",
+    "source_commit": "c6e57a18a8abaf4ae6b5755576982839f8e53900",
+    "native_library": [
+      "git+https://github.com/pop-os/libcosmic.git#23f5d63fed2a370f3c2f54b90ec8f0896fe82105"
+    ],
+    "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/cosmic-store",
+    "prepared_library": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-store",
+    "iced_revision": "87e1787fbb9b924576e6f6ea2ef2f45d0729e63d",
+    "native_font_loader_sha256": "3b7c2245e515f662f30e78c2b9bc52ba8fb3a285d32ca06bc87d6eea5b5dbd20",
+    "embedded_faces": 10,
+    "body_family": "Archivo",
+    "semantic_heading_family": "Instrument Serif",
+    "build_status": "font + measured native popup/window source prepared; actual GUI checks queued",
+    "launched": false
+  },
+  {
+    "component": "cosmic-monitor",
+    "source_commit": "fdcc323f533137430fa5609a6986daebda2d5741",
+    "native_library": [
+      "git+https://github.com/pop-os/libcosmic.git#03c8f93b294ad239ea935f6dd3c14a15acde8d0d"
+    ],
+    "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/cosmic-monitor",
+    "prepared_library": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-monitor",
+    "iced_revision": "6f1b3a71704c4074fad03b3bd6a4203f69556c9e",
+    "native_font_loader_sha256": "3b7c2245e515f662f30e78c2b9bc52ba8fb3a285d32ca06bc87d6eea5b5dbd20",
+    "embedded_faces": 10,
+    "body_family": "Archivo",
+    "semantic_heading_family": "Instrument Serif",
+    "build_status": "font + measured native popup/window source prepared; actual GUI checks queued",
+    "launched": false
+  },
+  {
+    "component": "cosmic-player",
+    "source_commit": "66b3f34335a500ce5dc93880d06f7ae94905872f",
+    "native_library": [
+      "git+https://github.com/pop-os/libcosmic.git#9cc82abd9ca5601bb0341edd12a9acbc97e77801"
+    ],
+    "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/cosmic-player",
+    "prepared_library": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-player",
+    "iced_revision": "39d3c99d1315e9a3db76fa8b32aa91e439c38b32",
+    "native_font_loader_sha256": "3b7c2245e515f662f30e78c2b9bc52ba8fb3a285d32ca06bc87d6eea5b5dbd20",
+    "embedded_faces": 10,
+    "body_family": "Archivo",
+    "semantic_heading_family": "Instrument Serif",
+    "build_status": "font + measured native popup/window source prepared; actual GUI checks queued",
+    "launched": false
+  },
+  {
+    "component": "cosmic-viewer",
+    "source_commit": "d820ab36b84d0fe97b9e1fb96683b9597f03ac83",
+    "native_library": [
+      "git+https://github.com/pop-os/libcosmic.git#eaa7a5a24c4359ebeaab507855388942e8984d5d"
+    ],
+    "prepared_source": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/cosmic-viewer",
+    "prepared_library": "/home/adamnolle/Documents/Codex/2026-10-10/oka/work/native-fonts-os/libcosmic-viewer",
+    "iced_revision": "5e2b580791e994cb0132c94b32ba4b00bc9ced21",
+    "native_font_loader_sha256": "3b7c2245e515f662f30e78c2b9bc52ba8fb3a285d32ca06bc87d6eea5b5dbd20",
+    "embedded_faces": 10,
+    "body_family": "Archivo",
+    "semantic_heading_family": "Instrument Serif",
+    "build_status": "font + measured native popup/window source prepared; actual GUI checks queued",
+    "launched": false
+  },
+  {
+    "component": "cosmic-screenshot",
+    "source_commit": "5ddcf1804192ff98823bd37a778286db5a00f3dd",
+    "native_library": []
+  },
+  {
+    "component": "cosmic-initial-setup",
+    "source_commit": "9b5a9490e60966ebf0565267ce0e9fca368dfbd1",
+    "native_library": [
+      "git+https://github.com/pop-os/libcosmic.git#8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+    ]
+  }
+]

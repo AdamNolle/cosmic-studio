@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-10",
+  "source": {
+    "repository": "https://github.com/pop-os/cosmic-greeter",
+    "revision": "bfb2745176e3fd0824e008d3efb2b37bce5ae0db",
+    "original_lock_sha256": "5de0de337322f772afdb56b0abe666afdb35de0204421341a192520c85ef82e2",
+    "registry_and_git_dependency_versions": "unchanged; only native library source locations patched"
+  },
+  "library": {
+    "repository": "https://github.com/pop-os/libcosmic",
+    "revision": "87ab8179e1bd9880239c340855ae8862034bd0e8",
+    "iced_revision": "5fc4372d877ad2ca6eaab1c0ca5e424f238b9258"
+  },
+  "artifact": {
+    "name": "cosmic-greeter",
+    "sha256": "42c00f6084537de647595308f420a2e8905d25b69d330498322ce87db5a1b0a9",
+    "bytes": 48549176,
+    "profile": "release",
+    "installed": false
+  },
+  "checks": {
+    "help": "PASS",
+    "version": "PASS; matches source and installed distribution revision",
+    "dynamic_libraries": "PASS; system PAM/dav1d; no unresolved libraries or runtime libclang",
+    "native_tests": {
+      "passed": 3,
+      "failed": 0,
+      "covers": [
+        "once-only embedded font loading",
+        "process-local dark default",
+        "explicit high contrast preservation"
+      ]
+    },
+    "safe_preview": {
+      "rendered": true,
+      "compositor": "private headless Weston",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "fonts": "Archivo controls; Instrument Serif date/clock/name",
+      "scope": "Representative appearance fixture; no PAM, greetd IPC, logind lock or session-lock path"
+    },
+    "protected_source_sha256": {
+      "src/common.rs": "df1e112acc4117dc86eba2420caf533591564712194c82b87441a2473fddbf6e",
+      "src/wayland/mod.rs": "3e16b261dde9d2cbf3ed36f274dde6204f9edb073637e01722486930c632f952",
+      "locker.update": "e6fd7dce6d8304d90e61604294316c14604ad7bf50ff415c64481b8580f83423",
+      "greeter.send_request": "00ee2d3421239b3f0c01c03d423e888378cf6388c1654fa72aafa5d06d438546"
+    },
+    "actual_lock_and_login_states": "NOT VERIFIED; running greeter untouched",
+    "fresh_preparation": "PASS; pinned-source preparation, portable patch parity, protected source check, duplicate refusal and installed/Cargo-cache refusal"
+  },
+  "appearance_patch_sha256": "0b7400ed20534720030e3bd4405dbd7f82792b9781b7f8daffdc64004c3adcc2",
+  "verification_script": "native/greeter/verify_source.py",
+  "ui_font_patch_sha256": "bf8321ddd937aae95c63a1bf7c40e96e84dd1b889c8439f595695a81a7e3d0c4"
+}

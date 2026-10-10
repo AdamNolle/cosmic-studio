@@ -1,0 +1,50 @@
+diff --git a/src/tab.rs b/src/tab.rs
+index 62632c7..f966698 100644
+--- a/src/tab.rs
++++ b/src/tab.rs
+@@ -190,15 +190,11 @@ fn button_appearance(
+             appearance.background = Some(Color::from(cosmic.bg_component_color()).into());
+         }
+     } else if desktop {
+-        appearance.background = Some(Color::from(cosmic.bg_color()).into());
+-        appearance.icon_color = Some(Color::from(cosmic.on_bg_color()));
+-        if cut {
+-            appearance.text_color = Some(Color::from(
+-                cosmic.background(theme.transparent).component.disabled,
+-            ));
+-        } else {
+-            appearance.text_color = Some(Color::from(cosmic.on_bg_color()));
+-        }
++        // Desktop labels sit directly on the wallpaper. The system's light
++        // app palette must not paint an opaque white box beneath each name.
++        appearance.background = None;
++        appearance.icon_color = Some(Color::WHITE);
++        appearance.text_color = Some(Color::from_rgba(1.0, 1.0, 1.0, if cut { 0.58 } else { 1.0 }));
+     } else if cut {
+         appearance.text_color = Some(Color::from(
+             cosmic.background(theme.transparent).component.on_disabled,
+@@ -7491,6 +7487,24 @@ mod tests {
+     };
+     use crate::config::{IconSizes, TabConfig, ThumbCfg};
+ 
++    #[test]
++    fn desktop_names_have_no_idle_box_and_retain_selection() {
++        use cosmic::iced::Color;
++        for theme in [cosmic::Theme::light(), cosmic::Theme::dark()] {
++            let idle = super::button_appearance(&theme, false, false, false, false, true, true, true);
++            assert!(idle.background.is_none(), "desktop labels must reveal the wallpaper");
++            assert_eq!(idle.text_color, Some(Color::WHITE));
++            let cut = super::button_appearance(&theme, false, false, true, false, true, true, true);
++            assert!(cut.background.is_none());
++            assert!(cut.text_color.unwrap().a < 1.0);
++            let selected = super::button_appearance(&theme, true, false, false, true, true, true, true);
++            assert!(selected.background.is_some(), "selection must remain visible");
++            assert!(selected.outline_width > 0.0, "keyboard focus must remain visible");
++            let file = super::button_appearance(&theme, false, false, false, false, true, true, false);
++            assert!(file.text_color.is_none(), "ordinary file views retain their theme");
++        }
++    }
++
+     // Boilerplate for tab tests. Checks if simulated clicks selected items.
+     fn tab_selects_item(
+         clicks: &[usize],

@@ -1,0 +1,9 @@
+{
+  "reference": "https://glass.samasante.com/",
+  "files": "Retained the approved near-square folder body and blue gradients; lowered the raised tab by 16px. Added a matched full variant with two paper sheets and a folded corner.",
+  "trash": "Original Blender model of a hollow clear glass cylinder. Empty and crumpled-paper states share camera, vessel, lighting, and material.",
+  "render": "Blender Cycles, 4096px, 512 samples, AgX, transparent film/glass. Crumpled sheets are modeled surfaces with thin solidified edges.",
+  "limitations": "Static PNG alpha shows the desktop through the glass; live wallpaper refraction is not possible in an ordinary dock PNG.",
+  "native_artwork": "Seven other dock icons retain their previously approved image data.",
+  "folder_state_selection": "User requested both artwork variants, without automatic folder-content tracking. The dock uses the empty version. Named theme assets: studio-folder-empty and studio-folder-full."
+}

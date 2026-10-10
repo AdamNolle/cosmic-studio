@@ -1,0 +1,130 @@
+[
+  {
+    "icon": "org.gimp.GIMP",
+    "names": [
+      "GNU Image Manipulation Program"
+    ],
+    "desktop_ids": [
+      "org.gimp.GIMP.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/512x512/apps/org.gimp.GIMP.png",
+    "source_sha256": "7e81d9e88bf4d5e42dbee1f7db71ebc24bc8840f64b4f98c11257524087f86b0",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "firefox",
+    "names": [
+      "Firefox Web Browser"
+    ],
+    "desktop_ids": [
+      "firefox.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/firefox.svg",
+    "source_sha256": "e156f92dcd18bcfdb00b9e1beff5b2b142de3bafb7207dda0b8bb0c557a11c71",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1057
+    ]
+  },
+  {
+    "icon": "libreoffice-calc",
+    "names": [
+      "LibreOffice Calc"
+    ],
+    "desktop_ids": [
+      "libreoffice-calc.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-calc.png",
+    "source_sha256": "b7e17f1bf3a1609527c2d2ccbd312f471de6121a7332ca394770340a0d0f649a",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "antigravity",
+    "names": [
+      "Antigravity"
+    ],
+    "desktop_ids": [
+      "antigravity.desktop"
+    ],
+    "source": "/home/adamnolle/Documents/Codex/2026-10-10/us/work/system-icons/antigravity-original.png",
+    "source_sha256": "b27f0e4a6f14f491ba31bb24533a1f43c677362b12a0744a53fdd09d7c785317",
+    "mode": "native-squircle-preserved",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "studio-app-blender",
+    "names": [
+      "Blender"
+    ],
+    "desktop_ids": [
+      "blender.desktop"
+    ],
+    "source": "/home/adamnolle/.local/opt/blender-5.2.2-linux-x64/blender.svg",
+    "source_sha256": "fd18ae29afd0743a6eee912fdfab71476f6da0f6699a16c1ecd7db7ea8a5de59",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "discord",
+    "names": [
+      "Discord"
+    ],
+    "desktop_ids": [
+      "discord.desktop"
+    ],
+    "source": "/usr/share/pixmaps/discord.png",
+    "source_sha256": "40160b15802f2798447b80807108845507be88663128f9d1c7593139e2b05e15",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      256,
+      256
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicSettings",
+    "names": [
+      "COSMIC Settings"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicSettings.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicSettings.svg",
+    "source_sha256": "b7ce1431c579f8e45b667e9b0659cd1cef7c9656fb6884f4697a96c5e9949c1f",
+    "mode": "vector-background-reshaped",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.inkscape.Inkscape",
+    "names": [
+      "Inkscape Vector Graphics Editor"
+    ],
+    "desktop_ids": [
+      "org.inkscape.Inkscape.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/org.inkscape.Inkscape.svg",
+    "source_sha256": "7e0676d855fd9ca03268a434368ee25809f22e692754ad4077deb9b19f2070d6",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+installation.local.json
+verification.local.json
+*.blend1

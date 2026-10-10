@@ -1,0 +1,1446 @@
+{
+  "custom_masters": 70,
+  "custom_names": 228,
+  "icons": {
+    "com.mitchellh.ghostty": {
+      "master": "masters/ghostty.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Ghostty",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "ghostty": {
+      "master": "masters/ghostty.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Ghostty",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicFiles": {
+      "master": "masters/files.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Files",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "system-file-manager": {
+      "master": "masters/files.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Files",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "folder": {
+      "master": "masters/files.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Files",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "brave-browser": {
+      "master": "masters/brave.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Brave",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "obsidian": {
+      "master": "masters/obsidian.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Obsidian",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "md.obsidian.Obsidian": {
+      "master": "masters/obsidian.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Obsidian",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "chatgpt": {
+      "master": "masters/chatgpt.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "ChatGPT",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "Chatgpt": {
+      "master": "masters/chatgpt.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "ChatGPT",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "codex": {
+      "master": "masters/chatgpt.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "ChatGPT",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "dev.zed.Zed": {
+      "master": "masters/zed.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Zed",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "zed": {
+      "master": "masters/zed.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Zed",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicSettings": {
+      "master": "masters/settings.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Settings",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "preferences-system": {
+      "master": "masters/settings.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Settings",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "preferences-desktop-theme": {
+      "master": "masters/settings.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Settings",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicPlayer": {
+      "master": "masters/player.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Player",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicScreenshot": {
+      "master": "masters/screenshot.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Screenshot",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicViewer": {
+      "master": "masters/viewer.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Viewer",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicStore": {
+      "master": "masters/store.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Store",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicMonitor": {
+      "master": "masters/monitor.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Monitor",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicTerm": {
+      "master": "masters/terminal.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Terminal",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "utilities-terminal": {
+      "master": "masters/terminal.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Terminal",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.CosmicEdit": {
+      "master": "masters/editor.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Editor",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "vlc": {
+      "master": "masters/vlc.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "VLC",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.inkscape.Inkscape": {
+      "master": "masters/inkscape.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Inkscape",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "inkscape": {
+      "master": "masters/inkscape.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Inkscape",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "blender": {
+      "master": "masters/blender.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Blender",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "gimp": {
+      "master": "masters/gimp.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "GIMP",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gimp.GIMP": {
+      "master": "masters/gimp.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "GIMP",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "spotify-client": {
+      "master": "masters/music.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Music",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "audio-x-generic": {
+      "master": "masters/music.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Music",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "thunderbird": {
+      "master": "masters/mail.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Mail",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "internet-mail": {
+      "master": "masters/mail.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Mail",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.DiskUtility": {
+      "master": "masters/disks.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Disks",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "drive-harddisk": {
+      "master": "masters/disks.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Disks",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.baobab": {
+      "master": "masters/usage.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Usage",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.Evince": {
+      "master": "masters/document.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Document",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "text-x-generic": {
+      "master": "masters/document.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Document",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "libreoffice-writer": {
+      "master": "masters/writer.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Writer",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "libreoffice-calc": {
+      "master": "masters/calc.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Calc",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "libreoffice-impress": {
+      "master": "masters/impress.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Impress",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "libreoffice-draw": {
+      "master": "masters/draw.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Draw",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "libreoffice-math": {
+      "master": "masters/math.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Math",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "preferences-system-network": {
+      "master": "masters/network.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Network",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.seahorse.Application": {
+      "master": "masters/keys.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Keys",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.FileRoller": {
+      "master": "masters/archive.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Archive",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "application-x-archive": {
+      "master": "masters/archive.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Archive",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "steam": {
+      "master": "masters/steam.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Steam",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "applications-games": {
+      "master": "masters/steam.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Steam",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "discord": {
+      "master": "masters/discord.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Discord",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "printer": {
+      "master": "masters/printer.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Printer",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.SimpleScan": {
+      "master": "masters/scanner.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Scanner",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.font-viewer": {
+      "master": "masters/fonts.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Fonts",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "firmware-manager": {
+      "master": "masters/firmware.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Firmware",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.Yelp": {
+      "master": "masters/help.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Help",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "preferences-desktop-locale": {
+      "master": "masters/language.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Language",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "syncthing": {
+      "master": "masters/syncthing.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Syncthing",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "multimedia-volume-control": {
+      "master": "masters/audio.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Audio",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "ibus-setup": {
+      "master": "masters/keyboard.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Keyboard",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "input-keyboard": {
+      "master": "masters/keyboard.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Keyboard",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "firefox": {
+      "master": "masters/firefox.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Firefox",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "darktable": {
+      "master": "masters/darktable.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Darktable",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.darktable.Darktable": {
+      "master": "masters/darktable.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Darktable",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "antigravity": {
+      "master": "masters/antigravity.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Antigravity",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "PrusaSlicer": {
+      "master": "masters/slicer.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Slicer",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "PrusaSlicer-gcodeviewer": {
+      "master": "masters/slicer.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Slicer",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "com.system76.Popsicle": {
+      "master": "masters/popsicle.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Popsicle",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "solaar": {
+      "master": "masters/solaar.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Solaar",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "user-trash": {
+      "master": "masters/trash.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Trash",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "user-trash-full": {
+      "master": "masters/trash.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Trash",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.kde.kdenlive": {
+      "master": "masters/kdenlive.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Kdenlive",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "kdenlive": {
+      "master": "masters/kdenlive.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Kdenlive",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "fr.handbrake.ghb": {
+      "master": "masters/handbrake.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "HandBrake",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "display-im6.q16": {
+      "master": "masters/imagemagick.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "ImageMagick",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "gvim": {
+      "master": "masters/vim.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Vim",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "nvidia-settings": {
+      "master": "masters/nvidia-settings.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "NVIDIA Settings",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "studio-nsight-eclipse": {
+      "master": "masters/nsight-eclipse.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Nsight Eclipse",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "studio-nsight-compute": {
+      "master": "masters/nsight-compute.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Nsight Compute",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "studio-nsight-systems": {
+      "master": "masters/nsight-systems.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Nsight Systems",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "studio-nvidia-profiler": {
+      "master": "masters/nvidia-visual-profiler.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "NVIDIA Visual Profiler",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.flameshot.Flameshot": {
+      "master": "masters/flameshot.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Flameshot",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.eog": {
+      "master": "masters/image-viewer.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Image Viewer",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "repoman": {
+      "master": "masters/repoman.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Repoman",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "io.github.kai_j_g.HardwareMonitor": {
+      "master": "masters/hardware-monitor.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Hardware Monitor",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "mini.xterm": {
+      "master": "masters/xterm.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "XTerm",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "org.gnome.PowerStats": {
+      "master": "masters/power-statistics.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Power Statistics",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "libreoffice-startcenter": {
+      "master": "masters/libreoffice.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "LibreOffice",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "accessories-character-map": {
+      "master": "masters/character-map.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Character Map",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "system76-driver": {
+      "master": "masters/system76-driver.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "System76 Driver",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "dialog-information": {
+      "master": "masters/texinfo.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "TeXInfo",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "looking-glass": {
+      "master": "masters/looking-glass.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Looking Glass",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "net.blip.Blip": {
+      "master": "masters/blip.svg",
+      "category": "application",
+      "status": "custom",
+      "identity": "Blip",
+      "source_scene": "blender/studio-glass-family.blend",
+      "material": "offline Blender glass"
+    },
+    "window-close-symbolic": {
+      "master": "symbols.py:close",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-clear-symbolic": {
+      "master": "symbols.py:close",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "close-menu-symbolic": {
+      "master": "symbols.py:close",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "window-minimize-symbolic": {
+      "master": "symbols.py:minus",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "list-remove-symbolic": {
+      "master": "symbols.py:minus",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "zoom-out-symbolic": {
+      "master": "symbols.py:minus",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "list-add-symbolic": {
+      "master": "symbols.py:plus",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "zoom-in-symbolic": {
+      "master": "symbols.py:plus",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "value-increase-symbolic": {
+      "master": "symbols.py:plus",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "object-select-symbolic": {
+      "master": "symbols.py:check",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "emblem-ok-symbolic": {
+      "master": "symbols.py:check",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "checkbox-checked-symbolic": {
+      "master": "symbols.py:check",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "application-menu-symbolic": {
+      "master": "symbols.py:menu",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "open-menu-symbolic": {
+      "master": "symbols.py:menu",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-more-symbolic": {
+      "master": "symbols.py:menu",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-more-horizontal-symbolic": {
+      "master": "symbols.py:more",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-previous-symbolic": {
+      "master": "symbols.py:left",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "pan-start-symbolic": {
+      "master": "symbols.py:left",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-back-symbolic": {
+      "master": "symbols.py:left",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-next-symbolic": {
+      "master": "symbols.py:right",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "pan-end-symbolic": {
+      "master": "symbols.py:right",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-forward-symbolic": {
+      "master": "symbols.py:right",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-up-symbolic": {
+      "master": "symbols.py:up",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "pan-up-symbolic": {
+      "master": "symbols.py:up",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-down-symbolic": {
+      "master": "symbols.py:down",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "pan-down-symbolic": {
+      "master": "symbols.py:down",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-find-symbolic": {
+      "master": "symbols.py:search",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "system-search-symbolic": {
+      "master": "symbols.py:search",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "search-symbolic": {
+      "master": "symbols.py:search",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "folder-symbolic": {
+      "master": "symbols.py:folder",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-open-symbolic": {
+      "master": "symbols.py:folder",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "user-home-symbolic": {
+      "master": "symbols.py:home",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "go-home-symbolic": {
+      "master": "symbols.py:home",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "user-trash-symbolic": {
+      "master": "symbols.py:trash",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-delete-symbolic": {
+      "master": "symbols.py:trash",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-new-symbolic": {
+      "master": "symbols.py:document",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "text-x-generic-symbolic": {
+      "master": "symbols.py:document",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-copy-symbolic": {
+      "master": "symbols.py:copy",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-cut-symbolic": {
+      "master": "symbols.py:cut",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-paste-symbolic": {
+      "master": "symbols.py:paste",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-save-symbolic": {
+      "master": "symbols.py:save",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-save-as-symbolic": {
+      "master": "symbols.py:save",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-undo-symbolic": {
+      "master": "symbols.py:undo",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "edit-redo-symbolic": {
+      "master": "symbols.py:redo",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-refresh-symbolic": {
+      "master": "symbols.py:refresh",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "reload-symbolic": {
+      "master": "symbols.py:refresh",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-revert-symbolic": {
+      "master": "symbols.py:refresh",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "system-shutdown-symbolic": {
+      "master": "symbols.py:power",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "system-power-off-symbolic": {
+      "master": "symbols.py:power",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "system-lock-screen-symbolic": {
+      "master": "symbols.py:lock",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "changes-prevent-symbolic": {
+      "master": "symbols.py:lock",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "changes-allow-symbolic": {
+      "master": "symbols.py:unlock",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "display-brightness-symbolic": {
+      "master": "symbols.py:brightness",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "brightness-symbolic": {
+      "master": "symbols.py:brightness",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "weather-clear-symbolic": {
+      "master": "symbols.py:brightness",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "bluetooth-symbolic": {
+      "master": "symbols.py:bluetooth",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "bluetooth-active-symbolic": {
+      "master": "symbols.py:bluetooth",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "network-wireless-symbolic": {
+      "master": "symbols.py:wifi",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "network-wireless-signal-excellent-symbolic": {
+      "master": "symbols.py:wifi",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "audio-volume-high-symbolic": {
+      "master": "symbols.py:volume",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "multimedia-volume-control-symbolic": {
+      "master": "symbols.py:volume",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "audio-volume-muted-symbolic": {
+      "master": "symbols.py:muted",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "audio-input-microphone-symbolic": {
+      "master": "symbols.py:microphone",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "microphone-sensitivity-high-symbolic": {
+      "master": "symbols.py:microphone",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "audio-headphones-symbolic": {
+      "master": "symbols.py:headphones",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-playback-start-symbolic": {
+      "master": "symbols.py:play",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-playback-pause-symbolic": {
+      "master": "symbols.py:pause",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-playback-stop-symbolic": {
+      "master": "symbols.py:stop",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-skip-forward-symbolic": {
+      "master": "symbols.py:next",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-skip-backward-symbolic": {
+      "master": "symbols.py:previous",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-record-symbolic": {
+      "master": "symbols.py:record",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-app-grid-symbolic": {
+      "master": "symbols.py:apps",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-grid-symbolic": {
+      "master": "symbols.py:apps",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "applications-other-symbolic": {
+      "master": "symbols.py:apps",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "com.system76.CosmicAppLibrary-symbolic": {
+      "master": "symbols.py:apps",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-paged-symbolic": {
+      "master": "symbols.py:workspaces",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "preferences-desktop-workspaces-symbolic": {
+      "master": "symbols.py:workspaces",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "com.system76.CosmicWorkspaces-symbolic": {
+      "master": "symbols.py:workspaces",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-fullscreen-symbolic": {
+      "master": "symbols.py:fullscreen",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "window-maximize-symbolic": {
+      "master": "symbols.py:fullscreen",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-restore-symbolic": {
+      "master": "symbols.py:restore",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "window-restore-symbolic": {
+      "master": "symbols.py:restore",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "video-display-symbolic": {
+      "master": "symbols.py:monitor",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "preferences-desktop-display-symbolic": {
+      "master": "symbols.py:monitor",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "input-keyboard-symbolic": {
+      "master": "symbols.py:keyboard",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "network-wired-symbolic": {
+      "master": "symbols.py:network",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "network-transmit-receive-symbolic": {
+      "master": "symbols.py:network",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "dialog-information-symbolic": {
+      "master": "symbols.py:info",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "dialog-warning-symbolic": {
+      "master": "symbols.py:warning",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "dialog-error-symbolic": {
+      "master": "symbols.py:error",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "process-stop-symbolic": {
+      "master": "symbols.py:error",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "help-about-symbolic": {
+      "master": "symbols.py:help",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "help-browser-symbolic": {
+      "master": "symbols.py:help",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "dialog-question-symbolic": {
+      "master": "symbols.py:help",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "folder-download-symbolic": {
+      "master": "symbols.py:download",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "folder-downloads-symbolic": {
+      "master": "symbols.py:download",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-send-symbolic": {
+      "master": "symbols.py:upload",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "media-eject-symbolic": {
+      "master": "symbols.py:eject",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "insert-link-symbolic": {
+      "master": "symbols.py:link",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "emblem-symbolic-link-symbolic": {
+      "master": "symbols.py:link",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-pin-symbolic": {
+      "master": "symbols.py:pin",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "view-reveal-symbolic": {
+      "master": "symbols.py:eye",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "appointment-soon-symbolic": {
+      "master": "symbols.py:clock",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-open-recent-symbolic": {
+      "master": "symbols.py:clock",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "x-office-calendar-symbolic": {
+      "master": "symbols.py:calendar",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "date-symbolic": {
+      "master": "symbols.py:calendar",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "avatar-default-symbolic": {
+      "master": "symbols.py:user",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "system-users-symbolic": {
+      "master": "symbols.py:user",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "document-print-symbolic": {
+      "master": "symbols.py:printer",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "printer-symbolic": {
+      "master": "symbols.py:printer",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "preferences-system-symbolic": {
+      "master": "symbols.py:settings",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "emblem-system-symbolic": {
+      "master": "symbols.py:settings",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "mark-location-symbolic": {
+      "master": "symbols.py:location",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-0-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-0-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-10-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-10-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-20-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-20-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-30-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-30-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-40-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-40-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-50-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-50-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-60-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-60-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-70-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-70-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-80-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-80-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-90-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-90-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-100-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    },
+    "battery-level-100-charging-symbolic": {
+      "master": "symbols.py:battery",
+      "category": "symbolic",
+      "status": "custom"
+    }
+  },
+  "complete": false,
+  "scope": "All visible installed desktop launchers; embedded application/web/document imagery excluded.",
+  "inherited_fallbacks": "Conflux,Cosmic,hicolor",
+  "cursor": "unchanged",
+  "raster_sizes": [
+    16,
+    20,
+    24,
+    32,
+    36,
+    40,
+    48,
+    64,
+    72,
+    96,
+    128,
+    192,
+    256,
+    512
+  ],
+  "renderer": "Blender Cycles offline, premultiplied-alpha PNG exports"
+}

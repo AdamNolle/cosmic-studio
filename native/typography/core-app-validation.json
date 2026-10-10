@@ -1,0 +1,56 @@
+{
+  "generated_utc": "2026-10-10T17:43:31.802913+00:00",
+  "applications": [
+    {
+      "component": "cosmic-files",
+      "source_commit": "d1f0af78e64f9e8ddb52c486913d53a234ce3cf2",
+      "native_library_source": "git+https://github.com/pop-os/libcosmic.git#08a09e3dfa1f729d52585fcedd6e731130235363",
+      "binary_path": "/home/adamnolle/Documents/Codex/2026-10-04/cou/work/cosmic-comp-src/target/release/cosmic-files",
+      "sha256": "a32063a937c647b55a29522dc7ca2e2b81bfaf25432d5df514d48df0a29b1baa",
+      "bytes": 67568368,
+      "release_build": true,
+      "locked_release_build": true,
+      "default_features": true,
+      "missing_runtime_libraries": false
+    },
+    {
+      "component": "cosmic-edit",
+      "source_commit": "bfc98bf21930fe5d9c32b7c238442499191b6319",
+      "native_library_source": "git+https://github.com/pop-os/libcosmic.git#08a09e3dfa1f729d52585fcedd6e731130235363",
+      "binary_path": "/home/adamnolle/Documents/Codex/2026-10-04/cou/work/cosmic-comp-src/target/release/cosmic-edit",
+      "sha256": "e238b06f82bc6bbe482d05282e15d803d2bc6966d9623e3c94b8dc869d5a1458",
+      "bytes": 63877024,
+      "release_build": true,
+      "locked_release_build": true,
+      "default_features": true,
+      "missing_runtime_libraries": false
+    },
+    {
+      "component": "cosmic-term",
+      "source_commit": "9129277bed1e810418a3138d683c1bc15656234f",
+      "native_library_source": "git+https://github.com/pop-os/libcosmic.git#08a09e3dfa1f729d52585fcedd6e731130235363",
+      "binary_path": "/home/adamnolle/Documents/Codex/2026-10-04/cou/work/cosmic-comp-src/target/release/cosmic-term",
+      "sha256": "82411acf7e892202e16f6e1a4d7c79dbb0d7fb4e25757a800fbf2a2cc9983f2f",
+      "bytes": 62235824,
+      "release_build": true,
+      "locked_release_build": true,
+      "default_features": true,
+      "missing_runtime_libraries": false
+    },
+    {
+      "component": "cosmic-settings",
+      "source_commit": "7421ff0ab482c942eef23fbe9280edacfbeb35cc",
+      "native_library_source": "git+https://github.com/pop-os/libcosmic#d77e99fb1555e2728297677de61e23ada4d9d09b",
+      "binary_path": "/home/adamnolle/Documents/Codex/2026-10-04/cou/work/cosmic-comp-src/target/release/cosmic-settings",
+      "sha256": "407739374ff97b9e7e71bf7b12c8d12fcc043481e44cfca13a3b3eb5915e96e8",
+      "bytes": 81726624,
+      "release_build": true,
+      "locked_release_build": true,
+      "default_features": true,
+      "missing_runtime_libraries": false
+    }
+  ],
+  "installed": false,
+  "started_or_restarted": false,
+  "validation_scope": "Release compilation, locked release compilation, native dependency overrides and runtime library resolution. Full application views have not been opened or visually tested in this run."
+}

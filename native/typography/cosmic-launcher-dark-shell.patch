@@ -1,0 +1,68 @@
+diff --git a/src/app.rs b/src/app.rs
+index 223bb5d..2498ec3 100644
+--- a/src/app.rs
++++ b/src/app.rs
+@@ -108,6 +108,7 @@ pub fn run() -> cosmic::iced::Result {
+     let args = Args::parse();
+     cosmic::app::run_single_instance::<CosmicLauncher>(
+         Settings::default()
++            .theme(studio_dark_theme())
+             .antialiasing(true)
+             .client_decorations(true)
+             .debug(false)
+@@ -119,6 +120,18 @@ pub fn run() -> cosmic::iced::Result {
+     )
+ }
+ 
++// Native shell material; no environment or child-application overrides.
++fn studio_dark_theme() -> cosmic::theme::Theme {
++    let dark = cosmic::theme::system_dark().cosmic().clone();
++    cosmic::theme::Theme::custom(std::sync::Arc::new(dark))
++}
++
++fn studio_dark_shell() -> Task<Message> {
++    Task::done(cosmic::action::cosmic(cosmic::app::Action::AppThemeChange(
++        studio_dark_theme(),
++    )))
++}
++
+ pub fn menu_button<'a, Message: Clone + 'a>(
+     content: impl Into<Element<'a, Message>>,
+ ) -> cosmic::widget::Button<'a, Message> {
+@@ -426,7 +439,8 @@ impl cosmic::Application for CosmicLauncher {
+         };
+         let task = app.create_dummy_layer_surface();
+         app.needs_clear = false;
+-        (app, task)
++        // The override stays in this process; apps inherit the light system preference.
++        (app, Task::batch([task, studio_dark_shell()]))
+     }
+ 
+     fn core(&self) -> &Core {
+@@ -1288,3 +1302,26 @@ impl cosmic::Application for CosmicLauncher {
+         ])
+     }
+ }
++
++#[cfg(test)]
++mod studio_tests {
++    use super::*;
++
++    #[test]
++    fn shell_theme_is_dark_and_process_local() {
++        let before = cosmic::theme::active_type();
++        let dark = studio_dark_theme();
++        assert!(dark.cosmic().is_dark);
++        assert!(matches!(dark.theme_type, cosmic::theme::ThemeType::Custom(_)));
++        assert_eq!(before, cosmic::theme::active_type());
++    }
++
++    #[test]
++    fn launcher_rows_preserve_balanced_native_padding() {
++        let padding = menu_control_padding();
++        assert_eq!(padding.top, 8.0);
++        assert_eq!(padding.bottom, 8.0);
++        assert_eq!(padding.left, 24.0);
++        assert_eq!(padding.right, 24.0);
++    }
++}

@@ -1,0 +1,22 @@
+/* Studio Light: opaque chrome with a restrained glass-like sheen.
+   Content areas, text, icons, and application layout remain unchanged. */
+headerbar, .titlebar {
+  background-color: #f5f8fc;
+  background-image: linear-gradient(to bottom, #ffffff, #e3ebf5);
+  color: #202024;
+  border-bottom: 1px solid #8694a6;
+  border-radius: 0;
+  box-shadow: inset 0 1px #ffffff;
+}
+.sidebar, .navigation-sidebar {
+  background-color: #ecf1f7;
+  background-image: linear-gradient(to right, #f8fbff, #e7edf5);
+  color: #202024;
+}
+popover, popover > contents {
+  background-color: #fafcff;
+  background-image: linear-gradient(to bottom, #ffffff, #ecf1f7);
+  color: #202024;
+  border: 1px solid #8694a6;
+  border-radius: 0;
+}

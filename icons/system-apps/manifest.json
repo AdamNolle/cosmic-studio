@@ -1,0 +1,1146 @@
+[
+  {
+    "icon": "org.gimp.GIMP",
+    "names": [
+      "GNU Image Manipulation Program"
+    ],
+    "desktop_ids": [
+      "org.gimp.GIMP.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/512x512/apps/org.gimp.GIMP.png",
+    "source_sha256": "7e81d9e88bf4d5e42dbee1f7db71ebc24bc8840f64b4f98c11257524087f86b0",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "io.github.kai_j_g.HardwareMonitor",
+    "names": [
+      "Hardware Monitor for COSMIC\u2122"
+    ],
+    "desktop_ids": [
+      "io.github.kai_j_g.HardwareMonitor.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/io.github.kai_j_g.HardwareMonitor.svg",
+    "source_sha256": "57933d8642693056852ea850fdcd441713923379adc37d354b849bb5983ef83f",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.kde.kdenlive",
+    "names": [
+      "Kdenlive"
+    ],
+    "desktop_ids": [
+      "org.kde.kdenlive.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/512x512/apps/org.kde.kdenlive.png",
+    "source_sha256": "1046648a5222d0dc06132e5ab8fd5b7eeaa16d6e8aa519d1340c175c95cdc68b",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "repoman",
+    "names": [
+      "Repoman"
+    ],
+    "desktop_ids": [
+      "repoman.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/repoman.svg",
+    "source_sha256": "86de0b1d10120993695be16f07d44b15367bbfc37949df01ccc2fcfc927dc895",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "preferences-desktop-theme",
+    "names": [
+      "Qt5 Settings",
+      "Qt6 Settings"
+    ],
+    "desktop_ids": [
+      "qt5ct.desktop",
+      "qt6ct.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/preferences/scalable/preferences-desktop-theme.svg",
+    "source_sha256": "8f36644185e14d0ba2e9833ad074a91f009fb4f6dd9ec1666c06287abf23b526",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "solaar",
+    "names": [
+      "Solaar"
+    ],
+    "desktop_ids": [
+      "solaar.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/solaar.svg",
+    "source_sha256": "f4428b1f9b37e17e8e81dfdcb83c0a917fa1d55ea0ff29bba3703b4a8a60cc6c",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "firefox",
+    "names": [
+      "Firefox Web Browser"
+    ],
+    "desktop_ids": [
+      "firefox.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/firefox.svg",
+    "source_sha256": "e156f92dcd18bcfdb00b9e1beff5b2b142de3bafb7207dda0b8bb0c557a11c71",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1057
+    ]
+  },
+  {
+    "icon": "PrusaSlicer",
+    "names": [
+      "PrusaSlicer"
+    ],
+    "desktop_ids": [
+      "PrusaSlicer.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/192x192/apps/PrusaSlicer.png",
+    "source_sha256": "b92dd32c7090ecbc050197497d20e22911a119d552907b5e8afc3f16c3cda49e",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      192,
+      192
+    ]
+  },
+  {
+    "icon": "libreoffice-calc",
+    "names": [
+      "LibreOffice Calc"
+    ],
+    "desktop_ids": [
+      "libreoffice-calc.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-calc.png",
+    "source_sha256": "b7e17f1bf3a1609527c2d2ccbd312f471de6121a7332ca394770340a0d0f649a",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicViewer",
+    "names": [
+      "COSMIC Viewer"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicViewer.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicViewer.svg",
+    "source_sha256": "57b397fba964841baf46dddbf41451892f8dce6d32781c8cef2ed4a87e9abeee",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.flameshot.Flameshot",
+    "names": [
+      "Flameshot",
+      "Take Screenshot (Flameshot)"
+    ],
+    "desktop_ids": [
+      "local-flameshot-capture.desktop",
+      "org.flameshot.Flameshot.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/org.flameshot.Flameshot.svg",
+    "source_sha256": "b63cbb4e1215ee0f1a49a88fb3f401457957b56ad9dffcdc014262a0c0c8706e",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "antigravity",
+    "names": [
+      "Antigravity"
+    ],
+    "desktop_ids": [
+      "antigravity.desktop"
+    ],
+    "source": "/home/adamnolle/Documents/Codex/2026-10-10/us/work/system-icons/antigravity-original.png",
+    "source_sha256": "b27f0e4a6f14f491ba31bb24533a1f43c677362b12a0744a53fdd09d7c785317",
+    "mode": "native-squircle-preserved",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "studio-app-nsight-compute-2025.3.1",
+    "names": [
+      "NVIDIA Nsight Compute 2025.3.1"
+    ],
+    "desktop_ids": [
+      "nsight-compute-2025.3.1.desktop"
+    ],
+    "source": "/opt/nvidia/nsight-compute/2025.3.1/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png",
+    "source_sha256": "b6e5e249d1260ef09d3ce36bfbf33da0086f51810be6bfbd6a6feb7288b611f2",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      256,
+      256
+    ]
+  },
+  {
+    "icon": "nvidia-settings",
+    "names": [
+      "NVIDIA X Server Settings"
+    ],
+    "desktop_ids": [
+      "nvidia-settings.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/nvidia-settings.svg",
+    "source_sha256": "dc6d848dac19785adc60734c2806e7ce3f23ec5b53d7bec18517a74ee5d6268f",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "thunderbird",
+    "names": [
+      "Thunderbird"
+    ],
+    "desktop_ids": [
+      "thunderbird.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/128x128/apps/thunderbird.png",
+    "source_sha256": "64214367f8f8633e3a5be46b18d2bb608d7a76a45cdc5373a5da875013c6d600",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      128,
+      128
+    ]
+  },
+  {
+    "icon": "firmware-manager",
+    "names": [
+      "Firmware Manager"
+    ],
+    "desktop_ids": [
+      "com.system76.FirmwareManager.desktop"
+    ],
+    "source": "/usr/share/icons/Cosmic/scalable/apps/firmware-manager.svg",
+    "source_sha256": "ee0fe9dd18b96b52a506a85e21b3b3b76c652580c1df401c2d1cc206822d6c96",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.gnome.eog",
+    "names": [
+      "Image Viewer"
+    ],
+    "desktop_ids": [
+      "org.gnome.eog.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.eog.svg",
+    "source_sha256": "65bc0738af0e016c601f793f577b01bec193853fdd2c81afe1fe0bc77a194bbe",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "libreoffice-writer",
+    "names": [
+      "LibreOffice Writer"
+    ],
+    "desktop_ids": [
+      "libreoffice-writer.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-writer.png",
+    "source_sha256": "f1e875950b2871e292e7176253f5d2dc04bd8e2517d1a2bda680dc7f660a7081",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "chatgpt",
+    "names": [
+      "ChatGPT"
+    ],
+    "desktop_ids": [
+      "chatgpt.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/chatgpt.svg",
+    "source_sha256": "0b2a1492474f5f178b17ad1094e09e840770e36f092db2b6d59b49045d1d91de",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "libreoffice-math",
+    "names": [
+      "LibreOffice Math"
+    ],
+    "desktop_ids": [
+      "libreoffice-math.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-math.png",
+    "source_sha256": "a05c22dc4be16ca216d6ffa177a930f827b328790d406638ee94dc83629aad53",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "display-im6.q16",
+    "names": [
+      "ImageMagick (color depth=q16)"
+    ],
+    "desktop_ids": [
+      "display-im6.q16.desktop"
+    ],
+    "source": "/home/adamnolle/Documents/Codex/2026-10-10/us/work/system-icons/imagemagick-wizard.png",
+    "source_sha256": "d37309800250dbbbfcfa50b199abdca6cf60b6e3e5417ea6929011caf9ced83d",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      468,
+      554
+    ]
+  },
+  {
+    "icon": "brave-browser",
+    "names": [
+      "Brave Web Browser"
+    ],
+    "desktop_ids": [
+      "brave-browser.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/brave-browser.png",
+    "source_sha256": "b0fee441f0803f404c81ee089c2167eb0a65e7bc5c3b672cadbe823ac227dad6",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.gnome.Evince",
+    "names": [
+      "Document Viewer"
+    ],
+    "desktop_ids": [
+      "org.gnome.Evince.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.Evince.svg",
+    "source_sha256": "f751882c37418ee2d89d3adfe5c826cbb7ee2caba1afdefea6da154a5456131c",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.Popsicle",
+    "names": [
+      "Popsicle USB Flasher"
+    ],
+    "desktop_ids": [
+      "com.system76.Popsicle.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/com.system76.Popsicle.png",
+    "source_sha256": "e86126078c47df3259ad23935c95ace87d639dfddda0ec3b7d659ba5d2a5bd6d",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "vlc",
+    "names": [
+      "VLC media player"
+    ],
+    "desktop_ids": [
+      "vlc.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/vlc.svg",
+    "source_sha256": "d24d1b412e83dcb6b02bc764958789302b915073da94156aadaefeb2ef003578",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "multimedia-volume-control",
+    "names": [
+      "PulseAudio Volume Control"
+    ],
+    "desktop_ids": [
+      "pavucontrol.desktop"
+    ],
+    "source": "/usr/share/icons/Cosmic/scalable/apps/multimedia-volume-control.svg",
+    "source_sha256": "e2f55f81473399c85d83d5afc86639df795f508019c75dc09a62a7d93ad0a12e",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "steam",
+    "names": [
+      "Steam"
+    ],
+    "desktop_ids": [
+      "steam.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/steam.png",
+    "source_sha256": "fccdb549d8df1c6078eb5d0cfbf2277a52619b26e093eafe85ed7050de9850cc",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      256,
+      256
+    ]
+  },
+  {
+    "icon": "org.gnome.DiskUtility",
+    "names": [
+      "Disks"
+    ],
+    "desktop_ids": [
+      "org.gnome.DiskUtility.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.DiskUtility.svg",
+    "source_sha256": "4cc8a950d8ee1bc36efa946e744b75e9a8b69585af679768268a6e4ffd1c7c2e",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "studio-app-blender",
+    "names": [
+      "Blender"
+    ],
+    "desktop_ids": [
+      "blender.desktop"
+    ],
+    "source": "/home/adamnolle/.local/opt/blender-5.2.2-linux-x64/blender.svg",
+    "source_sha256": "fd18ae29afd0743a6eee912fdfab71476f6da0f6699a16c1ecd7db7ea8a5de59",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "ibus-setup",
+    "names": [
+      "IBus Preferences"
+    ],
+    "desktop_ids": [
+      "org.freedesktop.IBus.Setup.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/ibus-setup.svg",
+    "source_sha256": "b9d1788db4d57965d09017c64d614fe0a8ee7fc7212bce4f1645ec4e4f718bfa",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicPlayer",
+    "names": [
+      "COSMIC Media Player"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicPlayer.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicPlayer.svg",
+    "source_sha256": "8677459bb3573a63e5968673377885c8834656b7548192fa02d547724f8a59d1",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "obsidian",
+    "names": [
+      "Obsidian"
+    ],
+    "desktop_ids": [
+      "md.obsidian.Obsidian.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/obsidian.svg",
+    "source_sha256": "9024ace9509b5af6e629a60a01b8c4d0f83a7b4856301173c7d24815c4d60e79",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "fr.handbrake.ghb",
+    "names": [
+      "HandBrake"
+    ],
+    "desktop_ids": [
+      "fr.handbrake.ghb.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/scalable/apps/fr.handbrake.ghb.svg",
+    "source_sha256": "f2c255b4e52c9062fb7f00816e71aeb98722d902c1e87395c0b1c2a2eaa8d9e9",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.darktable.Darktable",
+    "names": [
+      "Darktable Photo Workflow Software"
+    ],
+    "desktop_ids": [
+      "org.darktable.Darktable.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/flatpak/exports/share/icons/hicolor/256x256/apps/org.darktable.Darktable.png",
+    "source_sha256": "eb32e16477010280d8cdddd880e50c76fcd0dac877264e1744a9269d8f3f0db3",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "syncthing",
+    "names": [
+      "Start Syncthing",
+      "Syncthing Web UI"
+    ],
+    "desktop_ids": [
+      "syncthing-ui.desktop",
+      "syncthing-start.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/syncthing.png",
+    "source_sha256": "d0275a171c811209fa5d39b5ccdf7504fc356e40144cb98cb1d85e2acd4793e7",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "spotify-client",
+    "names": [
+      "Spotify"
+    ],
+    "desktop_ids": [
+      "spotify.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/spotify-client.svg",
+    "source_sha256": "b26cfb89c3ffb47f7dad6e11fce14bc775718765df0a997c56321f2f7e247c57",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.gnome.font-viewer",
+    "names": [
+      "Fonts"
+    ],
+    "desktop_ids": [
+      "org.gnome.font-viewer.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.font-viewer.svg",
+    "source_sha256": "8befb3905078bd25255590a1e6660f4f9d1777df0746b0dcc2bdcce36ef0d4e8",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "PrusaSlicer-gcodeviewer",
+    "names": [
+      "Prusa GCode viewer"
+    ],
+    "desktop_ids": [
+      "PrusaGcodeviewer.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/192x192/apps/PrusaSlicer-gcodeviewer.png",
+    "source_sha256": "47b828396649b8999bfa2f32e53b47c1cbb5496ba41c7f6ee288dc9be1be9118",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      192,
+      192
+    ]
+  },
+  {
+    "icon": "com.mitchellh.ghostty",
+    "names": [
+      "Ghostty"
+    ],
+    "desktop_ids": [
+      "com.mitchellh.ghostty.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/com.mitchellh.ghostty.png",
+    "source_sha256": "0f457f162622dfa12888d617caaa1e0877d8f7ba550a2dd5ddbbf1bda47a3757",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "libreoffice-startcenter",
+    "names": [
+      "LibreOffice"
+    ],
+    "desktop_ids": [
+      "libreoffice-startcenter.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-startcenter.png",
+    "source_sha256": "75904dcce7722e44394cc37b715852ada59c4257dc82d0695963804e180814db",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "studio-app-nsight-compute-2026.1.1",
+    "names": [
+      "NVIDIA Nsight Compute 2026.1.1"
+    ],
+    "desktop_ids": [
+      "nsight-compute-2026.1.1.desktop"
+    ],
+    "source": "/opt/nvidia/nsight-compute/2026.1.1/host/linux-desktop-glibc_2_11_3-x64/ncu-ui.png",
+    "source_sha256": "b6e5e249d1260ef09d3ce36bfbf33da0086f51810be6bfbd6a6feb7288b611f2",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      256,
+      256
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicFiles",
+    "names": [
+      "COSMIC Files"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicFiles.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicFiles.svg",
+    "source_sha256": "dc1b71bdbc3c28586d3632e0ee35b64f3d47b460ca653b91bf7f815eab65ad41",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.gnome.SimpleScan",
+    "names": [
+      "Document Scanner"
+    ],
+    "desktop_ids": [
+      "simple-scan.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/devices/org.gnome.SimpleScan.svg",
+    "source_sha256": "272533c97ba2b138a423cb008f070f3961c80ea31d670d59afcab93c4e292c68",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicStore",
+    "names": [
+      "COSMIC Store"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicStore.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicStore.svg",
+    "source_sha256": "e2744889cdfb017ce9706ee4e64b883deeb757dfb0be742d953f533dbe6a75c7",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "looking-glass",
+    "names": [
+      "Looking Glass Client"
+    ],
+    "desktop_ids": [
+      "looking-glass-client.desktop"
+    ],
+    "source": "/usr/local/share/icons/hicolor/scalable/apps/looking-glass.svg",
+    "source_sha256": "c84314690416357499c0eb5965d9e7f1a8555b90c5bcba36221277e7a9b5a132",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1251
+    ]
+  },
+  {
+    "icon": "org.gnome.baobab",
+    "names": [
+      "Disk Usage Analyzer"
+    ],
+    "desktop_ids": [
+      "org.gnome.baobab.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.baobab.svg",
+    "source_sha256": "15ec4cc75db47923e0dd50fd9756140f71d4d81d50dc13440d593d852026f0f3",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "user-trash",
+    "names": [
+      "Trash"
+    ],
+    "desktop_ids": [
+      "local-trash.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/places/scalable/user-trash.svg",
+    "source_sha256": "8cf07211b803b52158d87ca765006be778ac7cc86c85fecd81ba457296b3e1d4",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "discord",
+    "names": [
+      "Discord"
+    ],
+    "desktop_ids": [
+      "discord.desktop"
+    ],
+    "source": "/usr/share/pixmaps/discord.png",
+    "source_sha256": "40160b15802f2798447b80807108845507be88663128f9d1c7593139e2b05e15",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      256,
+      256
+    ]
+  },
+  {
+    "icon": "preferences-system-network",
+    "names": [
+      "Advanced Network Configuration"
+    ],
+    "desktop_ids": [
+      "nm-connection-editor.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/categories/preferences-system-network.svg",
+    "source_sha256": "c583cf81d055d4ddd09128f037176e79bb3928c79f9d2245ec6537ccb676c7f6",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "studio-app-nsys-ui-2025.6.3",
+    "names": [
+      "NVIDIA Nsight Systems 2025.6.3"
+    ],
+    "desktop_ids": [
+      "nsys-ui-2025.6.3.desktop"
+    ],
+    "source": "/opt/nvidia/nsight-systems/2025.6.3/host-linux-x64/nsys-ui.png",
+    "source_sha256": "38cd754a193f1715095837f97bee3a274831142dc19169240ed23d527dd4c815",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      257,
+      256
+    ]
+  },
+  {
+    "icon": "studio-app-nsys-ui-2025.3.2",
+    "names": [
+      "NVIDIA Nsight Systems 2025.3.2"
+    ],
+    "desktop_ids": [
+      "nsys-ui-2025.3.2.desktop"
+    ],
+    "source": "/opt/nvidia/nsight-systems/2025.3.2/host-linux-x64/nsys-ui.png",
+    "source_sha256": "38cd754a193f1715095837f97bee3a274831142dc19169240ed23d527dd4c815",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      257,
+      256
+    ]
+  },
+  {
+    "icon": "dialog-information",
+    "names": [
+      "TeXInfo"
+    ],
+    "desktop_ids": [
+      "info.desktop"
+    ],
+    "source": "/usr/share/icons/Cosmic/scalable/status/dialog-information.svg",
+    "source_sha256": "6623f8b38cad53ef2d316bc69c2aff3d38268d2793fe7923f02f61d4dcc3c2e2",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.gnome.seahorse.Application",
+    "names": [
+      "Passwords and Keys"
+    ],
+    "desktop_ids": [
+      "org.gnome.seahorse.Application.desktop"
+    ],
+    "source": "/usr/share/icons/Pop/256x256@2x/apps/org.gnome.seahorse.Application.svg",
+    "source_sha256": "d92cdd60354010330853c0f2288c52d77c2b37a6063ae40402c6faf6879f57f7",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "libreoffice-impress",
+    "names": [
+      "LibreOffice Impress"
+    ],
+    "desktop_ids": [
+      "libreoffice-impress.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-impress.png",
+    "source_sha256": "c984c805f291abe1af5b8bab3bab90520119acbd1bf68c96d8fadabf5ef59eb3",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "dev.zed.Zed",
+    "names": [
+      "Zed"
+    ],
+    "desktop_ids": [
+      "dev.zed.Zed.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/dev.zed.Zed.png",
+    "source_sha256": "77453d98d46494b3b34b94aa863b686ea299e0190030a5c7ca5377b238332522",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicMonitor",
+    "names": [
+      "COSMIC System Monitor"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicMonitor.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicMonitor.svg",
+    "source_sha256": "a8118d092263c4a1b09de80f1b652a2d4476ca54bd8c9257c0b513c807f0e9c6",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "darktable",
+    "names": [
+      "Darktable Photo Workflow Software"
+    ],
+    "desktop_ids": [
+      "org.darktable.darktable.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/darktable.png",
+    "source_sha256": "eb32e16477010280d8cdddd880e50c76fcd0dac877264e1744a9269d8f3f0db3",
+    "mode": "approved-artwork-preserved",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "libreoffice-draw",
+    "names": [
+      "LibreOffice Draw"
+    ],
+    "desktop_ids": [
+      "libreoffice-draw.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/512x512/apps/libreoffice-draw.png",
+    "source_sha256": "72a255437319596da03eafc45e0aa9ef29faae5d153baf6336b885abdecca970",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "gimp",
+    "names": [
+      "GNU Image Manipulation Program"
+    ],
+    "desktop_ids": [
+      "gimp.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/gimp.png",
+    "source_sha256": "01c0036415bf39fc3682a56aa401fa2a25ecc22e3a2caf89136ca5faa90561f0",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      256,
+      256
+    ]
+  },
+  {
+    "icon": "mini.xterm",
+    "names": [
+      "UXTerm",
+      "XTerm"
+    ],
+    "desktop_ids": [
+      "debian-xterm.desktop",
+      "debian-uxterm.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/mini.xterm.svg",
+    "source_sha256": "919a42e878a5b6a28e153dd5b9521f29a6e546f501818c38080e7aa9e79b6efb",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "preferences-desktop-locale",
+    "names": [
+      "Language Support"
+    ],
+    "desktop_ids": [
+      "gnome-language-selector.desktop"
+    ],
+    "source": "/usr/share/icons/Cosmic/scalable/apps/preferences-desktop-locale.svg",
+    "source_sha256": "535db599764227e46b2cee8645491b4e2a4c9272d31a6153e41c87009d92910d",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "accessories-character-map",
+    "names": [
+      "Character Map"
+    ],
+    "desktop_ids": [
+      "gucharmap.desktop"
+    ],
+    "source": "/usr/share/icons/Cosmic/scalable/apps/accessories-character-map.svg",
+    "source_sha256": "68041400a8b6305d260c6dfc36b0e02ba8688acd45bd5c8ee51a1f8565648c23",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "net.blip.Blip",
+    "names": [
+      "Blip"
+    ],
+    "desktop_ids": [
+      "net.blip.Blip.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/hicolor/512x512/apps/net.blip.Blip.png",
+    "source_sha256": "fbeba0834f95764e8c34ade876556ceef9a40f738223202ff4772652837b5e6e",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      512,
+      512
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicScreenshot",
+    "names": [
+      "COSMIC Screenshot"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicScreenshot.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicScreenshot.svg",
+    "source_sha256": "9714a8b6f3194e7ceb0ef2335cc1588cc019cf9ca6acef8c1fadcc52d9591262",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.gnome.FileRoller",
+    "names": [
+      "File Roller"
+    ],
+    "desktop_ids": [
+      "org.gnome.FileRoller.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/org.gnome.FileRoller.svg",
+    "source_sha256": "7d2f32ccc5832bfc90b65b92485ca8d7ed1eed4b93feae23348da3aa29d5ff6a",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "system76-driver",
+    "names": [
+      "System76 Driver"
+    ],
+    "desktop_ids": [
+      "system76-driver.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/system76-driver.svg",
+    "source_sha256": "c909e6cdcdfdc1968631b698475f318360f141c8c46e514171ba4d8316b82c68",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "printer",
+    "names": [
+      "Printers"
+    ],
+    "desktop_ids": [
+      "system-config-printer.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/devices/scalable/printer.svg",
+    "source_sha256": "d0e9b054c362248d490bdc8a570bfd58d2b90244dc101eca3cf8e81aeae08770",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicSettings",
+    "names": [
+      "COSMIC Settings"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicSettings.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicSettings.svg",
+    "source_sha256": "b7ce1431c579f8e45b667e9b0659cd1cef7c9656fb6884f4697a96c5e9949c1f",
+    "mode": "vector-background-reshaped",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicTerm",
+    "names": [
+      "COSMIC Terminal"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicTerm.desktop"
+    ],
+    "source": "/home/adamnolle/.local/share/icons/Conflux/apps/scalable/com.system76.CosmicTerm.svg",
+    "source_sha256": "ae64d7a8f85979fa695df2470059445d35d38c34d332ff680eab35bdacde083d",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "com.system76.CosmicEdit",
+    "names": [
+      "COSMIC Text Editor"
+    ],
+    "desktop_ids": [
+      "com.system76.CosmicEdit.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/256x256/apps/com.system76.CosmicEdit.svg",
+    "source_sha256": "45dbee9c4e9082bfb46b573a35c4da1900fc0e04577ba2fdedf79512fd13eaa4",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "icon": "org.inkscape.Inkscape",
+    "names": [
+      "Inkscape Vector Graphics Editor"
+    ],
+    "desktop_ids": [
+      "org.inkscape.Inkscape.desktop"
+    ],
+    "source": "/usr/share/icons/hicolor/scalable/apps/org.inkscape.Inkscape.svg",
+    "source_sha256": "7e0676d855fd9ca03268a434368ee25809f22e692754ad4077deb9b19f2070d6",
+    "mode": "logo-on-squircle",
+    "source_resolution": [
+      1024,
+      1024
+    ]
+  }
+]

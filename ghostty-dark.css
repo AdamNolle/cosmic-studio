@@ -1,0 +1,39 @@
+/* Ghostty loads this per process. Opaque dark controls match the terminal's
+   deliberate dark exception to the light application default. */
+headerbar, .titlebar {
+  background-color: #030405;
+  background-image: linear-gradient(to bottom, #141c28, #030405);
+  color: #f0f1f2;
+  border-bottom: 1px solid #4d5b70;
+  border-radius: 0;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.12);
+}
+headerbar .title, .titlebar .title {
+  font-family: "Instrument Serif";
+  font-weight: normal;
+  font-size: 1.15em;
+}
+popover, popover > contents, menu {
+  background-color: #0d1117;
+  background-image: none;
+  color: #f0f1f2;
+  border: 1px solid #4d5b70;
+}
+popover label, menuitem, menuitem label, modelbutton, modelbutton label {
+  color: #f0f1f2;
+}
+popover button:hover, menuitem:hover, modelbutton:hover {
+  background-color: #26364b;
+  color: #ffffff;
+}
+popover button:disabled, menuitem:disabled, modelbutton:disabled,
+popover label:disabled, menuitem label:disabled, modelbutton label:disabled {
+  color: #94a0b2;
+}
+popover accelerator, menuitem accelerator {
+  color: #b4c6de;
+}
+popover button:focus, menuitem:focus, modelbutton:focus {
+  outline: 2px solid #a5caff;
+  outline-offset: -2px;
+}

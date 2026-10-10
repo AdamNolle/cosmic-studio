@@ -1,0 +1,17 @@
+[
+  {
+    "component": "cosmic-launcher",
+    "source_commit": "cc3d42bcc8fbcb67e6312f2766394e18b4d937d5",
+    "native_library_commit": "8cb86195ec576064ac8e59e9200315714d17dc55"
+  },
+  {
+    "component": "cosmic-app-library",
+    "source_commit": "0a3996de82c264095ade047661f7a3088f99013e",
+    "native_library_commit": "8cb86195ec576064ac8e59e9200315714d17dc55"
+  },
+  {
+    "component": "cosmic-workspaces",
+    "source_commit": "28e257daa86643aee4166f192fb3e000ac3f7605",
+    "native_library_commit": "8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21"
+  }
+]

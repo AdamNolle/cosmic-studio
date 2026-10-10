@@ -1,0 +1,14 @@
+/* Studio Light chrome only; content widgets retain the COSMIC palette. */
+QMenuBar, QToolBar {
+  background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                             stop:0 #ffffff, stop:1 #e3ebf5);
+  color: #202024;
+  border-bottom: 1px solid #8694a6;
+}
+QMenu {
+  background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                             stop:0 #ffffff, stop:1 #ecf1f7);
+  color: #202024;
+  border: 1px solid #8694a6;
+}
+QMenu::item:selected { background: #2868c7; color: #ffffff; }

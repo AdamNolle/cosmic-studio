@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "profiles": [
+    {
+      "revision": "23f5d63fed2a370f3c2f54b90ec8f0896fe82105",
+      "source": "https://github.com/pop-os/libcosmic/tree/23f5d63fed2a370f3c2f54b90ec8f0896fe82105",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "0b9e2f54ba259041347a1e7856b6ed06b1de0b61c88cc49d390b9761dc2a1e61",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "cosmic-theme/src/model/theme.rs": "41e180abb8af41689b0266a7f684a4753d9f9b1cf2488016b90b4aab578a719d",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "revision": "8cb86195ec576064ac8e59e9200315714d17dc55",
+      "source": "https://github.com/pop-os/libcosmic/tree/8cb86195ec576064ac8e59e9200315714d17dc55",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "0b9e2f54ba259041347a1e7856b6ed06b1de0b61c88cc49d390b9761dc2a1e61",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "cosmic-theme/src/model/theme.rs": "9a2d7fc34b28c90c7c18227c2ac45a18b76980dc479799fe773a93768bad36f0",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "revision": "8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21",
+      "source": "https://github.com/pop-os/libcosmic/tree/8cb10bf6e24b86a7d2a9cf8c662d3e0154db1b21",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "4edd5b2be449068f7d0a5d1a4fc938790edef02e5b2b7f3d903a0199a48ecf6d",
+        "src/core.rs": "4d59e6c23e95aaaf40d00bd633a4ed0bd28831600bf73a4ca85b95e90d2ba327",
+        "src/app/cosmic.rs": "18b3b22ade956d10cf02beb7f8cd844c0cea0a7e6f542444cd0656182c19b7d0",
+        "src/theme/mod.rs": "968d4fdb257a1eab77949630aceb079b262ecd04132d3ddd5612a5007b4d26d8",
+        "Cargo.toml": "36597b0140f75cef496a0206053012de5554ca75adf02d8dd8b1f9057bc18b49",
+        "cosmic-theme/src/model/theme.rs": "17e04a24ead875f576105f257fe0c476c1bc8936c3f1556ce38e1174ba544edb",
+        "src/theme/style/iced.rs": "c49b6d1d97c7823ff82d794b4b72c0b1cfc98ecdfee8ad95f2ed10ede6cedee7"
+      }
+    },
+    {
+      "revision": "08a09e3dfa1f729d52585fcedd6e731130235363",
+      "source": "https://github.com/pop-os/libcosmic/tree/08a09e3dfa1f729d52585fcedd6e731130235363",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "d1a959e1757ffffee711e2aee09db7188f5349b372e006835f8cc754ab209751",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "cosmic-theme/src/model/theme.rs": "9a2d7fc34b28c90c7c18227c2ac45a18b76980dc479799fe773a93768bad36f0",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "revision": "d77e99fb1555e2728297677de61e23ada4d9d09b",
+      "source": "https://github.com/pop-os/libcosmic/tree/d77e99fb1555e2728297677de61e23ada4d9d09b",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "0b9e2f54ba259041347a1e7856b6ed06b1de0b61c88cc49d390b9761dc2a1e61",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "cosmic-theme/src/model/theme.rs": "41e180abb8af41689b0266a7f684a4753d9f9b1cf2488016b90b4aab578a719d",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "revision": "03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+      "source": "https://github.com/pop-os/libcosmic/tree/03c8f93b294ad239ea935f6dd3c14a15acde8d0d",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "d1a959e1757ffffee711e2aee09db7188f5349b372e006835f8cc754ab209751",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "cosmic-theme/src/model/theme.rs": "9a2d7fc34b28c90c7c18227c2ac45a18b76980dc479799fe773a93768bad36f0",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "revision": "d921602cde8248c070b493ce43b0edd388e19b9a",
+      "source": "https://github.com/pop-os/libcosmic/tree/d921602cde8248c070b493ce43b0edd388e19b9a",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "0b9e2f54ba259041347a1e7856b6ed06b1de0b61c88cc49d390b9761dc2a1e61",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "cosmic-theme/src/model/theme.rs": "9a2d7fc34b28c90c7c18227c2ac45a18b76980dc479799fe773a93768bad36f0",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "family": "Player",
+      "revision": "9cc82abd9ca5601bb0341edd12a9acbc97e77801",
+      "source": "https://github.com/pop-os/libcosmic/tree/9cc82abd9ca5601bb0341edd12a9acbc97e77801",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "8e160a5c921d1eadb6e13dff913ad9cf3dbc825c80867cb9a1b4d219e236dbf8",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "cosmic-theme/src/model/theme.rs": "41e180abb8af41689b0266a7f684a4753d9f9b1cf2488016b90b4aab578a719d",
+        "Cargo.toml": "e4a9895c50a402820c0e0671c29890f8a934ae435a78225f0d628073b80ecfed",
+        "src/theme/style/iced.rs": "9974508d035fadfd433f319cfb08aebe8090b6f748565be565af9a132d402ab8"
+      }
+    },
+    {
+      "family": "Viewer",
+      "revision": "eaa7a5a24c4359ebeaab507855388942e8984d5d",
+      "source": "https://github.com/pop-os/libcosmic/tree/eaa7a5a24c4359ebeaab507855388942e8984d5d",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "d1a959e1757ffffee711e2aee09db7188f5349b372e006835f8cc754ab209751",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "cosmic-theme/src/model/theme.rs": "9a2d7fc34b28c90c7c18227c2ac45a18b76980dc479799fe773a93768bad36f0",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      }
+    },
+    {
+      "family": "Brightness applet",
+      "revision": "dc1cf9f00cbe2902a52166492654bb9fee8a73d1",
+      "source": "https://github.com/pop-os/libcosmic/tree/dc1cf9f00cbe2902a52166492654bb9fee8a73d1",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "1fc6ca30a24bc00794cdb694567c00425e5e71d3895668631023a38f7c113be0",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "cosmic-theme/src/model/theme.rs": "41e180abb8af41689b0266a7f684a4753d9f9b1cf2488016b90b4aab578a719d",
+        "Cargo.toml": "e4a9895c50a402820c0e0671c29890f8a934ae435a78225f0d628073b80ecfed",
+        "src/theme/style/iced.rs": "12a6e98f27981931a1c40d958a01783aa2e7af52c69e8f655fbfe614cca065de"
+      }
+    },
+    {
+      "family": "Sysinfo applet",
+      "revision": "1f8d8786940cc6db59d412153c5a03f69a20375c",
+      "source": "https://github.com/pop-os/libcosmic/tree/1f8d8786940cc6db59d412153c5a03f69a20375c",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "8e160a5c921d1eadb6e13dff913ad9cf3dbc825c80867cb9a1b4d219e236dbf8",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "cosmic-theme/src/model/theme.rs": "41e180abb8af41689b0266a7f684a4753d9f9b1cf2488016b90b4aab578a719d",
+        "Cargo.toml": "e4a9895c50a402820c0e0671c29890f8a934ae435a78225f0d628073b80ecfed",
+        "src/theme/style/iced.rs": "9974508d035fadfd433f319cfb08aebe8090b6f748565be565af9a132d402ab8"
+      }
+    },
+    {
+      "family": "StatusHub applet",
+      "revision": "a401af8b1c54a8abd393b8c5b7c8809402f83850",
+      "source": "https://github.com/pop-os/libcosmic/tree/a401af8b1c54a8abd393b8c5b7c8809402f83850",
+      "refresh_paths": 5,
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "0b9e2f54ba259041347a1e7856b6ed06b1de0b61c88cc49d390b9761dc2a1e61",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "cosmic-theme/src/model/theme.rs": "41e180abb8af41689b0266a7f684a4753d9f9b1cf2488016b90b4aab578a719d",
+        "Cargo.toml": "9e395ab7e483fcb2a0d0ae08c965295c83cd96fc451fb86beee346d28badeb73",
+        "src/theme/style/iced.rs": "9974508d035fadfd433f319cfb08aebe8090b6f748565be565af9a132d402ab8"
+      }
+    },
+    {
+      "revision": "87ab8179e1bd9880239c340855ae8862034bd0e8",
+      "sha256": {
+        "src/lib.rs": "80cb836ba7b40802774d44b51d70611225641bc045f106348b144e904c7fd752",
+        "src/core.rs": "3549f374c4400b07f37de76f239d29874bdfc66d06402ca478af0621f5678415",
+        "src/app/cosmic.rs": "d1a959e1757ffffee711e2aee09db7188f5349b372e006835f8cc754ab209751",
+        "src/theme/mod.rs": "52cc878a29f25dba48fb4e57b7de5df0055c316a0bbbf2f1a77dc3fbeab99720",
+        "cosmic-theme/src/model/theme.rs": "9a2d7fc34b28c90c7c18227c2ac45a18b76980dc479799fe773a93768bad36f0",
+        "Cargo.toml": "69b616fefcd7f91fe1680041494d807045b6379edb1190cf289d71ff034b5c44",
+        "src/theme/style/iced.rs": "3a41cdb879817127543bd53e604e9de907d1a156ad175f36f344002651db5515"
+      },
+      "refresh_paths": 5,
+      "source": "https://github.com/pop-os/libcosmic/tree/87ab8179e1bd9880239c340855ae8862034bd0e8"
+    }
+  ]
+}

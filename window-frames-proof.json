@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-10",
+  "stylesheet_sha256": "dbc8210b0c25cbf8fd6e57225bd1579c89de0090132710f691df88c9b78700e1",
+  "gtk3_parser": "PASS",
+  "gtk4_parser": "PASS",
+  "native_gtk3_focused_control_pixels_unchanged": true,
+  "native_gtk3_decoration_pixels_changed": true,
+  "fresh_brave": {
+    "brave_version": "154.1.96.61",
+    "chromium_version": "154.0.8037.98",
+    "native_gtk": 3,
+    "matched_source": "https://raw.githubusercontent.com/chromium/chromium/154.0.8037.98/ui/gtk/window_frame_provider_gtk.cc",
+    "selectors_match": true,
+    "display": "separate private headless Weston desktop",
+    "profile": "disposable GTK theme profile",
+    "content": "sole local blank file",
+    "screenshot_sha256": "e43266bf477f08e53950b65b218abc8fa25f45128625ca40e0a3ccaf7cf5240b",
+    "review": "No black outer stroke on fresh GTK3 frame; ordinary soft shadow and internal controls/separator retained",
+    "owned_fixture_stopped": true
+  },
+  "existing_user_browser_cache": "NOT VERIFIED; no preference toggle or existing app/profile modification",
+  "merge_recovery_tests": "18 passed, including palette regeneration during typography and shell sync"
+}

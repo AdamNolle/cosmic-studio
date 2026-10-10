@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-10",
+  "patches": [
+    {
+      "component": "cosmic-comp-native",
+      "patch": "native/compositor/compositor-glass.patch",
+      "sha256": "6a900ee3896c6521ef01afd33bf46ed1bc360a6cebcd60365e5952c0dac8a7a8",
+      "reverse_check": "PASS"
+    },
+    {
+      "component": "cosmic-panel-src",
+      "patch": "native/panel/panel-glass.patch",
+      "sha256": "6c2dc4b58c6f30a1dafde2fa1cb7019b3ac4f13065cb01f056b59b15326f0c51",
+      "reverse_check": "PASS"
+    }
+  ],
+  "combined_runtime": "PENDING"
+}

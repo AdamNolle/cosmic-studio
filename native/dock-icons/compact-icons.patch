@@ -1,0 +1,183 @@
+--- a/cosmic-app-list/src/app.rs
++++ b/cosmic-app-list/src/app.rs
+@@ -79,12 +79,43 @@
+     dot_radius: f32,
+     bar_size: f32,
+     padding: Padding,
++    outer_padding: Padding,
++    edge_padding: Padding,
+ }
+ 
+ static DND_FAVORITES: u64 = u64::MAX;
+ 
+ impl AppletIconData {
+     fn new(applet: &Context) -> Self {
++        // Keep the approved artwork large without increasing the dock button padding.
++        // Scope this geometry to the dock; panel defaults stay native.
++        if std::env::var("COSMIC_STUDIO_COMPACT_DOCK").as_deref() == Ok("1")
++            && std::env::var("COSMIC_PANEL_NAME").as_deref() == Ok("Dock")
++        {
++            return Self {
++                icon_size: 60,
++                icon_spacing: 7.0,
++                dot_radius: 2.0,
++                bar_size: 12.0,
++                padding: match applet.anchor {
++                    PanelAnchor::Bottom => [0.0, 0.0, 1.0, 0.0],
++                    PanelAnchor::Top => [1.0, 0.0, 0.0, 0.0],
++                    PanelAnchor::Left => [0.0, 1.0, 0.0, 0.0],
++                    PanelAnchor::Right => [0.0, 0.0, 0.0, 1.0],
++                }
++                .into(),
++                // The panel's glass begins three pixels inside its surface.
++                // Paint hover/selection inside that boundary, retaining the full cell size.
++                outer_padding: 3.0.into(),
++                edge_padding: match applet.anchor {
++                    PanelAnchor::Bottom => [3.0, 3.0, 0.0, 3.0],
++                    PanelAnchor::Top => [0.0, 3.0, 3.0, 3.0],
++                    PanelAnchor::Left => [3.0, 3.0, 3.0, 0.0],
++                    PanelAnchor::Right => [3.0, 0.0, 3.0, 3.0],
++                }
++                .into(),
++            };
++        }
+         let icon_size = applet.suggested_size(false).0;
+         let (major_padding, cross_padding) = applet.suggested_padding(false);
+         let (h_padding, v_padding) = if applet.is_horizontal() {
+@@ -142,6 +173,8 @@
+             dot_radius,
+             bar_size,
+             padding: padding.into(),
++            outer_padding: 0.0.into(),
++            edge_padding: 0.0.into(),
+         }
+     }
+ }
+@@ -313,6 +346,22 @@
+             icon_button.into()
+         };
+ 
++        // The bin has three more transparent pixels at each side than the
++        // squircle artwork. Remove that much external space so visible gaps match.
++        let outer_padding = if applet.is_horizontal()
++            && std::env::var("COSMIC_STUDIO_COMPACT_DOCK").as_deref() == Ok("1")
++            && std::env::var("COSMIC_PANEL_NAME").as_deref() == Ok("Dock")
++            && matches!(desktop_info.id(), "local-trash" | "local-trash.desktop")
++        {
++            Padding {
++                left: 0.0,
++                right: 0.0,
++                ..app_icon.outer_padding
++            }
++        } else {
++            app_icon.outer_padding
++        };
++        let icon_button: Element<_> = container(icon_button).padding(outer_padding).into();
+         let path = desktop_info.path.clone();
+         let icon_button = if dnd_source_enabled && interaction_enabled {
+             DndSource::with_id(icon_button, cosmic::widget::Id::new("asdfasdfadfs"))
+@@ -727,9 +776,25 @@
+         // subtract the divider width
+         max_major_axis_len -= 1;
+         let applet_icon = AppletIconData::new(&self.core.applet);
++        let max_major_axis_len =
++            max_major_axis_len.saturating_sub(if self.core.applet.is_horizontal() {
++                applet_icon.edge_padding.left + applet_icon.edge_padding.right
++            } else {
++                applet_icon.edge_padding.top + applet_icon.edge_padding.bottom
++            } as u32);
+ 
+-        let button_total_size = self.core.applet.suggested_size(true).0
+-            + self.core.applet.suggested_padding(true).0 * 2
++        let button_total_size = applet_icon.icon_size
++            + if self.core.applet.is_horizontal() {
++                (applet_icon.padding.left
++                    + applet_icon.padding.right
++                    + applet_icon.outer_padding.left
++                    + applet_icon.outer_padding.right) as u16
++            } else {
++                (applet_icon.padding.top
++                    + applet_icon.padding.bottom
++                    + applet_icon.outer_padding.top
++                    + applet_icon.outer_padding.bottom) as u16
++            }
+             + applet_icon.icon_spacing as u16;
+ 
+         let favorite_active_cnt = self
+@@ -1969,16 +2034,28 @@
+ 
+         let window_size = self.core.applet.suggested_bounds.as_ref();
+         let max_num = if self.core.applet.is_horizontal() {
+-            let suggested_width = self.core.applet.suggested_size(false).0
+-                + self.core.applet.suggested_padding(false).0 * 2;
++            let suggested_width = app_icon.icon_size
++                + (app_icon.padding.left
++                    + app_icon.padding.right
++                    + app_icon.outer_padding.left
++                    + app_icon.outer_padding.right) as u16
++                + app_icon.icon_spacing as u16;
+             window_size
+-                .map(|w| w.width)
++                .map(|w| {
++                    (w.width - app_icon.edge_padding.left - app_icon.edge_padding.right).max(0.0)
++                })
+                 .map_or(u32::MAX, |b| (b / suggested_width as f32) as u32) as usize
+         } else {
+-            let suggested_height = self.core.applet.suggested_size(false).1
+-                + self.core.applet.suggested_padding(false).0 * 2;
++            let suggested_height = app_icon.icon_size
++                + (app_icon.padding.top
++                    + app_icon.padding.bottom
++                    + app_icon.outer_padding.top
++                    + app_icon.outer_padding.bottom) as u16
++                + app_icon.icon_spacing as u16;
+             window_size
+-                .map(|w| w.height)
++                .map(|w| {
++                    (w.height - app_icon.edge_padding.top - app_icon.edge_padding.bottom).max(0.0)
++                })
+                 .map_or(u32::MAX, |b| (b / suggested_height as f32) as u32) as usize
+         }
+         .max(4);
+@@ -2060,6 +2137,7 @@
+             let suggested_size = self.core.applet.suggested_size(false);
+             content = content.width(suggested_size.0).height(suggested_size.1);
+         }
++        content = content.padding(app_icon.edge_padding);
+ 
+         let mut limits = Limits::NONE.min_width(1.).min_height(1.);
+ 
+@@ -2127,6 +2205,33 @@
+                             .width(Length::Fill)
+                     }
+ 
++                    if matches!(desktop_info.id(), "local-trash" | "local-trash.desktop") {
++                        if let Some(exec) = desktop_info.action_entry("StudioEmptyTrash", "Exec") {
++                            let content =
++                                menu::menu_column::MenuColumn::with_capacity(1).push(
++                                    menu_button(text::body("Empty Trash Can"))
++                                        .on_press(Message::Exec(exec.into(), None, false)),
++                                );
++                            return self
++                                .core
++                                .applet
++                                .popup_container(
++                                    container(content)
++                                        .padding(1)
++                                        .height(Length::Shrink)
++                                        .width(Length::Fill),
++                                )
++                                .limits(
++                                    Limits::NONE
++                                        .min_width(1.)
++                                        .min_height(1.)
++                                        .max_width(300.)
++                                        .max_height(1000.),
++                                )
++                                .into();
++                        }
++                    }
++
+                     let mut content =
+                         menu::menu_column::MenuColumn::with_capacity(4).align_x(Alignment::Center);
+ 

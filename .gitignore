@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+/backups/
+/installation.json
+/verification.json
+/typography-verification.json
+/latest-typography-backup.txt
+/shell-verification.json
+/latest-shell-backup.txt
+/window-frames-verification.json
+/latest-window-frames-backup.txt
+/latest-backup.txt
+/original-backup.txt
+/original-*.ron
+.DS_Store
+/work/

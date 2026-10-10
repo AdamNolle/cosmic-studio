@@ -1,0 +1,33 @@
+{
+  "schema": 2,
+  "profile_count": 19,
+  "source_role_applied": {
+    "material_inventory_size": 19,
+    "font_ready_copies_applied": 16,
+    "pristine_unembedded_input_copies_preserved": 3,
+    "additional_native_libraries": [
+      "compd922",
+      "greeter87ab"
+    ],
+    "shell_clients_applied": [
+      "cosmic-launcher",
+      "cosmic-app-library",
+      "cosmic-workspaces"
+    ],
+    "calendar_role": "prepared, authoritative82e source unchanged pending build owner"
+  },
+  "source_preimage_reconstruction": "PASS; each applied role reverses to strict original full-file hash",
+  "reverse_patch_apply_checks": "PASS",
+  "fresh_shell_builder_replay": "PASS;2SDK+3client exact typography/roles/.95neutral material bytes;0Cargo",
+  "builder_schema": 3,
+  "portable_builder_tests": 18,
+  "setup_font_tests": 24,
+  "native_typed_compile": "pending agreed shared Cargo queue; no new live-font coverage claimed",
+  "preserved": [
+    "all existing font point sizes",
+    "body/caption/input/command fonts",
+    "monospace/document/glyph fonts",
+    "authentication and keyboard input",
+    "current live apps"
+  ]
+}

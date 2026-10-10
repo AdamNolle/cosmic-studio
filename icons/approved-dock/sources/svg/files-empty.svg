@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<title>Files — rounded blue folder, shorter tab, empty</title>
+<desc>Approved rounded folder body with the raised tab shortened by 16 pixels. Transparent background.</desc>
+<defs>
+ <linearGradient id="back" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4597e8" /><stop offset=".52" stop-color="#256bbb" /><stop offset="1" stop-color="#1753a3" /></linearGradient>
+ <linearGradient id="face" x1="0" y1="0" x2=".12" y2="1"><stop stop-color="#70b9ff" /><stop offset=".38" stop-color="#439df3" /><stop offset="1" stop-color="#2475d5" /></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#d4ecff" stop-opacity=".54" /><stop offset=".3" stop-color="#78b3ed" stop-opacity=".18" /><stop offset="1" stop-color="#164f91" stop-opacity=".5" /></linearGradient>
+ <linearGradient id="tabLight" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#c5e4ff" stop-opacity=".36" /><stop offset="1" stop-color="#c5e4ff" stop-opacity=".04" /></linearGradient>
+ <filter id="contact" x="-.05" y="-.05" width="1.1" height="1.13" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="2.8" result="blur" /><feOffset in="blur" dy="3" result="offset" /><feFlood flood-color="#102f58" flood-opacity=".18" result="color" /><feComposite in="color" in2="offset" operator="in" result="shadow" /><feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+</defs>
+<g id="folder" filter="url(#contact)">
+ <path id="COSMIC-folder-tab" d="M 104.0,345.0 C 104.0,229.0 104.0,175.18867924528303 139.0,148.0188679245283 C 174.0,120.0 228.0,120.0 329.0,120.0 L 371.0,120.0 C 405.0,120.0 421.0,125.94339622641509 448.0,145.47169811320754 L 507.0,190.47169811320754 C 522.0,203.20754716981133 540.0,210.0 569.0,210.0 L 697.0,210.0 C 817.0,210.0 870.0,217.0 903.0,260.0 C 924.0,292.0 924.0,340.0 924.0,423.0 L 924.0,697.0 C 924.0,820.0 915.0,864.0 881.0,895.0 C 848.0,923.0 792.0,924.0 697.0,924.0 L 331.0,924.0 C 208.0,924.0 151.0,916.0 124.0,870.0 C 104.0,834.0 104.0,779.0 104.0,697.0 L 104.0,345.0" fill="url(#back)" stroke="#2360a8" stroke-opacity=".3" stroke-width="1.4" />
+ <path id="tab-edge" d="M 110.0,341.0 C 110.0,230.0 110.0,177.73584905660377 144.0,151.41509433962264 C 178.0,125.09433962264151 230.0,125.09433962264151 330.0,125.09433962264151 L 371.0,125.09433962264151 C 403.0,125.09433962264151 417.0,131.03773584905662 444.0,150.56603773584905 L 503.0,195.56603773584905 C 520.0,209.1509433962264 539.0,216.0 569.0,216.0 L 697.0,216.0 C 815.0,216.0 867.0,223.0 898.0,264.0" fill="none" stroke="url(#tabLight)" stroke-width="2.1" stroke-linecap="round" />
+ <path id="COSMIC-folder-face" d="M330 266H698C823 266 878 270 906 309C924 335 924 377 924 438V696C924 806 921 856 887 890C855 923 805 924 697 924H331C223 924 169 923 137 890C105 856 104 806 104 696V438C104 377 104 335 122 309C150 270 205 266 330 266Z" fill="url(#face)" stroke="url(#edge)" stroke-width="2.2" />
+ <path id="front-lip" d="M116 345C120 281 179 272 330 272H698C849 272 908 281 912 345" fill="none" stroke="#dceeff" stroke-opacity=".43" stroke-width="2.4" stroke-linecap="round" />
+ <path id="bottom-seam" d="M116 776C121 883 174 918 331 918H697C852 918 907 883 912 776" fill="none" stroke="#1c58a1" stroke-opacity=".24" stroke-width="2" stroke-linecap="round" />
+</g>
+</svg>

@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+# Rebuilt locally from source plus the user's installed application marks.
+/Studio Objects/
+/masters/
+/preview.svg
+/preview.png
+/brand-sources.local.json
+/launcher-overrides.local.json
+/inventory.local.json
+/dock-review.png
+/blender/glass-renders/
+/blender/*.blend*
+/blender/*.png
+/blender/sources/
+
+/blender/review.svg
