@@ -83,11 +83,13 @@ mutex releases, without synchronous element re-entry; retain and independently
 revalidate deferred original envelopes. Tasks remain contextless/untrusted, and
 TaskInbox readiness is not an executor/FIFO barrier.
 
-Source inspection also confirms `space/overflow.rs::toggle_overflow_popup` closes
-popups and may hide workspaces/create a surface before validating the requested
-overflow element. A keyboard caller must perform full admission/target/parent/
-popup checks **before invoking this effectful routine**, not rely on its eventual
-missing-element error as rollback. Preserve original popup-root/leaf/grab and
+Historical original source inspection confirmed `toggle_overflow_popup` closed
+popups and hid Workspaces/created a surface before missing-membership refusal.
+Iteration36 [actual native preflight](overflow-preflight-audit.md) now checks
+membership, mapped location and live parent before opening effects, preserving
+dismissal recovery. This does not validate keyboard authority or undo later
+protocol failures. A keyboard caller still needs full live admission/target/press/
+popup checks **before invoking this effectful routine**. Preserve original popup-root/leaf/grab and
 compositor session-lock/exclusive-layer rules; do not retrofit authority from
 first-seat pointer history or latest-event cache. Real desktop keyboard-only
 entry/recovery and accessible hiding remain acceptance gates.

@@ -1,0 +1,9 @@
+The compressed fixture retains byte-exact original cosmic-panel space/overflow.rs
+from https://github.com/pop-os/cosmic-panel at
+b5cc19e351b82eed999097ced1ff267d27bf8e7a.
+Original Copyright System76 contributors. GPL-3.0-only; full upstream LICENSE.md
+is retained in pinned-keyboard-focus.LICENSE. Repository MIT does not relicense
+this fixture or the authored GPL preflight generator/tests.
+
+The candidate-only transform changes native opening precondition/effect ordering,
+not keyboard authority, original serial/grab policy or dependency features.

@@ -1,4 +1,4 @@
-# Manual status hiding: exact native boundary (iterations23–35)
+# Manual status hiding: exact native boundary (iterations23–36)
 
 **Not implemented, installed, or keyboard/runtime accepted.** The existing
 native overflow is the hosting seam; it is not an already-accessible manual
@@ -10,7 +10,25 @@ SDK `23f5d63fed2a370f3c2f54b90ec8f0896fe82105`. Original source/lock/license
 copies and exact file hashes are preserved outside the checkout under
 `iteration-23-panel-contract/` in the owned VM evidence directory.
 
-## Iteration35 callback/press pairing is not activation
+## Iteration36 opening preflight is not keyboard admission
+
+Actual native popup opening now checks membership, mapped anchor location and
+live parent before popup dismissal/Workspaces hiding/surface creation. Existing
+force-hide/already-open recovery remains independent of opening prerequisites.
+Original client serial/grab, geometry clamps/protocol tail and all-keyboard
+isolation preserved. Fresh caller check/release/existing app77, source265/262/3,
+host61/prepared19 pass; six new source/Git cases, not native Wayland runtime tests.
+Read-only reviewer: no issues, OK with notes for ordering only; recovery BLOCK.
+Full-build headroom is now below unchanged >20GiB volume guard. No cleanup or
+storage change. See [preflight audit](overflow-preflight-audit.md).
+
+A future keyboard caller still needs independent live keyboard/seat/admitted
+focus/target/modifier/order/per-press/grab checks and consume-once lifecycle,
+with deferred envelope/effect revalidation outside locks. Later protocol errors
+are not rollback; original pointer Program is never keyboard authority.
+Hiding/config/deployment remain disabled and essential controls visible.
+
+## Historical iteration35 callback/press pairing is not activation
 
 Actual client callbacks now retain private immutable original event/press pairs.
 Fresh press only, repeats retain original press without fresh activation, releases

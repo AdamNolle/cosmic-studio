@@ -107,6 +107,10 @@ def prepared_inputs(component):
                 (PACKAGE / 'native/panel/prepare_client_keyboard_delivery.py').read_bytes()).hexdigest(),
             'client_keyboard_delivery_module_sha256': hashlib.sha256(
                 (PACKAGE / 'native/panel/client_keyboard_delivery.rs').read_bytes()).hexdigest(),
+            'overflow_preflight_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_overflow_preflight.py').read_bytes()).hexdigest(),
+            'overflow_preflight_fixture_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/pinned-overflow-preflight.json.gz').read_bytes()).hexdigest(),
         } if component == 'cosmic-panel' else {}),
     }
 
@@ -135,7 +139,8 @@ def library_inputs(expected):
                            'iced_keyboard_dispatch_fixture_sha256',
                            'iced_keyboard_route_generator_sha256', 'iced_keyboard_route_module_sha256',
                            'overflow_keyboard_isolation_generator_sha256', 'overflow_keyboard_isolation_module_sha256',
-                           'client_keyboard_delivery_generator_sha256', 'client_keyboard_delivery_module_sha256')}
+                           'client_keyboard_delivery_generator_sha256', 'client_keyboard_delivery_module_sha256',
+                           'overflow_preflight_generator_sha256', 'overflow_preflight_fixture_sha256')}
 
 
 def validate_prepared(marker, expected):
@@ -208,6 +213,8 @@ def build(component, work, jobs):
                  '--output', work / 'overflow-keyboard-isolation.patch', '--apply'])
             run(['python3', PACKAGE / 'native/panel/prepare_client_keyboard_delivery.py', source,
                  '--output', work / 'client-keyboard-delivery.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_overflow_preflight.py', source,
+                 '--output', work / 'overflow-preflight.patch', '--apply'])
         patch = PACKAGE / 'native' / patch_relative
         run(['git', 'apply', '--check', patch], source)
         run(['git', 'apply', patch], source)

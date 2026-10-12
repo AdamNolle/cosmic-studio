@@ -5,7 +5,29 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
-## Iteration35 native callback/press pairing
+## Iteration36 actual native overflow opening preflight
+
+The existing popup routine now resolves overflow membership, mapped anchor
+location and a live parent proxy **before** dismissing popups, hiding Workspaces
+or creating protocol surfaces. Force-hide/already-open recovery remains independent
+of a surviving opening anchor. Original serial/grab/geometry clamps/protocol tail,
+pointer path and all-keyboard isolation remain. This is not keyboard admission or
+transactional rollback of later protocol errors.
+
+Fresh locked check/release/existing app77, Linux265/262/3 and host panel61/prepared19
+pass; six new source/Git regressions, **no new native popup runtime tests**.
+Original539 graph/features[]/licenses/postimages/compiler artifacts/ELFs retained.
+Build volume now ~20.0GB/18.6GiB: further full builds blocked by unchanged >20GiB
+guard; no deletion/storage change. Read-only verification remains supported.
+No keyboard routing/activation/recovery/hiding/deployment or final desktop pass.
+
+See [native preflight audit](overflow-preflight-audit.md).
+Current bounded rerun (fresh Windows shell/checkout cwd/no overrides):
+`python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-36-review-evidence.py'`.
+Compilation/unit/source evidence only; preserve36/prior roots/targets/caches/SSH/
+volume/auth/recovery. Historical reviewers may correctly refuse current source drift.
+
+## Historical iteration35 native callback/press pairing
 
 Actual ClientSeat callbacks now retain immutable original event/per-press pairing:
 fresh press only, repeat observation without fresh activation, release witness

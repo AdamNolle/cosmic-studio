@@ -15,7 +15,22 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
-## Iteration35 native callback/press pairing milestone
+## Iteration36 native popup preflight milestone
+
+- [x] Move actual opening membership/mapped-location/live-parent checks ahead of
+  popup dismissal, Workspaces hiding and surface allocation; keep dismissal recovery.
+- [x] Guard exact original/prior postimages/Git/patch/fingerprints; preserve original
+  serial/grab/geometry clamps/protocol tail, pointer path and inert keyboard isolation.
+- [x] Fresh locked caller check/release/existing native77 and Linux265/262/3 pass;
+  six new source/Git regressions (not native failure-injection/runtime tests).
+- [ ] Validate refusal/no-side-effect behavior and successful recovery in a real
+  owned desktop; preflight is not live keyboard admission or transactional rollback.
+- [ ] Resolve full-build headroom with explicit operator storage authority; ~18.6GiB
+  free blocks unchanged >20GiB preflight. Preserve caches/evidence; no deletion.
+- [ ] Implement original-envelope consume-once keyboard lifecycle/live caller and
+  dedicated keyboard-only dispatcher, then entry/traversal/restoration/recovery.
+
+## Historical iteration35 native callback/press pairing milestone
 
 - [x] Pair actual callback event frames with original press lifetime: fresh-only
   press, repeat observation, release snapshot before retirement and lifecycle clears.
