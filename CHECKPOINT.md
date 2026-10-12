@@ -2,7 +2,46 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
-## Iteration37 explicitly approved additional build storage
+## Iteration38 actual synchronous inert callback delivery
+
+Original client Press/Release callbacks now invoke the converter/wrapper path
+**after** Smithay input returns; Repeat after capture, without a server repeat
+down. Actual keyboard/seat/original-frame, unique same-seat active live outer
+layer, ungrabbed overflow focus and mapped positive-size target checks precede
+the wrapper mutex. Its validator performs no Smithay/geometry/widget queries.
+Every output is discarded/no task/ordinary Program/pointer popup fallback.
+The original SDK keyboard isolation remains mandatory and inert.
+
+Fresh corrected locked check/release/app82 pass (prior77 + five synthetic actual
+OverflowButton wrapper/converter cases; standalone context8 included, not90).
+Linux272 discovered/269 passed/3 explicit missing-Blender-export skips, nine
+suites+compileall0; host panel66/prepared19 pass. Original539 foreign entries,
+pins, SDK features[], licenses, postimages, actual compiler artifacts/ELFs and
+complete app/SDK inventories retained. **No live Wayland callback/recovery or
+desktop acceptance.** Source wiring is no longer absent; activation, consume-once
+client press/grab/order, traversal/restoration/accessibility/hiding remain open.
+
+First fresh check/release0 and testcompile101/E0283 are preserved: only a test
+constructor's unnecessary `.into()` was removed in a NEW tree. Both3003-input
+archives, full guest trees/targets and45 scoped first artifacts remain. First
+bounded verifier also refused an old log filename; separate corrected verifier,
+first scripts/logs and original results retained. Read-only reviewer found no
+issues: OK with notes for inert routing only, recovery BLOCK; no build attestation.
+
+Both38 drivers explicitly use the approved new256GiB mount and exact provenance,
+unchanged >20GiB-volume/>10GiB-root/no-compiler/override guards. Read-only reruns
+record budgets without compiler launch; old128GiB still refuses full-build
+headroom. New volume ~238GiB free; no deletion/resize/format/deployment.
+
+Bounded rerun, **not final desktop verification** (fresh Windows shell, cwd
+`C:/Users/adamm/Desktop/Code/cosmic-studio`, no compiler/library/profile overrides):
+`python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-38-review-evidence-corrected.py'`.
+Keep both volumes, first/fixed38 and prior sources/targets/caches/frozen artifacts/
+archives/logs/strict SSH/auth/config/cold recovery. Both runtime/final flags false.
+
+See [caller audit](native/panel/client-overflow-route-audit.md).
+
+## Historical iteration37 explicitly approved additional build storage
 
 The operator chose a NEW dynamic256GiB build-only disk, preserving both existing
 disks/caches/evidence. Authenticated ordinary shutdown and cold recovery snapshot

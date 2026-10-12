@@ -15,7 +15,23 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
-## Iteration37 build storage milestone
+## Iteration38 actual inert callback delivery milestone
+
+- [x] Wire original Press/Release after Smithay input, Repeat after capture,
+  explicit original converter and exact inert overflow wrapper, no ordinary
+  Program/pointer dispatcher or deferred task authority.
+- [x] Check actual originating device/frame/same-seat live outer/no-grab/mapped
+  target before wrapper mutex; no recursive keyboard/geometry/element validation.
+- [x] Fresh newvolume locked caller check/release/app82 and Linux272/269/3 pass;
+  five new synthetic actual-wrapper cases, not live Wayland recovery. Source66.
+- [x] Preserve first E0283 compile failure/test-only correction and separate
+  verifier-logname refusal; original539 graph/pins/features/licenses/inventories.
+- [ ] Establish consume-once keyboard activation/grab/order and dedicated effect
+  dispatcher after unlock; inert routing is not activation or recovery authority.
+- [ ] Verify actual keyboard-only entry/traversal/restoration/accessibility and
+  recovery before hiding/config migration/deployment/final desktop acceptance.
+
+## Historical iteration37 build storage milestone
 
 - [x] Obtain explicit operator authority for NEW separate dynamic256GiB VDI;
   normal shutdown/cold snapshot, preserve original160GiB + old128GiB/caches/evidence.
@@ -23,8 +39,9 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
   provenance-remount older filesystem only, fstab/packages unchanged.
 - [x] Preserve first preflight refusal, root/external receipts and source regressions;
   hostVM48/targetedLinux5/existing native77-source61 reviews pass, no new compile.
-- [ ] Use new mount with original >20GiB-volume/>10GiB-root/no-builder/override
-  guards for future fresh trees; preserve all old trees instead of moving/deleting.
+- [x] Use new mount for both38 fresh trees with unchanged >20GiB-volume/>10GiB-root/
+  no-builder/override guards; preserve old trees. Future drivers still require
+  explicit new mount/UUID/serial/root provenance, never generic bypass/relocation.
 - [ ] Deliver live keyboard activation/admission/traversal/restoration/recovery,
   package alignment and final combined desktop acceptance; storage is not acceptance.
 

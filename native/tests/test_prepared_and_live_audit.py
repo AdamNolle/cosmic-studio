@@ -58,6 +58,8 @@ class PreparedBuildTests(unittest.TestCase):
                            (self.root/'native/panel/client_keyboard_delivery.rs', 'client delivery module\n'),
                            (self.root/'native/panel/prepare_overflow_preflight.py', 'overflow preflight generator\n'),
                            (self.root/'native/panel/pinned-overflow-preflight.json.gz', 'overflow preflight fixture\n'),
+                            (self.root/'native/panel/prepare_client_overflow_route.py', 'client overflow route generator\n'),
+                            (self.root/'native/panel/client_overflow_route.rs', 'client overflow route module\n'),
                            (self.root/'native/typography/lock_guard.py', 'dependency guard\n'),
                            (self.root/'native/typography/embed_fonts.py', 'font embedding generator\n'),
                            (self.root/'native/typography/prepare_display_roles.py', 'semantic font roles\n'),
@@ -153,7 +155,8 @@ class PreparedBuildTests(unittest.TestCase):
         for name in ('prepare_iced_keyboard_route.py', 'iced_keyboard_route.rs',
                      'prepare_overflow_keyboard_isolation.py', 'overflow_keyboard_isolation.rs',
                      'prepare_client_keyboard_delivery.py', 'client_keyboard_delivery.rs',
-                     'prepare_overflow_preflight.py', 'pinned-overflow-preflight.json.gz'):
+                     'prepare_overflow_preflight.py', 'pinned-overflow-preflight.json.gz',
+                     'prepare_client_overflow_route.py', 'client_overflow_route.rs'):
             with self.subTest(name=name):
                 path=self.root/'native/panel'/name
                 before=path.read_bytes()

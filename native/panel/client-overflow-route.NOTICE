@@ -1,0 +1,13 @@
+COSMIC Studio authored synchronous inert overflow callback route.
+SPDX-License-Identifier: GPL-3.0-only
+
+The new module/generator/tests are authored GPL code, not a replacement SDK.
+Original GPL panel b5cc19e351b82eed999097ced1ff267d27bf8e7a callback/wrapper
+sources come from the already authenticated keyboard-focus/input fixtures.
+The complete original GPL license is pinned-keyboard-focus.LICENSE.
+Original seat.rs MPL-2.0 text/notice, Iced MIT tables and borrowed-Winit
+provenance remain unchanged. SDK23f5d63, Iced87e1787, Smithay0ff00983 and
+all original foreign dependencies/features/locks remain unchanged.
+
+This routes original client keyboard callbacks to the inert overflow view.
+It grants no activation, popup grab, deferred authority or manual hiding.
