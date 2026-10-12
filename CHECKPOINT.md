@@ -2,6 +2,25 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration41 actual isolated combined startup (partial only)
+
+One exact repaired compositor + compiled39 empty native panel private run
+observed real layer-surface keyboard enter, subsequent zero modifier masks and
+configure/acknowledgements. No panel buffer attach/frame callback completion,
+capture, key press, popup or recovery was observed. Authenticated owned peers,
+fresh HOME/XDG/private bus/absent system bus,30s/64MiB/core0/owned cleanup;
+ELFs/full panel-SDK sources unchanged. No stock attachment/deployment or hiding.
+
+Immediate stock config/state fingerprints matched after the diagnostic. A later
+strict verifier refused a changed state fingerprint; complete failure retained,
+cause unknown/no state repair. New read-only checker distinguishes immediate
+from later equality without certifying stability or runtime recovery. All100
+archive payload hashes/modes/UID/GID retained. No native build/new unit cases;
+app93/Linux277/274/3 remain prior coverage. See
+[startup observation](native/panel/combined-startup-observation.md).
+Both runtime/final flags remain false; next populated native applet/overflow
+and real keyboard recovery/accessibility still require new bounded evidence.
+
 ## Iteration40 source reachability audit (no new runtime)
 
 Exact original compositor focus/input and Wayland keyboard contracts now fill

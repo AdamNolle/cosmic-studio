@@ -5,6 +5,16 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration41 isolated combined startup, not recovery
+
+The [startup observation](combined-startup-observation.md) records one exact
+repaired compositor + compiled39 **empty native panel** private run. Actual
+layer keyboard enter/zero modifiers/configure/acknowledgements were observed;
+no buffer attach/callback completion/capture/key press/popup/recovery acceptance.
+Owned cleanup and immediate stock config/state equality were verified. A later
+state fingerprint mismatch is retained as unknown, not repaired or waived into
+stability acceptance. No new build/test coverage, deployment or hiding.
+
 ## Iteration40 source reachability, not live recovery
 
 The [reachability audit](recovery-reachability.md) traces exact upstream popup

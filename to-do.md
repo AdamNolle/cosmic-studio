@@ -15,6 +15,20 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration41 live startup disposition
+
+- [x] Authenticate original native config/startup/spawn contracts and run exact
+  repaired compositor + compiled39 empty panel once in a private owned runtime.
+- [x] Preserve actual layer enter/zero modifiers/configure/acknowledgements,
+  no observed attach/frame callback completion/capture/key press/popup/recovery.
+- [x] Verify owned cleanup/unchanged ELFs/full sources and immediate config/state
+  equality; retain later state mismatch/first strict refusal with cause unknown.
+- [ ] Authenticate a bounded native applet's launch/input requirements, then NEW
+  populated native rendering/overflow diagnostic without installed applet queue,
+  stock attachment, synthetic focus/client serials or permission expansion.
+- [ ] Prove real popup admission/input/consume/teardown/restoration and keyboard-
+  only entry/accessibility; empty layer startup cannot authorize hiding.
+
 ## Iteration40 reachability disposition
 
 - [x] Authenticate nine missing original compositor focus/input/Wayland keyboard

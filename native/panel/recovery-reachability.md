@@ -56,6 +56,17 @@ Parent source inspection finds a conditional feasible path, not a proven live
 path or a reason to change keyboard admission. A new read-only review timed out
 before a final verdict; its partial supervisor observations are not approval.
 
+## Iteration41 layer-only live observation
+
+A NEW [combined startup diagnostic](combined-startup-observation.md) now records
+actual empty-panel **layer** enter and subsequent zero modifiers/configure/acks
+in the isolated exact candidate compositor. No popup/key press/internal consume/
+teardown/restoration, panel buffer attach/callback completion or pixels were
+observed. This narrows startup feasibility only, not recovery reachability.
+Immediate stock config/state equality was preserved; later state differs with
+unknown cause and is not accepted as stability. Required popup gates below
+remain absent; opening/hiding/deployment remain disabled.
+
 ## Required owned live evidence — still absent
 
 Use a NEW isolated candidate runtime, never attach to stock/greeter/session
