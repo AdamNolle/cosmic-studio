@@ -2,6 +2,24 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration40 source reachability audit (no new runtime)
+
+Exact original compositor focus/input and Wayland keyboard contracts now fill
+nine missing source inputs. Upstream active PopupKind maps to the popup surface,
+not its layer root; the panel separately sets its embedded focus to None on that
+real popup enter. Its default keyboard input does not invent focus. These are
+conditionally compatible with dedicated39 recovery, **not live admission or
+recovery proof**. Original compositor-owned Escape cancellation does not include
+PopupKeyboardGrab; shortcut/a11y interception remains a separate delivery gate.
+
+Parent-owned [reachability audit](native/panel/recovery-reachability.md) records
+real enter/modifiers/key/consume/dismiss/destruction/restoration evidence still
+required. A new read-only reviewer timed out before a final verdict; partial
+supervisor findings are retained, not approval. No implementation/native build,
+renderer trial, stock attachment or package/storage/security change. Existing39
+bounded eight-command review passes again; app93/source71 results are repeats,
+not new test coverage. Both runtime/final flags remain false.
+
 ## Iteration39 recovery-only callback and native popup teardown
 
 The actual outside-Smithay-input route now tries a dedicated fresh Escape

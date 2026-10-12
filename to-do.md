@@ -15,6 +15,20 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration40 reachability disposition
+
+- [x] Authenticate nine missing original compositor focus/input/Wayland keyboard
+  contracts; distinguish upstream popup focus from panel embedded None focus.
+- [x] Record conditional source-feasible recovery chain and owned live evidence
+  checklist in [reachability audit](native/panel/recovery-reachability.md).
+- [x] Preserve timed-out read-only review without claiming final approval;
+  repeat existing39 bounded checks, no implementation/build/runtime changes.
+- [ ] Establish actual popup admission/enter/modifiers/fresh Escape/consume/effect,
+  protocol teardown and same-seat anchor restoration in a NEW isolated runtime.
+  Pointer-opened recovery diagnostics cannot certify keyboard-only entry.
+- [ ] Retain opening/hiding disabled until keyboard-only entry/traversal/
+  accessibility/essential-control recovery and combined desktop gates pass.
+
 ## Iteration39 recovery-only candidate milestone
 
 - [x] Audit actual request/commit/serial/grab/focus contracts; prefer recovery-first,

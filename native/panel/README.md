@@ -5,6 +5,15 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration40 source reachability, not live recovery
+
+The [reachability audit](recovery-reachability.md) traces exact upstream popup
+focus separately from the panel's embedded None focus and records the missing
+owned live admission/input/consume/teardown/restoration evidence. The compiled39
+candidate is unchanged. Parent source inspection is conditional feasibility,
+not runtime proof; the new read-only review timed out without a final verdict.
+Opening/hiding remain disabled. No new build or runtime trial is claimed.
+
 ## Iteration39 recovery-only callback and native popup teardown
 
 The actual outside-Smithay-input route now tries a dedicated fresh Escape
