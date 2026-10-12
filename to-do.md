@@ -15,7 +15,25 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
-## Iteration34 overflow isolation milestone
+## Iteration35 native callback/press pairing milestone
+
+- [x] Pair actual callback event frames with original press lifetime: fresh-only
+  press, repeat observation, release snapshot before retirement and lifecycle clears.
+- [x] Preserve private/redacted snapshots and original forwarding/pins/graph/licenses;
+  exact fresh-tree generator and panel-only fingerprint/refusal guards.
+- [x] Retain interrupted source55-only report; NEW same-archive native caller
+  check/release/app77 and Linux259/256/3 pass, eight new pairing cases only.
+- [x] Parent-reviewed fresh read-only reviewer: no issues for bookkeeping only;
+  native recovery BLOCK. No reviewer build attestation.
+- [ ] Implement consume-once Enter/Space/release/Escape/Tab lifecycle and dedicated
+  keyboard caller/dispatcher with live keyboard/seat/target/grab/order validation
+  outside Smithay locks. Freshness alone is not activation authority.
+- [ ] Preflight native popup effects before invocation; retain original envelope
+  through independently revalidated deferred work after element mutex release.
+- [ ] Verify actual keyboard-only traversal/restoration/recovery/accessibility
+  before hiding, config migration or deployment. All keyboard input remains inert.
+
+## Historical iteration34 overflow isolation milestone
 
 - [x] Isolate all overflow keyboard input before SDK pointer state processing,
   with exact prior-postimage/Git/new-module/patch/panel-only fingerprint guards.

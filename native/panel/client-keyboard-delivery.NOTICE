@@ -1,0 +1,18 @@
+COSMIC Studio native callback/press pairing candidate
+
+client_keyboard_delivery.rs and prepare_client_keyboard_delivery.py are authored
+GPL-3.0-only additions. Existing original panel GPL fixture/license and original
+client/handlers/seat.rs MPL-2.0 header/full official license remain unchanged.
+Original Iced forward tables remain MIT with borrowed-Winit provenance.
+Repository MIT does not relicense these modules or original foreign sources.
+
+Exact panel b5cc19e351b82eed999097ced1ff267d27bf8e7a, SDK
+23f5d63fed2a370f3c2f54b90ec8f0896fe82105, Iced
+87e1787fbb9b924576e6f6ea2ef2f45d0729e63d and panel Smithay
+0ff00983b6007257a7a161a4fe8b14a778e2ac8f are preserved.
+
+Native callbacks now pair original event frames with original press lifetimes.
+This is NOT live routing, admission, queue ordering, activation, popup grants,
+keyboard recovery, accessibility, manual hiding or desktop runtime acceptance.
+Overflow keyboard isolation remains fail-closed. Release witnesses are retired;
+repeat and duplicate press callbacks cannot grant fresh press freshness.

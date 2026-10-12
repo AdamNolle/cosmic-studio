@@ -1,4 +1,4 @@
-# Manual status hiding: exact native boundary (iterations23–34)
+# Manual status hiding: exact native boundary (iterations23–35)
 
 **Not implemented, installed, or keyboard/runtime accepted.** The existing
 native overflow is the hosting seam; it is not an already-accessible manual
@@ -10,7 +10,21 @@ SDK `23f5d63fed2a370f3c2f54b90ec8f0896fe82105`. Original source/lock/license
 copies and exact file hashes are preserved outside the checkout under
 `iteration-23-panel-contract/` in the owned VM evidence directory.
 
-## Iteration34 overflow-local fail-closed isolation
+## Iteration35 callback/press pairing is not activation
+
+Actual client callbacks now retain private immutable original event/press pairs.
+Fresh press only, repeats retain original press without fresh activation, releases
+snapshot before retirement. Native app77/source259/256/3 pass; independent
+read-only pairing review found no issues, no native recovery acceptance.
+`current_fresh_press` is not a consume-once latch or live keyboard/target/grab/order
+authority. No callback invokes conversion/UI dispatch; all overflow keyboard
+input still stops before SDK processing. Hiding/config/deployment stay disabled.
+See [pairing audit](client-keyboard-delivery-audit.md). Preflight the effectful
+native popup routine before calling it; deferred effects need independent original
+envelope/live revalidation after element mutex release and outside Smithay locks.
+Preserve initial interrupted source-only and NEW same-archive native results.
+
+## Historical iteration34 overflow-local fail-closed isolation
 
 The actual OverflowButton view now wraps its original SDK button with a
 panel-local delegating widget. **All keyboard events are inert before SDK

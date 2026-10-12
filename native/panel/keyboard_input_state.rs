@@ -65,6 +65,12 @@ impl<O: Clone + PartialEq> InputLedger<O> {
         Some(press)
     }
 
+    // Immutable observation only: repeats/releases may retain the original
+    // press witness, but cannot mint fresh activation or keep it live on release.
+    pub(crate) fn held_press(&self, raw_code: u32) -> Option<&ClientPress<O>> {
+        self.held.get(&raw_code).and_then(Option::as_ref)
+    }
+
     pub(crate) fn release(&mut self, raw_code: u32) -> bool {
         self.held.remove(&raw_code).is_some()
     }

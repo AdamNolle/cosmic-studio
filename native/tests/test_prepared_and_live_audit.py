@@ -54,6 +54,8 @@ class PreparedBuildTests(unittest.TestCase):
                            (self.root/'native/panel/iced_keyboard_route.rs', 'wrapper route module\n'),
                            (self.root/'native/panel/prepare_overflow_keyboard_isolation.py', 'overflow isolation generator\n'),
                            (self.root/'native/panel/overflow_keyboard_isolation.rs', 'overflow isolation module\n'),
+                           (self.root/'native/panel/prepare_client_keyboard_delivery.py', 'client delivery generator\n'),
+                           (self.root/'native/panel/client_keyboard_delivery.rs', 'client delivery module\n'),
                            (self.root/'native/typography/lock_guard.py', 'dependency guard\n'),
                            (self.root/'native/typography/embed_fonts.py', 'font embedding generator\n'),
                            (self.root/'native/typography/prepare_display_roles.py', 'semantic font roles\n'),
@@ -147,7 +149,8 @@ class PreparedBuildTests(unittest.TestCase):
 
     def test_changed_keyboard_route_inputs_are_rejected_before_checkout_or_cargo(self):
         for name in ('prepare_iced_keyboard_route.py', 'iced_keyboard_route.rs',
-                     'prepare_overflow_keyboard_isolation.py', 'overflow_keyboard_isolation.rs'):
+                     'prepare_overflow_keyboard_isolation.py', 'overflow_keyboard_isolation.rs',
+                     'prepare_client_keyboard_delivery.py', 'client_keyboard_delivery.rs'):
             with self.subTest(name=name):
                 path=self.root/'native/panel'/name
                 before=path.read_bytes()

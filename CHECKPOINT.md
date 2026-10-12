@@ -2,7 +2,30 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
-## Iteration34 overflow-local fail-closed isolation
+## Iteration35 native callback/press pairing
+
+Actual ClientSeat callbacks now retain immutable original event/per-press pairing:
+fresh press only, repeat observation without fresh activation, release witness
+captured before retirement. Duplicate/entry-held/unknown events do not mint a
+grant; enter/leave/keymap/capability/modifiers invalidate stored delivery. Ordinary
+server forwarding and inert overflow keyboard isolation remain unchanged.
+Fresh original-feature locked check/release/app77 (prior69 + eight pairing cases),
+Linux259/256/3/nine suites+compileall0 and host panel55/prepared19 pass. Original539
+foreign graph/pins/features[]/licenses/postimages/compiler artifacts/ELFs preserved.
+
+Initial host interruption1073807364/source55-only report retained; owned VM was
+saved, resumed normally without reset/discard, then a NEW same-archive tree passed.
+No native compilation failure or changed-source repair is inferred. Read-only
+reviewer: no issues, OK with notes for pairing only; native recovery BLOCK.
+No callback invokes conversion/UI dispatch, no consume-once activation/lifecycle,
+live admitted target/grab/deferred authority/traversal/restoration/recovery/hiding.
+Both runtime/final flags false. See [pairing audit](native/panel/client-keyboard-delivery-audit.md).
+Bounded rerun (fresh Windows shell/checkout cwd/no compiler-library-profile overrides):
+`python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-35-review-evidence.py'`.
+Preserve interrupted/resumed35/prior roots/targets/caches/artifacts and SSH/volume/
+auth/recovery. Compilation/synthetic unit/source evidence, not final desktop gate.
+
+## Historical iteration34 overflow-local fail-closed isolation
 
 The actual OverflowButton view now wraps its original SDK button with a
 panel-local delegating widget. **All keyboard events are inert before SDK
