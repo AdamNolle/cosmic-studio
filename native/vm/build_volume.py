@@ -7,9 +7,14 @@ import re
 PRIMARY_SERIAL='VB5fcfe660-4751c2d2'
 PRIMARY_BYTES=171798691840
 BUILD_BYTES=137438953472
+ADDITIONAL_BUILD_BYTES=274877906944
 
 
-def select_empty_build_disk(layout, serial, root_source):
+def select_empty_build_disk(layout, serial, root_source, *, build_bytes=BUILD_BYTES):
+    # Size must be explicit for the separately approved iteration37 disk.
+    # Existing callers keep the exact128GiB contract; no arbitrary-size guard.
+    if type(build_bytes) is not int or build_bytes not in (BUILD_BYTES, ADDITIONAL_BUILD_BYTES):
+        raise ValueError('Only explicitly approved128GiB or256GiB build-disk sizes allowed.')
     if not re.fullmatch(r'VB[0-9a-f]{8}-[0-9a-f]{8}',serial) or serial==PRIMARY_SERIAL:
         raise ValueError('Explicit distinct VirtualBox build-disk serial required.')
     disks=layout.get('blockdevices',[])
@@ -22,8 +27,8 @@ def select_empty_build_disk(layout, serial, root_source):
     if len(matches)!=1:raise ValueError('Unique explicitly identified new build disk required.')
     disk=matches[0]
     if (not re.fullmatch(r'/dev/sd[b-z]',disk.get('path','')) or disk.get('type')!='disk'
-            or disk.get('size')!=BUILD_BYTES or disk.get('model','').strip()!='VBOX HARDDISK'
+            or disk.get('size')!=build_bytes or disk.get('model','').strip()!='VBOX HARDDISK'
             or disk.get('ro') not in (False,0) or disk.get('children')
             or disk.get('fstype') or disk.get('uuid') or any(disk.get('mountpoints') or [])):
-        raise ValueError('Build disk must be the exact128GiB writable empty whole VirtualBox disk.')
+        raise ValueError('Build disk must be the explicitly sized writable empty whole VirtualBox disk.')
     return disk['path']

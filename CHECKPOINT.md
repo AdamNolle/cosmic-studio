@@ -2,7 +2,32 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
-## Iteration36 actual native overflow opening preflight
+## Iteration37 explicitly approved additional build storage
+
+The operator chose a NEW dynamic256GiB build-only disk, preserving both existing
+disks/caches/evidence. Authenticated ordinary shutdown and cold recovery snapshot
+preceded SATA port3 attachment. Exact new-empty-disk/primary/old-volume guards,
+repeated read-only wipefs checks and private authenticated formatting succeeded.
+New ext4 UUID `aba53340-ed2a-48ff-b532-8b6371f81d9c` at
+`/mnt/cosmic-studio-builds-37` nodev,nosuid, studio1000:1000/mode0700;
+initial ~251GiB free. Old volume remounted without formatting; fstab unchanged.
+
+Default read-only empty-disk guard still requires128GiB; explicit approved256GiB
+selection retains all identity/signature/refusal checks. Host VM source48 and
+five targeted Linux guard cases pass. First directory-only preflight assumption
+failed before shutdown/mutation and is retained separately. Existing native77/
+source61/539graph/full app-SDK inventories/ELFs rerun successfully; no new native
+compilation or full Linux aggregate. Prior full Linux265/262/3 remains iteration36.
+Storage recovery does not deliver keyboard activation/admission/traversal/recovery,
+hiding, deployment or final desktop acceptance. See [VM details](native/vm/README.md).
+
+Bounded rerun (fresh Windows shell/checkout cwd/no overrides):
+`python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-37-review-evidence.py'`.
+Keep both build volumes, all prior/new artifacts/trees/targets/caches, cold snapshots,
+strict SSH and auth/config recovery. After reboot remount existing filesystems only,
+NEVER repeat formatting. No completion claim from source/storage/unit verification.
+
+## Historical iteration36 actual native overflow opening preflight
 
 The existing popup routine now resolves overflow membership, mapped anchor
 location and a live parent proxy **before** dismissing popups, hiding Workspaces
@@ -14,8 +39,9 @@ transactional rollback of later protocol errors.
 Fresh locked check/release/existing app77, Linux265/262/3 and host panel61/prepared19
 pass; six new source/Git regressions, **no new native popup runtime tests**.
 Original539 graph/features[]/licenses/postimages/compiler artifacts/ELFs retained.
-Build volume now ~20.0GB/18.6GiB: further full builds blocked by unchanged >20GiB
-guard; no deletion/storage change. Read-only verification remains supported.
+At iteration36 the128GiB build volume fell to ~20.0GB/18.6GiB, blocking its
+unchanged >20GiB full-build guard. Iteration37 adds separate explicitly approved
+storage without deleting/resizing that volume. Read-only verification remains supported.
 No keyboard routing/activation/recovery/hiding/deployment or final desktop pass.
 
 See [native preflight audit](native/panel/overflow-preflight-audit.md).

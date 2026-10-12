@@ -27,6 +27,50 @@ Rollback: stop owned builders, unmount, ordinary shutdown, detach only SATA port
 retain the VDI and required artifacts. Do not delete evidence or relax headroom
 checks. New builds check both build-volume and OS-root headroom.
 
+## Additional approved build-only volume (iteration37)
+
+The operator explicitly approved a **NEW dynamic256GiB VDI**, not resizing or
+cleaning either existing disk. Normal authenticated poweroff preceded cold
+snapshot `PopOS-before-additional-build-volume-iteration37`
+(`96952d18-68e3-4d38-9425-b7295d9b5bc5`). Snapshot-created differencing children
+retain the previous primary/build media as parents; that is not disk resizing.
+Only SATA port3 was added. The original volume was provenance-checked and
+**remounted without formatting** after boot; `/etc/fstab` remains unchanged.
+
+New volume: `/mnt/cosmic-studio-builds-37`, nodev,nosuid; studio subdirectory
+UID/GID1000/mode0700. VBox medium `deba07b4-e2cb-487f-9a85-659005d3ade6`,
+guest serial `VBdeba07b4-e6add305`, ext4 UUID
+`aba53340-ed2a-48ff-b532-8b6371f81d9c`. Initial free space269410668544bytes
+(~251GiB). The older128GiB volume remains intact at ~18.6GiB free and cannot
+meet a new full-build budget itself. Future fresh build trees use the **new**
+mount with unchanged >20GiB-volume/>10GiB-root/no-active-compiler/override guards.
+Do not relocate or overwrite earlier prepared trees to make a guard pass.
+
+`select_empty_build_disk(..., build_bytes=ADDITIONAL_BUILD_BYTES)` explicitly
+selects the approved256GiB size; the default still requires128GiB. Other sizes,
+existing filesystem/signature/mount/partition/read-only identities remain refused.
+The guard is read-only, not automatic provisioning or permission to format again.
+Five host and targeted Linux guard cases pass; host VM tooling48 passes.
+Initial preflight wrongly assumed retained archives were directories and stopped
+before shutdown/mutation; first script/partial collection/log retained, corrected
+fresh preflight records both files and directories. No native compilation this turn.
+Existing iteration36 app77/source61/539graph/inventory/ELF review reruns pass;
+full Linux265/262/3 remains **prior** iteration36, not a new aggregate.
+
+After reboot, verify both volumes' exact device serial/size/ext4 UUID and
+root-owned provenance before explicit existing-filesystem remount nodev,nosuid;
+**never rerun either formatter**. Rollback: stop owned builders, unmount ONLY
+`/mnt/cosmic-studio-builds-37`, ordinary shutdown, detach ONLY SATA port3 and retain
+the VDI, snapshot and evidence. No cache/source deletion, primary resize, sandbox,
+authentication or other-VM/security change. Reboot-scoped sleep-only inhibitor
+restored; no candidate deployment or desktop/input/recovery acceptance.
+
+Bounded storage/source/existing-unit evidence rerun, **not final desktop gate**:
+`python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-37-review-evidence.py'`
+in a fresh Windows shell, checkout cwd, no compiler/library/profile overrides.
+Preserve new/old mounted volumes, original source/targets/caches, strict SSH,
+root/private receipts/scripts, cold snapshots and all native/auth/config recovery.
+
 ## Provision
 
 VirtualBox must already be installed. From the repository in PowerShell:

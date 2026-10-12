@@ -15,7 +15,20 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
-## Iteration36 native popup preflight milestone
+## Iteration37 build storage milestone
+
+- [x] Obtain explicit operator authority for NEW separate dynamic256GiB VDI;
+  normal shutdown/cold snapshot, preserve original160GiB + old128GiB/caches/evidence.
+- [x] Guard exact empty new disk, format/mount new nodev,nosuid/owned0700 volume;
+  provenance-remount older filesystem only, fstab/packages unchanged.
+- [x] Preserve first preflight refusal, root/external receipts and source regressions;
+  hostVM48/targetedLinux5/existing native77-source61 reviews pass, no new compile.
+- [ ] Use new mount with original >20GiB-volume/>10GiB-root/no-builder/override
+  guards for future fresh trees; preserve all old trees instead of moving/deleting.
+- [ ] Deliver live keyboard activation/admission/traversal/restoration/recovery,
+  package alignment and final combined desktop acceptance; storage is not acceptance.
+
+## Historical iteration36 native popup preflight milestone
 
 - [x] Move actual opening membership/mapped-location/live-parent checks ahead of
   popup dismissal, Workspaces hiding and surface allocation; keep dismissal recovery.
@@ -25,8 +38,8 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
   six new source/Git regressions (not native failure-injection/runtime tests).
 - [ ] Validate refusal/no-side-effect behavior and successful recovery in a real
   owned desktop; preflight is not live keyboard admission or transactional rollback.
-- [ ] Resolve full-build headroom with explicit operator storage authority; ~18.6GiB
-  free blocks unchanged >20GiB preflight. Preserve caches/evidence; no deletion.
+- [x] Resolve headroom authority in iteration37: NEW separate256GiB build volume;
+  original128GiB remains ~18.6GiB and fails its unchanged full-build budget. No deletion.
 - [ ] Implement original-envelope consume-once keyboard lifecycle/live caller and
   dedicated keyboard-only dispatcher, then entry/traversal/restoration/recovery.
 
