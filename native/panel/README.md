@@ -5,7 +5,58 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
-## Iteration38 actual synchronous inert callback delivery
+## Iteration39 recovery-only callback and native popup teardown
+
+The actual outside-Smithay-input route now tries a dedicated fresh Escape
+dismissal before inert wrapper delivery. It requires the exact live originating
+keyboard/client seat, unique active focus on its exact owned native leaf popup,
+no ordinary/descendant popup or server grab/proxied focus, current original
+press/frame and explicit known-zero modifier policy. Original press serial/seat
+are retained; consume once after all refusals, then synchronous original force-
+hide outside UI locks. Physical held/release bookkeeping is unchanged.
+**No Enter/Space opening, SDK keyboard forwarding, task/pointer fallback,
+synthetic focus/grab/restoration, hiding/config migration or deployment.**
+
+Actual PopupDone routing now includes native overflow. The exclusion predicate
+closes the requested recorded client-surface subtree, not unrelated roots.
+Child-first teardown MOVES whole native PanelPopup resources and original
+embedded PopupSurface into an owned batch: focus cleanup/embedded Done before
+original RAII release. Raw proxies alone do not retain SCTK PopupInner; no
+manual duplicate role/surface destruction. Callback Arc ownership can defer
+final destruction; this is not observed protocol/restoration acceptance.
+
+Fresh guarded whole-caller locked check/release/test compilation and **app93**
+pass (prior82 + eight synthetic consume/converter + three actual generic
+subtree/order/owned-drop cases; context8 included, not101). Linux277 discovered/
+274 pass/3 explicit missing-Blender-export skips, nine suites+compileall0;
+host panel71/prepared19 pass. Original539 foreign entries/pins/features[]/
+licenses, all postimages, actual compiler artifacts/ELFs and complete app/SDK
+inventories retained. First native39 build's eight phases all0/1122.07s.
+
+Unbuilt leaf-only, intermediate subtree and raw-order source candidates stay
+separate. Read-only reviewers found descendant retention, then premature SCTK
+owner destruction; both P1s corrected before native compilation. Initial source
+transform refused a guessed seam before output; exact original seam correction
+and zero-postimage partial root preserved. Original SCTK0.20.0 read files match
+locked-checksum crate bytes; panel Smithay0ff00983 source matches Git HEAD/blobs,
+not Compositor e3d461a. Final focused source review: no issues/OK with notes;
+live activation/recovery BLOCK, no reviewer build attestation.
+
+New3009-input archive/tree/target/frozen evidence retained on the explicit approved
+256GiB build volume. Unchanged >20GiB-volume/>10GiB-root/no-compiler/override
+guards; old128GiB still refuses full-build budget. No formatting/deletion/resize/
+package or stock-session change. **No live keyboard-only entry/dismissal/
+traversal/restoration/accessibility or final combined-desktop pass.**
+
+Bounded rerun, **not final desktop verification** (fresh Windows shell, cwd
+`C:/Users/adamm/Desktop/Code/cosmic-studio`, no compiler/library/profile overrides):
+`python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-39-review-evidence.py'`.
+Keep both volumes, all old/new source/target/cache/failed previews/archives/
+ELFs/logs/strict SSH/auth/config/cold recovery. Both runtime/final flags false.
+
+See [recovery audit](overflow-keyboard-recovery-audit.md).
+
+## Historical iteration38 actual synchronous inert callback delivery
 
 Original client Press/Release callbacks now invoke the converter/wrapper path
 **after** Smithay input returns; Repeat after capture, without a server repeat

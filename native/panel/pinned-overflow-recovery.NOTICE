@@ -1,0 +1,16 @@
+COSMIC Studio native overflow recovery candidate
+
+Original files: cosmic-panel-bin/src/space/{panel_space.rs,popup.rs}
+Repository: https://github.com/pop-os/cosmic-panel
+Revision: b5cc19e351b82eed999097ced1ff267d27bf8e7a
+Original archive: pinned-overflow-recovery.json.gz
+SHA-256: f2dad6959fe1c52f718d9445971fbcedd98dc27d827f7a09a8f49fa2b6e5683e
+
+These byte-exact original source files and their candidate modifications remain
+GPL-3.0-only. Full original license: pinned-keyboard-focus.LICENSE.
+Original Git bytes/authentic upstream licensing are preserved. The repository's
+MIT license does not relicense these files. Authored recovery module/generator/
+tests are GPL-3.0-only. Prior GPL/MPL-2.0/MIT fixtures/notices remain unchanged.
+
+Ephemeral original popup/client-seat ownership and consume-once bookkeeping do
+not authorize an opening/grab or establish keyboard-only entry/restoration.

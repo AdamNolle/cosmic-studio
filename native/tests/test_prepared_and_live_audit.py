@@ -60,6 +60,9 @@ class PreparedBuildTests(unittest.TestCase):
                            (self.root/'native/panel/pinned-overflow-preflight.json.gz', 'overflow preflight fixture\n'),
                             (self.root/'native/panel/prepare_client_overflow_route.py', 'client overflow route generator\n'),
                             (self.root/'native/panel/client_overflow_route.rs', 'client overflow route module\n'),
+                             (self.root/'native/panel/prepare_overflow_keyboard_recovery.py', 'overflow keyboard recovery generator\n'),
+                             (self.root/'native/panel/overflow_keyboard_recovery.rs', 'overflow keyboard recovery module\n'),
+                             (self.root/'native/panel/pinned-overflow-recovery.json.gz', 'overflow keyboard recovery fixture\n'),
                            (self.root/'native/typography/lock_guard.py', 'dependency guard\n'),
                            (self.root/'native/typography/embed_fonts.py', 'font embedding generator\n'),
                            (self.root/'native/typography/prepare_display_roles.py', 'semantic font roles\n'),
@@ -156,7 +159,9 @@ class PreparedBuildTests(unittest.TestCase):
                      'prepare_overflow_keyboard_isolation.py', 'overflow_keyboard_isolation.rs',
                      'prepare_client_keyboard_delivery.py', 'client_keyboard_delivery.rs',
                      'prepare_overflow_preflight.py', 'pinned-overflow-preflight.json.gz',
-                     'prepare_client_overflow_route.py', 'client_overflow_route.rs'):
+                     'prepare_client_overflow_route.py', 'client_overflow_route.rs',
+                      'prepare_overflow_keyboard_recovery.py', 'overflow_keyboard_recovery.rs',
+                      'pinned-overflow-recovery.json.gz'):
             with self.subTest(name=name):
                 path=self.root/'native/panel'/name
                 before=path.read_bytes()

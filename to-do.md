@@ -15,7 +15,27 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
-## Iteration38 actual inert callback delivery milestone
+## Iteration39 recovery-only candidate milestone
+
+- [x] Audit actual request/commit/serial/grab/focus contracts; prefer recovery-first,
+  leave opening disabled until reachable keyboard-only recovery is established.
+- [x] Wire actual outside-lock same-owner native leaf fresh Escape, consume-once
+  original press/seat/frame/modifier refusals and synchronous existing force-hide.
+- [x] Correct actual PopupDone subtree selection and retain whole native owners
+  until child-first notification/focus cleanup/RAII release; preserve unrelated roots.
+- [x] Preserve unbuilt source P1 candidates/first seam refusal/original ownership
+  contracts; final focused source review OK with notes, no runtime attestation.
+- [x] Fresh guarded locked whole caller check/release/app93, Linux277/274/3,
+  source71/prepared19 pass; eleven new synthetic production-module helper cases,
+  not actual live Wayland popup or restoration tests; original539/features[].
+- [ ] Implement Enter/Space keyboard opening with original client serial/live
+  admission/modifiers/grab/order/effect validation after UI unlock; no pointer fallback.
+- [ ] Prove actual keyboard-only entry/dismissal/traversal/restoration/accessibility
+  and essential-control recovery before hiding/config migration/deployment.
+- [ ] Complete remaining signed runtime/package compatibility, hardware/optical/
+  performance and externally rerunnable final combined-desktop acceptance.
+
+## Historical iteration38 actual inert callback delivery milestone
 
 - [x] Wire original Press/Release after Smithay input, Repeat after capture,
   explicit original converter and exact inert overflow wrapper, no ordinary

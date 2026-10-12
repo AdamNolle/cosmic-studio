@@ -115,6 +115,12 @@ def prepared_inputs(component):
                 (PACKAGE / 'native/panel/prepare_client_overflow_route.py').read_bytes()).hexdigest(),
             'client_overflow_route_module_sha256': hashlib.sha256(
                 (PACKAGE / 'native/panel/client_overflow_route.rs').read_bytes()).hexdigest(),
+            'overflow_keyboard_recovery_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_overflow_keyboard_recovery.py').read_bytes()).hexdigest(),
+            'overflow_keyboard_recovery_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/overflow_keyboard_recovery.rs').read_bytes()).hexdigest(),
+            'overflow_keyboard_recovery_fixture_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/pinned-overflow-recovery.json.gz').read_bytes()).hexdigest(),
         } if component == 'cosmic-panel' else {}),
     }
 
@@ -145,7 +151,9 @@ def library_inputs(expected):
                            'overflow_keyboard_isolation_generator_sha256', 'overflow_keyboard_isolation_module_sha256',
                            'client_keyboard_delivery_generator_sha256', 'client_keyboard_delivery_module_sha256',
                            'overflow_preflight_generator_sha256', 'overflow_preflight_fixture_sha256',
-                           'client_overflow_route_generator_sha256', 'client_overflow_route_module_sha256')}
+                           'client_overflow_route_generator_sha256', 'client_overflow_route_module_sha256',
+                            'overflow_keyboard_recovery_generator_sha256', 'overflow_keyboard_recovery_module_sha256',
+                            'overflow_keyboard_recovery_fixture_sha256')}
 
 
 def validate_prepared(marker, expected):
@@ -222,6 +230,8 @@ def build(component, work, jobs):
                  '--output', work / 'overflow-preflight.patch', '--apply'])
             run(['python3', PACKAGE / 'native/panel/prepare_client_overflow_route.py', source,
                  '--output', work / 'client-overflow-route.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_overflow_keyboard_recovery.py', source,
+                 '--output', work / 'overflow-keyboard-recovery.patch', '--apply'])
         patch = PACKAGE / 'native' / patch_relative
         run(['git', 'apply', '--check', patch], source)
         run(['git', 'apply', patch], source)
