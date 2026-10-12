@@ -5,6 +5,20 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration44 outer interruption supervision fixtures
+
+[Updated prerequisites](populated-runtime-prerequisites.md) record eight real
+process/FD fixtures: independent identity/limits checks, raw failure/deadline
+refusal, wrapper SIGKILL cleanup and outer SIGKILL cleanup by a surviving guardian.
+Unexpected selected privileged/notification FDs refuse before spawn. Full first
+failures, reviewed/strict repeats, a real scan/exit cleanup race and fresh robust
+correction are preserved in five archives/282 member payloads (cumulative overlap,
+not282 distinct inputs/tests). The same eight fixture cases pass. No native
+manager/applet/renderer/compiler or recovery acceptance; total supervision loss
+remains untested. Actual panel/desktop override/native ELF/environment/exact peer
+integration precedes a NEW populated no-input run. Original policies/code/features
+unchanged; hiding/deployment and final desktop remain open.
+
 ## Iteration43 connection chain and private launcher fixtures
 
 The [updated prerequisites](populated-runtime-prerequisites.md) authenticate the

@@ -4,6 +4,77 @@ Iteration42 inspected authenticated original and compiled39 input contracts.
 **No new renderer, populated panel, native build, input or popup trial ran.**
 Opening/manual hiding/deployment and final desktop acceptance remain open.
 
+## Iteration44: independent interruption cleanup fixtures
+
+A NEW private outer supervisor independently discovers owned descendants from
+`/proc`, captures PID/start ticks/executable/argv, opens pidfds, and verifies
+initial-exec environment, selected socket FD/inode and core/file limits. It
+never imports the launcher's bookkeeping. A separate surviving guardian observes
+that supervisor, wrapper and fixture children, including adopted double-forks.
+Signals target currently owned descendant pidfds, not global names/process groups.
+The original iteration43 launcher and production restart policy are unchanged.
+
+Eight actual Linux **process/socket fixtures** pass in separate reviewed and
+strict runs (same eight cases, not sixteen native app tests):
+
+- Normal child exit0, with independently observed wrapper and child identities.
+- Raw child exit7 rejected despite wrapper exit0.
+- Wrapper SIGKILL with escaped descendants: outer supervisor cleans/reaps them.
+- Outer SIGTERM with escaped descendants: outer cleanup completes.
+- Outer SIGKILL: the surviving guardian independently cleans/reaps the adopted
+  wrapper and descendants. Its interrupted outer report is not completed cleanup.
+- Child deadline with escaped descendants: cleanup succeeds, acceptance fails.
+- Unexpected `X_PRIVILEGED_WAYLAND_SOCKET` and `COSMIC_NOTIFICATIONS` each refuse
+  **before** the wrapper/child is spawned for this selected diagnostic.
+
+The first run's assertion wrongly expected no report after wrapper SIGKILL;
+the actual launcher had already saved a partial pre-spawn report. Full first
+scripts/results/traceback are preserved. A separate harness requires that partial
+report to remain unaccepted. Parent review then tightened acceptance to require
+exactly one independently authenticated wrapper and child; fresh strict fixtures
+pass. A retained-byte reviewer initially mishandled absent reports as dictionaries;
+its separately captured deterministic refusal and corrected reviewer are retained.
+An external repeat then exposed a real cleanup race: a descendant exited between
+ownership scans, and the supervisor raised rather than refusing that now-unneeded
+signal. The surviving guardian cleaned the tree; full raw tracebacks and partial
+outer report remain unaccepted. A NEW robust version skips vanished/reused
+identities while retaining pidfd/current-descendant checks; the same eight cases
+pass again. Five archives authenticate282 regular member payloads, including the
+intentionally overlapping cumulative failed-rerun archive—not282 distinct inputs
+or tests. First/reviewed/strict/failed-repeat/robust scripts and results are retained.
+
+**No Caffeine, original launch-pad manager, panel, compositor or compiler ran.**
+Python fixture executable/environment/socket identity is not native ELF/backend
+acceptance. `/proc` environment describes initial exec bytes, not application
+`getenv` state. Polling plus subreaper adoption cleans observed/adopted descendants;
+it is not complete instrumentation of every short-lived intermediate executable.
+Loss of the surviving guardian, simultaneous loss of all supervisors, and host/VM
+interruption are not tested or certified by these cases.
+
+Next integrate this tested ownership/cleanup contract into the actual private
+panel-manager hierarchy: authenticate the genuine desktop override, exact frozen
+Caffeine executable/argv, original panel-supplied environment and designated FD,
+and **exact owned panel socket peer**, not only matching UID/GID. Require an
+independent surviving guardian for that actual hierarchy; do not run the native
+branch directly using the fixture launcher as proof. Then one NEW no-input
+populated30s/64MiB/core0 diagnostic may observe mapping/attach/completed callbacks
+before capture. No popup/input/recovery/hiding/deployment acceptance yet.
+
+Scoped rerun, **not final desktop verification**:
+
+```powershell
+python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-44-review-evidence-corrected.py'
+```
+
+Fresh Windows shell, cwd `C:/Users/adamm/Desktop/Code/cosmic-studio`, no compiler/
+library/profile overrides. It audits the282 preserved archive member payloads, checks fresh
+read-only source/storage/ELF/cleanup provenance, repeats only the same eight
+process/FD fixtures, and checks the diff. Preserve all private scripts/archives/
+receipts, strict SSH/exact existing mounts and original source/targets/caches/
+ELFs/media/VDIs/snapshots/auth/config recovery; never repeat a formatter. Later
+stock-state mismatch remains unknown. App93/Linux277/274/3 and both false
+runtime/final flags are unchanged; no independent child final verdict is claimed.
+
 ## Iteration43: authenticated backend chain and launcher fixtures
 
 The missing connection link is the **locked Winit fork**, not a direct Iced

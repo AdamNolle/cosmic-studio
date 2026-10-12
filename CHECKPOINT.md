@@ -2,6 +2,23 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration44 independent interruption supervision fixtures
+
+Eight real Linux process/socket fixtures verify independent outer identity and
+pidfd cleanup, including wrapper SIGKILL and outer SIGKILL with a surviving
+guardian. Raw failure/deadline/partial reports remain refused; unexpected selected
+privileged/notification FDs refuse before spawn. First assertion/schema failures,
+reviewed and stricter identity-count runs remain separate. An external repeat
+caught a cleanup scan/exit race; the guardian cleaned it, then a fresh robust
+version passed the same cases. Five archives/282 member payloads authenticated,
+including cumulative overlap, not282 distinct inputs. Same eight fixture cases,
+not new native application tests. No native
+Caffeine/launch-pad/panel/compositor/compiler/input run or production mutation.
+Actual manager/ELF/environment/exact panel-peer integration is next; loss of all
+supervision/host interruption is untested. App93/Linux277/274/3, unknown later
+stock-state difference, disabled hiding/deployment and false runtime/final flags
+remain. See [prerequisites](native/panel/populated-runtime-prerequisites.md).
+
 ## Iteration43 actual source chain and diagnostic launcher fixtures
 
 Authenticated Caffeine→SDK→Iced→locked Winit8dfaba2→Wayland connection source

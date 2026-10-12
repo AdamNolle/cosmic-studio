@@ -15,6 +15,24 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration44 independent supervision preparation
+
+- [x] Test eight process/socket fixtures with independent outer PID/start/exe/
+  argv/initial-exec environment/FD/limits and surviving-guardian pidfd cleanup.
+  Wrapper/outer SIGKILL, graceful interruption, raw failure, deadline and extra
+  selected designated-FD refusal are distinct cases; no native applet acceptance.
+- [x] Preserve full first partial-report assertion failure, corrected reviewed
+  run, stricter independent identity-count run, external-repeat cleanup scan/exit
+  race and robust correction. Five archives/282 member payloads include cumulative
+  overlap, not282 distinct inputs or new native application cases.
+- [ ] Integrate the tested contract into the actual private original panel-manager
+  hierarchy/genuine desktop override, authenticating native ELF/argv/environment/
+  selected FD and exact owned panel peer under independent surviving supervision.
+  Host/VM or total guardian loss remains untested; no production policy change.
+- [ ] Run NEW bounded populated no-input diagnostic only after that integration;
+  observe actual mapping/attach/completed callbacks before capture, then real
+  popup/input/consume/teardown/restoration/keyboard-only accessibility separately.
+
 ## Iteration43 bounded-launch preparation
 
 - [x] Authenticate actual prepared connection source chain through locked Winit,
