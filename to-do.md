@@ -15,6 +15,24 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration42 populated runtime prerequisites
+
+- [x] Authenticate original/compiled frame-size gating, native Caffeine action
+  semantics, locked launch-pad inherited-FD/environment/restart contracts and
+  wayland-client crate/license. Preserve first license-name collector refusal.
+- [x] Record source-consistent empty-panel size refusal, not dynamic cause;
+  initial has_frame means missing callback alone is not deadlock proof.
+- [ ] Authenticate actual applet backend connection call chain; library
+  connect_to_env behavior alone is not the application call-chain proof.
+- [ ] Test a private one-shot native launcher/restart count bound before NEW
+  populated run; original999,999-restart policy cannot be treated as one launch.
+- [ ] Observe actual native applet mapping/panel attach/completed callback with
+  strict child/environment/socket identity and independent descendant cleanup;
+  no installed queue, input/logind permission expansion or stock attachment.
+- [ ] Prove real popup/keyboard consumption/teardown/restoration/accessibility
+  before opening/hiding; [source prerequisites](native/panel/populated-runtime-prerequisites.md)
+  do not change app93/Linux277/274/3 or close combined desktop acceptance.
+
 ## Iteration41 live startup disposition
 
 - [x] Authenticate original native config/startup/spawn contracts and run exact

@@ -88,8 +88,16 @@ Retain strict installed SSH, the owned running VM/exact existing mounts and
 all private receipts/scripts/evidence/native originals. Both
 `candidate_runtime_pass` and `final_desktop_complete` remain false.
 
-Next: authenticate a bounded real native applet's launch/input requirements and
-observe populated native rendering/overflow in a NEW private diagnostic. No
+Iteration42's [frame/applet source audit](populated-runtime-prerequisites.md)
+found the original size-at-most20 render refusal and initial `has_frame: true`.
+This empty run is consistent with size gating, not observed internal branch
+execution or proof of a callback deadlock. Original Caffeine/launch-pad contracts
+now identify action-only inhibitor access and999,999 applet restarts; tested
+one-shot launch bounds and actual backend connection-chain evidence remain open.
+No populated run or renderer repair followed.
+
+Next: satisfy those bounded launch prerequisites and observe populated native
+rendering/overflow in a NEW private diagnostic. No
 installed-default applet queue or system-bus permission expansion. Real popup
 focus/modifiers/fresh Escape/internal consumption/teardown/restoration and
 keyboard-only entry/accessibility remain separate required gates.

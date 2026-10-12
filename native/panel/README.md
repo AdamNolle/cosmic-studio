@@ -5,6 +5,17 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration42 populated diagnostic prerequisites
+
+The [frame/applet audit](populated-runtime-prerequisites.md) confirms the actual
+compiled render source still refuses size axes at most20 and starts with
+`has_frame: true`. Empty layer dimensions are consistent with size refusal,
+not a proved dynamic cause or callback deadlock. Original native Caffeine has
+no initial inhibitor/timer, but activation can inhibit idle+sleep. Original
+panel permits999,999 applet restarts; a verified one-shot bound and actual
+backend inherited-connection chain are required before a populated run.
+No new renderer/compiler/tests or recovery/hiding acceptance.
+
 ## Iteration41 isolated combined startup, not recovery
 
 The [startup observation](combined-startup-observation.md) records one exact

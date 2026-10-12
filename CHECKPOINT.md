@@ -2,6 +2,21 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration42 frame/applet source audit (no runtime trial)
+
+Actual compiled39 render source is original and refuses any actual/dimension
+axis at most20; initial has_frame is true. Empty startup's8/1px height is
+consistent with native size refusal, not proved branch execution or a callback
+deadlock. Original Caffeine init has no inhibitor/timer; activation can request
+idle+sleep inhibition and is excluded from the proposed no-input diagnostic.
+Authenticated original launch-pad/wayland-client FD/environment contracts;
+original panel restart999,999 requires a tested one-shot launch bound and actual
+backend connection-chain evidence before a NEW populated run. No build/test/
+renderer trial or source repair. Three source archives/62payloads and first
+collector license-name refusal retained. See [prerequisites](native/panel/populated-runtime-prerequisites.md).
+App93/Linux277/274/3 unchanged; runtime/final flags false. Stock-state later
+mismatch remains unknown, never reset or waived into stability acceptance.
+
 ## Iteration41 actual isolated combined startup (partial only)
 
 One exact repaired compositor + compiled39 empty native panel private run
