@@ -15,6 +15,25 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration45 actual native startup refusal
+
+- [x] Integrate private dual-supervisor admission into the actual original panel
+  launch path; observe one wrapper and one frozen native Caffeine child with
+  original environment/designated FD and exact owned panel SO_PEERCRED identity.
+  Three admission fixtures are helper tests, not native application coverage.
+- [x] Retain ONE new no-input run and117 archive payloads: unexpected native
+  `dbus-send` child refused, private portal activation/GTK-schema failures
+  preserved, owned outer/guardian cleanup and fresh absence verified. Wrapper0
+  does not accept raw refusal. No unchanged retry or production-policy change.
+- [ ] Authenticate the original helper source/exec/environment and private-bus
+  activation boundary before any revised native diagnostic; do not broaden
+  descendant permissions or reinterpret sync callbacks as surface frames.
+- [ ] Observe actual mapped applet/panel attachment/completed frame callbacks
+  before capture. Genuine app ID/xdg configuration is not mapping/presentation.
+  Native abrupt interruption/total supervision loss remains untested.
+- [ ] Complete live popup/keyboard-only entry/consume/teardown/restoration/
+  accessibility and final combined desktop gates; hiding/deployment stay off.
+
 ## Iteration44 independent supervision preparation
 
 - [x] Test eight process/socket fixtures with independent outer PID/start/exe/

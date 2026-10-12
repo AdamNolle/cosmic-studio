@@ -2,6 +2,37 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration45 actual native launch, retained startup refusal
+
+ONE new private no-input run used the exact frozen compositor, compiled39 panel
+and Caffeine16 ELF through a genuine desktop-ID/metadata override. The original
+panel directly parented one diagnostic wrapper; outer and surviving guardian
+independently authenticated it before native spawn, then exactly one native
+child: PID/start/exe/argv, original panel-supplied environment, selected FD/inode
+and core/file limits. SO_PEERCRED matched the exact owned panel PID/start, not
+merely UID. Original production restart policy/source/features remain unchanged.
+
+The raw native startup is **REFUSED**, not accepted: an unexpected `dbus-send`
+child requested the portal button-layout setting. Private-bus portal services
+also activated, with retained GTK/schema failures. No descendant allowlist or
+DBus permission was broadened; no unchanged retry ran. Wrapper exit0 suppressed
+manager retries but did not erase the raw refusal/native cleanup SIGTERM.
+Owned pidfd cleanup/reaping and fresh absence checks passed, including observed
+portal descendants; no native abrupt-interruption or total-supervision-loss
+test is claimed.
+
+Caffeine advertised its genuine app ID and configured an xdg role, but no buffer
+attach/mapping/presentation or completed surface-frame callback was observed.
+Registry/display sync callbacks are not frame completion; the original raw
+convenience callback marker is malformed and remains retained. No capture/input/
+popup/recovery/deployment. The117-member archive and three admission helper
+fixtures are separate from native application tests; app93/Linux277/274/3 stay
+unchanged. Immediate stock config/state equality and later read-only equality
+to45 do not resolve the historical41 state difference or certify stability.
+Both runtime/final flags remain false. Before another run, authenticate the
+unexpected helper's source/exec contract and private-bus activation boundaries;
+do not simply permit descendants. See [prerequisites](native/panel/populated-runtime-prerequisites.md).
+
 ## Iteration44 independent interruption supervision fixtures
 
 Eight real Linux process/socket fixtures verify independent outer identity and

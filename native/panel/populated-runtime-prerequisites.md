@@ -4,6 +4,82 @@ Iteration42 inspected authenticated original and compiled39 input contracts.
 **No new renderer, populated panel, native build, input or popup trial ran.**
 Opening/manual hiding/deployment and final desktop acceptance remain open.
 
+## Iteration45: actual panel launch, raw native startup refused
+
+ONE new private NO-INPUT diagnostic used unchanged frozen repaired compositor,
+compiled39 panel and Caffeine16 ELF. Native v1 Panel/OnDemand/Never selected only
+the genuine `com.github.codevardhan.caffeine-applet` desktop ID, preserved every
+original metadata field except private Exec, with XS size/padding4/spacing0.
+Fresh HOME/XDG/config/data/private session bus, absent system bus, no Xwayland,
+stock attachment, injected input, source/compiler or permission change.
+
+The original panel directly parented the diagnostic wrapper. Both independent
+outer and surviving guardian checked its PID/start/exe/argv, initial environment,
+designated FD/inode and limits before an authorization file admitted native spawn.
+Exactly one unchanged native Caffeine child was independently authenticated by
+both. The wrapper checked SO_PEERCRED against the **exact owned panel PID/start**
+and UID/GID. Original launch-pad policy remains999,999 restarts; wrapper exit0
+suppresses failure retry only for this private diagnostic and never grants
+native acceptance. Per-thread manager internals were not instrumented.
+
+**Raw startup refused:** the native child spawned an unexpected `dbus-send`
+request for `org.freedesktop.portal.Settings Read` / button-layout. Its observed
+argv/PPID/start identity and raw `Unexpected native descendants refused` result
+are retained. The private bus also activated desktop/document/permission-store
+portal processes; GTK display failure and a schema-related signal5 are retained.
+A fresh private DBus alone therefore did not exclude system service activation.
+No source attribution or complete short-lived-executable coverage is inferred
+from these observations. No descendant allowlist, system-bus permission or
+activation policy was relaxed, and no unchanged renderer/native retry followed.
+
+The wrapper's raw native final return was SIGTERM during owned refusal cleanup,
+not a spontaneous applet crash or accepted exit0. Outer and surviving guardian
+pidfd cleanup/reaping completed; a fresh check found no observed owned PID/start
+identities, native executables or private runtime. The original44 interruption
+fixtures are not native abrupt-interruption tests: this run does **not** certify
+native outer/wrapper SIGKILL, loss of the guardian/all supervisors or host/VM
+interruption. Portal descendants were ownership-observed/cleaned, not all given
+native environment/FD authentication.
+
+Native protocol shows the genuine app ID, xdg role/configures/acknowledgement;
+this is not buffer-backed mapping. No applet or panel buffer attachment and no
+completed requested surface-frame callback were observed; no capture was tried.
+The panel requested frame callback53 without observed completion. Other done
+rows belong to registry/display sync callbacks, not that surface frame. The
+original report's generic callback convenience token was malformed: its false
+boolean is **not** evidence that every callback was absent. A separate read-only
+object-correlated retained review preserves that distinction without rewriting
+the original report. No popup/input/internal consume/teardown/restoration or
+keyboard-only accessibility/hiding acceptance.
+
+Three Linux admission helper fixtures checked matching environment/peer profile,
+unexpected notification-FD refusal and same-UID wrong-peer-PID refusal. They do
+not execute native Caffeine or add app tests. Complete117 regular archive members
+authenticate scripts, metadata/config, first native raw/protocol/guardian results
+and those fixtures; every SHA/size/mode/UID/GID checked. Immediate stock config/
+state equality and later equality to45 are separate from the still-unknown
+historical41 state difference, not a stability waiver. All source/targets/cache/
+ELFs/media/VDIs/snapshots/auth/config recovery remain; app93/Linux277/274/3 and both
+false runtime/final flags unchanged. No new independent child final verdict.
+
+Before another native run, authenticate the actual helper's locked source and
+exec/environment/deadline/cleanup contract and specify a private-bus service
+activation boundary. Do not simply turn on `allow_descendants`, disable inherited
+features, fake frame completion or repair rendering from these partial facts.
+
+Scoped **read-only** rerun, not a final desktop or native runtime repeat:
+
+```powershell
+python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-45-review-evidence.py'
+```
+
+Fresh Windows shell, cwd `C:/Users/adamm/Desktop/Code/cosmic-studio`, no compiler/
+library/profile overrides. Retained117-member/source/raw refusal review, fresh
+strictSSH provenance/cleanup/state checks and diffcheck only; NO native/renderer/
+compiler/input/fixture replay. Preserve private scripts/receipts/archives/exact
+existing mounts/strictSSH/all original sources/targets/caches/native ELFs/media/
+VDIs/snapshots/auth/config recovery. Never repeat either formatter.
+
 ## Iteration44: independent interruption cleanup fixtures
 
 A NEW private outer supervisor independently discovers owned descendants from

@@ -5,6 +5,23 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration45 actual native startup remains refused
+
+The [updated prerequisites](populated-runtime-prerequisites.md) record ONE new
+no-input actual panel→diagnostic-wrapper→frozen Caffeine run. Independent outer
+and surviving guardian authenticated wrapper/native identity, exact inherited
+environment/FD and exact owned panel socket peer. Native startup refused an
+unexpected `dbus-send` descendant; private portal service activation/failures
+are retained. Wrapper exit0 is not success; no allowlist expansion or retry.
+Both supervisors cleaned owned descendants, with fresh absence checks.
+
+Genuine app ID/xdg configure is not mapping: no buffer attach or completed
+surface-frame callback/capture/input/popup/recovery. Sync callbacks are separate.
+117 archived payloads and three admission fixtures preserved; original source/
+features/restart policy, app93/Linux277/274/3 unchanged. Native interruption/total
+supervision loss, private-bus service boundary, keyboard recovery/accessibility,
+hiding/deployment and final desktop acceptance remain open.
+
 ## Iteration44 outer interruption supervision fixtures
 
 [Updated prerequisites](populated-runtime-prerequisites.md) record eight real
