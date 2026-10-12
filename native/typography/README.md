@@ -47,6 +47,15 @@ python3 native/typography/prepare_font_tests.py /path/to/libcosmic --client-lock
 cargo +stable test --release --manifest-path /path/to/libcosmic/Cargo.toml -p libcosmic --lib studio_embedded_font_tests --no-default-features --features applet,applet-token,dbus-config,multi-window,tokio,wayland,desktop-systemd-scope,winit -j4
 ```
 
+For a fresh combined preparation/build of the remaining OS clients, use the Linux-only builder:
+
+```sh
+python3 native/typography/build_os_clients.py --work work/native-os-clients --jobs 4
+python3 native/typography/build_os_clients.py --work work/native-media --components cosmic-player cosmic-viewer --jobs 4
+```
+
+It derives all nine supported pins from `prepare_components.py`, applies embedded fonts, semantic menu roles and final popup materials, and adds window glass/controls only for the four supported window applications. Applets receive the calendar heading role and retain both `cosmic-applets` and `cosmic-panel-button` candidates. Shared libraries are prepared once per revision; wrappers still control per-process material opt-in. Initial Setup is available explicitly but not selected by default, and no candidate is launched. Existing source trees are refused before cloning. After one local Git-to-path lock normalization, registry checksums/versions and foreign Git pins must match the original graph; subsequent check/build commands use `--locked`. Candidate reports explicitly leave installation and runtime validation false. These guards have portable unit/mocked-pipeline tests; actual guest builds are a separate pending gate.
+
 Select the corresponding binary for notifications or OSD. Cargo requires the
 native library's own workspace to run its private unit test. The font-test
 preparation excludes unrelated examples and copies the client's existing lock;

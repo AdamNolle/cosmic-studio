@@ -12,6 +12,7 @@
     "src/theme/style/iced.rs": "fe098fba7d9c10690a77f676b08ca9f7a8f2817a68c971b34ff1eaa6e90330b3"
   },
   "native_api_sha256": {
+    "iced/core/src/size.rs": "7ec056939a02804f65076ca3bf2b804ec033a5bd3a91dbcae76fca13614ad87d",
     "iced/winit/src/platform_specific/wayland/commands/blur.rs": "dcd2d08d060cd5bd40930b9c59bc0cedaa0022f4d815f6bb9824169e1ff80e5d"
   },
   "native_backport_sha256": {
@@ -19,9 +20,9 @@
     "iced/winit/src/platform_specific/wayland/sctk_event.rs": "5fd8eb751a5c391e147407620eaf95249bb8e6c3443185a6c50d26219629d928",
     "iced/winit/src/platform_specific/wayland/commands/blur.rs": "dcd2d08d060cd5bd40930b9c59bc0cedaa0022f4d815f6bb9824169e1ff80e5d",
     "iced/winit/src/platform_specific/wayland/commands/mod.rs": "6edfcf39a8f0bcc11ef7d5779f63343079c21d3cd3522d64b9d12109e56f039e",
-    "iced/winit/src/platform_specific/wayland/event_loop/state.rs": "7445a10e06251f0c68ae61dc8d63ad7ba7f37e4c579f37dcaa9e53720fe150cf",
+    "iced/winit/src/platform_specific/wayland/event_loop/state.rs": "6153e6d5f0a3d7e190b8c636f773021ba9b86d2bfb1424c32f7783b487206142",
     "iced/winit/src/platform_specific/wayland/event_loop/mod.rs": "f2a393c108e61caa27a1f0f4d37af4c24c4db46be22804961fbd61edb025f360",
-    "iced/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs": "57be21c730fd8afe889853dc20cdd3272f7f2e5281857c5a3d41efc395556171",
+    "iced/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs": "8635e4309c8ffccf6454c7d5b42eed685af55504fa2e37eb6394bae841aec978",
     "iced/winit/src/platform_specific/wayland/handlers/ext_background_effect.rs": "933ead04d451a017dd1a108421f701ad70bd12c4c47d435014fbae1e152e5496",
     "iced/winit/src/platform_specific/wayland/handlers/mod.rs": "cde9637dac4826c322fac6c12db1c1d8e1eabde48495247cd40e4fb8444674b7",
     "iced/winit/src/platform_specific/wayland/handlers/shell/xdg_popup.rs": "4d21ff9426b2dd6f2c852a2b9205f339b5af15e73435b97572ccf0eba0afcd8c"

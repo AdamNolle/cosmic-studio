@@ -23,9 +23,13 @@ struct Surface {
  struct ext_background_effect_surface_v1 *effect;
  struct wl_buffer *buffers[2];
  uint32_t *pixels[2];
- int width,height,kind,busy[2],current,configured;
+ int width,height,kind,busy[2],current,configured,initial_frame_done;
 };
 static struct Surface surfaces[3];
+static void initial_frame_done(void *data,struct wl_callback *callback,uint32_t time){
+ (void)time;((struct Surface*)data)->initial_frame_done=1;wl_callback_destroy(callback);
+}
+static const struct wl_callback_listener initial_frame_listener={initial_frame_done};
 static void release(void *data,struct wl_buffer *buffer) {
  struct Surface *s=data;for(int i=0;i<2;i++)if(s->buffers[i]==buffer)s->busy[i]=0;
 }
@@ -66,7 +70,9 @@ static void configure(void *data,struct zwlr_layer_surface_v1 *layer,uint32_t se
  if(!s->configured){
   s->width=width?width:s->width;s->height=height?height:s->height;make_buffers(s);
   if(s->effect){struct wl_region *region=wl_compositor_create_region(compositor);wl_region_add(region,0,0,s->width,s->height);ext_background_effect_surface_v1_set_blur_region(s->effect,region);wl_region_destroy(region);}
-  fill(s,0,0);s->busy[0]=1;wl_surface_attach(s->surface,s->buffers[0],0,0);wl_surface_damage_buffer(s->surface,0,0,s->width,s->height);wl_surface_commit(s->surface);s->configured=1;
+  fill(s,0,0);s->busy[0]=1;
+  struct wl_callback *callback=wl_surface_frame(s->surface);wl_callback_add_listener(callback,&initial_frame_listener,s);
+  wl_surface_attach(s->surface,s->buffers[0],0,0);wl_surface_damage_buffer(s->surface,0,0,s->width,s->height);wl_surface_commit(s->surface);s->configured=1;
  }
 }
 static void closed(void *data,struct zwlr_layer_surface_v1 *layer){fprintf(stderr,"closed kind=%d\n",((struct Surface*)data)->kind);(void)layer;}
@@ -101,11 +107,13 @@ int main(){
   wl_surface_commit(s->surface);
  }
  for(int n=0;n<3;n++)wl_display_roundtrip(display);
- fprintf(stdout,"Native layer fixture: Panel+Dock, ext_background_effect_v1, SHM buffers ready\n");fflush(stdout);
- int tick=0;int ticks=getenv("STUDIO_FIXTURE_BACKGROUND_ONLY")?2400:200;for(int n=0;n<ticks;n++){
+ int ready=0,tick=0;int ticks=getenv("STUDIO_FIXTURE_BACKGROUND_ONLY")?2400:200;for(int n=0;n<ticks;n++){
   wl_display_dispatch_pending(display);wl_display_flush(display);
   struct pollfd p={wl_display_get_fd(display),POLLIN,0};poll(&p,1,25);if(p.revents&POLLIN){if(wl_display_dispatch(display)<0)break;}
+  if(!ready){int configured=0,callbacks=0;for(int i=0;i<count;i++){configured+=surfaces[i].configured;callbacks+=surfaces[i].initial_frame_done;}
+   if(configured==count&&callbacks==count){fprintf(stdout,"STUDIO_FIXTURE_READY count=%d configured=%d callbacks=%d\n",count,configured,callbacks);fflush(stdout);ready=1;}
+  }
   if(getenv("STUDIO_FIXTURE_ANIMATE")&&n%4==0){struct Surface *s=&surfaces[0];int next=1-s->current;if(s->configured&&!s->busy[next]){fill(s,next,++tick);s->busy[next]=1;s->current=next;wl_surface_attach(s->surface,s->buffers[next],0,0);wl_surface_damage_buffer(s->surface,0,0,s->width,s->height);wl_surface_commit(s->surface);}}
  }
- wl_display_disconnect(display);return 0;
+ wl_display_disconnect(display);if(!ready){fprintf(stderr,"Required initial fixture frame callbacks unavailable\n");return 4;}return 0;
 }

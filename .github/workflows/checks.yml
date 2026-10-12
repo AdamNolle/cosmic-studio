@@ -14,4 +14,21 @@ jobs:
       - run: python3 -m unittest discover -s native/tests -v
       - run: python3 -m unittest discover -s native/popups/tests -v
       - run: python3 -m unittest discover -s icons/tests -v
+      - run: python3 -m unittest discover -s native/vm -p 'test*.py' -v
       - run: python3 -m compileall -q setup.py native icons
+  windows-source-integrity:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s native/vm -p 'test*.py' -v
+      - run: python -m unittest discover -s native/tests -p test_os_clients.py -v
+      - run: python -m compileall -q setup.py native icons
+      - name: Check provisioning script syntax without provisioning
+        shell: pwsh
+        run: |
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile("$PWD/native/vm/provision.ps1", [ref]$null, [ref]$errors) | Out-Null
+          if ($errors) { $errors; exit 1 }

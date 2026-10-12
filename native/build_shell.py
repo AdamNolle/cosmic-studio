@@ -9,6 +9,9 @@ import subprocess
 import tomllib
 
 PACKAGE = Path(__file__).resolve().parents[1]
+_guard_spec = importlib.util.spec_from_file_location('studio_lock_guard', PACKAGE / 'native/typography/lock_guard.py')
+lock_guard = importlib.util.module_from_spec(_guard_spec)
+_guard_spec.loader.exec_module(lock_guard)
 SOURCES = {
     'cosmic-panel': ('b5cc19e351b82eed999097ced1ff267d27bf8e7a', '23f5d63fed2a370f3c2f54b90ec8f0896fe82105', 'panel/panel-glass.patch'),
     'cosmic-launcher': ('cc3d42bcc8fbcb67e6312f2766394e18b4d937d5', '8cb86195ec576064ac8e59e9200315714d17dc55', 'typography/cosmic-launcher-dark-shell.patch'),
@@ -27,6 +30,7 @@ def run(args, cwd=None):
 def checkout(folder, repository, revision):
     if not folder.exists():
         run(['git', 'clone', '--no-checkout', repository, folder])
+        run(['git', 'fetch', 'origin', revision], folder)
         run(['git', 'checkout', '--detach', revision], folder)
         run(['git', 'submodule', 'update', '--init', '--recursive'], folder)
     actual = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=folder, text=True).strip()
@@ -40,7 +44,8 @@ def prepared_inputs(component):
     patch = PACKAGE / 'native' / patch_relative
     generator = PACKAGE / 'native/typography/patch_libcosmic.py'
     return {
-        'schema_version': 3,
+        'schema_version': 4,
+        'lock_guard_sha256': hashlib.sha256((PACKAGE / 'native/typography/lock_guard.py').read_bytes()).hexdigest(),
         'source_commit': revision,
         'library_commit': library_revision,
         'source_patch_sha256': hashlib.sha256(patch.read_bytes()).hexdigest(),
@@ -53,6 +58,52 @@ def prepared_inputs(component):
         'display_role_profiles_sha256': hashlib.sha256(
             (PACKAGE / 'native/typography/display-role-profiles.json').read_bytes()).hexdigest(),
         'popup_generator_sha256': popup_inputs_digest(),
+        **({
+            'keyboard_focus_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_keyboard_focus.py').read_bytes()).hexdigest(),
+            'keyboard_focus_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/keyboard_focus_seats.rs').read_bytes()).hexdigest(),
+            'keyboard_input_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_keyboard_input.py').read_bytes()).hexdigest(),
+            'keyboard_input_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/keyboard_input_state.rs').read_bytes()).hexdigest(),
+            'keyboard_context_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_keyboard_context.py').read_bytes()).hexdigest(),
+            'keyboard_context_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/keyboard_event_context.rs').read_bytes()).hexdigest(),
+            'client_keymap_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_client_keymap.py').read_bytes()).hexdigest(),
+            'client_keymap_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/client_keymap.rs').read_bytes()).hexdigest(),
+            'client_iced_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_client_iced.py').read_bytes()).hexdigest(),
+            'client_iced_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/client_iced_event.rs').read_bytes()).hexdigest(),
+            'client_key_tables_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/client_key_tables.rs').read_bytes()).hexdigest(),
+            'client_iced_fixture_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/pinned-iced-keymap-sources.json.gz').read_bytes()).hexdigest(),
+            'client_iced_license_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/pinned-iced-keymap.LICENSE').read_bytes()).hexdigest(),
+            'client_focus_match_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_client_focus_match.py').read_bytes()).hexdigest(),
+            'client_focus_match_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/client_focus_match.rs').read_bytes()).hexdigest(),
+            'iced_keyboard_dispatch_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_iced_keyboard_dispatch.py').read_bytes()).hexdigest(),
+            'iced_keyboard_dispatch_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/iced_keyboard_dispatch.rs').read_bytes()).hexdigest(),
+            'iced_keyboard_dispatch_fixture_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/pinned-iced-state.json.gz').read_bytes()).hexdigest(),
+            'iced_keyboard_route_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_iced_keyboard_route.py').read_bytes()).hexdigest(),
+            'iced_keyboard_route_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/iced_keyboard_route.rs').read_bytes()).hexdigest(),
+            'overflow_keyboard_isolation_generator_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/prepare_overflow_keyboard_isolation.py').read_bytes()).hexdigest(),
+            'overflow_keyboard_isolation_module_sha256': hashlib.sha256(
+                (PACKAGE / 'native/panel/overflow_keyboard_isolation.rs').read_bytes()).hexdigest(),
+        } if component == 'cosmic-panel' else {}),
     }
 
 
@@ -67,7 +118,19 @@ def popup_inputs_digest():
 
 def library_inputs(expected):
     return {key: value for key, value in expected.items()
-            if key not in ('source_commit', 'source_patch_sha256')}
+            if key not in ('source_commit', 'source_patch_sha256',
+                           'keyboard_focus_generator_sha256', 'keyboard_focus_module_sha256',
+                           'keyboard_input_generator_sha256', 'keyboard_input_module_sha256',
+                           'keyboard_context_generator_sha256', 'keyboard_context_module_sha256',
+                           'client_keymap_generator_sha256', 'client_keymap_module_sha256',
+                           'client_iced_generator_sha256', 'client_iced_module_sha256',
+                           'client_key_tables_sha256', 'client_iced_fixture_sha256',
+                           'client_iced_license_sha256',
+                           'client_focus_match_generator_sha256', 'client_focus_match_module_sha256',
+                           'iced_keyboard_dispatch_generator_sha256', 'iced_keyboard_dispatch_module_sha256',
+                           'iced_keyboard_dispatch_fixture_sha256',
+                           'iced_keyboard_route_generator_sha256', 'iced_keyboard_route_module_sha256',
+                           'overflow_keyboard_isolation_generator_sha256', 'overflow_keyboard_isolation_module_sha256')}
 
 
 def validate_prepared(marker, expected):
@@ -119,6 +182,25 @@ def build(component, work, jobs):
         raise RuntimeError(f'Prepared native typography is missing in {library}; '
                            'use a fresh --work directory. The existing source tree was left unchanged.')
     if not marker.exists():
+        if component == 'cosmic-panel':
+            run(['python3', PACKAGE / 'native/panel/prepare_keyboard_focus.py', source,
+                 '--output', work / 'keyboard-focus.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_keyboard_input.py', source,
+                 '--output', work / 'keyboard-input.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_keyboard_context.py', source,
+                 '--output', work / 'keyboard-context.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_client_keymap.py', source,
+                 '--output', work / 'client-keymap.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_client_iced.py', source,
+                 '--output', work / 'client-iced.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_client_focus_match.py', source,
+                 '--output', work / 'client-focus-match.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_iced_keyboard_dispatch.py', source,
+                 '--output', work / 'iced-keyboard-dispatch.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_iced_keyboard_route.py', source,
+                 '--output', work / 'iced-keyboard-route.patch', '--apply'])
+            run(['python3', PACKAGE / 'native/panel/prepare_overflow_keyboard_isolation.py', source,
+                 '--output', work / 'overflow-keyboard-isolation.patch', '--apply'])
         patch = PACKAGE / 'native' / patch_relative
         run(['git', 'apply', '--check', patch], source)
         run(['git', 'apply', patch], source)
@@ -153,10 +235,12 @@ def build(component, work, jobs):
             raise RuntimeError('Source already contains a libcosmic override; inspect it before building.')
         cargo.write_text(cargo.read_text() + library_overrides(library))
         marker.write_text(json.dumps(expected, indent=2) + '\n')
-    # Resolve only the local crate substitutions; existing transitive pins stay
-    # in the upstream lockfile. The subsequent release build requires that lock.
-    run(['cargo', '+stable', 'check', '-j', jobs], source)
+    # Always compare against the authentic pinned upstream lock, including on resume.
+    original_lock = subprocess.check_output(['git', 'show', revision + ':Cargo.lock'], cwd=source)
+    lock_guard.resolve(source, original_lock)
+    run(['cargo', '+stable', 'check', '--locked', '-j', jobs], source)
     run(['cargo', '+stable', 'build', '--release', '--locked', '-j', jobs], source)
+    lock_guard.validate(source, original_lock)
     binary = source / 'target/release' / component
     print(f'Built native candidate: {binary}')
     print('Inspect it before installing with native/install.py. The running session is unchanged.')

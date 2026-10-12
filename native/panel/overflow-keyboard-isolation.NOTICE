@@ -1,0 +1,12 @@
+Overflow keyboard isolation is authored GPL-3.0-only panel code. Original panel
+b5cc19e351b82eed999097ced1ff267d27bf8e7a source is authenticated through the
+existing pinned-keyboard-focus GPL fixture and full license. This transform
+changes only the actual overflow view's wrapper and adds an authored child
+module; the original SDK button and MPL/GPL/MIT notices/licenses remain intact.
+
+The module delegates the original-feature widget tree, layout, focus operations,
+non-keyboard input, draw, pointer interaction, overlay, id and drag destinations.
+Every keyboard event is refused before SDK processing; no keyboard activation,
+traversal, popup serial/grab authority or accessibility acceptance is supplied.
+The supported reviewed SDK feature set is []; a11y-enabled builds are not
+verified by this seam and must not be claimed as accessible recovery.

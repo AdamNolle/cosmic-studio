@@ -6,7 +6,7 @@
     "winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs",
     "winit/src/platform_specific/wayland/handlers/ext_background_effect.rs"
   ],
-  "patch_sha256": "adc35c4f016592fb4e4caabff77455adb8ee8d3bbfeb015db8f92e7c1e34d420",
+  "patch_sha256": "d8a63926049c794fcacbd64a5b5956c09f14d9c1dbdb49ef03f810d4956921c3",
   "protocol": {
     "checksum": "efa790ed75fbfd71283bd2521a1cfdc022aabcc28bdcff00851f9e4ae88d9901",
     "target_corrected_blur_bit": 1,

@@ -4,6 +4,24 @@
 
 The selected icons now live in [`approved-dock/`](approved-dock/README.md). Use `python3 icons/approved-dock/install.py apply` and `verify` from the repository root for that set. It provides the approved macOS artwork, blue Files icon, and Blender glass Trash with automatic empty/full states. The Studio Objects generator and installer documented below are older inactive studies.
 
+### Audit the selected approved theme
+
+`python3 icons/inventory.py --local-report icons/inventory.local.json` audits
+actual exact-case files under `approved-dock/theme` (Studio Dock), not membership
+in the older `coverage.json`. It respects XDG launcher priority, recursive
+freedesktop desktop IDs and hidden overrides. Declared inherited lookups and
+absolute paths are reported separately, never counted as authored coverage.
+`env`-wrapped launchers without `TryExec` remain unassessed. An existing report
+is never overwritten. This is a filesystem/source audit: theme installation,
+application startup, embedded resources and optical quality remain unverified.
+
+The additional CPU/RAM/GPU/disk, multi-monitor brightness and hidden-bar icon
+families requested in iteration21 now have parent-reviewed original
+[geometry specifications and state/size SVG candidates](utilities/README.md)
+with27 passing source tests. Real editable Blender exports, family/glass optics,
+active-theme aliases, visual review and native runtime evidence remain open.
+No new utility artwork is installed merely by fixing this audit.
+
 
 The new family uses editable Blender geometry, physical cast-glass volumes,
 app-specific colors, beveled identifying objects, and authored lighting. The

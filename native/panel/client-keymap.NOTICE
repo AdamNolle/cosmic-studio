@@ -1,0 +1,17 @@
+COSMIC Studio owned client XKB lookup candidate, 2026-10-11.
+Original panel pin b5cc19e351b82eed999097ced1ff267d27bf8e7a; panel Smithay
+0ff00983b6007257a7a161a4fe8b14a778e2ac8f. Not compositor Smithay.
+Exact prior original-source/focus/input/event fixtures, GPL/MPL notices and
+full licenses remain in pinned-keyboard-{focus,input} files and
+keyboard-event-context.NOTICE. Original seat.rs MPL header preserved;
+no new header invented for original state.rs. New client_keymap.rs and authored
+self-contained synthetic XKB test text are GPL-3.0-only; MIT repo does not
+relicense upstream fixtures or this module.
+
+Captures actual SCTK callback as_string text into actual ClientSeat; only an
+explicit lookup builds independent local xkbcommon0.9 objects through existing
+public Smithay exports. No borrowed FFI objects/unsafe Send/foreign dependencies.
+Slave raw depressed/latched/locked/layout masks, checked XKB+8, single-symbol
+cardinality/current original event comparison and Control-cleared profiles.
+No native per-key parsing, original server-state change, composed-text rebuild,
+Iced key/physical/location conversion or activation/recovery/hiding acceptance.

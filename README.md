@@ -45,6 +45,10 @@ Recovery preserves bytes, permissions, symlinks and previously absent files, and
 
 Approved assets, Blender scenes, SVGs and exports are in [approved-dock](icons/approved-dock/README.md), [system-apps](icons/system-apps/README.md) and [window-controls](icons/window-controls/README.md). Older Studio Objects studies are inactive. The Trash watcher changes launcher artwork only.
 
+## Windows development VM
+
+Use the [isolated Pop!_OS VM tooling](native/vm/README.md) to edit this repo on Windows and build/test inside Linux. It verifies the official ISO, preserves existing VMs, exports explicit source inputs and retains source/recovery reports. Native runtime and hardware validation remain separate completion gates.
+
 ## Native Rust integration
 
 Typography and materials require changes to statically linked libcosmic and COSMIC clients. Builders pin revisions and retain native Iced shaping, glyph caches, Wayland input and scaling. Preparation refuses unsupported sources. Builders create candidates without installing or stopping the desktop.

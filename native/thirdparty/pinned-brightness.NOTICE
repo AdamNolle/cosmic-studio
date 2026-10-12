@@ -1,0 +1,17 @@
+Pinned Brightness source fixture
+===============================
+
+Repository: https://github.com/cosmic-utils/cosmic-ext-applet-external-monitor-brightness
+Commit: 3e6486ff11dba8cdb729420c27b4ce2c519f8443
+Files: src/app.rs, src/monitor.rs, src/main.rs
+License: GPL-3.0-only, preserved in pinned-brightness.LICENSE.
+
+pinned-brightness-sources.json.gz holds exact original Git HEAD bytes as JSON
+strings for transform/refusal/real-patch source tests. These files are not
+relicensed by the repository's MIT license. The managed-popup postimage is
+computed separately before the narrowly guarded grouped-command transform.
+brightness_commands.rs is original Studio code integrated under GPL-3.0-only.
+
+The fixture does not prove full application compilation, DDC/monitor support,
+Flatpak baseline/sandbox compatibility, or native desktop rendering. The
+original watch channel remains last-value-only across distinct UI actions.

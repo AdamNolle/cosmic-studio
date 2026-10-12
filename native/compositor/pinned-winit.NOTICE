@@ -1,0 +1,9 @@
+Fixture: original cosmic-comp src/backend/winit.rs
+Source: https://github.com/pop-os/cosmic-comp/blob/0fbd4574ef4caf74769a617d205fd1fc909ac9b1/src/backend/winit.rs
+Original SHA-256: d0e6421880113f1095c439c607f9bb8f3001e1ee6282cfe5878d8dd8db2b583a
+License: GPL-3.0-only (original file's SPDX identifier retained in compressed bytes).
+The original full GPL-3.0 license is retained beside this fixture as pinned-winit.LICENSE
+(SHA-256 3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986).
+The top-level repository MIT license does not relicense this upstream fixture.
+This fixture is original upstream source for byte-exact candidate repair guards,
+not a replacement renderer or runtime evidence.

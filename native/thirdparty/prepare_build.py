@@ -21,6 +21,16 @@ PROFILES = {
 }
 
 
+# Reviewed native Iced build helper, not a foreign dependency exception.
+# Each manifest was verified byte-equal to the exact recursive submodule HEAD.
+NATIVE_HELPER_MANIFEST_SHA256 = '1a09e421283df007634fc2f95bea9f726160f4687dcc7c40bdcb8e117816ca5f'
+NATIVE_HELPER_SUBMODULES = {
+    PROFILES['brightness'][1]: '7346cffd2e51e45fbe4dd31bdd42211b8ca0078e',
+    PROFILES['sysinfo'][1]: '7918b2826ec8ad4f9e0032f6a21286bac431e482',
+    PROFILES['status-hub'][1]: 'ffe1f1dbe3cbfd313f9b5fe8e36a4af462cae5d7',
+}
+
+
 def git(folder, *args):
     return subprocess.check_output(['git', *args], cwd=folder, text=True).strip()
 
@@ -54,6 +64,12 @@ def generator_inputs(profile):
     paths += [PACKAGE/'native/typography/prepare_display_roles.py']
     if profile in ('brightness', 'sysinfo'):
         paths += [PACKAGE/'native/thirdparty/prepare_routes.py']
+    if profile == 'brightness':
+        paths += [PACKAGE/'native/thirdparty'/name for name in
+                  ('prepare_brightness_batch.py', 'brightness_commands.rs')]
+    if profile == 'sysinfo':
+        paths += [PACKAGE/'native/thirdparty'/name for name in
+                  ('prepare_sysinfo_rates.py', 'sysinfo_sample_rates.rs')]
     paths += [PACKAGE/'native/popups'/name for name in
               ('prepare.py', 'policy.rs', 'material.rs', 'theme_method.rs', 'window_patch.py')]
     if profile == 'caffeine':
@@ -77,6 +93,22 @@ def generator_inputs(profile):
     return inputs
 
 
+def verify_native_helper(library, manifest):
+    library = library.resolve()
+    expected = library/'iced/build_helpers/Cargo.toml'
+    if manifest.resolve() != expected or manifest.is_symlink():
+        raise ValueError('Native build helper must use its exact reviewed SDK path.')
+    revision = git(library, 'rev-parse', 'HEAD')
+    iced = NATIVE_HELPER_SUBMODULES.get(revision)
+    if (iced is None or git(library, 'rev-parse', 'HEAD:iced') != iced
+            or git(library/'iced', 'rev-parse', 'HEAD') != iced):
+        raise ValueError('Native build helper requires the exact reviewed library/submodule pins.')
+    original = subprocess.check_output(['git', 'show', 'HEAD:build_helpers/Cargo.toml'], cwd=library/'iced')
+    if (hashlib.sha256(original).hexdigest() != NATIVE_HELPER_MANIFEST_SHA256
+            or manifest.read_bytes() != original):
+        raise ValueError('Native build helper manifest differs from its reviewed original bytes.')
+
+
 def crate_entries(library):
     entries = {}
     for cargo in library.rglob('Cargo.toml'):
@@ -86,7 +118,9 @@ def crate_entries(library):
             name = tomllib.loads(cargo.read_text()).get('package', {}).get('name', '')
         except tomllib.TOMLDecodeError:
             continue
-        if name == 'libcosmic' or name.startswith('iced') or name in ('cosmic-config', 'cosmic-config-derive', 'cosmic-theme'):
+        if name == 'build_helpers':
+            verify_native_helper(library, cargo)
+        if name == 'libcosmic' or name.startswith('iced') or name in ('cosmic-config', 'cosmic-config-derive', 'cosmic-theme', 'build_helpers'):
             if name in entries:
                 raise ValueError('Ambiguous native crate name: '+name)
             entries[name] = cargo.parent
@@ -102,8 +136,10 @@ def lock_packages(text, native_crates, library_revision):
         item = {key: package[key] for key in ('name', 'version', 'source', 'checksum') if key in package}
         if package['name'] in native_crates:
             source = package.get('source')
-            if source is not None and not (source.startswith('git+https://github.com/pop-os/libcosmic') and source.endswith('#'+library_revision)):
-                raise ValueError('Unexpected source for native crate: '+package['name'])
+            if source is not None:
+                repository = source.split('#')[0].split('?')[0].removesuffix('/').removesuffix('.git')
+                if repository != 'git+https://github.com/pop-os/libcosmic' or not source.endswith('#'+library_revision):
+                    raise ValueError('Unexpected source for native crate: '+package['name'])
             item.pop('source', None)
             item.pop('checksum', None)
         packages.append(item)

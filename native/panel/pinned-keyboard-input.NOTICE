@@ -1,0 +1,14 @@
+Original fixture: three exact cosmic-panel files at
+b5cc19e351b82eed999097ced1ff267d27bf8e7a from pop-os/cosmic-panel.
+Container upstream GPL-3.0-only text is already preserved in
+pinned-keyboard-focus.LICENSE. client/handlers/seat.rs retains its original
+SPDX-License-Identifier: MPL-2.0 header; original files are not relabeled MIT or
+relicensed by this repository. Copyright original System76 contributors.
+Full MPL2 text preserved as pinned-keyboard-input.MPL-2.0 from
+https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt
+SHA256 fab3dd6bdab226f1c08630b1dd917e11fcb4ec5e1e020e2c16f83a0a13863e85.
+
+COSMIC Studio candidate changes, 2026-10-11: per-ClientSeat held/raw/client-press
+lifetime ledger only. Original forwarding, repeat stub, serial domains and key
+conversion are preserved. keyboard_input_state.rs is new GPL-3.0-only source.
+No Iced events, popup activation/grab grants, persistent applet ID or hiding.

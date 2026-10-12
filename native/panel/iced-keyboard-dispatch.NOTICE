@@ -1,0 +1,27 @@
+COSMIC Studio explicit single-event Iced message boundary
+
+Original cosmic-panel b5cc19e351b82eed999097ced1ff267d27bf8e7a
+cosmic-panel-bin/src/iced/state.rs is retained byte-exact in
+pinned-iced-state.json.gz (original SHA256
+199b3a9aa395a28fbc24f8007b9e472ccb0d9a591abda887d154689b5f9ec39a).
+Original GPL-3.0 license text is pinned-keyboard-focus.LICENSE. This fixture,
+new iced_keyboard_dispatch.rs and generator integration remain GPL-3.0-only;
+repository MIT does not relicense them. Prior GPL/MPL and borrowed-Winit MIT
+notices remain unchanged.
+
+Explicit State::update_keyboard runs one converted keyboard event through the
+actual Iced widget UI and carries its immutable original envelope to each
+resulting message. Nonempty ordinary queues are refused without flushing or
+relabeling. Validation and keyboard-only dispatch are mandatory explicit caller
+arguments; no ordinary Program::update or first-seat pointer fallback occurs.
+Validation precedes UI and each output. Returned tasks do not inherit context;
+a later task output is ordinary untrusted work. No transactional rollback is
+claimed after an earlier dispatcher changes live state.
+
+No native keyboard callback or production wrapper invokes this method yet.
+The synthetic widget tests use the real UI/cache/software renderer and original
+safe converter, not actual WlSeat admission/keyboard/grab/recovery. A supplied
+validator is not itself evidence of live seat/focus/target/modifier/order/press/
+popup authorization. Those gates, deferred message authority, traversal and
+restoration remain open. Hiding, configuration migration and deployment remain
+disabled. No new dependency, unsafe code, timer or renderer trial.

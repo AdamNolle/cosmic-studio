@@ -4,6 +4,7 @@
 No application is installed, launched or stopped by this script.
 """
 import argparse
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -11,6 +12,9 @@ import subprocess
 import tomllib
 
 HERE = Path(__file__).resolve().parent
+_guard_spec = importlib.util.spec_from_file_location('studio_lock_guard', HERE / 'lock_guard.py')
+lock_guard = importlib.util.module_from_spec(_guard_spec)
+_guard_spec.loader.exec_module(lock_guard)
 
 def run(*args, cwd=None, env=None):
     subprocess.run(args, cwd=cwd, env=env, check=True)
@@ -19,6 +23,7 @@ def clone(url, revision, target):
     if target.exists():
         raise SystemExit(f"Refusing to overwrite an existing source: {target}")
     run("git", "clone", url, str(target))
+    run("git", "fetch", "origin", revision, cwd=target)
     run("git", "checkout", "--detach", revision, cwd=target)
     run("git", "submodule", "update", "--init", "--recursive", cwd=target)
 
@@ -87,14 +92,16 @@ def main():
             labels = HERE / "files-desktop-labels.patch"
             run("git", "apply", "--check", str(labels), cwd=application)
             run("git", "apply", str(labels), cwd=application)
+        original_lock = (application / 'Cargo.lock').read_bytes()
         overrides(application, libraries[library_revision])
+        lock_guard.resolve(application, original_lock, args.toolchain, env)
         packages = ["-p", component] + (["-p", "cosmic-files-applet"] if app == "files" else [])
-        run("cargo", f"+{args.toolchain}", "build", "--release", *packages,
-            "-j", str(args.jobs), cwd=application, env=env)
-        # Override resolution changes the source locations in Cargo.lock once.
-        # Verify the resulting lock is complete and fixed for subsequent builds.
         run("cargo", f"+{args.toolchain}", "build", "--release", "--locked", *packages,
             "-j", str(args.jobs), cwd=application, env=env)
+        # A second locked invocation verifies that the resolved lock stays fixed.
+        run("cargo", f"+{args.toolchain}", "build", "--release", "--locked", *packages,
+            "-j", str(args.jobs), cwd=application, env=env)
+        lock_guard.validate(application, original_lock)
         run("git", "diff", "--check", cwd=application)
         built.append(str(work / "target" / "release" / component))
         if app == "files":

@@ -1,0 +1,14 @@
+# Source fingerprints, generated patches and licensed font metadata require LF bytes.
+# Keep the Windows checkout identical to the Linux build inputs.
+* text=auto eol=lf
+*.ttf binary
+*.otf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.blend binary
+*.ico binary
+*.pdf binary
+# Preserve the official MPL text verbatim, including its authored whitespace.
+native/panel/pinned-keyboard-input.MPL-2.0 -text whitespace=-blank-at-eol

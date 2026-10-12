@@ -32,6 +32,11 @@ class LegacyAdapterTests(unittest.TestCase):
             self.assertIn('Task::batch([blur, get_popup(settings)])', app)
             self.assertIn('studio_refresh_popup_blur()', app)
             self.assertIn('desired.then(|| vec![iced_core::Rectangle::new', app)
+            self.assertIn('iced_core::Size::INFINITY', app)
+            self.assertNotIn('iced_core::Size::INFINITE', app)
+            api = json.loads((LEGACY/'compatibility.json').read_text())['native_api_sha256']
+            self.assertEqual(api['iced/core/src/size.rs'],
+                             '7ec056939a02804f65076ca3bf2b804ec033a5bd3a91dbcae76fca13614ad87d')
             self.assertIn('theme.cosmic().is_high_contrast', app)
             self.assertEqual((root / 'src/core.rs').read_text(), files['src/core.rs'])
             self.assertEqual((root / 'Cargo.toml').read_text(), files['Cargo.toml'])

@@ -1,0 +1,10 @@
+The compressed fixture preserves six original GPL-3.0-only source files from
+https://github.com/pop-os/cosmic-panel at
+b5cc19e351b82eed999097ced1ff267d27bf8e7a.
+Original Copyright System76 contributors. Full upstream LICENSE.md is retained
+as pinned-keyboard-focus.LICENSE. Fixtures are source/refusal evidence, not a
+replacement implementation. Repository MIT does not relicense these GPL files.
+
+prepare_keyboard_focus.py generates candidate-only modifications to this exact
+native panel. keyboard_focus_seats.rs is GPL-3.0-only and remains under that
+license when incorporated. No upstream dependency or sandbox change.

@@ -1,0 +1,19 @@
+Exact Sysinfo source fixture
+============================
+Repository: https://github.com/cosmic-utils/cosmic-ext-applet-sysinfo
+Commit: f66e0c7b133bf4249d23ab7483693cedca46ad19
+Files: src/data/mod.rs, src/main.rs, src/config.rs
+Original license: GNU GPL version 3, preserved verbatim in pinned-sysinfo.LICENSE.
+The repository MIT license does not relicense this fixture. Original Studio
+sample-rate module is integrated under GPL-3.0-only.
+
+sysinfo 0.39.6 original locked archive checksum:
+d2071df9448915b71c4fe6d25deaf1c22f12bd234f01540b77312bb8e41361e6
+Its DiskUsage read_bytes/written_bytes and NetworkData received/transmitted
+already measure bytes since the last refresh. Do not subtract them again.
+
+This fixture supports exact transforms/refusals/real Git application. It does
+not establish whole-app compilation, cancellation of nvidia-smi/flatpak-spawn,
+physical sampling precision, device/reset/error coverage or desktop behavior.
+Default decimal MB/s labels clarify units; existing user configuration and schema
+remain untouched. Original GPU subprocess/provider behavior remains unbounded.

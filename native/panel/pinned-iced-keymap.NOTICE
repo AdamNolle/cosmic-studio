@@ -1,0 +1,22 @@
+COSMIC Studio explicit client/Iced metadata conversion candidate, 2026-10-12.
+Panel b5cc19e351b82eed999097ced1ff267d27bf8e7a / Iced
+87e1787fbb9b924576e6f6ea2ef2f45d0729e63d / panel Smithay0ff00983.
+
+pinned-iced-keymap-sources.json.gz preserves original Iced Wayland keymap,
+core key definitions and full original MIT license, byte-authenticated from
+Git HEAD. client_key_tables.rs adapts only callable forward scancode,
+named-symbol and location tables to existing Iced core types and locked
+Smithay xkb constants. Original "Borrowed from winit" provenance retained;
+original Iced copyright and permission in pinned-iced-keymap.LICENSE apply.
+The tables are MIT, not claimed as original artwork or proprietary code.
+Authored client_iced_event.rs and original panel integration remain GPL-3.0-only;
+repository MIT does not relicense GPL/MPL fixtures. Previous original notices
+and full GPL/MPL licenses remain, including seat.rs original MPL header.
+
+Explicit ClientSeat conversion retains immutable original event envelope,
+base logical/Control-cleared modified/current-symbol location/Linux-scancode
+physical identity, original named modifiers and SCTK composed text/repeat kind.
+Raw masks/group stay intact in the original frame; NumLock has no Iced flag.
+No callbacks dispatch the converter, no per-native-key parsing, no new dependency,
+server modifier synchronization, FIFO, popup authorization, repeat timer,
+keyboard activation/recovery/accessibility/hiding or deployment acceptance.

@@ -1,0 +1,8 @@
+Exact source transform for cosmic-panel b5cc19e351b82eed999097ced1ff267d27bf8e7a,
+following the guarded complete Iced metadata postimages. Authored selection
+module and native integration are GPL-3.0-only, not repository MIT relicensing.
+Original panel GPL license is retained in pinned-keyboard-focus.LICENSE.
+Original seat.rs MPL-2.0 header and full official license remain unchanged in
+pinned-keyboard-input.MPL-2.0; adapted Iced tables keep original MIT provenance.
+No third-party implementation, original fixture bytes, lock or license changed.
+Same-seat active callback selection is not popup authorization/input recovery.

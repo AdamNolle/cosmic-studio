@@ -32,6 +32,29 @@ class PreparedBuildTests(unittest.TestCase):
         self.generator = self.root / 'native/typography/patch_libcosmic.py'
         for path, text in ((self.source_patch, 'native panel patch\n'),
                            (self.generator, 'display font generator\n'),
+                           (self.root/'native/panel/prepare_keyboard_focus.py', 'focus generator\n'),
+                           (self.root/'native/panel/keyboard_focus_seats.rs', 'focus ownership module\n'),
+                           (self.root/'native/panel/prepare_keyboard_input.py', 'input generator\n'),
+                           (self.root/'native/panel/keyboard_input_state.rs', 'input ledger module\n'),
+                           (self.root/'native/panel/prepare_keyboard_context.py', 'context generator\n'),
+                           (self.root/'native/panel/keyboard_event_context.rs', 'event context module\n'),
+                           (self.root/'native/panel/prepare_client_keymap.py', 'keymap generator\n'),
+                           (self.root/'native/panel/client_keymap.rs', 'keymap module\n'),
+                           (self.root/'native/panel/prepare_client_iced.py', 'iced generator\n'),
+                           (self.root/'native/panel/client_iced_event.rs', 'iced module\n'),
+                           (self.root/'native/panel/client_key_tables.rs', 'iced tables\n'),
+                           (self.root/'native/panel/pinned-iced-keymap-sources.json.gz', 'iced fixture\n'),
+                           (self.root/'native/panel/pinned-iced-keymap.LICENSE', 'iced license\n'),
+                           (self.root/'native/panel/prepare_client_focus_match.py', 'active focus generator\n'),
+                           (self.root/'native/panel/client_focus_match.rs', 'active focus module\n'),
+                           (self.root/'native/panel/prepare_iced_keyboard_dispatch.py', 'dispatch generator\n'),
+                           (self.root/'native/panel/iced_keyboard_dispatch.rs', 'dispatch module\n'),
+                           (self.root/'native/panel/pinned-iced-state.json.gz', 'dispatch fixture\n'),
+                           (self.root/'native/panel/prepare_iced_keyboard_route.py', 'wrapper route generator\n'),
+                           (self.root/'native/panel/iced_keyboard_route.rs', 'wrapper route module\n'),
+                           (self.root/'native/panel/prepare_overflow_keyboard_isolation.py', 'overflow isolation generator\n'),
+                           (self.root/'native/panel/overflow_keyboard_isolation.rs', 'overflow isolation module\n'),
+                           (self.root/'native/typography/lock_guard.py', 'dependency guard\n'),
                            (self.root/'native/typography/embed_fonts.py', 'font embedding generator\n'),
                            (self.root/'native/typography/prepare_display_roles.py', 'semantic font roles\n'),
                            (self.root/'native/typography/display-role-profiles.json', 'semantic source pins\n'),
@@ -78,6 +101,83 @@ class PreparedBuildTests(unittest.TestCase):
         self.generator.write_text('changed font generator\n')
         self.assert_rejected_without_work()
 
+    def test_changed_focus_generator_is_rejected_before_checkout_or_cargo(self):
+        (self.root/'native/panel/prepare_keyboard_focus.py').write_text('changed focus generator\n')
+        self.assert_rejected_without_work()
+
+    def test_changed_focus_module_is_rejected_before_checkout_or_cargo(self):
+        (self.root/'native/panel/keyboard_focus_seats.rs').write_text('changed focus module\n')
+        self.assert_rejected_without_work()
+
+    def test_changed_input_generator_or_module_is_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_keyboard_input.py', 'keyboard_input_state.rs'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native input\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_context_generator_or_module_is_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_keyboard_context.py', 'keyboard_event_context.rs'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native context\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_client_keymap_generator_or_module_is_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_client_keymap.py', 'client_keymap.rs'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native keymap\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_client_focus_match_inputs_are_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_client_focus_match.py', 'client_focus_match.rs'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native active focus\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_keyboard_route_inputs_are_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_iced_keyboard_route.py', 'iced_keyboard_route.rs',
+                     'prepare_overflow_keyboard_isolation.py', 'overflow_keyboard_isolation.rs'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native wrapper route\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_keyboard_dispatch_inputs_are_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_iced_keyboard_dispatch.py', 'iced_keyboard_dispatch.rs', 'pinned-iced-state.json.gz'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native message attribution\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_client_iced_inputs_are_rejected_before_checkout_or_cargo(self):
+        for name in ('prepare_client_iced.py', 'client_iced_event.rs', 'client_key_tables.rs',
+                     'pinned-iced-keymap-sources.json.gz', 'pinned-iced-keymap.LICENSE'):
+            with self.subTest(name=name):
+                path=self.root/'native/panel'/name
+                before=path.read_bytes()
+                path.write_text('changed native conversion\n')
+                self.assert_rejected_without_work()
+                path.write_bytes(before)
+
+    def test_changed_dependency_guard_is_rejected_before_checkout_or_cargo(self):
+        (self.root/'native/typography/lock_guard.py').write_text('changed dependency guard\n')
+        self.assert_rejected_without_work()
+
     def test_changed_popup_policy_is_rejected_before_checkout_or_cargo(self):
         (self.root/'native/popups/policy.rs').write_text('new popup policy\n')
         self.assert_rejected_without_work()
@@ -107,13 +207,21 @@ class PreparedBuildTests(unittest.TestCase):
 
     def test_matching_inputs_reuse_preparation_without_applying_patches(self):
         before = self.marker.read_bytes()
-        with mock.patch.object(shell, 'checkout') as checkout, mock.patch.object(shell, 'run') as run:
+        original = b'version = 3\npackage = []\n'
+        with mock.patch.object(shell, 'checkout') as checkout, mock.patch.object(shell, 'run') as run, \
+             mock.patch.object(shell.subprocess, 'check_output', return_value=original) as upstream, \
+             mock.patch.object(shell.lock_guard, 'resolve') as resolve, \
+             mock.patch.object(shell.lock_guard, 'validate') as validate:
             with contextlib.redirect_stdout(io.StringIO()):
                 shell.build(self.component, self.work, 4)
+            upstream.assert_called_once_with(['git', 'show', self.revision + ':Cargo.lock'], cwd=self.source)
+            resolve.assert_called_once_with(self.source, original)
+            validate.assert_called_once_with(self.source, original)
             self.assertEqual(checkout.call_count, 2)
             commands = [call.args[0] for call in run.call_args_list]
             self.assertEqual([command[:3] for command in commands], [
                 ['cargo', '+stable', 'check'], ['cargo', '+stable', 'build']])
+            self.assertTrue(all('--locked' in command for command in commands))
         self.assertEqual(self.marker.read_bytes(), before)
 
     def test_new_client_cannot_inherit_stale_shared_typography(self):

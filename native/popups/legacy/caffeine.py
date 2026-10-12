@@ -86,7 +86,7 @@ def transform_app(text):
         // native backend safely replays them; unavailable remains opaque.
         iced_winit::commands::blur::blur(
             id,
-            desired.then(|| vec![iced_core::Rectangle::new(iced_core::Point::ORIGIN, iced_core::Size::INFINITE)]),
+            desired.then(|| vec![iced_core::Rectangle::new(iced_core::Point::ORIGIN, iced_core::Size::INFINITY)]),
         ).discard()
     }
 

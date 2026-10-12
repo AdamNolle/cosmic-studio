@@ -1,0 +1,17 @@
+COSMIC Studio candidate event-context prerequisite, 2026-10-11.
+Original source: pop-os/cosmic-panel b5cc19e351b82eed999097ced1ff267d27bf8e7a.
+Exact original three-file fixture and GPL/MPL source attribution are preserved in
+pinned-keyboard-input-sources.json.gz and pinned-keyboard-input.NOTICE.
+Full GPL text: pinned-keyboard-focus.LICENSE; full original MPL2 text:
+pinned-keyboard-input.MPL-2.0. Original source notices remain unchanged;
+repository MIT does not relicense them. keyboard_event_context.rs is new GPL3.
+
+Requires exact focus25 and press-fixed26 postimages, adds per-actual-ClientSeat
+original SCTK KeyEvent/callback-serial and optional named/raw/group/serial
+modifier snapshots with immutable focus/event lifetime and redacted Debug.
+Press/release forwarding and legacy modifier behavior remain original.
+Repeat callback is observed only; no native key-down or timer is introduced.
+No reconstructed UTF8, Iced metadata, raw XKB synchronization, popup activation,
+keyboard admission/traversal/restoration/hiding or persistent applet ID.
+Latest-event cache is not FIFO/history and must not stand in for later queued
+full-path input dispatch or popup-grab/client-press authorization.

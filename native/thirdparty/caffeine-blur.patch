@@ -78,7 +78,7 @@ index 319a75e..22e9585 100644
  
                      queue_handle: qh,
 diff --git a/winit/src/platform_specific/wayland/event_loop/state.rs b/winit/src/platform_specific/wayland/event_loop/state.rs
-index e61a0e6..ef52e1c 100644
+index e61a0e6..b86c406 100644
 --- a/winit/src/platform_specific/wayland/event_loop/state.rs
 +++ b/winit/src/platform_specific/wayland/event_loop/state.rs
 @@ -486,7 +486,10 @@ pub struct SctkState {
@@ -145,16 +145,23 @@ index e61a0e6..ef52e1c 100644
      pub fn request_redraw(&mut self, surface: &WlSurface) {
          let e = self
              .frame_status
-@@ -874,6 +922,8 @@ impl SctkState {
+@@ -874,10 +922,14 @@ impl SctkState {
              close_with_children: settings.close_with_children,
          });
  
++        // End the parent-layer borrow before reconciling mutable popup state.
++        let toplevel = toplevel.clone();
 +        self.reconcile_popup_blur(settings.id);
 +
          Ok((
              settings.id,
              parent.wl_surface().clone(),
-@@ -1301,6 +1351,11 @@ impl SctkState {
+-            toplevel.clone(),
++            toplevel,
+             CommonSurface::Popup(popup.clone(), positioner.clone()),
+             common,
+         ))
+@@ -1301,6 +1353,11 @@ impl SctkState {
                  // XXX popup destruction must be done carefully
                  // first destroy the uppermost popup, then work down to the requested popup
                  platform_specific::wayland::popup::Action::Destroy { id } => {
@@ -166,7 +173,7 @@ index e61a0e6..ef52e1c 100644
                      let sctk_popup = match self
                          .popups
                          .iter()
-@@ -1331,6 +1386,7 @@ impl SctkState {
+@@ -1331,6 +1388,7 @@ impl SctkState {
                          to_destroy.push(popup_to_destroy_first);
                      }
                      for popup in to_destroy.into_iter().rev() {
@@ -174,7 +181,7 @@ index e61a0e6..ef52e1c 100644
                          if let Some(id) = self.id_map.remove(&popup.popup.wl_surface().id()) {
                              _ = self.destroyed.insert(id);
                          }
-@@ -1561,6 +1617,13 @@ impl SctkState {
+@@ -1561,6 +1619,13 @@ impl SctkState {
                      }
                  }
              }
@@ -190,7 +197,7 @@ index e61a0e6..ef52e1c 100644
                      if let Some(w) = self.windows.iter_mut().find(|w| w.id == id) {
 diff --git a/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs b/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs
 new file mode 100644
-index 0000000..3a3a510
+index 0000000..9b0e91e
 --- /dev/null
 +++ b/winit/src/platform_specific/wayland/handlers/blur_lifecycle.rs
 @@ -0,0 +1,248 @@
@@ -276,10 +283,10 @@ index 0000000..3a3a510
 +    pub fn request(&mut self, id: I, region: Option<Vec<RegionRect>>) {
 +        match region {
 +            Some(region) => {
-+                self.desired.insert(id, region);
++                _ = self.desired.insert(id, region);
 +            }
 +            None => {
-+                self.desired.remove(&id);
++                _ = self.desired.remove(&id);
 +            }
 +        }
 +    }
@@ -313,8 +320,8 @@ index 0000000..3a3a510
 +    }
 +
 +    pub fn remove(&mut self, id: I) {
-+        self.desired.remove(&id);
-+        self.applied.remove(&id);
++        _ = self.desired.remove(&id);
++        _ = self.applied.remove(&id);
 +    }
 +}
 +
@@ -396,7 +403,7 @@ index 0000000..3a3a510
 +        state.request(1, None);
 +        assert_eq!(state.reconcile(1, true, true), Change::Quiet);
 +        state.request(1, Some(region(80.0)));
-+        state.reconcile(1, true, true);
++        _ = state.reconcile(1, true, true);
 +        state.request(1, None);
 +        assert_eq!(state.reconcile(1, true, true), Change::Remove);
 +        state.request(1, Some(region(80.0)));

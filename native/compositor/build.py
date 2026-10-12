@@ -4,7 +4,6 @@ import argparse
 import importlib.util
 from pathlib import Path
 import subprocess
-import tomllib
 
 HERE = Path(__file__).resolve().parent
 COMP = "0fbd4574ef4caf74769a617d205fd1fc909ac9b1"
@@ -17,6 +16,7 @@ def source(url, revision, target):
     if target.exists():
         raise SystemExit(f"Refusing to overwrite existing source: {target}")
     run("git", "clone", url, str(target))
+    run("git", "fetch", "origin", revision, cwd=target)
     run("git", "checkout", "--detach", revision, cwd=target)
     run("git", "submodule", "update", "--init", "--recursive", cwd=target)
 
@@ -45,23 +45,22 @@ def main():
     source("https://github.com/pop-os/cosmic-comp", COMP, compositor)
     run("git", "apply", str(HERE / "compositor-glass.patch"), cwd=compositor)
     run("python3", str(HERE.parent / "window-controls/prepare.py"), str(compositor), "--compositor")
+    run("python3", str(HERE / "prepare_winit_binding.py"), str(compositor),
+        "--output", str(root / "winit-binding.patch"), "--apply")
     # Point every locked native toolkit crate at the reviewed typography fork.
     helper = HERE.parent / "typography/build_core_apps.py"
     spec = importlib.util.spec_from_file_location("native_overrides", helper)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
+    original_lock = (compositor / "Cargo.lock").read_bytes()
     module.overrides(compositor, library)
-    def registry_pins():
-        return {(p["name"], p["version"], p["source"])
-                for p in tomllib.loads((compositor / "Cargo.lock").read_text())["package"]
-                if p.get("source", "").startswith("registry+")}
-    before = registry_pins()
-    run("cargo", f"+{args.toolchain}", "check", "-j", str(args.jobs), cwd=compositor)
-    if registry_pins() != before:
-        raise SystemExit("Unexpected registry dependency changes; inspect the generated lockfile.")
+    module.lock_guard.resolve(compositor, original_lock, args.toolchain)
+    run("cargo", f"+{args.toolchain}", "check", "--locked", "-j", str(args.jobs), cwd=compositor)
+    module.lock_guard.validate(compositor, original_lock)
     run("git", "diff", "--check", cwd=compositor)
     run("cargo", f"+{args.toolchain}", "test", "--locked", "--lib", "-j", str(args.jobs), cwd=compositor)
     run("cargo", f"+{args.toolchain}", "build", "--locked", "--release", "-j", str(args.jobs), cwd=compositor)
+    module.lock_guard.validate(compositor, original_lock)
     print(compositor / "target" / "release" / "cosmic-comp")
 
 if __name__ == "__main__":

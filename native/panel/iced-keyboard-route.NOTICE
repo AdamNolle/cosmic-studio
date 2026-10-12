@@ -1,0 +1,25 @@
+COSMIC Studio actual IcedElement keyboard wrapper route (iteration32)
+
+Original panel: b5cc19e351b82eed999097ced1ff267d27bf8e7a
+Original GPL sources/complete license retained in pinned-keyboard-focus-sources.json.gz
+and pinned-keyboard-focus.LICENSE; original State in pinned-iced-state.json.gz.
+Authored iced_keyboard_route.rs and prepare_iced_keyboard_route.py: GPL-3.0-only.
+Prior authored GPL, original MPL seat and MIT/Winit forward-table notices unchanged.
+
+Requires exact complete iteration31 corrected State dispatch postimages. Changes
+only wrapper receiver type/two fresh constructor conversions, adds its child
+module, and exposes the State dispatch child to its parent wrapper. Ordinary
+update/filter/target/client callbacks/overflow/popup-grab paths remain unchanged.
+
+TaskInbox stages at most the next original Option<Message> when probing pending
+output. None is an output too; repeated refusal does not consume/reorder it.
+Ordinary update uses the same try_recv semantics. State work refuses before the
+receiver probe. This is not a scheduler barrier: an in-flight output may arrive
+later and stays ordinary work, never attributed to the supplied keyboard event.
+
+Actual wrapper explicitly calls State::update_keyboard; caller must supply live
+validation and keyboard-only envelope-bearing dispatch outside Smithay locks.
+Returned tasks follow original contextless scheduling. Synthetic wrapper/UI tests
+use a real calloop handle but do not dispatch a live GlobalState or Wayland seat.
+No native callback uses this route, no validator/grab grant is implemented, no
+keyboard recovery/activation/hiding/config/deployment/runtime acceptance claimed.
