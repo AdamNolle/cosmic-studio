@@ -5,6 +5,19 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration43 connection chain and private launcher fixtures
+
+The [updated prerequisites](populated-runtime-prerequisites.md) authenticate the
+actual source path through locked Winit to inherited-FD connection handling.
+Full app22/SDK933 inventory and frozen ELF match the native build. Seven actual
+Linux process/socket helper cases verify an atomic attempt cap, same inherited
+FD, retained child failure and graceful/timeout cleanup of observed escaped
+fixture descendants. Repeated cases are not new native app coverage. The
+private wrapper has not run through launch-pad/panel or launched Caffeine;
+outer interruption/native-child identity and cleanup remain gates before a
+NEW populated run. Production policies unchanged; no renderer/compiler/input/
+recovery/hiding/deployment acceptance. App93/Linux277/274/3 unchanged.
+
 ## Iteration42 populated diagnostic prerequisites
 
 The [frame/applet audit](populated-runtime-prerequisites.md) confirms the actual

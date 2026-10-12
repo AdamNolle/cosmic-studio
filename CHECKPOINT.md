@@ -2,6 +2,23 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration43 actual source chain and diagnostic launcher fixtures
+
+Authenticated Caffeine→SDK→Iced→locked Winit8dfaba2→Wayland connection source
+path, including exact SCTK0.19.2 reexport versus CCTK's separate0.20.0 choice.
+Complete app22/SDK933 inputs/marker/lock/frozen native ELF unchanged. Source
+correspondence is not observed backend execution. Seven real owned Linux
+process/socket helper cases (repeated with launcher hash check) verify atomic
+single attempt, inherited FD, raw child exit7 retention and timeout/SIGTERM
+cleanup of observed setsid/double-fork descendants. Wrapper exit0 intentionally
+suppresses failure-restart, never certifies child success. Four archives196
+payloads authenticated; native sources/features/production policy unchanged.
+No native Caffeine/launch-pad/panel/compositor/compiler run. Actual outer
+interruption cleanup and native-child identity remain required before NEW
+populated execution. No independent child verdict/new app tests/full aggregate;
+app93/Linux277/274/3 and both false runtime/final flags unchanged. Later stock
+state difference remains unknown. See [prerequisites](native/panel/populated-runtime-prerequisites.md).
+
 ## Iteration42 frame/applet source audit (no runtime trial)
 
 Actual compiled39 render source is original and refuses any actual/dimension

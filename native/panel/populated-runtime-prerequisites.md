@@ -4,6 +4,73 @@ Iteration42 inspected authenticated original and compiled39 input contracts.
 **No new renderer, populated panel, native build, input or popup trial ran.**
 Opening/manual hiding/deployment and final desktop acceptance remain open.
 
+## Iteration43: authenticated backend chain and launcher fixtures
+
+The missing connection link is the **locked Winit fork**, not a direct Iced
+`connect_to_env` call. Actual prepared chain files match their original bytes:
+
+- Caffeine `main` → SDK `applet::run` → `MultiWindow::run_with`.
+- Iced `src/program.rs` → `iced_winit::program::run` → Winit `EventLoop::new`.
+- Winit `8dfaba290f9a00d3e13be71f1e6f438889cf5546` builds the Linux event loop;
+  nonempty WAYLAND_DISPLAY or WAYLAND_SOCKET selects Wayland unless explicitly
+  forced otherwise. Its Wayland event loop calls `Connection::connect_to_env`.
+- Actual metadata selects SCTK0.19.2 for Winit; its authenticated crate reexports
+  wayland-client0.31.11. CCTK separately selects SCTK0.20.0, not the same toolkit.
+  Both resolve the same locked wayland-client package. The inherited-FD behavior
+  reviewed in iteration42 therefore belongs to the actual source call chain.
+
+Iced's auxiliary Wayland event loop takes Winit's owned display handle and uses
+`Backend::from_foreign_display`/`Connection::from_backend`; its reviewed
+connection block is original, although the whole file has accepted blur changes.
+This is source correspondence, **not observed execution or connection success**.
+Complete prepared app22/SDK933 input inventories, marker/lock and frozen Caffeine
+ELF still match the retained native build. No dependency, feature or native code
+changed; no Caffeine, panel, compositor or compiler was launched in iteration43.
+
+A **private diagnostic-only** Python launcher now has seven real Linux
+process/socket fixture cases, repeated in a hash-checked run:
+
+1. One child receives the same inherited socket FD/inode and sends fixture bytes.
+2. Raw child exit7 is retained separately from wrapper exit0.
+3. Concurrent/repeated wrapper invocations cannot regain an atomic attempt.
+4. Invalid FD consumes the attempt without spawning.
+5. Wrong executable hash consumes the attempt without spawning.
+6. Deadline cleanup reaps an observed setsid/double-fork descendant.
+7. SIGTERM cleanup separately reaps that descendant.
+
+An exclusive-create marker consumes the attempt **before validation/spawn**.
+`pass_fds` preserves the designated FD, with other unrelated FDs closed. The
+owned wrapper is a Linux child subreaper; it observes descendant identities,
+opens pidfds and cleans/reaps those descendants rather than assuming
+`kill_on_drop` handles them. Its wrapper exit0 deliberately prevents the original
+manager's failure restart; **exit0 never accepts the raw child result**. A NEW
+supervisor must reject refused/failed/timed-out/unexpected-child results.
+
+These are seven helper fixture cases, not fourteen native app tests, not an
+execution of launch-pad's manager, and not native Caffeine cleanup acceptance.
+The wrapper has not been used by the panel. Abrupt wrapper SIGKILL/interrupted
+supervision is not covered by the graceful-signal fixtures. Before populated
+execution, the outer owned supervisor must independently track and clean the
+actual wrapper/native descendants (including interruption), authenticate
+actual executable/argv/UID/environment/FD/socket and preserve first outcomes.
+Keep the genuine desktop ID/metadata and production restart policy unchanged.
+No input, logind permission expansion, installed queue or stock attachment.
+
+Four private archives retain196 regular payloads, checked SHA/size/mode/UID/GID,
+including original/actual sources, both fixture runs and full input marker.
+The scoped command below checks those artifacts, fresh source/storage/cleanup,
+and repeats only the seven process/FD fixtures:
+
+```powershell
+python 'C:/Users/adamm/VirtualBox VMs/COSMIC-Studio/iteration-43-review-evidence.py'
+```
+
+Fresh Windows shell, cwd `C:/Users/adamm/Desktop/Code/cosmic-studio`, no compiler/
+library/profile overrides. Preserve strict SSH, exact existing mounts, original
+source/targets/caches/ELFs, private scripts/archives/receipts and all recovery.
+Later stock-state mismatch remains unknown. App93/Linux277/274/3 are unchanged;
+no independent child final verdict or populated/runtime/final desktop pass.
+
 ## Empty startup: check native size refusal before changing frame handling
 
 The compiled39 `space/render.rs` is byte-equal to original panel
@@ -74,8 +141,9 @@ its original crate SHA256
 `WAYLAND_SOCKET`, and sets CLOEXEC; only otherwise does it use WAYLAND_DISPLAY.
 Consequently absence of that variable after startup does not prove no inherited
 connection. Original Iced tree searches found no direct matching call;
-**the actual applet backend-to-connection call chain is not yet accepted**.
-The library API alone cannot fill that gap.
+the library API alone could not fill that gap. Iteration43 authenticates the
+actual source chain through the locked Winit fork above; execution is still
+unobserved.
 
 Before a NEW populated run:
 
@@ -98,7 +166,7 @@ physical devices, sandbox/session compatibility and combined desktop gates stay
 separate. Existing app93/Linux277/274/3 counts are unchanged; no new independent
 child verdict or native test coverage is claimed.
 
-## Retention and scoped rerun
+## Historical iteration42 retention and scoped rerun
 
 First collector refused a guessed upstream `LICENSE` name before runtime work;
 its script/stdout/partial original exports remain separate. A NEW collector used

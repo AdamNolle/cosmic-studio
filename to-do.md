@@ -15,6 +15,20 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration43 bounded-launch preparation
+
+- [x] Authenticate actual prepared connection source chain through locked Winit,
+  exact toolkit reexports and original wayland-client; full app22/SDK933 unchanged.
+- [x] Test seven private launcher process/FD fixtures, repeated with exact launcher
+  hash; single atomic attempt, raw child failure and observed descendant cleanup.
+  These are helper tests, not native Caffeine/launch-pad/panel acceptance.
+- [ ] Integrate outer independent wrapper/native-child identity and interruption
+  cleanup into a NEW30s/64MiB/core0 owned populated no-input diagnostic; retain
+  genuine desktop ID/metadata, exact ELF/FD and production restart policy.
+- [ ] Observe actual mapping/panel attach/completed callback before capture,
+  then separately popup/input/internal consume/teardown/restoration/accessibility.
+  No hiding/deployment or final desktop acceptance from helper fixtures.
+
 ## Iteration42 populated runtime prerequisites
 
 - [x] Authenticate original/compiled frame-size gating, native Caffeine action
@@ -22,8 +36,8 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
   wayland-client crate/license. Preserve first license-name collector refusal.
 - [x] Record source-consistent empty-panel size refusal, not dynamic cause;
   initial has_frame means missing callback alone is not deadlock proof.
-- [ ] Authenticate actual applet backend connection call chain; library
-  connect_to_env behavior alone is not the application call-chain proof.
+- [x] Authenticate actual applet backend source connection chain in iteration43;
+  library API alone was insufficient. Runtime execution still unobserved.
 - [ ] Test a private one-shot native launcher/restart count bound before NEW
   populated run; original999,999-restart policy cannot be treated as one launch.
 - [ ] Observe actual native applet mapping/panel attach/completed callback with
