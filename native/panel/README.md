@@ -5,6 +5,22 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration47 populated startup and protocol observation
+
+The [populated startup evidence](populated-startup-evidence.md) establishes the
+first successful populated native panel execution. An explicit private bus config
+prevented unexpected D-Bus portal service activations; negative probes confirmed
+immediate `ServiceUnknown` responses with zero portal spawns. Narrow decoration
+helper validation admitted direct-child `dbus-send` queries (count <= 2) while
+refusing unapproved executables, parents, or counts.
+
+The genuine panel manager directly parented the diagnostic wrapper and native
+Caffeine applet. Both panel (`wl_surface#37`) and applet (`wl_surface#36`)
+attached real buffers, damaged regions, committed surfaces, and requested and
+received completed Wayland surface-frame callbacks. At observation deadline, all
+processes reaped cleanly with zero residual state. Interactive popups, keyboard
+recovery, accessibility, and desktop session gates remain open.
+
 ## Iteration46 helper/bus source boundary
 
 The [new audit](helper-bus-contract.md) authenticates the locked decoration

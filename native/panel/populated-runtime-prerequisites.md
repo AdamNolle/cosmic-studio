@@ -1,8 +1,17 @@
 # Populated panel diagnostic prerequisites
 
-Iteration42 inspected authenticated original and compiled39 input contracts.
-**No new renderer, populated panel, native build, input or popup trial ran.**
-Opening/manual hiding/deployment and final desktop acceptance remain open.
+Iteration 47 delivered the first authenticated populated native panel startup.
+See [populated startup evidence](populated-startup-evidence.md).
+Interactive popups, keyboard recovery, accessibility, and desktop session gates remain open.
+
+## Iteration47: populated panel startup, buffer attach and frame completion
+
+Iteration 47 executed the populated native panel diagnostic under dual supervision:
+- Private no-activation D-Bus session prevented auto-activation of `xdg-desktop-portal`.
+- Narrow helper admission admitted direct-child `dbus-send` queries (count <= 2).
+- Native Caffeine applet ran under real panel manager supervision without crash or refusal.
+- Both panel (`wl_surface#37`) and applet (`wl_surface#36`) attached buffers and completed surface frames (`wl_callback#101.done`).
+- Complete process reaping and stock config/state preservation verified clean.
 
 ## Iteration46: locked helper and bus contract, no runtime retry
 

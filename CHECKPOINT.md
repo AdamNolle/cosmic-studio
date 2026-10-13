@@ -2,6 +2,25 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration47 populated native panel startup and protocol completion
+
+ONE new private populated run verified genuine panel manager supervision and
+buffer-backed presentation protocol without crashes or unhandled descendant errors.
+An explicit private D-Bus configuration omitted service activation, and guest
+probes confirmed immediate `ServiceUnknown` responses with zero portal spawns.
+The narrow decoration helper policy admitted direct-child `dbus-send` queries
+(count <= 2) and reaped descendants cleanly.
+
+The genuine panel manager directly parented the diagnostic wrapper and native
+Caffeine applet. Both panel (`wl_surface#37`) and applet (`wl_surface#36`)
+attached real buffers, damaged buffer regions, committed surfaces, and requested
+and received completed Wayland surface-frame callbacks (`wl_callback#101.done`).
+Both independent supervisors observed clean termination at the observation
+deadline (8s native / 12s renderer) with zero lingering processes in `/proc`.
+Stock configuration and state were verified unchanged. Interactive popups,
+keyboard recovery, accessibility, and desktop session gates remain open.
+See [populated startup evidence](native/panel/populated-startup-evidence.md).
+
 ## Iteration46 authenticated helper source, proposed bus boundary
 
 Locked sctk-adwaita0.10.1/Winit source establishes the decoration button-layout
