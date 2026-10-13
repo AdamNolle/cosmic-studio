@@ -5,6 +5,18 @@ contract](manual-hide-contract.md) records overflow ownership and keyboard,
 seat/serial, focus and stable-identity/config prerequisites. Do not hide any
 applet behind a pointer-only reveal or remove essential recovery controls.
 
+## Iteration46 helper/bus source boundary
+
+The [new audit](helper-bus-contract.md) authenticates the locked decoration
+caller, synchronous query/wait and additional font-helper contracts. Mutable
+post-exec cmdline is not exact spawn argv; installed binary provenance and a
+public Debian reference remain distinct. Default session service lookup includes
+compiled-in datadir despite private XDG roots.69 archive members and18 actual
+registry source matches preserved; no runtime retry, native tests, production
+feature/policy, permission or global-service change. Proposed no-activation bus
+and narrow helper profiles require separate negative tests before a new native
+run. The45 startup remains refused; rendering/recovery/final desktop stay open.
+
 ## Iteration45 actual native startup remains refused
 
 The [updated prerequisites](populated-runtime-prerequisites.md) record ONE new

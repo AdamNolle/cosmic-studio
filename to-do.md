@@ -15,6 +15,22 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration46 helper/bus source audit
+
+- [x] Authenticate locked sctk-adwaita0.10.1/Winit decoration helper calls,
+  synchronous wait/fallback and potential gsettings/fc-match commands;69 archive
+  payloads and18 actual registry-source matches retained. No native retry.
+- [x] Audit installed session service lookup/portal definitions and preserve
+  mutable post-exec argv versus source-spawn distinction; Debian reference is
+  not an authenticated installed Ubuntu-source build. Raw45 refusal unchanged.
+- [ ] Test proposed explicit private no-activation bus with bounded negative
+  probes, exact identities/cleanup and no global policy/permission changes.
+- [ ] Test narrowly justified helper executable/argv/environment/FD/parent/count/
+  deadline/refusal profiles; no blanket descendant allowance or short-lived
+  exec-coverage claim. Then consider ONE NEW no-input populated observation.
+- [ ] Observe real buffer attachment/completed surface frames and later actual
+  keyboard-only popup/recovery/restoration/accessibility before hiding/deployment.
+
 ## Iteration45 actual native startup refusal
 
 - [x] Integrate private dual-supervisor admission into the actual original panel

@@ -4,6 +4,24 @@ Iteration42 inspected authenticated original and compiled39 input contracts.
 **No new renderer, populated panel, native build, input or popup trial ran.**
 Opening/manual hiding/deployment and final desktop acceptance remain open.
 
+## Iteration46: locked helper and bus contract, no runtime retry
+
+The [helper/bus audit](helper-bus-contract.md) authenticates locked
+sctk-adwaita0.10.1/Winit frame construction, synchronous button-layout/theme
+queries and potential gsettings/fc-match helpers. Reply100ms is not a total
+process deadline. Observed post-exec cmdline differs from source spawn argv;
+a separate Debian reference explains delimiter mutation without attesting the
+installed Ubuntu build. The45 raw refusal remains unaccepted.
+
+Installed default session configuration/manuals retain a compiled-in service
+directory beyond fresh XDG paths, with real portal Exec definitions. An explicit
+private no-activation config and narrow helper profiles are proposed only;
+no config/probe/helper/native trial or permission change ran. First package-name
+lookup failures and corrected supplement are retained;69 archive members and18
+actual registry-source matches checked. No new app tests/full aggregate or
+independent child verdict. Attachment/frame/input/restoration/final gates stay
+open; scoped46 command in the audit is read-only, not desktop verification.
+
 ## Iteration45: actual panel launch, raw native startup refused
 
 ONE new private NO-INPUT diagnostic used unchanged frozen repaired compositor,

@@ -2,6 +2,22 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration46 authenticated helper source, proposed bus boundary
+
+Locked sctk-adwaita0.10.1/Winit source establishes the decoration button-layout
+helper and possible theme/font commands; synchronous output collection has no
+total process deadline. Observed post-exec cmdline is not source spawn argv;
+public Debian delimiter-mutation reference is not installed Ubuntu-source
+attestation. Installed default session config/manuals include compiled-in service
+lookup, explaining source-consistent portal activation despite fresh XDG paths.
+69 archived member payloads/18 actual registry source files checked; first
+package-name inventory failures and corrected supplement retained separately.
+No native/renderer/compiler/helper fixture retry, production policy/features,
+permission or global-service change. A private no-activation bus and narrow
+helper identities remain proposed/unexecuted; test those boundaries before ONE
+new native observation. Raw45 refusal, app93/Linux277/274/3, historical state
+uncertainty and false runtime/final flags unchanged. See [audit](native/panel/helper-bus-contract.md).
+
 ## Iteration45 actual native launch, retained startup refusal
 
 ONE new private no-input run used the exact frozen compositor, compiled39 panel
