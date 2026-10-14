@@ -1,6 +1,6 @@
 # COSMIC Studio
 
-A native COSMIC appearance project with Archivo interface text, Instrument Serif headings, readable graphite glass, subtle corners, and the approved Studio Dock application icons.
+A native COSMIC appearance project implementing the [COSMIC Studio Desktop design](design/README.md): warm paper and ink with one blue accent, Archivo interface text, Instrument Serif headings, readable glass, subtle corners, and the approved Studio Dock application icons.
 
 This is a source checkpoint. See [CHECKPOINT.md](CHECKPOINT.md) for installed changes, validated candidates and remaining work. Native binaries and private recovery data stay local.
 
@@ -11,12 +11,13 @@ This is a source checkpoint. See [CHECKPOINT.md](CHECKPOINT.md) for installed ch
 | Interface text | Archivo, preserving native sizes and weights |
 | Titles and headings | Instrument Serif through semantic font roles |
 | Code and terminal content | Existing monospace preferences; dark Ghostty palette |
-| Menu bar | Dense graphite glass, 6 px corners and 8 px margin; flush square geometry for visible maximized/fullscreen windows |
-| Dock | Dense glass, 6 px outer corners, 3 px inset and inner corners, no black outline |
+| Palette | Paper and ink in light and dark themes; blue only for selection, links and focus |
+| Menu bar | Glass, 6 px corners and 8 px margin; flush square geometry for visible maximized/fullscreen windows |
+| Dock | Glass, 8 px outer corners, 3 px inset, no black outline; white/black 2 px running bars whose width marks focus |
 | Dock layout | Approved 60 px icons in 66 × 72 px cells, minimal padding and 4 px spacing |
-| Menus and tooltips | Readable glass surround, denser controls and opaque labels |
+| Menus and tooltips | Readable glass surround, denser controls and opaque labels; compact 12 px hover names |
 | Application content | Native content colors; six selected system apps can opt into quiet window glass |
-| Window buttons | Approved green minimize, yellow maximize/restore and red close |
+| Window buttons | One rocker: green minimize, yellow maximize/restore and red close segments, glyphs on hover |
 | Application icons | Studio Dock covers 75 inventoried launchers with 71 designs; Conflux supplies remaining symbols |
 
 Latest source configuration: panel opacity 0.92 and dock opacity 0.86, multiplied by native gradient backing factors 0.96 and 0.82. Popup surrounds use 0.95 backing, controls 0.98, and primary window content remains opaque. These are material parameters, not measured final pixel opacity. All final configurations and rebuilt binaries have not been activated together on the main desktop.
