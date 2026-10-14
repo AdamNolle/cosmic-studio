@@ -116,6 +116,9 @@ class OSClientBuildTests(unittest.TestCase):
             self.assertIn(str(work / 'artifacts/compact-dock-build.json'), compact[1])
             self.assertGreater(calls.index(compact[1]), calls.index(release))
             self.assertFalse(any('window-controls/prepare.py' in ' '.join(call) for call in calls))
+            tooltip = [call for call in calls if Path(call[1]) == HERE.parent / 'dock-icons/prepare_tooltip.py']
+            self.assertTrue(tooltip and all('--apply' in call for call in tooltip))
+            self.assertLess(calls.index(tooltip[-1]), calls.index(release))
 
     def test_mocked_metadata_drift_restores_lock_before_any_build(self):
         with tempfile.TemporaryDirectory() as directory:

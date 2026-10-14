@@ -34,7 +34,9 @@ INTERFACE_FONT = '(family: "Archivo", weight: Normal, stretch: Normal, style: No
 CAFFEINE_FLATPAK_ID = 'com.github.codevardhan.caffeine-applet'
 SHELL_FROSTED = 'ExtremelyLow'
 CORNER_RADII = {'0': 0.0, 'xs': 2.0, 's': 4.0, 'm': 6.0, 'l': 8.0, 'xl': 10.0}
-DOCK = {'background':'Dark','border_radius':'6','border_width':'0','size':'M','padding':'0','spacing':'4','anchor_gap':'true',
+# Imported desktop design: palette, shell geometry and the user's dock overrides.
+TOKENS = json.loads((PACKAGE/'design/desktop-tokens.json').read_text())
+DOCK = {'background':'Dark','border_radius':str(TOKENS['dock']['radius']),'border_width':'0','size':'M','padding':'0','spacing':'4','anchor_gap':'true',
         'margin':'8','opacity':'0.86','autohide':'Always','keep_style_on_maximize':'true'}
 PANEL = {'background':'Dark','border_radius':'6','border_width':'0','opacity':'0.92','margin':'8','anchor_gap':'true','expand_to_edges':'true','autohide':'Never','keep_style_on_maximize':'false'}
 
@@ -369,6 +371,12 @@ def preflight(include_apps=True):
 def save_manifest(directory, manifest):
     atomic(directory/'manifest.json',json.dumps(manifest,indent=2)+'\n',0o600)
 
+def theme_colors(mode):
+    """Native theme fields for Light or Dark, resolved from the design palette."""
+    key=mode.lower()
+    palette=TOKENS['palette'][key]
+    return {field:palette[role] for field,role in TOKENS['native_theme'][key].items()}
+
 def prepare():
     """Generate native RON from the local schema, without changing the desktop."""
     for mode in ['Light','Dark']:
@@ -376,14 +384,7 @@ def prepare():
         if not root.is_dir(): raise RuntimeError('COSMIC v2 theme configuration is required.')
         values={p.name:p.read_text().strip() for p in root.iterdir() if p.is_file()}
         light=mode=='Light'
-        colors={'bg_color':'#F5F5F7' if light else '#000000',
-                'primary_container_bg':'#FFFFFF' if light else '#030405',
-                'secondary_container_bg':'#ECECEF' if light else '#0D1117',
-                'text_tint':'#202024' if light else '#F0F1F2',
-                'accent':'#2868C7' if light else '#659BEE',
-                'success':'#247747' if light else '#5FD08A',
-                'warning':'#805A00' if light else '#E9C46A',
-                'destructive':'#B72F28' if light else '#EF766E'}
+        colors=theme_colors(mode)
         for k,v in colors.items(): values[k]=f'Some("{v}FF")'
         values['corner_radii']='('+''.join(f'radius_{k}: ({v:.1f}, {v:.1f}, {v:.1f}, {v:.1f}),' for k,v in CORNER_RADII.items())+')'
         values.update(frosted=SHELL_FROSTED,frosted_panel='true',frosted_applets='true',
@@ -716,10 +717,10 @@ def verify(directory=None):
         add(toolkit+' follows light palette','CosmicLight.conf' in read(path))
         add(toolkit+' glass chrome stylesheet',str(CONFIG/'studio-light/glass-qt.qss') in read(path))
     add('GTK glass chrome stylesheet',all('BEGIN STUDIO GLASS' in read(CONFIG/v/'gtk.css') for v in ['gtk-3.0','gtk-4.0']))
-    for mode,expected in [('Light','#F5F5F7FF'),('Dark','#000000FF')]:
-        add(mode+' background color',expected in read(COSMIC/f'com.system76.CosmicTheme.{mode}/v2/background'))
-    for mode,expected in [('Light','#2868C7FF'),('Dark','#659BEEFF')]:
-        add(mode+' blue accent',expected in read(COSMIC/f'com.system76.CosmicTheme.{mode}/v2/accent'))
+    for mode in ['Light','Dark']:
+        colors=theme_colors(mode)
+        add(mode+' paper background',colors['bg_color']+'FF' in read(COSMIC/f'com.system76.CosmicTheme.{mode}/v2/background'))
+        add(mode+' blue accent',colors['accent']+'FF' in read(COSMIC/f'com.system76.CosmicTheme.{mode}/v2/accent'))
     add('Dark glass tint','medium: 0.90' in read(COSMIC/'com.system76.CosmicTheme.Dark/v2/alpha_map'))
     portal=run(['gdbus','call','--session','--dest','org.freedesktop.portal.Desktop',
                 '--object-path','/org/freedesktop/portal/desktop','--method',
@@ -793,7 +794,7 @@ def verify_typography(directory=None):
 
 def preview():
     preflight()
-    print('Ready: COSMIC v2 themes, light app defaults, dark frosted panel/dock, zero-radius native geometry.')
+    print('Ready: COSMIC v2 themes, light app defaults, paper and ink palette, frosted panel/dock, subtle native corners.')
     print('Applications: custom Ghostty/Zed light themes, native GIMP/Blender light presets, GTK/Qt integration.')
     print('Typography: authentic Archivo UI faces and Instrument Serif headings; existing point sizes and code fonts retained.')
     print('Unchanged: pinned apps, app controls, wallpaper, monitors, content, motion.')

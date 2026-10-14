@@ -88,8 +88,14 @@ class AssetTests(unittest.TestCase):
             if attrs.get('color'):
                 self.assertGreaterEqual(contrast(attrs['color'],'#FFFFFF'),4.5,name)
     def test_light_text_focus_and_chrome_contrast(self):
-        for fg,bg in [('#202024','#F5F5F7'),('#5F6069','#F5F5F7'),('#1D5AB0','#F5F5F7'),
-                      ('#FFFFFF','#2868C7'),('#202024','#E3EBF5'),('#F0F1F2','#000000')]:
+        light,dark=setup.TOKENS['palette']['light'],setup.TOKENS['palette']['dark']
+        pairs=[(light['ink'],light['paper']),(light['ink2'],light['paper']),(light['accent'],light['paper']),
+               ('#FFFFFF',light['accent']),(light['ink'],light['fill']),(light['ink'],light['paper2']),
+               (dark['ink'],dark['paper']),(dark['ink2'],dark['paper']),(dark['accent'],dark['paper']),
+               (dark['ink'],dark['paper3'])]
+        for palette in (light,dark):
+            pairs += [(palette[role],palette['paper']) for role in ['success','warning','destructive']]
+        for fg,bg in pairs:
             self.assertGreaterEqual(contrast(fg,bg),4.5,(fg,bg))
     def test_ghostty_palette_is_readable_on_light_background(self):
         import re
@@ -348,3 +354,49 @@ class WindowFrameTests(unittest.TestCase):
                 self.assertEqual(setup.snapshot(roots),before)
 
 if __name__=='__main__': unittest.main()
+
+
+class DesignTests(unittest.TestCase):
+    """The imported desktop design, as committed native themes and assets."""
+    def test_committed_native_themes_match_design_palette(self):
+        for mode in ['Light','Dark']:
+            text=(ROOT/f'studio-{mode.lower()}.ron').read_text()
+            for field,color in setup.theme_colors(mode).items():
+                self.assertIn(f'    {field}: Some("{color}FF"),',text,(mode,field))
+    def test_shell_geometry_follows_design(self):
+        self.assertEqual(setup.DOCK['border_radius'],str(setup.TOKENS['dock']['radius']))
+        self.assertEqual(setup.PANEL['border_radius'],str(setup.TOKENS['menu_bar']['radius']))
+        self.assertEqual(setup.PANEL['margin'],str(setup.TOKENS['menu_bar']['margin']))
+        self.assertEqual(setup.DOCK['margin'],str(setup.TOKENS['dock']['margin']))
+    def test_dock_indicator_is_monochrome_and_tooltip_compact(self):
+        patch=(ROOT/'native/dock-icons/compact-icons.patch').read_text()
+        added='\n'.join(l for l in patch.splitlines() if l.startswith('+'))
+        self.assertIn('Color::WHITE',added); self.assertIn('Color::BLACK',added)
+        self.assertNotIn('accent_color()',added)
+        self.assertIn('-                        Some(Background::Color(theme.cosmic().accent_color().into()))',patch)
+        bars=setup.TOKENS['dock']['indicator']
+        self.assertIn(f"Some([{bars['running']:.1f}, {bars['multiple']:.1f}, {bars['focused']:.1f}])",added)
+        tooltip=(ROOT/'native/dock-icons/prepare_tooltip.py').read_text()
+        self.assertIn(f".size({setup.TOKENS['tooltip']['size']})",tooltip)
+        self.assertIn('Wrapping::None',tooltip)
+    def test_rocker_assets_cover_every_role_shape_and_state(self):
+        art=ROOT/'icons/window-controls/svg'
+        tokens=json.loads((ROOT/'icons/window-controls/tokens.json').read_text())
+        for state in tokens['states']:
+            for role in tokens['colors']:
+                for shape in tokens['shapes']:
+                    svg=(art/state/f'{role}-{shape}.svg').read_text()
+                    self.assertIn('width="22" height="24"',svg)
+                    self.assertEqual('stroke-linecap' in svg,state in tokens['glyph']['visible'],(state,role,shape))
+                    self.assertEqual('<rect y="5" width="1"' in svg,shape in ('middle','right'),(role,shape))
+        for role,color in setup.TOKENS['window_controls']['colors'].items():
+            self.assertEqual(tokens['colors'][role].upper(),color)
+    def test_toolkit_rocker_styles_reference_existing_art(self):
+        art=ROOT/'icons/window-controls/svg'
+        for name in ['gtk.css','obsidian.css']:
+            text=(ROOT/'native/window-controls'/name).read_text()
+            for path in re.findall(r'assets/([a-z]+/[a-z-]+\.svg)',text):
+                self.assertTrue((art/path).is_file(),(name,path))
+        gtk=(ROOT/'native/window-controls/gtk.css').read_text()
+        for selector in [':only-child',':first-child',':last-child','windowcontrols { border-spacing: 0; }']:
+            self.assertIn(selector,gtk)

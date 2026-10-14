@@ -32,6 +32,7 @@ class PreparedBuildTests(unittest.TestCase):
         self.generator = self.root / 'native/typography/patch_libcosmic.py'
         for path, text in ((self.source_patch, 'native panel patch\n'),
                            (self.generator, 'display font generator\n'),
+                           (self.root/'native/dock-icons/prepare_tooltip.py', 'tooltip generator\n'),
                            (self.root/'native/panel/prepare_keyboard_focus.py', 'focus generator\n'),
                            (self.root/'native/panel/keyboard_focus_seats.rs', 'focus ownership module\n'),
                            (self.root/'native/panel/prepare_keyboard_input.py', 'input generator\n'),

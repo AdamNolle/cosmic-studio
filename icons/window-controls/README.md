@@ -1,13 +1,13 @@
 # Studio window controls
 
-A modern vector interpretation of the supplied Windows XP controls, using the Studio squircle shape and restrained shading:
+The design's rocker: one switch with green minimize, yellow maximize/restore and red close.
 
-- Green minimize, yellow maximize/restore, red close.
-- Pure black symbols across all four button states.
-- 32-pixel layout canvas with a 28-pixel visible button and 6-pixel inter-button gap.
-- Normal, hover, pressed and inactive states.
-- Editable SVGs plus PNG exports at 24, 28, 32, 48, 56, 64, 96, 128 and 256 pixels.
+- Joined 22 × 14 px segments with 4 px outer corners, a half-pixel outer edge, a top highlight and 1 px dividers.
+- Each segment sits in a 22 × 24 px canvas, so the pointer target stays 24 px tall.
+- Glyphs are hidden until hover and press. Inactive windows show a neutral rocker until hovered.
+- Every role is drawn in four shapes (solo, left, middle, right), so a window with only some controls still shows a complete switch. `<role>.svg` is the usual full-rocker position.
+- Normal, hover, pressed and inactive states; PNG exports at 1×–4×.
 
-`preview.png` shows enlarged artwork and controls at native size on light and dark titlebars. `tokens.json` records dimensions and colors. Run `python3 build.py` with Inkscape installed to regenerate the set.
+`preview.png` shows every state, the restore, close-only and no-maximize layouts, and active and inactive titlebars on paper and graphite. `tokens.json` records geometry and colours. Run `python3 build.py`; PNG exports use Inkscape or `rsvg-convert` when either is installed. The previous circular-squircle set is kept in `revisions/before-rocker-20261014/`.
 
-The approved artwork is integrated through `native/window-controls/`: native COSMIC headerbars, compositor decorations, GTK 3/4 titlebars, and an Obsidian titlebar snippet. Native installation activates when applications next launch and when the desktop session next starts.
+The artwork is integrated through `native/window-controls/`: native COSMIC headerbars, compositor decorations, GTK 3/4 titlebars and an Obsidian titlebar snippet. Native installation takes effect when applications next launch and when the desktop session next starts.

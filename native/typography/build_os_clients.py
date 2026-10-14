@@ -85,6 +85,7 @@ def build(work, components, jobs, toolchain):
         flags = ['--window-glass'] if window_glass else []
         run(python, HERE.parent / 'popups/prepare.py', library, '--revision', revision,
             '--output', work / ('materials-' + revision[:8] + '.patch'), '--apply', *flags)
+        run(python, HERE.parent / 'dock-icons/prepare_tooltip.py', library, '--apply')
         if window_glass:
             run(python, HERE.parent / 'window-controls/prepare.py', library)
         run('git', 'diff', '--check', cwd=library)

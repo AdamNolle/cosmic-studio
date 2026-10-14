@@ -1,8 +1,1 @@
-{
-  "schema": 1,
-  "revision": "82e7cd814addb0641959b634227fe550374e195b",
-  "file": "cosmic-app-list/src/app.rs",
-  "preimage": "fec506ad801d38c1e9f81f7bdc98841c65e7288c64bbe25bd8ddb5c21ff3b73e",
-  "postimage": "00dedd8adfa906521e8c5b845f4135a3703554c774ba1ba3e0e38a11010c317d",
-  "patch_sha256": "1c945e560b6675087588a08171ac0022e9db18c23ef2ef9e5e876e2c84d38237"
-}
+{"schema":1,"revision":"82e7cd814addb0641959b634227fe550374e195b","file":"cosmic-app-list/src/app.rs","preimage":"fec506ad801d38c1e9f81f7bdc98841c65e7288c64bbe25bd8ddb5c21ff3b73e","postimage":"0a3c33679d85271cb647ab739365a201a957a089575566a87c74d2aeec9b2aca","patch_sha256":"de45eacc957e28945dc294066865bb10a188547b5ad1e8858843b353e9f7f548"}

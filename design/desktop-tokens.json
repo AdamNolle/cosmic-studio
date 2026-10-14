@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "source": "claude.ai/design project 40c2b795, COSMIC Studio Desktop.dc.html (2026-10-14)",
+  "overrides": {
+    "dock_hover_label": "Compact 12 px Archivo Medium tooltip with 4 x 8 px padding and small corners. The design's 32 px italic serif caption and uppercase subtitle are not used.",
+    "dock_indicator": "Plain white on dark glass, black on light glass. The design's per-application coloured glow pools and bars are not used."
+  },
+  "palette": {
+    "light": {
+      "paper": "#E9E7E1", "paper2": "#DEDBD3", "paper3": "#D2CFC6", "fill": "#F7F6F2",
+      "ink": "#1F1F22", "ink2": "#5C5B5B", "accent": "#1D5AB0",
+      "success": "#216F42", "warning": "#805A00", "destructive": "#B72F28"
+    },
+    "dark": {
+      "paper": "#1B1C20", "paper2": "#232429", "paper3": "#2C2D33",
+      "ink": "#F3F3F5", "ink2": "#AEAEB1", "accent": "#4C8FF5",
+      "success": "#4BD77E", "warning": "#FFD24B", "destructive": "#FF6860"
+    }
+  },
+  "native_theme": {
+    "light": {"bg_color": "paper", "primary_container_bg": "fill", "secondary_container_bg": "paper2",
+              "text_tint": "ink", "accent": "accent", "success": "success", "warning": "warning", "destructive": "destructive"},
+    "dark": {"bg_color": "paper", "primary_container_bg": "paper2", "secondary_container_bg": "paper3",
+             "text_tint": "ink", "accent": "accent", "success": "success", "warning": "warning", "destructive": "destructive"}
+  },
+  "menu_bar": {"height": 32, "margin": 8, "radius": 6, "control": [30, 24], "control_radius": 4,
+               "clock": "centred, tabular figures", "popover_radius": 8, "popover_gap": 6},
+  "dock": {"margin": 8, "radius": 8, "padding": [3, 6], "cell": [66, 74], "icon": 58, "gap": 4,
+           "indicator": {"height": 2, "running": 10, "multiple": 16, "focused": 22}},
+  "tooltip": {"size": 12, "weight": "Medium", "padding": [4, 8], "radius": "radius_s"},
+  "window": {"radius": 6, "titlebar": 38, "title": "Instrument Serif 18 px, centred"},
+  "window_controls": {"segment": [22, 14], "outer_radius": 4, "gap": 0, "glyphs": "hover only",
+                      "colors": {"minimize": "#2FC469", "maximize": "#F8C22E", "close": "#F0514B"}},
+  "menus": {"radius": 5, "row": 26, "highlight": "accent with white text"},
+  "glass": {"blur": 18, "saturate": 1.85, "refractive_alpha": 0.66, "dense_alpha": 0.84, "popover_alpha": 0.92}
+}

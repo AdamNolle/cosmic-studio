@@ -8,11 +8,11 @@ ART = HERE.parents[1] / 'icons/window-controls/svg'
 SELECTOR = '.titlebar-button:is(.mod-minimize,.mod-maximize,.mod-close)'
 parts = ['/* Studio window controls: preserve Obsidian native button actions. */',
          SELECTOR + ''' {
-  width: 32px; height: 32px; min-width: 32px;
-  align-self: center; margin: 0 3px; padding: 0;
-  border: 0; border-radius: 8px;
+  width: 22px; height: 24px; min-width: 22px;
+  align-self: center; margin: 0; padding: 0;
+  border: 0; border-radius: 4px;
   background-color: transparent !important;
-  background-size: 32px 32px;
+  background-size: 22px 24px;
   background-position: center; background-repeat: no-repeat;
 }''', SELECTOR + ' svg { visibility: hidden; }',
          SELECTOR + ':focus-visible { outline: 1px solid var(--interactive-accent); }']
@@ -21,6 +21,7 @@ for role in ['minimize', 'maximize', 'close', 'restore']:
     body = 'body.is-maximized' if role == 'restore' else 'body'
     for state, condition, suffix in [('normal', '', ''), ('inactive', ':not(.is-focused)', ''),
                                      ('hover', '', ':hover'), ('pressed', '', ':active')]:
+        # Obsidian always shows all three, so each role keeps its rocker position.
         svg = (ART/state/(role+'.svg')).read_text()
         parts.append(body + condition + ' .titlebar-button.mod-' + button + suffix
                      + ' { background-image: url("data:image/svg+xml,' + quote(svg, safe='') + '") !important; }')

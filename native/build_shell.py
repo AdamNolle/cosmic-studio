@@ -58,6 +58,8 @@ def prepared_inputs(component):
         'display_role_profiles_sha256': hashlib.sha256(
             (PACKAGE / 'native/typography/display-role-profiles.json').read_bytes()).hexdigest(),
         'popup_generator_sha256': popup_inputs_digest(),
+        'tooltip_generator_sha256': hashlib.sha256(
+            (PACKAGE / 'native/dock-icons/prepare_tooltip.py').read_bytes()).hexdigest(),
         **({
             'keyboard_focus_generator_sha256': hashlib.sha256(
                 (PACKAGE / 'native/panel/prepare_keyboard_focus.py').read_bytes()).hexdigest(),
@@ -256,6 +258,7 @@ def build(component, work, jobs):
                  '--output', work / ('display-roles-' + library_revision[:7] + '.patch'), '--apply'])
             run(['python3', PACKAGE / 'native/popups/prepare.py', library,
                  '--revision', library_revision, '--output', work / ('popup-' + library_revision[:7] + '.patch'), '--apply'])
+            run(['python3', PACKAGE / 'native/dock-icons/prepare_tooltip.py', library, '--apply'])
             library_marker.write_text(json.dumps(library_expected, indent=2) + '\n')
         if component != 'cosmic-panel':
             run(['python3', PACKAGE / 'native/typography/prepare_display_roles.py', source,

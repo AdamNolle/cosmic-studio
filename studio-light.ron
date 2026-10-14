@@ -1,5 +1,5 @@
 (
-    accent: Some("#2868C7FF"),
+    accent: Some("#1D5AB0FF"),
     active_hint: 0,
     alpha_map: (
     extremely_low: 0.9,
@@ -17,7 +17,7 @@
     extremely_high: 0.62308,
     extremely_high_2: 0.6,
 ),
-    bg_color: Some("#F5F5F7FF"),
+    bg_color: Some("#E9E7E1FF"),
     corner_radii: (radius_0: (0.0, 0.0, 0.0, 0.0),radius_xs: (0.0, 0.0, 0.0, 0.0),radius_s: (0.0, 0.0, 0.0, 0.0),radius_m: (0.0, 0.0, 0.0, 0.0),radius_l: (0.0, 0.0, 0.0, 0.0),radius_xl: (0.0, 0.0, 0.0, 0.0),),
     destructive: Some("#B72F28FF"),
     frosted: ExtremelyLow,
@@ -63,8 +63,8 @@
     ext_pink: "#FF9CDDFF",
     ext_indigo: "#95C4FCFF",
 )),
-    primary_container_bg: Some("#FFFFFFFF"),
-    secondary_container_bg: Some("#ECECEFFF"),
+    primary_container_bg: Some("#F7F6F2FF"),
+    secondary_container_bg: Some("#DEDBD3FF"),
     spacing: (
     space_none: 0,
     space_xxxs: 4,
@@ -77,8 +77,8 @@
     space_xxl: 64,
     space_xxxl: 128,
 ),
-    success: Some("#247747FF"),
-    text_tint: Some("#202024FF"),
+    success: Some("#216F42FF"),
+    text_tint: Some("#1F1F22FF"),
     warning: Some("#805A00FF"),
     window_hint: None,
 )

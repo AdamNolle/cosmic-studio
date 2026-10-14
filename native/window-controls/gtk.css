@@ -1,16 +1,16 @@
-/* Studio titlebar controls. Artwork includes the black glyph; preserve native actions. */
+/* Studio titlebar rocker. Artwork includes glyphs; preserve native actions. */
 
 button.titlebutton,
 windowcontrols button {
-  min-width: 32px;
-  min-height: 32px;
+  min-width: 22px;
+  min-height: 24px;
   padding: 0;
-  margin: 0 3px;
+  margin: 0;
   border: 0;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: none;
   background-color: transparent;
-  background-size: 32px 32px;
+  background-size: 22px 24px;
   background-position: center;
   background-repeat: no-repeat;
   transition: none;
@@ -20,67 +20,250 @@ windowcontrols button {
 button.titlebutton image,
 windowcontrols button image { opacity: 0; color: transparent; -gtk-icon-shadow: none; }
 
+/* GTK 4 lays controls out with CSS spacing; GTK 3 keeps a 6 px box gap. */
+windowcontrols { border-spacing: 0; }
+
+button.titlebutton + button.titlebutton { margin-left: -6px; }
+
 button.titlebutton.minimize,
-windowcontrols button.minimize { background-image: url("assets/normal/minimize.svg"); }
+windowcontrols button.minimize { background-image: url("assets/normal/minimize-middle.svg"); }
+
+button.titlebutton.minimize:first-child,
+windowcontrols button.minimize:first-child { background-image: url("assets/normal/minimize-left.svg"); }
+
+button.titlebutton.minimize:last-child,
+windowcontrols button.minimize:last-child { background-image: url("assets/normal/minimize-right.svg"); }
+
+button.titlebutton.minimize:only-child,
+windowcontrols button.minimize:only-child { background-image: url("assets/normal/minimize-solo.svg"); }
 
 button.titlebutton.minimize:backdrop,
-windowcontrols button.minimize:backdrop { background-image: url("assets/inactive/minimize.svg"); }
+windowcontrols button.minimize:backdrop { background-image: url("assets/inactive/minimize-middle.svg"); }
+
+button.titlebutton.minimize:first-child:backdrop,
+windowcontrols button.minimize:first-child:backdrop { background-image: url("assets/inactive/minimize-left.svg"); }
+
+button.titlebutton.minimize:last-child:backdrop,
+windowcontrols button.minimize:last-child:backdrop { background-image: url("assets/inactive/minimize-right.svg"); }
+
+button.titlebutton.minimize:only-child:backdrop,
+windowcontrols button.minimize:only-child:backdrop { background-image: url("assets/inactive/minimize-solo.svg"); }
 
 button.titlebutton.minimize:hover,
-windowcontrols button.minimize:hover { background-image: url("assets/hover/minimize.svg"); }
+windowcontrols button.minimize:hover { background-image: url("assets/hover/minimize-middle.svg"); }
+
+button.titlebutton.minimize:first-child:hover,
+windowcontrols button.minimize:first-child:hover { background-image: url("assets/hover/minimize-left.svg"); }
+
+button.titlebutton.minimize:last-child:hover,
+windowcontrols button.minimize:last-child:hover { background-image: url("assets/hover/minimize-right.svg"); }
+
+button.titlebutton.minimize:only-child:hover,
+windowcontrols button.minimize:only-child:hover { background-image: url("assets/hover/minimize-solo.svg"); }
 
 button.titlebutton.minimize:active,
-windowcontrols button.minimize:active { background-image: url("assets/pressed/minimize.svg"); }
+windowcontrols button.minimize:active { background-image: url("assets/pressed/minimize-middle.svg"); }
+
+button.titlebutton.minimize:first-child:active,
+windowcontrols button.minimize:first-child:active { background-image: url("assets/pressed/minimize-left.svg"); }
+
+button.titlebutton.minimize:last-child:active,
+windowcontrols button.minimize:last-child:active { background-image: url("assets/pressed/minimize-right.svg"); }
+
+button.titlebutton.minimize:only-child:active,
+windowcontrols button.minimize:only-child:active { background-image: url("assets/pressed/minimize-solo.svg"); }
 
 button.titlebutton.minimize:disabled,
-windowcontrols button.minimize:disabled { background-image: url("assets/inactive/minimize.svg"); }
+windowcontrols button.minimize:disabled { background-image: url("assets/inactive/minimize-middle.svg"); }
+
+button.titlebutton.minimize:first-child:disabled,
+windowcontrols button.minimize:first-child:disabled { background-image: url("assets/inactive/minimize-left.svg"); }
+
+button.titlebutton.minimize:last-child:disabled,
+windowcontrols button.minimize:last-child:disabled { background-image: url("assets/inactive/minimize-right.svg"); }
+
+button.titlebutton.minimize:only-child:disabled,
+windowcontrols button.minimize:only-child:disabled { background-image: url("assets/inactive/minimize-solo.svg"); }
 
 button.titlebutton.maximize,
-windowcontrols button.maximize { background-image: url("assets/normal/maximize.svg"); }
+windowcontrols button.maximize { background-image: url("assets/normal/maximize-middle.svg"); }
+
+button.titlebutton.maximize:first-child,
+windowcontrols button.maximize:first-child { background-image: url("assets/normal/maximize-left.svg"); }
+
+button.titlebutton.maximize:last-child,
+windowcontrols button.maximize:last-child { background-image: url("assets/normal/maximize-right.svg"); }
+
+button.titlebutton.maximize:only-child,
+windowcontrols button.maximize:only-child { background-image: url("assets/normal/maximize-solo.svg"); }
 
 button.titlebutton.maximize:backdrop,
-windowcontrols button.maximize:backdrop { background-image: url("assets/inactive/maximize.svg"); }
+windowcontrols button.maximize:backdrop { background-image: url("assets/inactive/maximize-middle.svg"); }
+
+button.titlebutton.maximize:first-child:backdrop,
+windowcontrols button.maximize:first-child:backdrop { background-image: url("assets/inactive/maximize-left.svg"); }
+
+button.titlebutton.maximize:last-child:backdrop,
+windowcontrols button.maximize:last-child:backdrop { background-image: url("assets/inactive/maximize-right.svg"); }
+
+button.titlebutton.maximize:only-child:backdrop,
+windowcontrols button.maximize:only-child:backdrop { background-image: url("assets/inactive/maximize-solo.svg"); }
 
 button.titlebutton.maximize:hover,
-windowcontrols button.maximize:hover { background-image: url("assets/hover/maximize.svg"); }
+windowcontrols button.maximize:hover { background-image: url("assets/hover/maximize-middle.svg"); }
+
+button.titlebutton.maximize:first-child:hover,
+windowcontrols button.maximize:first-child:hover { background-image: url("assets/hover/maximize-left.svg"); }
+
+button.titlebutton.maximize:last-child:hover,
+windowcontrols button.maximize:last-child:hover { background-image: url("assets/hover/maximize-right.svg"); }
+
+button.titlebutton.maximize:only-child:hover,
+windowcontrols button.maximize:only-child:hover { background-image: url("assets/hover/maximize-solo.svg"); }
 
 button.titlebutton.maximize:active,
-windowcontrols button.maximize:active { background-image: url("assets/pressed/maximize.svg"); }
+windowcontrols button.maximize:active { background-image: url("assets/pressed/maximize-middle.svg"); }
+
+button.titlebutton.maximize:first-child:active,
+windowcontrols button.maximize:first-child:active { background-image: url("assets/pressed/maximize-left.svg"); }
+
+button.titlebutton.maximize:last-child:active,
+windowcontrols button.maximize:last-child:active { background-image: url("assets/pressed/maximize-right.svg"); }
+
+button.titlebutton.maximize:only-child:active,
+windowcontrols button.maximize:only-child:active { background-image: url("assets/pressed/maximize-solo.svg"); }
 
 button.titlebutton.maximize:disabled,
-windowcontrols button.maximize:disabled { background-image: url("assets/inactive/maximize.svg"); }
+windowcontrols button.maximize:disabled { background-image: url("assets/inactive/maximize-middle.svg"); }
+
+button.titlebutton.maximize:first-child:disabled,
+windowcontrols button.maximize:first-child:disabled { background-image: url("assets/inactive/maximize-left.svg"); }
+
+button.titlebutton.maximize:last-child:disabled,
+windowcontrols button.maximize:last-child:disabled { background-image: url("assets/inactive/maximize-right.svg"); }
+
+button.titlebutton.maximize:only-child:disabled,
+windowcontrols button.maximize:only-child:disabled { background-image: url("assets/inactive/maximize-solo.svg"); }
 
 button.titlebutton.close,
-windowcontrols button.close { background-image: url("assets/normal/close.svg"); }
+windowcontrols button.close { background-image: url("assets/normal/close-middle.svg"); }
+
+button.titlebutton.close:first-child,
+windowcontrols button.close:first-child { background-image: url("assets/normal/close-left.svg"); }
+
+button.titlebutton.close:last-child,
+windowcontrols button.close:last-child { background-image: url("assets/normal/close-right.svg"); }
+
+button.titlebutton.close:only-child,
+windowcontrols button.close:only-child { background-image: url("assets/normal/close-solo.svg"); }
 
 button.titlebutton.close:backdrop,
-windowcontrols button.close:backdrop { background-image: url("assets/inactive/close.svg"); }
+windowcontrols button.close:backdrop { background-image: url("assets/inactive/close-middle.svg"); }
+
+button.titlebutton.close:first-child:backdrop,
+windowcontrols button.close:first-child:backdrop { background-image: url("assets/inactive/close-left.svg"); }
+
+button.titlebutton.close:last-child:backdrop,
+windowcontrols button.close:last-child:backdrop { background-image: url("assets/inactive/close-right.svg"); }
+
+button.titlebutton.close:only-child:backdrop,
+windowcontrols button.close:only-child:backdrop { background-image: url("assets/inactive/close-solo.svg"); }
 
 button.titlebutton.close:hover,
-windowcontrols button.close:hover { background-image: url("assets/hover/close.svg"); }
+windowcontrols button.close:hover { background-image: url("assets/hover/close-middle.svg"); }
+
+button.titlebutton.close:first-child:hover,
+windowcontrols button.close:first-child:hover { background-image: url("assets/hover/close-left.svg"); }
+
+button.titlebutton.close:last-child:hover,
+windowcontrols button.close:last-child:hover { background-image: url("assets/hover/close-right.svg"); }
+
+button.titlebutton.close:only-child:hover,
+windowcontrols button.close:only-child:hover { background-image: url("assets/hover/close-solo.svg"); }
 
 button.titlebutton.close:active,
-windowcontrols button.close:active { background-image: url("assets/pressed/close.svg"); }
+windowcontrols button.close:active { background-image: url("assets/pressed/close-middle.svg"); }
+
+button.titlebutton.close:first-child:active,
+windowcontrols button.close:first-child:active { background-image: url("assets/pressed/close-left.svg"); }
+
+button.titlebutton.close:last-child:active,
+windowcontrols button.close:last-child:active { background-image: url("assets/pressed/close-right.svg"); }
+
+button.titlebutton.close:only-child:active,
+windowcontrols button.close:only-child:active { background-image: url("assets/pressed/close-solo.svg"); }
 
 button.titlebutton.close:disabled,
-windowcontrols button.close:disabled { background-image: url("assets/inactive/close.svg"); }
+windowcontrols button.close:disabled { background-image: url("assets/inactive/close-middle.svg"); }
+
+button.titlebutton.close:first-child:disabled,
+windowcontrols button.close:first-child:disabled { background-image: url("assets/inactive/close-left.svg"); }
+
+button.titlebutton.close:last-child:disabled,
+windowcontrols button.close:last-child:disabled { background-image: url("assets/inactive/close-right.svg"); }
+
+button.titlebutton.close:only-child:disabled,
+windowcontrols button.close:only-child:disabled { background-image: url("assets/inactive/close-solo.svg"); }
 
 window.maximized button.titlebutton.maximize,
-window.maximized windowcontrols button.maximize { background-image: url("assets/normal/restore.svg"); }
+window.maximized windowcontrols button.maximize { background-image: url("assets/normal/restore-middle.svg"); }
+
+window.maximized button.titlebutton.maximize:first-child,
+window.maximized windowcontrols button.maximize:first-child { background-image: url("assets/normal/restore-left.svg"); }
+
+window.maximized button.titlebutton.maximize:last-child,
+window.maximized windowcontrols button.maximize:last-child { background-image: url("assets/normal/restore-right.svg"); }
+
+window.maximized button.titlebutton.maximize:only-child,
+window.maximized windowcontrols button.maximize:only-child { background-image: url("assets/normal/restore-solo.svg"); }
 
 window.maximized button.titlebutton.maximize:backdrop,
-window.maximized windowcontrols button.maximize:backdrop { background-image: url("assets/inactive/restore.svg"); }
+window.maximized windowcontrols button.maximize:backdrop { background-image: url("assets/inactive/restore-middle.svg"); }
+
+window.maximized button.titlebutton.maximize:first-child:backdrop,
+window.maximized windowcontrols button.maximize:first-child:backdrop { background-image: url("assets/inactive/restore-left.svg"); }
+
+window.maximized button.titlebutton.maximize:last-child:backdrop,
+window.maximized windowcontrols button.maximize:last-child:backdrop { background-image: url("assets/inactive/restore-right.svg"); }
+
+window.maximized button.titlebutton.maximize:only-child:backdrop,
+window.maximized windowcontrols button.maximize:only-child:backdrop { background-image: url("assets/inactive/restore-solo.svg"); }
 
 window.maximized button.titlebutton.maximize:hover,
-window.maximized windowcontrols button.maximize:hover { background-image: url("assets/hover/restore.svg"); }
+window.maximized windowcontrols button.maximize:hover { background-image: url("assets/hover/restore-middle.svg"); }
+
+window.maximized button.titlebutton.maximize:first-child:hover,
+window.maximized windowcontrols button.maximize:first-child:hover { background-image: url("assets/hover/restore-left.svg"); }
+
+window.maximized button.titlebutton.maximize:last-child:hover,
+window.maximized windowcontrols button.maximize:last-child:hover { background-image: url("assets/hover/restore-right.svg"); }
+
+window.maximized button.titlebutton.maximize:only-child:hover,
+window.maximized windowcontrols button.maximize:only-child:hover { background-image: url("assets/hover/restore-solo.svg"); }
 
 window.maximized button.titlebutton.maximize:active,
-window.maximized windowcontrols button.maximize:active { background-image: url("assets/pressed/restore.svg"); }
+window.maximized windowcontrols button.maximize:active { background-image: url("assets/pressed/restore-middle.svg"); }
+
+window.maximized button.titlebutton.maximize:first-child:active,
+window.maximized windowcontrols button.maximize:first-child:active { background-image: url("assets/pressed/restore-left.svg"); }
+
+window.maximized button.titlebutton.maximize:last-child:active,
+window.maximized windowcontrols button.maximize:last-child:active { background-image: url("assets/pressed/restore-right.svg"); }
+
+window.maximized button.titlebutton.maximize:only-child:active,
+window.maximized windowcontrols button.maximize:only-child:active { background-image: url("assets/pressed/restore-solo.svg"); }
 
 window.maximized button.titlebutton.maximize:disabled,
-window.maximized windowcontrols button.maximize:disabled { background-image: url("assets/inactive/restore.svg"); }
+window.maximized windowcontrols button.maximize:disabled { background-image: url("assets/inactive/restore-middle.svg"); }
 
-button.titlebutton { margin: 0; }
+window.maximized button.titlebutton.maximize:first-child:disabled,
+window.maximized windowcontrols button.maximize:first-child:disabled { background-image: url("assets/inactive/restore-left.svg"); }
+
+window.maximized button.titlebutton.maximize:last-child:disabled,
+window.maximized windowcontrols button.maximize:last-child:disabled { background-image: url("assets/inactive/restore-right.svg"); }
+
+window.maximized button.titlebutton.maximize:only-child:disabled,
+window.maximized windowcontrols button.maximize:only-child:disabled { background-image: url("assets/inactive/restore-solo.svg"); }
 
 button.titlebutton:focus,
 windowcontrols button:focus { outline: 1px solid @theme_selected_bg_color; outline-offset: -1px; }

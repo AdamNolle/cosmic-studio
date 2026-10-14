@@ -1,6 +1,6 @@
 # Compact dock icons
 
-Keep the approved artwork at 60 logical pixels inside 66 × 72 pixel buttons, with 7 pixels between buttons and no additional panel padding. The dock uses its original `M` size; its app list supplies larger artwork directly, without the native proportional padding that made `Custom(92)` bulky. Running-app indicators retain space below the artwork. Hover and selection backgrounds sit three pixels inside each icon cell, aligning them with the glass opening. The complete row has an additional 3 pixels above and at each end, balancing the space reserved for running dots below.
+Keep the approved artwork at 60 logical pixels inside 66 × 72 pixel buttons, with 7 pixels between buttons and no additional panel padding. The dock uses its original `M` size; its app list supplies larger artwork directly, without the native proportional padding that made `Custom(92)` bulky. Running-app indicators keep their space below the artwork. They are 2 px bars in plain white on the dark dock, or black on a light one, never the accent colour: 10 px for one window, 16 px for several and 22 px for the focused application. Outside the compact dock the native dots keep their geometry but use the same black or white. Hover and selection backgrounds sit three pixels inside each icon cell, aligning them with the glass opening. The complete row has an additional 3 pixels above and at each end, balancing the space reserved for running dots below.
 
 `compact-icons.patch` targets cosmic-applets commit `82e7cd814addb0641959b634227fe550374e195b`. Apply it to a prepared native source checkout, then build the standalone app list:
 
@@ -35,3 +35,7 @@ Restore the previous applet and size with `python3 native/dock-icons/install.py 
 The local Trash launcher has a dedicated context menu containing only **Empty Trash Can**. This invokes the installed launcher action, which asks for confirmation before permanently emptying Trash. Other application menus retain native behavior.
 
 Trash uses a 60 × 72 pixel cell on horizontal docks. Its additional transparent side margins replace the 3-pixel external margins used by the other cells, matching visible edge-to-edge gaps at approximately 24 pixels. The artwork and its scale remain unchanged.
+
+## Compact hover names
+
+`prepare_tooltip.py LIBCOSMIC --apply` replaces the applet tooltip's 14 px body text with a single-line 12 px Archivo Medium label, 4 × 8 px padding and small theme corners. Placement, delay and the popup surface path stay native. The native shell and OS-client builders apply it after the popup material step, and the prepared-input fingerprint includes it.

@@ -1,14 +1,15 @@
 /* Studio Light chrome only; content widgets retain the COSMIC palette. */
 QMenuBar, QToolBar {
-  background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                             stop:0 #ffffff, stop:1 #e3ebf5);
-  color: #202024;
-  border-bottom: 1px solid #8694a6;
+  background: #e9e7e1;
+  color: #1f1f22;
+  border-bottom: 1px solid #b9b7b2;
 }
 QMenu {
-  background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                             stop:0 #ffffff, stop:1 #ecf1f7);
-  color: #202024;
-  border: 1px solid #8694a6;
+  background: #eeece7;
+  color: #1f1f22;
+  border: 1px solid #b9b7b2;
+  padding: 5px;
 }
-QMenu::item:selected { background: #2868c7; color: #ffffff; }
+QMenu::item { padding: 5px 24px 5px 8px; border-radius: 3px; }
+QMenu::item:selected { background: #1d5ab0; color: #ffffff; }
+QMenu::separator { height: 1px; background: #d9d7d1; margin: 4px 6px; }

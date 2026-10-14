@@ -1,11 +1,13 @@
 --- a/cosmic-app-list/src/app.rs
 +++ b/cosmic-app-list/src/app.rs
-@@ -79,12 +79,43 @@
+@@ -79,12 +79,47 @@ struct AppletIconData {
      dot_radius: f32,
      bar_size: f32,
      padding: Padding,
 +    outer_padding: Padding,
 +    edge_padding: Padding,
++    /// Studio dock bars: single-window, multi-window and focused widths.
++    studio_indicator: Option<[f32; 3]>,
  }
  
  static DND_FAVORITES: u64 = u64::MAX;
@@ -20,7 +22,8 @@
 +            return Self {
 +                icon_size: 60,
 +                icon_spacing: 7.0,
-+                dot_radius: 2.0,
++                // 2 px monochrome bars; width alone marks focus.
++                dot_radius: 1.0,
 +                bar_size: 12.0,
 +                padding: match applet.anchor {
 +                    PanelAnchor::Bottom => [0.0, 0.0, 1.0, 0.0],
@@ -39,21 +42,65 @@
 +                    PanelAnchor::Right => [3.0, 0.0, 3.0, 3.0],
 +                }
 +                .into(),
++                studio_indicator: Some([10.0, 16.0, 22.0]),
 +            };
 +        }
          let icon_size = applet.suggested_size(false).0;
          let (major_padding, cross_padding) = applet.suggested_padding(false);
          let (h_padding, v_padding) = if applet.is_horizontal() {
-@@ -142,6 +173,8 @@
+@@ -142,6 +177,9 @@ impl AppletIconData {
              dot_radius,
              bar_size,
              padding: padding.into(),
 +            outer_padding: 0.0.into(),
 +            edge_padding: 0.0.into(),
++            studio_indicator: None,
          }
      }
  }
-@@ -313,6 +346,22 @@
+@@ -219,7 +257,22 @@ impl DockItem {
+         .height(app_icon.icon_size.into());
+ 
+         let indicator = {
+-            let container = if toplevel_count <= 1 {
++            let studio_width = app_icon.studio_indicator.map(|[single, multiple, focused]| {
++                let width = if is_focused {
++                    focused
++                } else if toplevel_count > 1 {
++                    multiple
++                } else {
++                    single
++                };
++                width - app_icon.dot_radius * 2.0
++            });
++            let container = if let (Some(width), true) = (studio_width, toplevel_count > 0) {
++                match applet.anchor {
++                    PanelAnchor::Left | PanelAnchor::Right => vertical_space().height(width),
++                    PanelAnchor::Top | PanelAnchor::Bottom => horizontal_space().width(width),
++                }
++            } else if toplevel_count <= 1 {
+                 vertical_space().height(Length::Fixed(0.0))
+             } else {
+                 match applet.anchor {
+@@ -237,12 +290,13 @@ impl DockItem {
+             if toplevel_count == 0 {
+                 container
+             } else {
++                // Studio: indicators are plain white on dark glass, black on light; never accent.
+                 container.class(theme::Container::custom(move |theme| container::Style {
+-                    background: if is_focused {
+-                        Some(Background::Color(theme.cosmic().accent_color().into()))
++                    background: Some(Background::Color(if theme.cosmic().is_dark {
++                        cosmic::iced::Color::WHITE
+                     } else {
+-                        Some(Background::Color(theme.cosmic().on_bg_color().into()))
+-                    },
++                        cosmic::iced::Color::BLACK
++                    })),
+                     border: Border {
+                         radius: dot_border_radius.into(),
+                         ..Default::default()
+@@ -313,6 +367,22 @@ impl DockItem {
              icon_button.into()
          };
  
@@ -76,19 +123,20 @@
          let path = desktop_info.path.clone();
          let icon_button = if dnd_source_enabled && interaction_enabled {
              DndSource::with_id(icon_button, cosmic::widget::Id::new("asdfasdfadfs"))
-@@ -727,9 +776,25 @@
+@@ -727,9 +797,25 @@ impl CosmicAppList {
          // subtract the divider width
          max_major_axis_len -= 1;
          let applet_icon = AppletIconData::new(&self.core.applet);
+-
+-        let button_total_size = self.core.applet.suggested_size(true).0
+-            + self.core.applet.suggested_padding(true).0 * 2
 +        let max_major_axis_len =
 +            max_major_axis_len.saturating_sub(if self.core.applet.is_horizontal() {
 +                applet_icon.edge_padding.left + applet_icon.edge_padding.right
 +            } else {
 +                applet_icon.edge_padding.top + applet_icon.edge_padding.bottom
 +            } as u32);
- 
--        let button_total_size = self.core.applet.suggested_size(true).0
--            + self.core.applet.suggested_padding(true).0 * 2
++
 +        let button_total_size = applet_icon.icon_size
 +            + if self.core.applet.is_horizontal() {
 +                (applet_icon.padding.left
@@ -104,7 +152,7 @@
              + applet_icon.icon_spacing as u16;
  
          let favorite_active_cnt = self
-@@ -1969,16 +2034,28 @@
+@@ -1969,16 +2055,28 @@ impl cosmic::Application for CosmicAppList {
  
          let window_size = self.core.applet.suggested_bounds.as_ref();
          let max_num = if self.core.applet.is_horizontal() {
@@ -139,7 +187,7 @@
                  .map_or(u32::MAX, |b| (b / suggested_height as f32) as u32) as usize
          }
          .max(4);
-@@ -2060,6 +2137,7 @@
+@@ -2060,6 +2158,7 @@ impl cosmic::Application for CosmicAppList {
              let suggested_size = self.core.applet.suggested_size(false);
              content = content.width(suggested_size.0).height(suggested_size.1);
          }
@@ -147,7 +195,7 @@
  
          let mut limits = Limits::NONE.min_width(1.).min_height(1.);
  
-@@ -2127,6 +2205,33 @@
+@@ -2127,6 +2226,33 @@ impl cosmic::Application for CosmicAppList {
                              .width(Length::Fill)
                      }
  

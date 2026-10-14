@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><style>
+@font-face{font-family:Archivo;src:url(fonts/archivo/Archivo-Regular.ttf);font-weight:400}
+@font-face{font-family:Archivo;src:url(fonts/archivo/Archivo-Medium.ttf);font-weight:500}
+@font-face{font-family:Archivo;src:url(fonts/archivo/Archivo-SemiBold.ttf);font-weight:600}
+@font-face{font-family:"Instrument Serif";src:url(fonts/instrumentserif/InstrumentSerif-Regular.ttf)}
+@font-face{font-family:"Instrument Serif";src:url(fonts/instrumentserif/InstrumentSerif-Italic.ttf);font-style:italic}
+html,body{margin:0;height:100%;overflow:hidden;background:#0b2a44;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--acc)}a:hover{opacity:.85}
+input{font-family:inherit}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;margin:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px}
+:root,[data-mode=light]{--paper:#e9e7e1;--paper2:#dedbd3;--paper3:#d2cfc6;--ink:#1f1f22;--ink2:rgba(31,31,34,.70);--ink3:rgba(31,31,34,.56);--rule:rgba(31,31,34,.22);--line:rgba(31,31,34,.10);--ctl:rgba(31,31,34,.06);--ctl2:rgba(31,31,34,.11);--sel:rgba(31,31,34,.08);--acc:#1d5ab0;--accsoft:rgba(29,90,176,.13);--glass:rgba(226,224,218,.66);--pop:rgba(236,234,228,.92);--menu:#eeece7;--track:rgba(31,31,34,.15);--fill:#f7f6f2;--fillink:#1f1f22;--good:#247747;--warn:#805a00;--bad:#b72f28;--blur:blur(18px) saturate(185%) brightness(1.04);--shbar:0 0 0 .5px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.55),inset 1px 0 0 rgba(255,150,130,.1),inset -1px 0 0 rgba(120,170,255,.12),0 8px 24px rgba(0,0,0,.16);--shpop:0 0 0 .5px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.6),0 18px 44px rgba(0,0,0,.26),0 3px 10px rgba(0,0,0,.12);--shwin:0 0 0 .5px rgba(0,0,0,.3),0 24px 60px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.2);--shwin2:0 0 0 .5px rgba(0,0,0,.25),0 10px 30px rgba(0,0,0,.25)}
+[data-mode=dark]{--paper:#1b1c20;--paper2:#232429;--paper3:#2c2d33;--ink:#f3f3f5;--ink2:rgba(243,243,245,.68);--ink3:rgba(243,243,245,.46);--rule:rgba(255,255,255,.18);--line:rgba(255,255,255,.09);--ctl:rgba(255,255,255,.07);--ctl2:rgba(255,255,255,.14);--sel:rgba(255,255,255,.1);--acc:#4c8ff5;--accsoft:rgba(76,143,245,.22);--glass:rgba(30,32,38,.66);--pop:rgba(36,38,44,.92);--menu:#24262c;--track:rgba(255,255,255,.14);--fill:rgba(255,255,255,.92);--fillink:#2a2b30;--good:#4bd77e;--warn:#ffd24b;--bad:#ff6860;--shbar:0 0 0 .5px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.22),inset 1px 0 0 rgba(255,140,120,.07),inset -1px 0 0 rgba(120,180,255,.09),0 8px 24px rgba(0,0,0,.28);--shpop:0 0 0 .5px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.14),0 18px 44px rgba(0,0,0,.45);--shwin:0 0 0 .5px rgba(0,0,0,.7),inset 0 .5px 0 rgba(255,255,255,.08),0 30px 80px rgba(0,0,0,.55),0 6px 20px rgba(0,0,0,.3);--shwin2:0 0 0 .5px rgba(0,0,0,.6),0 12px 34px rgba(0,0,0,.4)}
+[data-glass=dense]{--glass:rgba(29,30,35,.84)}[data-mode=light][data-glass=dense]{--glass:rgba(226,224,218,.86)}
+</style></helmet>
+
+<div data-mode="{{ mode }}" data-glass="{{ glass }}" data-screen-label="COSMIC Studio desktop" style="position:relative;width:100%;height:100vh;min-width:1280px;min-height:780px;overflow:hidden;background:#0b2a44 url(assets/wallpaper.jpg) right center/cover;color:var(--ink);font:400 13px/1.3 Archivo;user-select:none">
+
+<sc-if value="{{ catcher }}" hint-placeholder-val="{{ false }}"><div onMouseDown="{{ closeAll }}" style="position:absolute;inset:0;z-index:40"></div></sc-if>
+
+<div style="position:absolute;left:8px;right:8px;top:8px;height:32px;display:flex;align-items:center;padding:0 6px;gap:2px;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:6px;box-shadow:var(--shbar);font:500 13px/1 Archivo;z-index:50">
+  <div onClick="{{ pLaunch }}" aria-label="Applications" style="width:30px;height:24px;display:grid;place-items:center;border-radius:4px;background:{{ bLaunch }}" style-hover="background:var(--ctl2)"><svg width="15" height="15"><use href="assets/studio-glyphs.svg#g-grid"></use></svg></div>
+  <div onMouseLeave="{{ peekOff }}" style="position:relative;display:flex;align-items:center;height:28px;padding:0 6px;margin-left:2px;border-radius:5px;transition:background .15s;background:{{ peekBg }}">
+    <sc-for list="{{ dots }}" as="w" hint-placeholder-count="4">
+      <div onClick="{{ w.pick }}" onMouseEnter="{{ w.enter }}" aria-label="{{ w.label }}" style="height:28px;padding:0 3.5px;display:flex;align-items:center;cursor:pointer"><div style="height:7px;border-radius:4px;transition:width .26s cubic-bezier(.3,.7,.4,1),background .2s,transform .15s;width:{{ w.w }};background:{{ w.bg }};box-shadow:{{ w.ring }};transform:{{ w.sc }}"></div></div>
+    </sc-for>
+    <div style="position:absolute;left:0;top:38px;width:260px;padding:10px;border-radius:8px;background:var(--pop);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shpop);font:400 12px Archivo;box-sizing:border-box;pointer-events:none;transition:opacity .16s,transform .2s cubic-bezier(.3,.7,.4,1);opacity:{{ pk.op }};transform:{{ pk.tf }}">
+      <div style="height:120px;border-radius:4px;position:relative;overflow:hidden;background:url(assets/wallpaper.jpg) right center/cover;box-shadow:inset 0 0 0 .5px var(--line)">
+        <sc-for list="{{ pk.wins }}" as="x" hint-placeholder-count="2"><div style="position:absolute;border-radius:3px;background:var(--paper);box-shadow:0 4px 12px rgba(0,0,0,.35);padding:5px;box-sizing:border-box;left:{{ x.l }};top:{{ x.t }};width:{{ x.w }};height:{{ x.h }}"><img src="{{ x.src }}" style="width:16px;height:16px"></div></sc-for>
+        <sc-if value="{{ pk.empty }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:grid;place-items:center;font:italic 400 18px 'Instrument Serif',serif;color:rgba(255,255,255,.85)">Empty</div></sc-if>
+      </div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;padding:9px 2px 0"><span style="font:400 17px/1 'Instrument Serif',serif">{{ pk.name }}</span><span style="color:var(--ink3)">{{ pk.sub }}</span></div>
+    </div>
+  </div>
+  <div style="flex:1"></div>
+  <div onClick="{{ pCal }}" style="position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:8px;height:24px;align-items:center;padding:0 10px;border-radius:4px;font-variant-numeric:tabular-nums;cursor:default;background:{{ bCal }}" style-hover="background:var(--ctl2)"><span>Wed Oct 14</span><span>{{ clock }}</span></div>
+  <div onMouseLeave="{{ hsOff }}" style="display:flex;align-items:center;gap:2px;margin-right:4px">
+    <sc-for list="{{ chips }}" as="c" hint-placeholder-count="2">
+      <div style="position:relative">
+        <div onMouseEnter="{{ c.enter }}" onClick="{{ c.pin }}" style="height:24px;display:flex;align-items:center;gap:5px;padding:0 8px;border-radius:4px;font-size:12px;font-variant-numeric:tabular-nums;cursor:default;transition:background .12s;background:{{ c.bg }}"><svg width="13" height="13" style="color:var(--ink2)"><use href="{{ c.g }}"></use></svg>{{ c.v }}</div>
+        <sc-if value="{{ c.open }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;right:-60px;top:32px;width:300px;padding:14px;border-radius:6px;background:var(--pop);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shpop);font:400 12px/1.3 Archivo;z-index:5;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10px Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)">{{ c.cap }}</span><span style="color:var(--ink2)">{{ c.sub }}</span></div><span style="font:400 38px/1 'Instrument Serif',serif;font-variant-numeric:tabular-nums">{{ c.big }}</span></div>
+            <svg width="100%" height="56" viewBox="0 0 272 56" preserveAspectRatio="none" style="display:block;color:var(--ink)"><path d="M0 14H272M0 28H272M0 42H272" style="stroke:var(--line);stroke-width:1"></path><path d="{{ c.area }}" style="fill:currentColor;opacity:.12"></path><path d="{{ c.line }}" style="fill:none;stroke:currentColor;stroke-width:1.6;vector-effect:non-scaling-stroke"></path></svg>
+            <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink3);margin-top:-6px"><span>60 s ago</span><span>now</span></div>
+            <div style="display:flex;flex-direction:column;border-top:1px solid var(--rule)"><sc-for list="{{ c.rows }}" as="r" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:78px 1fr 64px;align-items:center;gap:10px;height:26px;box-shadow:inset 0 -1px 0 var(--line);font-variant-numeric:tabular-nums"><span style="color:var(--ink2)">{{ r.k }}</span><div style="height:3px;background:var(--track)"><div style="height:100%;background:var(--ink);width:{{ r.w }}"></div></div><span style="text-align:right">{{ r.v }}</span></div></sc-for></div>
+            <div style="display:flex;flex-direction:column"><span style="font:600 10px Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);padding-bottom:4px">Top processes</span><sc-for list="{{ c.procs }}" as="p" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:8px;height:24px;font-variant-numeric:tabular-nums"><img src="{{ p.src }}" style="width:16px;height:16px"><span style="flex:1">{{ p.n }}</span><span style="color:var(--ink2)">{{ p.v }}</span></div></sc-for></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;border-top:1px solid var(--line);color:var(--ink2)"><span style="display:flex;align-items:center;gap:5px"><svg width="12" height="12"><use href="assets/studio-glyphs.svg#g-pin"></use></svg>{{ c.pinTxt }}</span><span>System Monitor ›</span></div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+  <div style="width:1px;height:14px;background:var(--line)"></div>
+  <div onClick="{{ pQs }}" aria-label="Brightness" style="width:30px;height:24px;display:grid;place-items:center;border-radius:4px" style-hover="background:var(--ctl2)"><svg width="15" height="15"><use href="assets/studio-glyphs.svg#g-sun"></use></svg></div>
+  <div onClick="{{ flipCaf }}" aria-label="Caffeine" title="{{ cafTitle }}" style="width:30px;height:24px;display:grid;place-items:center;border-radius:4px;transition:background .15s,color .15s;background:{{ cafBg }};color:{{ cafFg }}" style-hover="background:var(--ctl2)"><svg width="15" height="15"><use href="assets/studio-glyphs.svg#g-coffee"></use></svg></div>
+  <div onClick="{{ pQs }}" aria-label="Sound" style="width:30px;height:24px;display:grid;place-items:center;border-radius:4px;background:{{ bQs }}" style-hover="background:var(--ctl2)"><svg width="15" height="15"><use href="assets/studio-glyphs.svg#g-sound"></use></svg></div>
+  <div onClick="{{ pQs }}" aria-label="Battery" style="height:24px;display:flex;align-items:center;gap:5px;padding:0 6px;border-radius:4px;font-size:12px;font-variant-numeric:tabular-nums" style-hover="background:var(--ctl2)"><span>82%</span><svg width="20" height="20"><use href="assets/studio-glyphs.svg#g-battery"></use></svg></div>
+  <div onClick="{{ pNotif }}" aria-label="Notifications" style="position:relative;width:30px;height:24px;display:grid;place-items:center;border-radius:4px;background:{{ bNotif }}" style-hover="background:var(--ctl2)"><svg width="15" height="15"><use href="assets/studio-glyphs.svg#g-bell"></use></svg><sc-if value="{{ hasNotifs }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:4px;right:7px;width:6px;height:6px;border-radius:50%;background:var(--acc)"></div></sc-if></div>
+  <div onClick="{{ pPower }}" aria-label="Power" style="width:30px;height:24px;display:grid;place-items:center;border-radius:4px;background:{{ bPower }}" style-hover="background:var(--ctl2)"><svg width="15" height="15"><use href="assets/studio-glyphs.svg#g-power"></use></svg></div>
+</div>
+
+<sc-if value="{{ P.cal }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:50%;top:46px;transform:translateX(-50%);width:300px;padding:14px 12px 8px;border-radius:8px;background:var(--pop);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shpop);z-index:60;box-sizing:border-box">
+  <div style="display:flex;align-items:baseline;padding:0 4px 10px;border-bottom:1px solid var(--rule);margin-bottom:6px"><span style="font:400 24px/1 'Instrument Serif',serif">October</span><span style="font:400 24px/1 'Instrument Serif',serif;color:var(--ink3);margin-left:6px">2026</span><div style="flex:1"></div><span style="font:600 10px Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)">Week 42</span></div>
+  <div style="display:grid;grid-template-columns:repeat(7,1fr);text-align:center">
+    <sc-for list="{{ dow }}" as="d" hint-placeholder-count="7"><div style="font:600 10px/24px Archivo;letter-spacing:.08em;color:var(--ink3);text-transform:uppercase">{{ d }}</div></sc-for>
+    <sc-for list="{{ cal }}" as="c" hint-placeholder-count="35"><div style="height:34px;display:grid;place-items:center"><div style="width:30px;height:30px;border-radius:4px;display:grid;place-items:center;font-variant-numeric:tabular-nums;font-weight:{{ c.fw }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.n }}</div></div></sc-for>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;height:30px;padding:0 4px;margin-top:4px;border-top:1px solid var(--line);color:var(--ink2);font-size:12.5px">Date &amp; time settings<svg width="12" height="12"><use href="assets/studio-glyphs.svg#i-chev-r"></use></svg></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ P.qs }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;right:8px;top:46px;width:340px;padding:12px;border-radius:8px;background:var(--pop);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shpop);z-index:60;box-sizing:border-box;display:flex;flex-direction:column;gap:10px">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="4">
+      <div onClick="{{ t.flip }}" role="switch" aria-label="{{ t.name }}" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:5px;cursor:pointer;box-shadow:inset 0 0 0 1px var(--rule);background:{{ t.tbg }}">
+        <div style="width:30px;height:30px;border-radius:4px;flex:none;display:grid;place-items:center;transition:background .15s,color .15s;background:{{ t.bg }};color:{{ t.fg }}"><svg width="16" height="16"><use href="{{ t.g }}"></use></svg></div>
+        <div style="min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font-weight:600;font-size:12.5px">{{ t.name }}</span><span style="font-size:11.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.sub }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+  <sc-for list="{{ sliders }}" as="s" hint-placeholder-count="2">
+    <div style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;font:600 10px Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)"><span>{{ s.k }}</span><span style="font-variant-numeric:tabular-nums;letter-spacing:0">{{ s.v }}%</span></div>
+      <div style="height:24px;border-radius:4px;background:var(--track);position:relative;overflow:hidden"><div style="position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--fill);box-shadow:0 0 0 .5px var(--rule);width:{{ s.w }}"></div><svg width="14" height="14" style="position:absolute;left:6px;top:5px;color:var(--fillink);pointer-events:none"><use href="{{ s.g }}"></use></svg><input type="range" min="0" max="100" value="{{ s.v }}" onInput="{{ s.set }}" aria-label="{{ s.k }}" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer"></div></div>
+  </sc-for>
+  <div style="display:flex;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--rule);font-size:12px;color:var(--ink2);font-variant-numeric:tabular-nums"><svg width="20" height="20" style="color:var(--good)"><use href="assets/studio-glyphs.svg#g-battery"></use></svg><span style="color:var(--ink)">82%</span><span>· 3 h 40 m left</span><div style="flex:1"></div><a href="Studio Settings v3.dc.html" style="color:var(--ink2);text-decoration:none">Settings ›</a></div>
+</div>
+</sc-if>
+
+<sc-if value="{{ P.notif }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;right:8px;top:46px;width:360px;display:flex;flex-direction:column;gap:8px;z-index:60">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 6px"><span style="font:400 26px/1 'Instrument Serif',serif;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45)">Notifications</span><span onClick="{{ clearN }}" style="font:500 12px Archivo;padding:5px 10px;border-radius:4px;cursor:pointer;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shbar)">Clear all</span></div>
+  <sc-for list="{{ notifs }}" as="n" hint-placeholder-count="3">
+    <div style="position:relative;display:flex;gap:12px;padding:12px;border-radius:6px;background:var(--pop);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shpop);font-size:12.5px;line-height:1.35">
+      <img src="{{ n.src }}" style="width:32px;height:32px;flex:none">
+      <div style="flex:1;min-width:0"><div style="display:flex;justify-content:space-between;gap:8px"><b style="font-weight:600">{{ n.t }}</b><span style="font-size:11px;color:var(--ink3)">{{ n.when }}</span></div><div style="color:var(--ink2)">{{ n.b }}</div></div>
+      <div onClick="{{ n.dismiss }}" aria-label="Dismiss" style="position:absolute;left:-6px;top:-6px;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--menu);box-shadow:0 0 0 .5px var(--rule),0 1px 3px rgba(0,0,0,.2);cursor:pointer;color:var(--ink2)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-x"></use></svg></div>
+    </div>
+  </sc-for>
+  <sc-if value="{{ noNotifs }}" hint-placeholder-val="{{ false }}"><div style="padding:24px;border-radius:6px;background:var(--pop);box-shadow:var(--shpop);text-align:center;color:var(--ink2);font:italic 400 18px 'Instrument Serif',serif">All caught up.</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ P.power }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;right:8px;top:46px;width:220px;padding:5px;border-radius:5px;background:var(--menu);box-shadow:var(--shpop);z-index:60;font-size:12.5px">
+  <div style="display:flex;align-items:center;gap:10px;padding:8px 8px 10px;border-bottom:1px solid var(--line);margin-bottom:4px"><div style="width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font:400 16px/1 'Instrument Serif',serif">A</div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:600">Adam Nolle</span><span style="font-size:11px;color:var(--ink3)">Up 3 d 14 h</span></div></div>
+  <sc-for list="{{ powerItems }}" as="p" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:9px;height:28px;padding:0 8px;border-radius:3px;color:{{ p.fg }}" style-hover="background:var(--acc);color:#fff"><svg width="14" height="14"><use href="{{ p.g }}"></use></svg><span style="flex:1">{{ p.l }}</span><span style="font-size:11.5px;opacity:.6">{{ p.k }}</span></div></sc-for>
+</div>
+</sc-if>
+
+<div onMouseDown="{{ F.focus }}" style="position:absolute;flex-direction:column;border-radius:6px;overflow:hidden;background:var(--paper);left:{{ F.l }};top:{{ F.t }};width:{{ F.w }};height:{{ F.h }};z-index:{{ F.z }};display:{{ F.disp }};box-shadow:{{ F.sh }}">
+  <div onMouseDown="{{ F.drag }}" onDoubleClick="{{ F.max }}" style="height:38px;flex:none;display:flex;align-items:center;padding:0 14px;box-shadow:inset 0 -1px 0 var(--rule);position:relative">
+    <svg width="15" height="15" style="margin-right:10px;color:{{ F.tc }}"><use href="assets/studio-glyphs.svg#g-folder"></use></svg>
+    <div data-nodrag="1" data-menu="1" style="display:flex;gap:1px;position:relative;z-index:3">
+      <sc-for list="{{ menus }}" as="m" hint-placeholder-count="6">
+        <div style="position:relative">
+          <div onClick="{{ m.toggle }}" onMouseEnter="{{ m.enter }}" style="height:24px;padding:0 8px;display:flex;align-items:center;border-radius:3px;cursor:default;font-size:12.5px;background:{{ m.bg }};color:{{ m.fg }}" style-hover="background:var(--ctl2)">{{ m.l }}</div>
+          <sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;left:0;top:28px;width:232px;padding:5px;border-radius:5px;background:var(--menu);box-shadow:var(--shpop);z-index:5">
+              <sc-for list="{{ m.items }}" as="it" hint-placeholder-count="6">
+                <sc-if value="{{ it.sep }}" hint-placeholder-val="{{ false }}"><div style="height:1px;background:var(--line);margin:4px 6px"></div></sc-if>
+                <sc-if value="{{ it.row }}" hint-placeholder-val="{{ true }}"><div onClick="{{ it.run }}" style="display:flex;align-items:center;gap:8px;height:26px;padding:0 8px;border-radius:3px;font-size:12.5px;color:{{ it.fg }}" style-hover="background:var(--acc);color:#fff"><span style="width:12px;display:grid;place-items:center"><sc-if value="{{ it.chk }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11"><use href="assets/studio-glyphs.svg#i-check"></use></svg></sc-if></span><span style="flex:1">{{ it.l }}</span><span style="font-size:11.5px;opacity:.62;font-variant-numeric:tabular-nums">{{ it.k }}</span><sc-if value="{{ it.sub }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" style="opacity:.6"><use href="assets/studio-glyphs.svg#i-chev-r"></use></svg></sc-if></div></sc-if>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="position:absolute;left:50%;transform:translateX(-50%);font:400 18px/1 'Instrument Serif',serif;color:{{ F.tc }};pointer-events:none">{{ place }}</div>
+    <div style="flex:1"></div>
+    <div data-nodrag="1" style="display:flex;border-radius:4px;overflow:hidden;box-shadow:0 0 0 .5px rgba(0,0,0,.35),inset 0 .5px 0 rgba(255,255,255,.35);flex:none">
+      <div onClick="{{ F.min }}" aria-label="Minimize" style="width:22px;height:14px;display:grid;place-items:center;color:transparent;transition:color .12s,background .15s;background:{{ F.rk.g }}" style-hover="color:rgba(0,0,0,.6)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-min"></use></svg></div>
+      <div onClick="{{ F.max }}" aria-label="Maximize" style="width:22px;height:14px;display:grid;place-items:center;box-shadow:inset 1px 0 0 rgba(0,0,0,.18);color:transparent;transition:color .12s,background .15s;background:{{ F.rk.y }}" style-hover="color:rgba(0,0,0,.6)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-sq"></use></svg></div>
+      <div onClick="{{ F.close }}" aria-label="Close" style="width:22px;height:14px;display:grid;place-items:center;box-shadow:inset 1px 0 0 rgba(0,0,0,.18);color:transparent;transition:color .12s,background .15s;background:{{ F.rk.r }}" style-hover="color:rgba(0,0,0,.65)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-x"></use></svg></div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;min-height:0">
+    <div style="width:184px;flex:none;box-shadow:inset -1px 0 0 var(--rule);padding:14px 12px">
+      <sc-for list="{{ side }}" as="p" hint-placeholder-count="7">
+        <div onClick="{{ p.pick }}" style="position:relative;display:flex;align-items:center;gap:10px;height:30px;padding:0 4px;box-shadow:inset 0 -1px 0 var(--line);cursor:default;font-weight:{{ p.fw }};color:{{ p.fg }}" style-hover="background:var(--sel)"><div style="position:absolute;left:-12px;top:8px;bottom:8px;width:2px;background:{{ p.tick }}"></div><span style="font-size:10.5px;color:var(--ink3);font-variant-numeric:tabular-nums;width:16px">{{ p.i }}</span><span>{{ p.n }}</span></div>
+      </sc-for>
+    </div>
+    <div style="flex:1;min-width:0;padding:18px 22px;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+      <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font:400 36px/1 'Instrument Serif',serif">{{ place }}</span><span style="color:var(--ink3);font-size:12px;font-variant-numeric:tabular-nums">{{ placeSub }}</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px">
+        <sc-for list="{{ files }}" as="f" hint-placeholder-count="6">
+          <div onClick="{{ f.pick }}" onDoubleClick="{{ f.open }}" style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:3px;cursor:default;box-shadow:inset 0 0 0 1px {{ f.ring }};background:{{ f.bg }}"><svg width="26" height="26" style="color:{{ f.gc }}"><use href="{{ f.g }}"></use></svg><span style="font-weight:500;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.n }}</span><span style="font-size:11px;color:var(--ink3)">{{ f.k }} · {{ f.d }}</span></div>
+        </sc-for>
+      </div>
+      <div style="flex:1"></div>
+      <div style="font-size:11.5px;color:var(--ink3)">Double-click DESIGN.md to open it in Text Editor.</div>
+    </div>
+  </div>
+</div>
+
+<div onMouseDown="{{ E.focus }}" style="position:absolute;flex-direction:column;border-radius:6px;overflow:hidden;background:var(--paper);left:{{ E.l }};top:{{ E.t }};width:{{ E.w }};height:{{ E.h }};z-index:{{ E.z }};display:{{ E.disp }};box-shadow:{{ E.sh }}">
+  <div onMouseDown="{{ E.drag }}" onDoubleClick="{{ E.max }}" style="height:38px;flex:none;display:flex;align-items:center;padding:0 14px;position:relative;background:var(--paper2)">
+    <svg width="15" height="15" style="margin-right:10px;color:{{ E.tc }}"><use href="assets/studio-glyphs.svg#g-doc"></use></svg>
+    <span style="font-size:12.5px;color:var(--ink3)">~/Code/cosmic-studio</span>
+    <div style="position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;pointer-events:none"><span style="font:400 18px/1 'Instrument Serif',serif;color:{{ E.tc }}">DESIGN.md</span><span style="width:6px;height:6px;border-radius:50%;background:var(--ink2)"></span></div>
+    <div style="flex:1"></div>
+    <div data-nodrag="1" style="display:flex;border-radius:4px;overflow:hidden;box-shadow:0 0 0 .5px rgba(0,0,0,.35),inset 0 .5px 0 rgba(255,255,255,.35);flex:none">
+      <div onClick="{{ E.min }}" aria-label="Minimize" style="width:22px;height:14px;display:grid;place-items:center;color:transparent;transition:color .12s,background .15s;background:{{ E.rk.g }}" style-hover="color:rgba(0,0,0,.6)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-min"></use></svg></div>
+      <div onClick="{{ E.max }}" aria-label="Maximize" style="width:22px;height:14px;display:grid;place-items:center;box-shadow:inset 1px 0 0 rgba(0,0,0,.18);color:transparent;transition:color .12s,background .15s;background:{{ E.rk.y }}" style-hover="color:rgba(0,0,0,.6)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-sq"></use></svg></div>
+      <div onClick="{{ E.close }}" aria-label="Close" style="width:22px;height:14px;display:grid;place-items:center;box-shadow:inset 1px 0 0 rgba(0,0,0,.18);color:transparent;transition:color .12s,background .15s;background:{{ E.rk.r }}" style-hover="color:rgba(0,0,0,.65)"><svg width="9" height="9"><use href="assets/studio-glyphs.svg#t-x"></use></svg></div>
+    </div>
+  </div>
+  <div data-nodrag="1" style="height:30px;flex:none;display:flex;align-items:flex-end;gap:2px;padding:0 10px;background:var(--paper2);box-shadow:inset 0 -1px 0 var(--rule)">
+    <div style="height:24px;padding:0 12px;display:flex;align-items:center;border-radius:3px;background:var(--ink);color:var(--paper);font-weight:600;font-size:12.5px;margin-bottom:3px">File</div>
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4"><div onClick="{{ t.pick }}" style="height:27px;padding:0 13px;display:flex;align-items:center;cursor:default;font-size:12.5px;border-radius:4px 4px 0 0;background:{{ t.bg }};color:{{ t.fg }};font-weight:{{ t.fw }};box-shadow:{{ t.sh }}">{{ t.l }}</div></sc-for>
+    <div style="flex:1"></div>
+    <div style="height:22px;margin-bottom:4px;width:220px;border-radius:3px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--rule);display:flex;align-items:center;gap:6px;padding:0 8px;color:var(--ink3);font-size:12px;box-sizing:border-box"><svg width="12" height="12"><use href="assets/studio-glyphs.svg#g-search"></use></svg><span style="flex:1">Tell me what to do</span><span style="font:600 10px Archivo;padding:1px 4px;border-radius:2px;box-shadow:inset 0 0 0 1px var(--rule)">Ctrl K</span></div>
+    <div onClick="{{ ribToggle }}" aria-label="Collapse ribbon" style="width:24px;height:22px;margin-bottom:4px;display:grid;place-items:center;border-radius:3px;cursor:default;color:var(--ink2)" style-hover="background:var(--ctl2)"><svg width="13" height="13"><use href="{{ ribChev }}"></use></svg></div>
+  </div>
+  <sc-if value="{{ ribOpen }}" hint-placeholder-val="{{ true }}">
+  <div style="height:92px;flex:none;display:flex;align-items:stretch;padding:6px 8px 0;background:var(--paper);box-shadow:inset 0 -1px 0 var(--rule);overflow:hidden">
+    <sc-for list="{{ groups }}" as="gr" hint-placeholder-count="4">
+      <div style="display:flex;flex-direction:column;padding:0 10px;box-shadow:inset -1px 0 0 var(--line)">
+        <div style="flex:1;display:flex;align-items:flex-start;gap:4px">
+          <sc-for list="{{ gr.big }}" as="b" hint-placeholder-count="1"><div style="width:56px;height:62px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border-radius:3px;font-size:11.5px;text-align:center;line-height:1.15" style-hover="background:var(--ctl2)"><svg width="24" height="24"><use href="{{ b.g }}"></use></svg>{{ b.l }}</div></sc-for>
+          <sc-if value="{{ gr.hasSmall }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:1px"><sc-for list="{{ gr.small }}" as="s" hint-placeholder-count="3"><div style="height:20px;display:flex;align-items:center;gap:7px;padding:0 7px 0 5px;border-radius:3px;font-size:12px;white-space:nowrap" style-hover="background:var(--ctl2)"><svg width="14" height="14" style="color:var(--ink2)"><use href="{{ s.g }}"></use></svg>{{ s.l }}</div></sc-for></div></sc-if>
+          <sc-if value="{{ gr.hasTiny }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:6px;padding-top:2px">
+            <div style="height:24px;width:132px;border-radius:3px;box-shadow:inset 0 0 0 1px var(--rule);display:flex;align-items:center;justify-content:space-between;padding:0 6px 0 9px;box-sizing:border-box;font:400 15px/1 'Instrument Serif',serif">Heading 2<svg width="11" height="11" style="color:var(--ink2)"><use href="assets/studio-glyphs.svg#i-chev-d"></use></svg></div>
+            <div style="display:flex;gap:1px;padding:1px;border-radius:3px;box-shadow:inset 0 0 0 1px var(--line)"><sc-for list="{{ gr.tiny }}" as="x" hint-placeholder-count="5"><div onClick="{{ x.flip }}" style="width:26px;height:24px;display:grid;place-items:center;border-radius:2px;background:{{ x.bg }};color:{{ x.fg }}" style-hover="background:var(--ctl2)"><svg width="14" height="14"><use href="{{ x.g }}"></use></svg></div></sc-for></div>
+          </div></sc-if>
+        </div>
+        <div style="height:18px;display:flex;align-items:center;justify-content:center;font:600 9.5px Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)">{{ gr.cap }}</div>
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+  <div style="flex:1;overflow:hidden;display:flex;justify-content:center;padding-top:22px;background:var(--paper3)">
+    <div style="width:600px;background:var(--paper);box-shadow:0 0 0 .5px var(--rule),0 4px 18px rgba(0,0,0,.12);padding:34px 52px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;user-select:text">
+      <span style="font:600 10px Archivo;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)">01 · Direction</span>
+      <span style="font:400 40px/1 'Instrument Serif',serif">COSMIC Studio Design</span>
+      <span style="font:400 21px/1.1 'Instrument Serif',serif;margin-top:6px">Warm paper, ink rules, one accent</span>
+      <span style="font-size:13.5px;line-height:1.6;color:var(--ink2)">The panel and dock share one refractive glass. Windows are single paper sheets with menus in the title bar. Labels stay opaque in both modes, controls stay neutral, and blue is used only for selection and focus.</span>
+      <span style="font-size:13.5px;line-height:1.6;color:var(--ink2)">Window controls use the rocker: green, yellow and red in one switch, with glyphs on hover.</span>
+    </div>
+  </div>
+  <div style="height:24px;flex:none;display:flex;align-items:center;gap:16px;padding:0 14px;background:var(--paper2);box-shadow:inset 0 1px 0 var(--rule);font-size:11.5px;color:var(--ink2);font-variant-numeric:tabular-nums"><span>Ln 14, Col 62</span><span>Markdown</span><span>UTF-8</span><div style="flex:1"></div><span>412 words</span><span>100%</span></div>
+</div>
+
+<sc-if value="{{ P.launch }}" hint-placeholder-val="{{ false }}">
+<div onMouseDown="{{ closeAll }}" style="position:absolute;inset:0;z-index:70;background:rgba(0,0,0,.18)">
+  <div onMouseDown="{{ stop }}" style="position:absolute;left:50%;top:120px;transform:translateX(-50%);width:620px;border-radius:8px;background:var(--pop);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:var(--shpop);overflow:hidden">
+    <div style="display:flex;align-items:center;gap:12px;height:56px;padding:0 18px;box-shadow:inset 0 -1px 0 var(--rule)"><svg width="19" height="19" style="color:var(--ink2)"><use href="assets/studio-glyphs.svg#g-search"></use></svg><input ref="{{ qRef }}" value="{{ q }}" onInput="{{ setQ }}" onKeyDown="{{ qKey }}" placeholder="Search apps, files and actions" aria-label="Search" style="flex:1;border:0;outline:0;background:transparent;color:var(--ink);font:400 20px Archivo;caret-color:var(--acc)"><span style="font:600 10.5px Archivo;padding:3px 6px;border-radius:3px;box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink2)">Esc</span></div>
+    <div style="padding:8px">
+      <div style="padding:6px 10px;font:600 10px Archivo;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)">Applications</div>
+      <sc-for list="{{ results }}" as="r" hint-placeholder-count="5"><div onClick="{{ r.open }}" style="display:flex;align-items:center;gap:12px;height:42px;padding:0 10px;border-radius:4px;background:{{ r.bg }};color:{{ r.fg }}" style-hover="background:var(--sel)"><sc-if value="{{ r.isImg }}" hint-placeholder-val="{{ true }}"><img src="{{ r.src }}" style="width:28px;height:28px"></sc-if><sc-if value="{{ r.isIcon }}" hint-placeholder-val="{{ false }}"><dc-import name="StudioAppIcon" icon="{{ r.icon }}" style="width:30px;height:30px" hint-size="30px,30px"></dc-import></sc-if><span style="font-weight:500">{{ r.n }}</span><span style="font-size:12px;opacity:.7">{{ r.kind }}</span><span style="flex:1"></span><span style="font-size:11.5px;opacity:.8">{{ r.hint }}</span></div></sc-for>
+      <sc-if value="{{ noRes }}" hint-placeholder-val="{{ false }}"><div style="padding:16px 10px;color:var(--ink3)">Nothing matches “{{ q }}”.</div></sc-if>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;height:34px;padding:0 16px;box-shadow:inset 0 1px 0 var(--rule);font-size:11.5px;color:var(--ink3)"><span><b style="color:var(--ink2);font-weight:600">Enter</b> Open</span><span><b style="color:var(--ink2);font-weight:600">Esc</b> Close</span><span style="flex:1"></span><span>Ctrl Space from anywhere</span></div>
+  </div>
+</div>
+</sc-if>
+
+<div onMouseLeave="{{ dockOff }}" style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;align-items:flex-end;gap:4px;padding:3px 6px;background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-radius:8px;box-shadow:var(--shbar);z-index:45">
+  <div style="position:absolute;bottom:calc(100% + 12px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;pointer-events:none;transition:left .22s cubic-bezier(.3,.7,.4,1),opacity .15s;left:{{ cap.x }};opacity:{{ cap.op }}"><span style="font:italic 400 32px/1 'Instrument Serif',serif;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.5);white-space:nowrap">{{ cap.n }}</span><span style="font:500 10.5px Archivo;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:6px;text-shadow:0 1px 6px rgba(0,0,0,.4)">{{ cap.sub }}</span><div style="width:1px;height:14px;margin-top:8px;background:linear-gradient(rgba(255,255,255,.7),transparent)"></div></div>
+  <sc-for list="{{ dock }}" as="d" hint-placeholder-count="9">
+    <div onMouseEnter="{{ d.enter }}" onClick="{{ d.click }}" aria-label="{{ d.n }}" style="width:66px;height:74px;display:flex;align-items:center;justify-content:center;position:relative;cursor:default">
+      <div style="position:absolute;left:4px;right:4px;bottom:-2px;height:26px;border-radius:50%;transition:opacity .25s;background:radial-gradient(closest-side,{{ d.glow }},transparent);opacity:{{ d.pool }}"></div>
+      <div style="width:58px;height:58px;position:relative;margin-top:-6px;transform-origin:50% 100%;transition:transform .2s cubic-bezier(.3,.7,.4,1);transform:{{ d.tf }}">
+        <sc-if value="{{ d.isImg }}" hint-placeholder-val="{{ true }}"><img src="{{ d.src }}" style="width:58px;height:58px"></sc-if>
+        <sc-if value="{{ d.isIcon }}" hint-placeholder-val="{{ false }}"><dc-import name="StudioAppIcon" icon="{{ d.icon }}" style="width:58px;height:58px" hint-size="58px,58px"></dc-import></sc-if>
+      </div>
+      <div style="position:absolute;bottom:3px;height:2px;border-radius:1px;transition:width .2s,opacity .2s;width:{{ d.barW }};background:{{ d.solid }};box-shadow:0 0 8px {{ d.glow }};opacity:{{ d.run }}"></div>
+    </div>
+  </sc-for>
+  <div style="width:1px;height:46px;align-self:center;background:var(--line);margin:0 3px"></div>
+  <div onMouseEnter="{{ trashEnter }}" aria-label="Trash" style="width:66px;height:74px;display:grid;place-items:center"><img src="icons/approved-dock/png/128/trash-empty.png" style="width:58px;height:58px;margin-top:-6px"></div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;glass&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;refractive&quot;,&quot;dense&quot;],&quot;default&quot;:&quot;refractive&quot;,&quot;tsType&quot;:&quot;'refractive'|'dense'&quot;}}">
+class Component extends DCLogic {
+  state = {
+    ws: 0, peek: null, hs: null, pin: null, pop: null, caf: true,
+    tiles: { wifi: true, bt: true, dnd: false }, vol: 46, bri: 70,
+    wins: { files: { open: true, min: false, max: false, x: 90, y: 70, w: 860, h: 520 }, edit: { open: true, min: false, max: false, x: 420, y: 150, w: 940, h: 600 } },
+    z: ['files', 'edit'], menu: null, place: 'Documents', fsel: 2, tab: 'Home', rib: true, fmt: { b: true }, q: '', hov: null,
+    notifs: [0, 1, 2]
+  };
+  qRef = React.createRef();
+  componentDidMount() {
+    this.mv = e => { const d = this.drag; if (!d) return; const x = d.ox + e.clientX - d.sx, y = Math.max(48, d.oy + e.clientY - d.sy); this.setWin(d.id, { x, y }); };
+    this.up = () => { this.drag = null; };
+    this.kd = e => {
+      if (e.key === 'Escape') this.setState({ pop: null, menu: null });
+      if (e.ctrlKey && e.code === 'Space') { e.preventDefault(); this.togglePop('launch'); }
+    };
+    window.addEventListener('mousemove', this.mv); window.addEventListener('mouseup', this.up); window.addEventListener('keydown', this.kd);
+    this.tk = setInterval(() => this.forceUpdate(), 30000);
+  }
+  componentWillUnmount() { window.removeEventListener('mousemove', this.mv); window.removeEventListener('mouseup', this.up); window.removeEventListener('keydown', this.kd); clearInterval(this.tk); }
+  componentDidUpdate(pp, ps) { if (this.state.pop === 'launch' && ps.pop !== 'launch') setTimeout(() => this.qRef.current && this.qRef.current.focus(), 30); }
+  setWin(id, p) { this.setState(s => ({ wins: { ...s.wins, [id]: { ...s.wins[id], ...p } } })); }
+  raise(id) { this.setState(s => s.z[s.z.length - 1] === id ? null : { z: s.z.filter(x => x !== id).concat(id) }); }
+  openApp(id) { this.setState(s => ({ wins: { ...s.wins, [id]: { ...s.wins[id], open: true, min: false } }, z: s.z.filter(x => x !== id).concat(id), pop: null })); }
+  togglePop(p) { this.setState(s => ({ pop: s.pop === p ? null : p, menu: null, q: p === 'launch' ? '' : s.q })); }
+  spark(seed, base, amp, spike) {
+    let x = seed; const v = [];
+    for (let i = 0; i < 60; i++) { x = (x * 9301 + 49297) % 233280; v.push(Math.max(3, Math.min(97, base + (x / 233280 - .5) * amp + Math.sin(i / 5) * amp * .25 + (spike && i % 17 === 0 ? spike : 0)))); }
+    const line = 'M' + v.map((y, i) => (i * 272 / 59).toFixed(1) + ' ' + (54 - y / 100 * 52).toFixed(1)).join(' L');
+    return { line, area: line + ' L272 56 L0 56 Z' };
+  }
+  win(id) {
+    const st = this.state, w = st.wins[id], vis = st.z.filter(k => st.wins[k].open && !st.wins[k].min);
+    const active = vis[vis.length - 1] === id;
+    return {
+      l: w.max ? '8px' : w.x + 'px', t: w.max ? '48px' : w.y + 'px', w: w.max ? 'calc(100% - 16px)' : w.w + 'px', h: w.max ? 'calc(100% - 144px)' : w.h + 'px',
+      z: 10 + st.z.indexOf(id), disp: w.open && !w.min ? 'flex' : 'none', sh: active ? 'var(--shwin)' : 'var(--shwin2)', tc: active ? 'var(--ink)' : 'var(--ink3)',
+      rk: active ? { g: '#2fc469', y: '#f8c22e', r: '#f0514b' } : { g: 'var(--ctl2)', y: 'var(--ctl2)', r: 'var(--ctl2)' },
+      focus: e => { this.raise(id); if (this.state.menu && !e.target.closest('[data-menu]')) this.setState({ menu: null }); },
+      drag: e => { if (e.target.closest('[data-nodrag]') || this.state.wins[id].max) return; this.drag = { id, sx: e.clientX, sy: e.clientY, ox: this.state.wins[id].x, oy: this.state.wins[id].y }; e.preventDefault(); },
+      min: e => { e.stopPropagation(); this.setWin(id, { min: true }); },
+      max: e => { e.stopPropagation(); this.setWin(id, { max: !this.state.wins[id].max }); },
+      close: e => { e.stopPropagation(); this.setWin(id, { open: false, max: false }); }
+    };
+  }
+  renderVals() {
+    const st = this.state, D = 'assets/studio-glyphs.svg#', P = 'icons/approved-dock/png/128/', S = 'icons/system-apps/png/128/';
+    const wsData = [['Workspace 1 · Studio', [['files', '6%', '10%', '56%', '62%'], ['edit', '34%', '26%', '60%', '66%']]], ['Workspace 2 · Web', [['brave', '10%', '8%', '78%', '80%']]], ['Workspace 3 · Music', [['spotify', '20%', '18%', '56%', '62%']]], ['Workspace 4', []]];
+    const icon = a => a === 'edit' ? S + 'com.system76.CosmicEdit.png' : P + a + '.png';
+    const occ = [1, 1, 1, 0];
+    const dots = occ.map((o, i) => { const on = i === st.ws; return { label: wsData[i][0], w: on ? '20px' : '7px', bg: on ? 'var(--ink)' : (o ? 'var(--ink3)' : 'transparent'), ring: !on && !o ? 'inset 0 0 0 1.2px var(--ink3)' : 'none', sc: st.peek === i && !on ? 'scale(1.35)' : 'none', enter: () => { clearTimeout(this.pt); this.pt = setTimeout(() => this.setState({ peek: i }), 150); }, pick: () => this.setState({ ws: i }) }; });
+    const pi = st.peek == null ? st.ws : st.peek, pd = wsData[pi];
+    const pk = { name: pd[0], sub: pd[1].length ? pd[1].length + (pd[1].length > 1 ? ' windows' : ' window') : 'Nothing open', empty: !pd[1].length, wins: pd[1].map(([a, l, t, w, h]) => ({ src: icon(a), l, t, w, h })), op: st.peek == null ? 0 : 1, tf: st.peek == null ? 'translateY(-4px)' : 'none' };
+    const H = {
+      cpu: { g: D + 'g-cpu', v: '12%', cap: 'Processor', sub: 'Ryzen 9 9950X · 54 °C', big: '12%', sp: [11, 12, 22, 55], rows: [['User', '8%', 8], ['System', '3%', 3], ['Clock', '3.9 GHz', 72]], procs: [['Zed', P + 'zed.png', '4.2%'], ['Brave', P + 'brave.png', '3.1%'], ['Ghostty', P + 'ghostty.png', '0.9%']] },
+      mem: { g: D + 'g-mem', v: '6.4 GB', cap: 'Memory', sub: 'of 32 GB · swap 0 B', big: '20%', sp: [23, 20, 4, 0], rows: [['Apps', '5.3 GB', 17], ['Cached', '1.1 GB', 4], ['Free', '25.6 GB', 80]], procs: [['Brave', P + 'brave.png', '2.4 GB'], ['Zed', P + 'zed.png', '1.3 GB'], ['Spotify', P + 'spotify.png', '480 MB']] }
+    };
+    const shown = st.pin || st.hs;
+    const chips = Object.keys(H).map(k => { const h = H[k], sp = this.spark(...h.sp), open = shown === k && !st.pop;
+      return { g: h.g, v: h.v, open, bg: open ? 'var(--ctl2)' : 'transparent', cap: h.cap, sub: h.sub, big: h.big, line: sp.line, area: sp.area, rows: h.rows.map(([a, b, w]) => ({ k: a, v: b, w: w + '%' })), procs: h.procs.map(([n, src, v]) => ({ n, src, v })), pinTxt: st.pin === k ? 'Pinned · click to unpin' : 'Click to pin',
+        enter: () => { clearTimeout(this.ht); this.ht = setTimeout(() => this.setState({ hs: k }), st.hs ? 0 : 250); }, pin: () => this.setState(s => ({ pin: s.pin === k ? null : k })) }; });
+    const cal = [];
+    [27, 28, 29, 30].forEach(n => cal.push({ n, fg: 'var(--ink3)', bg: 'transparent', fw: 400 }));
+    for (let n = 1; n <= 31; n++) { const t = n === 14, wk = (n + 3) % 7 === 0 || (n + 4) % 7 === 0; cal.push({ n, fg: t ? 'var(--paper)' : (wk ? 'var(--ink2)' : 'var(--ink)'), bg: t ? 'var(--ink)' : 'transparent', fw: t ? 600 : 400 }); }
+    const T = st.tiles;
+    const tdef = [['wifi', 'Wi-Fi', 'g-wifi', 'Studio 5G'], ['bt', 'Bluetooth', 'g-bt', 'WH-1000XM5'], ['dnd', 'Focus', 'g-moon', 'Do not disturb'], ['caf', 'Caffeine', 'g-coffee', 'Awake until off']];
+    const tiles = tdef.map(([k, name, g, on]) => { const v = k === 'caf' ? st.caf : T[k]; return { name, g: D + g, sub: v ? on : 'Off', bg: v ? 'var(--acc)' : 'var(--ctl2)', fg: v ? '#fff' : 'var(--ink)', tbg: v ? 'var(--accsoft)' : 'transparent', flip: () => k === 'caf' ? this.setState(s => ({ caf: !s.caf })) : this.setState(s => ({ tiles: { ...s.tiles, [k]: !s.tiles[k] } })) }; });
+    const sliders = [['Display', 'bri', 'g-sun'], ['Sound', 'vol', 'g-sound']].map(([k, key, g]) => ({ k, v: st[key], w: st[key] + '%', g: D + g, set: e => this.setState({ [key]: +e.target.value }) }));
+    const nAll = [['Build finished', 'cosmic-panel candidate · release · 2 m 14 s', 'now', P + 'ghostty.png'], ['#cosmic-dev', 'Is the dock clipping fixed on the new compositor build?', '4 m', S + 'discord.png'], ['7 updates available', 'Including Mesa and the NVIDIA driver', '1 h', S + 'com.system76.CosmicStore.png']];
+    const notifs = st.notifs.map(i => ({ t: nAll[i][0], b: nAll[i][1], when: nAll[i][2], src: nAll[i][3], dismiss: () => this.setState(s => ({ notifs: s.notifs.filter(x => x !== i) })) }));
+    const powerItems = [['g-lock', 'Lock', 'Super Esc'], ['g-moon', 'Suspend', ''], ['i-power', 'Log out…', ''], ['g-power', 'Restart…', ''], ['g-power', 'Shut down…', '']].map(([g, l, k], i) => ({ g: D + g, l, k, fg: i === 4 ? 'var(--bad)' : 'var(--ink)' }));
+    const M = {
+      File: [['New Window', 'Ctrl N'], ['New Tab', 'Ctrl T'], ['Open…', 'Ctrl O'], 0, ['Open Recent', '', 0, 0, 1], 0, ['Close Window', 'Ctrl W', 0, 0, 0, 'close']],
+      Edit: [['Undo', 'Ctrl Z'], ['Redo', 'Shift Ctrl Z', 1], 0, ['Cut', 'Ctrl X'], ['Copy', 'Ctrl C'], ['Paste', 'Ctrl V'], 0, ['Select All', 'Ctrl A'], ['Rename…', 'F2'], 0, ['Move to Trash', 'Delete']],
+      View: [['Grid', 'Ctrl 1', 0, 1], ['List', 'Ctrl 2'], 0, ['Show Sidebar', 'Ctrl B', 0, 1], ['Show Hidden Files', 'Ctrl H'], 0, ['Sort By', '', 0, 0, 1]],
+      Go: [['Back', 'Alt ←'], ['Forward', 'Alt →', 1], ['Enclosing Folder', 'Alt ↑'], 0, ['Home', 'Alt Home', 0, 0, 0, 'Home'], ['Downloads', '', 0, 0, 0, 'Downloads'], ['Go to Location…', 'Ctrl L']],
+      Window: [['Minimize', 'Super H', 0, 0, 0, 'min'], ['Maximize', 'Super M', 0, 0, 0, 'max'], 0, ['Move to Workspace', '', 0, 0, 1]],
+      Help: [['Search Commands…', 'Ctrl K'], ['Keyboard Shortcuts', 'Ctrl ?'], 0, ['About Files', '']]
+    };
+    const act = a => () => { this.setState({ menu: null }); if (!a) return; if (a === 'close') this.setWin('files', { open: false }); else if (a === 'min') this.setWin('files', { min: true }); else if (a === 'max') this.setWin('files', { max: !this.state.wins.files.max }); else this.setState({ place: a }); };
+    const menus = Object.keys(M).map(l => { const open = st.menu === l; return { l, open, bg: open ? 'var(--ink)' : 'transparent', fg: open ? 'var(--paper)' : 'var(--ink2)', toggle: () => this.setState(s => ({ menu: s.menu === l ? null : l })), enter: () => { if (this.state.menu && this.state.menu !== l) this.setState({ menu: l }); },
+      items: M[l].map(it => it === 0 ? { sep: true, row: false } : { sep: false, row: true, l: it[0], k: it[1], fg: it[2] ? 'var(--ink3)' : 'var(--ink)', chk: !!it[3], sub: !!it[4], run: act(it[5]) }) }; });
+    const sideDef = [['Home', 6], ['Recents', 24], ['Documents', 6], ['Downloads', 38], ['Pictures', 612], ['Music', 1204], ['Trash', 3]];
+    const side = sideDef.map(([n], i) => { const on = n === st.place; return { n, i: String(i + 1).padStart(2, '0'), fw: on ? 600 : 400, fg: on ? 'var(--ink)' : 'var(--ink2)', tick: on ? 'var(--ink)' : 'transparent', pick: () => this.setState({ place: n, fsel: -1 }) }; });
+    const fd = [['cosmic-studio', 'Folder', 'Today', 1], ['my-skills', 'Folder', 'Yesterday', 1], ['DESIGN.md', 'Markdown', 'Today', 0], ['to-do.md', 'Markdown', 'Today', 0], ['typography.md', 'Markdown', 'Oct 10', 0], ['daftpunk.jpg', 'JPEG image', 'Oct 9', 0]];
+    const files = fd.map(([n, k, d, dir], i) => { const on = i === st.fsel; return { n, k, d, g: D + (dir ? 'g-folder' : (n.endsWith('.jpg') ? 'g-img' : 'g-doc')), gc: dir ? 'var(--ink)' : 'var(--ink2)', bg: on ? 'var(--accsoft)' : 'transparent', ring: on ? 'var(--acc)' : 'var(--line)', pick: () => this.setState({ fsel: i }), open: () => { if (n === 'DESIGN.md') this.openApp('edit'); } }; });
+    const cnt = sideDef.find(s => s[0] === st.place)[1];
+    const R = {
+      Home: [['Clipboard', [['g-paste', 'Paste']], [['g-cut', 'Cut'], ['g-copy', 'Copy'], ['g-brush', 'Format painter']], null], ['Text', [], [], [['g-bold', 'b'], ['g-italic', 'i'], ['g-under', 'u'], ['g-strike', 's'], ['g-link', 'l']]], ['Paragraph', [], [['g-list', 'Bulleted'], ['g-numlist', 'Numbered'], ['g-quote', 'Quote']], null], ['Blocks', [['g-code', 'Code block']], [['g-callout', 'Callout'], ['g-divider', 'Divider']], null], ['Find', [['g-find', 'Find']], [['g-replace', 'Replace'], ['g-goto', 'Go to line']], null]],
+      Insert: [['Media', [['g-img', 'Image'], ['g-table', 'Table']], [], null], ['Links', [], [['g-link', 'Link'], ['g-note', 'Footnote']], null], ['Blocks', [], [['g-code', 'Code'], ['g-callout', 'Callout'], ['g-divider', 'Divider']], null], ['Date', [['g-cal', 'Date & time']], [], null]],
+      Layout: [['Page', [['g-margins', 'Margins'], ['g-width', 'Width']], [], null], ['Columns', [], [['g-doc', 'One'], ['g-col2', 'Two']], null], ['Text flow', [], [['g-wrap', 'Soft wrap'], ['g-ruler', 'Ruler']], null]],
+      View: [['Panels', [], [['g-sidebar', 'Sidebar'], ['g-outline', 'Outline'], ['g-minimap', 'Minimap']], null], ['Zoom', [['g-zin', 'Zoom in'], ['g-zout', 'Zoom out']], [], null], ['Mode', [['g-focus', 'Focus'], ['g-split', 'Preview']], [], null]]
+    };
+    const tabs = Object.keys(R).map(l => { const on = st.tab === l; return { l, bg: on ? 'var(--paper)' : 'transparent', fg: on ? 'var(--ink)' : 'var(--ink2)', fw: on ? 600 : 400, sh: on ? 'inset 1px 0 0 var(--rule),inset -1px 0 0 var(--rule),inset 0 1px 0 var(--rule)' : 'none', pick: () => this.setState({ tab: l, rib: true }) }; });
+    const groups = R[st.tab].map(([cap, big, small, tiny]) => ({ cap, big: big.map(([g, l]) => ({ g: D + g, l })), small: small.map(([g, l]) => ({ g: D + g, l })), hasSmall: small.length > 0, hasTiny: !!tiny,
+      tiny: (tiny || []).map(([g, k]) => { const on = !!st.fmt[k]; return { g: D + g, bg: on ? 'var(--ink)' : 'transparent', fg: on ? 'var(--paper)' : 'var(--ink)', flip: () => this.setState(s => ({ fmt: { ...s.fmt, [k]: !s.fmt[k] } })) }; }) }));
+    const W = st.wins;
+    const dockDef = [['files', 'Files', 'img', P + 'files.png', '#3d8bff'], ['brave', 'Brave', 'img', P + 'brave.png', '#ff6a2b'], ['ghostty', 'Ghostty', 'img', P + 'ghostty.png', '#5b7bff'], ['zed', 'Zed', 'img', P + 'zed.png', '#c9ccd4'], ['obsidian', 'Obsidian', 'img', P + 'obsidian.png', '#8b5cf6'], ['spotify', 'Spotify', 'img', P + 'spotify.png', '#1ed760'], ['edit', 'Text Editor', 'icon', 'editor', '#f0b45a'], ['settings', 'Settings', 'icon', 'settings', '#4c8ff5']];
+    const run = { files: W.files.open, edit: W.edit.open, brave: true, ghostty: true, spotify: true };
+    const vis = st.z.filter(k => W[k].open && !W[k].min), focused = vis[vis.length - 1];
+    const dock = dockDef.map(([id, n, kind, s, c], i) => { const r = !!run[id], h = st.hov === i;
+      const sub = id in W ? (!W[id].open ? 'Not running' : W[id].min ? 'Minimized' : '1 window') : (r ? 'Running' : 'Not running');
+      return { n, sub, isImg: kind === 'img', isIcon: kind === 'icon', src: kind === 'img' ? s : '', icon: kind === 'icon' ? s : '', glow: c + (r ? 'cc' : '55'), solid: c, run: r ? 1 : 0, pool: r ? (h ? 1 : .55) : (h ? .4 : 0), tf: h ? 'translateY(-8px) scale(1.12)' : 'none', barW: id === focused ? '22px' : (r ? '10px' : '0px'),
+        enter: () => this.setState({ hov: i }), click: () => { if (id in W) this.openApp(id); else if (id === 'settings') window.location.href = 'Studio Settings v3.dc.html'; } }; });
+    const ci = st.hov, capInfo = ci == null ? null : (ci === 99 ? { n: 'Trash', sub: 'Empty' } : dock[ci]);
+    const cap = { x: (6 + (ci === 99 ? dock.length * 70 + 7 : (ci || 0) * 70) + 33) + 'px', n: capInfo ? capInfo.n : '', sub: capInfo ? capInfo.sub : '', op: capInfo ? 1 : 0 };
+    const apps = [['Files', 'img', P + 'files.png', 'Files', 'files'], ['Text Editor', 'icon', 'editor', 'Editor', 'edit'], ['Settings', 'icon', 'settings', 'System', 'settings'], ['Terminal', 'icon', 'terminal', 'Terminal'], ['System Monitor', 'icon', 'monitor', 'System'], ['Brave', 'img', P + 'brave.png', 'Browser'], ['Ghostty', 'img', P + 'ghostty.png', 'Terminal'], ['Zed', 'img', P + 'zed.png', 'Code editor'], ['Obsidian', 'img', P + 'obsidian.png', 'Notes'], ['Spotify', 'img', P + 'spotify.png', 'Music'], ['Calendar', 'icon', 'calendar', 'Productivity'], ['Store', 'icon', 'store', 'System']];
+    const q = st.q.trim().toLowerCase();
+    const hits = (q ? apps.filter(a => (a[0] + ' ' + a[3]).toLowerCase().includes(q)) : apps).slice(0, 5);
+    const openRes = a => { if (a[4] === 'settings') window.location.href = 'Studio Settings v3.dc.html'; else if (a[4]) this.openApp(a[4]); else this.setState({ pop: null }); };
+    this._hit = hits[0];
+    const results = hits.map((a, i) => ({ n: a[0], kind: a[3], isImg: a[1] === 'img', isIcon: a[1] === 'icon', src: a[1] === 'img' ? a[2] : '', icon: a[1] === 'icon' ? a[2] : '', hint: i === 0 ? 'Enter' : '', bg: i === 0 ? 'var(--acc)' : 'transparent', fg: i === 0 ? '#fff' : 'var(--ink)', open: () => openRes(a) }));
+    const d = new Date(), hh = d.getHours() % 12 || 12, mm = String(d.getMinutes()).padStart(2, '0');
+    const pop = st.pop;
+    return {
+      mode: this.props.mode ?? 'light', glass: this.props.glass ?? 'refractive',
+      catcher: !!pop && pop !== 'launch', closeAll: () => this.setState({ pop: null }), stop: e => e.stopPropagation(),
+      P: { cal: pop === 'cal', qs: pop === 'qs', notif: pop === 'notif', power: pop === 'power', launch: pop === 'launch' },
+      pLaunch: () => this.togglePop('launch'), pCal: () => this.togglePop('cal'), pQs: () => this.togglePop('qs'), pNotif: () => this.togglePop('notif'), pPower: () => this.togglePop('power'),
+      bLaunch: pop === 'launch' ? 'var(--ctl2)' : 'transparent', bCal: pop === 'cal' ? 'var(--ctl2)' : 'transparent', bQs: pop === 'qs' ? 'var(--ctl2)' : 'transparent', bNotif: pop === 'notif' ? 'var(--ctl2)' : 'transparent', bPower: pop === 'power' ? 'var(--ctl2)' : 'transparent',
+      dots, pk, peekOff: () => { clearTimeout(this.pt); this.setState({ peek: null }); }, peekBg: st.peek != null ? 'var(--ctl)' : 'transparent',
+      chips, hsOff: () => { clearTimeout(this.ht); this.ht = setTimeout(() => { if (!this.state.pin) this.setState({ hs: null }); }, 150); },
+      clock: hh + ':' + mm + (d.getHours() < 12 ? ' AM' : ' PM'),
+      flipCaf: () => this.setState(s => ({ caf: !s.caf })), cafBg: st.caf ? 'var(--accsoft)' : 'transparent', cafFg: st.caf ? 'var(--acc)' : 'var(--ink)', cafTitle: st.caf ? 'Caffeine on: screen stays awake' : 'Caffeine off',
+      hasNotifs: st.notifs.length > 0, noNotifs: !st.notifs.length, notifs, clearN: () => this.setState({ notifs: [] }), powerItems,
+      dow: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], cal, tiles, sliders,
+      F: this.win('files'), E: this.win('edit'), menus, side, files, place: st.place, placeSub: cnt + ' items',
+      tabs, groups, ribOpen: st.rib, ribToggle: () => this.setState(s => ({ rib: !s.rib })), ribChev: D + (st.rib ? 'i-chev-u' : 'i-chev-d'),
+      dock, cap, dockOff: () => this.setState({ hov: null }), trashEnter: () => this.setState({ hov: 99 }),
+      qRef: this.qRef, q: st.q, setQ: e => this.setState({ q: e.target.value }), results, noRes: !!q && !hits.length,
+      qKey: e => { if (e.key === 'Enter' && this._hit) openRes(this._hit); if (e.key === 'Escape') this.setState({ pop: null }); }
+    };
+  }
+}
+</script>
+</body>
+</html>
