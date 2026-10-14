@@ -13,6 +13,9 @@ spec.loader.exec_module(installer)
 spec = importlib.util.spec_from_file_location('studio_compact_prepare', HERE/'prepare.py')
 prepare = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(prepare)
+spec = importlib.util.spec_from_file_location('studio_compact_tooltip', HERE/'prepare_tooltip.py')
+tooltip = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(tooltip)
 
 
 class CompactCandidateTests(unittest.TestCase):
@@ -53,6 +56,36 @@ class CompactCandidateTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError, 'differs from both'):
                     prepare.prepare(root, apply=True)
             self.assertEqual(path.read_text(), 'unreviewed source mutation')
+
+
+class CompactTooltipTests(unittest.TestCase):
+    def library(self, folder, text):
+        import subprocess
+        root = Path(folder)
+        (root/'src/applet').mkdir(parents=True)
+        (root/tooltip.FILE).write_text(text)
+        for args in (['init', '-q'], ['add', '.'], ['-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-qm', 'pin']):
+            subprocess.run(['git', *args], cwd=root, check=True)
+        return root
+
+    def test_reviewed_source_is_rewritten_once_and_never_twice(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = self.library(folder, 'before\n' + tooltip.BEFORE + '\nafter\n')
+            self.assertFalse(tooltip.apply(root)['applied'])
+            self.assertIn(tooltip.BEFORE, (root/tooltip.FILE).read_text())
+            self.assertTrue(tooltip.apply(root, write=True)['applied'])
+            text = (root/tooltip.FILE).read_text()
+            self.assertIn('.size(12)', text)
+            self.assertNotIn(tooltip.BEFORE, text)
+            with self.assertRaisesRegex(RuntimeError, 'already prepared'):
+                tooltip.apply(root, write=True)
+
+    def test_unreviewed_tooltip_source_is_refused_without_writing(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = self.library(folder, 'changed upstream tooltip\n')
+            with self.assertRaisesRegex(RuntimeError, 'reviewed implementation'):
+                tooltip.apply(root, write=True)
+            self.assertEqual((root/tooltip.FILE).read_text(), 'changed upstream tooltip\n')
 
 
 if __name__ == '__main__':

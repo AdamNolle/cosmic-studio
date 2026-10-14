@@ -2,6 +2,23 @@
 
 Work stopped at the user's request to publish the source repository. This preserves approved design and recovery tools while retaining the remaining rollout tasks.
 
+## Iteration48 imported desktop design
+
+The claude.ai/design `COSMIC Studio Desktop` prototype is imported as a
+reference and translated through [design/desktop-tokens.json](design/desktop-tokens.json):
+paper/ink palette and one blue accent in both native themes and toolkit chrome,
+8 px dock corners, the window-control rocker, monochrome dock indicators and
+compact hover names. Two prototype details are deliberately not reproduced at the
+user's request: the large serif hover caption and coloured glow under icons.
+
+Evidence is source-level only. The rocker preparation applies at all seven pinned
+libcosmic revisions; patched libcosmic `03c8f93` (with the tooltip change) and
+cosmic-app-list `82e7cd8` pass `cargo check` using a private Zig linker and a
+type-check-only pkg-config stub. No release binary was built, installed or
+rendered, and the running desktop was not touched. Root/native/icon suites pass;
+`native/popups/tests` still needs a system C linker on this host. See
+[design/README.md](design/README.md).
+
 ## Iteration47 populated native panel startup and protocol completion
 
 ONE new private populated run verified genuine panel manager supervision and

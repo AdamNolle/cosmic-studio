@@ -15,6 +15,25 @@ The user requested a stopping point and public GitHub publication on 2026-10-10.
 - [ ] Deploy greeter/locker changes through the appropriate account and validate authentication separately.
 - [ ] Audit unsupported proprietary titlebars and application-embedded icons individually.
 
+## Iteration48 imported desktop design (2026-10-14)
+
+- [x] Import the claude.ai/design `COSMIC Studio Desktop` prototype and record its
+  palette and shell geometry in [design/desktop-tokens.json](design/desktop-tokens.json).
+- [x] Native light/dark themes, GTK/Qt chrome and dock corners follow the design palette
+  and geometry; `DesignTests` keep themes, settings, patches and assets in step.
+- [x] Window controls become the design's rocker (libcosmic, compositor decorations,
+  GTK 3/4, Obsidian) with position-aware segments; patched libcosmic `03c8f93`
+  passes `cargo check` and the preparation applies at all seven pinned revisions.
+- [x] Dock indicators are plain white/black 2 px bars (no accent or per-app colour);
+  hover names are compact 12 px Archivo Medium tooltips, not display captions.
+  Patched cosmic-app-list `82e7cd8` and libcosmic applet module pass `cargo check`.
+- [ ] Build the rocker, indicator and tooltip candidates on a host with Wayland
+  development libraries, then capture them in an owned session (light/dark,
+  active/inactive/hover/pressed/restore, close-only and reversed layouts,
+  high contrast, both scales). The 2026-10-14 host is headless (SSH only, no
+  COSMIC session, no Wayland/xkbcommon development files, no root), so every
+  runtime, capture, hardware, Flatpak and login item below remains open.
+
 ## Iteration47 populated startup and protocol observation
 
 - [x] Test private no-activation bus probe: immediate `ServiceUnknown` failures,
